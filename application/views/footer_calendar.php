@@ -96,22 +96,25 @@
 			right: 'month,agendaWeek,agendaDay'
 		},
 		events: [
-		{
-			title: 'All Day Event',
-			start: new Date(y, m, 1),
-			className: 'label-important'
-		},
-		{
-			title: 'Long Event',
-			start: new Date(y, m, d-5),
-			end: new Date(y, m, d-2),
-			className: 'label-success'
-		},
-		{
-			title: 'Some Event',
-			start: new Date(y, m, d-3, 16, 0),
-			allDay: false
-		}]
+		
+            <?php   if (is_array($daily) && count($daily)) {                               
+                                                            
+                           foreach ($daily as $loops) { 
+                                $value = explode("-", $loops->date);
+                                    $y =  $value[0]; 
+                                      $m =  $value[1]; 
+                                        $d =  $value[2]; 
+                                             ?>
+                    {
+                         title: '<?php echo $loops->actual.'mm';?>',
+			start: new Date(<?=$y?>, <?=$m?>,<?=$d?>),
+			className: 'label-success'},
+                                                                 
+            <?php }  }  ?> 
+            
+            
+            
+            ]
 		,
 		editable: true,
 		droppable: true, // this allows things to be dropped onto the calendar !!!

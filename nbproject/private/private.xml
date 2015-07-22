@@ -2,23 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/wamp/www/weather/application/views/footer_instrument.php</file>
-            <file>file:/C:/wamp/www/weather/application/views/archive.php</file>
-            <file>file:/C:/wamp/www/weather/application/views/footer_calendar.php</file>
-            <file>file:/C:/wamp/www/weather/application/controllers/Welcome.php</file>
-            <file>file:/C:/wamp/www/weather/application/views/reports.php</file>
-            <file>file:/C:/wamp/www/weather/application/views/station.php</file>
-            <file>file:/C:/wamp/www/weather/application/views/schedule.php</file>
-            <file>file:/C:/wamp/www/weather/application/views/index.html</file>
-            <file>file:/C:/wamp/www/weather/application/views/header.php</file>
-            <file>file:/C:/wamp/www/weather/application/views/instrument.php</file>
-            <file>file:/C:/wamp/www/weather/application/views/element.php</file>
-            <file>file:/C:/wamp/www/weather/application/views/form-elements.html</file>
-            <file>file:/C:/wamp/www/weather/application/views/user.php</file>
-            <file>file:/C:/wamp/www/weather/application/views/footer.php</file>
-            <file>file:/C:/wamp/www/weather/application/views/home.php</file>
-            <file>file:/C:/wamp/www/weather/application/views/footer_report.php</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

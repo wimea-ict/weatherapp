@@ -2,942 +2,307 @@
 
 
 <div class="row-fluid">
-    <div class="span12">
-        <!--PAGE CONTENT BEGINS-->
-        <div class="row-fluid">
+    <?php
+                                    if (is_array($userID) && count($userID))
+                                        {
+                                        foreach ($userID as $user) {
+                                            ?>   
+    
+                         <div class="widget-body" style="padding: 3%;">
+                                            <h4> Enter user details to below: </h4>
+                                    <form id="user-form" name="user-form" enctype="multipart/form-data"  action='<?= base_url(); ?>index.php/User/update'  method="post">            
+
+                                            <fieldset>
+                                    <label>
+
+                                                    <span class="block input-icon input-icon-right">
+                                                         <input type="hidden" name="userID" id="userID" class="span12" value="<?= $user->id ?>" />
+                                                        <input type="email" name="email" id="email" class="span12" value="<?= $user->email ?>" />
+                                                      <span id="Loading_email" name ="Loading_email"><img src="<?= base_url(); ?>images/ajax-loader.gif" alt="Ajax Indicator" /></span>
+                                                  
+                                                    </span>
+                                                </label>
+
+                                                <label>
+                                                    <span class="block input-icon input-icon-right">
+                                                        <input type="text" name="name" id="name" class="span12"value="<?= $user->name ?>" />
+                                                        <span id="Loading_name" name ="Loading_name"><img src="<?= base_url(); ?>images/ajax-loader.gif" alt="Ajax Indicator" /></span>
+                                                               
+                                                    </span>
+                                                </label>
+                                                <label>
+                                                    <span class="block input-icon input-icon-right">
+                                                        <input type="text" name="contact" id="contact" class="span12" value="<?= $user->contact ?>" />
+                                                       
+                                                    </span>
+                                                     <span class="block input-icon input-icon-right">
+                                                         <input type="text" id="contact2" name="contact2" class="span12" value="<?= $user->contact2 ?>" />
+                                                       
+                                                    </span>
+                                                </label>
+
+                                                <label>
+                                                    Please input a password only if you want to change the previous password**
+                                                    <span class="block input-icon input-icon-right">
+                                                        <input type="password" name="password" id="password" class="span12" placeholder="Password" />
+                                                       
+                                                    </span>
+                                                </label>
+
+                                                <label>
+                                                    <span class="block input-icon input-icon-right">
+                                                        <input type="password" name="password2" id="password2" class="span12" placeholder="Repeat password" />
+                                                    
+                                                    </span>
+                                                </label>
+                                                 <label>
+                                                    <span class="block input-icon input-icon-right">
+                                                        <select id="role" name="role">
+                                                             <option value="<?=$user->role?>" /><?=$user->role?>
+                                                            <?php
+                                        if (is_array($roles) && count($roles)) {
+                                            foreach ($roles as $loop) {
+                                                ?>                        
+                                                            <option value="<?=$loop->name?>" /><?=$loop->name?>
+                                                    
+
+                                        <?php }}?>
+                                                </select></span>
+                                                     
+                                                      <span class="block input-icon input-icon-right">
+                                                        <select id="station" name="station">
+                                                              <option value="<?=$user->station?>" /><?=$user->station?>
+                                                            <?php
+                                        if (is_array($stations) && count($stations)) {
+                                            foreach ($stations as $loop) {
+                                                ?>                        
+                                                            <option value="<?=$loop->name?>" /><?=$loop->name?>
+                                                    
+
+                                        <?php }}?>
+                                                </select></span>
+                                                     
+                                                </label>
+                                                <div class="clearfix">
+                                                   
+
+                                                    <button class="width-10 btn btn-small btn-success"  >
+                                                 Update
+
+                                                    </button>
+                                                </div>
+                                            </fieldset>
+                                            </form>
+                               
+                    </div>
+    
+    
+    
+    <?php }
+} 
+else { ?>
+           <div id="accordion2" class="accordion">
+                        <div class="accordion-group">
+                                <div class="accordion-heading">
+                                       
+                                </div>
+
+                        <div class="accordion-body collapse" id="collapseOne">
+                                <div class="accordion-inner">
+                                           <div class="widget-body" style="padding: 3%;">
+                                            <h4> Enter user details to below: </h4>
+                                    <form id="user-form" name="user-form" enctype="multipart/form-data"  action='<?= base_url(); ?>index.php/User/save'  method="post">            
+
+                                            <fieldset>
+                                    <label>
+
+                                                    <span class="block input-icon input-icon-right">
+                                                        <input type="email" name="email" id="email" class="span12" placeholder="Email" />
+                                                      <span id="Loading_email" name ="Loading_email"><img src="<?= base_url(); ?>images/ajax-loader.gif" alt="Ajax Indicator" /></span>
+                                                  
+                                                    </span>
+                                                </label>
+
+                                                <label>
+                                                    <span class="block input-icon input-icon-right">
+                                                        <input type="text" name="name" id="name" class="span12" placeholder="name" />
+                                                        <span id="Loading_name" name ="Loading_name"><img src="<?= base_url(); ?>images/ajax-loader.gif" alt="Ajax Indicator" /></span>
+                                                               
+                                                    </span>
+                                                </label>
+                                                <label>
+                                                    <span class="block input-icon input-icon-right">
+                                                        <input type="text" name="contact" id="contact" class="span12" placeholder="Contact" />
+                                                       
+                                                    </span>
+                                                     <span class="block input-icon input-icon-right">
+                                                         <input type="text" id="contact2" name="contact2" class="span12" placeholder="Contact 2" />
+                                                       
+                                                    </span>
+                                                </label>
+
+                                                <label>
+                                                    <span class="block input-icon input-icon-right">
+                                                        <input type="password" name="password" id="password" class="span12" placeholder="Password" />
+                                                       
+                                                    </span>
+                                                </label>
+
+                                                <label>
+                                                    <span class="block input-icon input-icon-right">
+                                                        <input type="password" name="password2" id="password2" class="span12" placeholder="Repeat password" />
+                                                    
+                                                    </span>
+                                                </label>
+                                                 <label>
+                                                    <span class="block input-icon input-icon-right">
+                                                        Select the user role
+                                                        <select id="role" name="role">
+                                                            <?php
+                                        if (is_array($roles) && count($roles)) {
+                                            foreach ($roles as $loop) {
+                                                ?>                        
+                                                            <option value="<?=$loop->name?>" /><?=$loop->name?>
+                                                    
+
+                                        <?php }}?>
+                                                </select></span>
+                                                     
+                                                        <span class="block input-icon input-icon-right">
+                                                            Select the station if it applies   <select id="station" name="station">
+                                                            <?php
+                                        if (is_array($stations) && count($stations)) {
+                                            foreach ($stations as $loop) {
+                                                ?>                        
+                                                            <option value="<?=$loop->name?>" /><?=$loop->name?>
+                                                    
+
+                                        <?php }}?>
+                                                </select></span>
+                                                </label>
+                                                <div class="clearfix">
+                                                    <button type="reset" class="width-10 pull-right btn btn-small btn-success" >
+                                                        <i class="icon-refresh"></i>
+                                                        Reset
+                                                    </button>
+
+                                                    <button class="width-10 btn btn-small"  >
+                                                     Submit
+
+                                                    </button>
+                                                </div>
+                                            </fieldset>
+                                            </form>
+                               
+                    </div>	</div>
+											</div>
+										</div>
+
+									</div>
+    <?php } ?>
+    
+    
+         <div class="span11">
             <div class="span12">
-                <div class="widget-box transparent" id="recent-box">
-                    <div class="widget-header">
-                        <h4 class="lighter smaller">
-                            <i class="icon-group icon-2x green"></i>
-                            Users and role management
-                        </h4>
-
-                        <div class="widget-toolbar no-border">
-                            <ul class="nav nav-tabs" id="recent-tab">
-                                <li class="active">
-                                    <a data-toggle="tab" href="#task-tab">New user</a>
-                                </li>
-
-                                <li>
-                                    <a data-toggle="tab" href="#member-tab">All Users</a>
-                                </li>
-
-                                <li>
-                                    <a data-toggle="tab" href="#comment-tab">User Roles</a>
-                                </li>
-                            </ul>
-                        </div>
+                <div class="widget-box">
+                    <div class="widget-header widget-header-flat">
+                        <a href="#collapseOne" data-parent="#accordion2" data-toggle="collapse" class="accordion-toggle collapsed">
+                       <span class="arrowed-in-right"></span> <button  class="width-10 pull-left btn  btn-mini btn-yellow">   ADD USER   </button>
+                                        </a><a href="" data-parent="#accordion2" data-toggle="collapse" class="accordion-toggle collapsed float-right">
+                       <span class="arrowed-in-right "></span> <button  class="width-10 pull-left btn float-right  btn-mini btn-success">          DELETE SELECTED      </button>     </a>
                     </div>
 
                     <div class="widget-body">
-                        <div class="widget-main padding-4">
-                            <div class="tab-content padding-8 overflow-visible">
-                                <div id="task-tab" class="tab-pane active">
-
-
-                                    <div id="signup-box" class="signup-box widget-box no-border">
-                                        <div class="widget-body">
-                                            <div class="widget-main">
-                                                <h4 class="header green lighter bigger">
-
-                                                    User Registration
-                                                </h4>
-
-                                                <div class="space-6"></div>
-                                                <p> Enter your details to begin: </p>
-
-
-                                                <fieldset>
-                                                    <label for="form-field-select-1">User role</label>
-
-                                                    <select id="form-field-select-1">
-                                                         <option value="AK" />Default
-                                                        <option value="AL" />Administrator
-                                                       
-                                                        
-                                                    </select>
-                                                    <label>
-                                                        <span class="block input-icon input-icon-right">
-                                                            <input type="email" class="span12" placeholder="Email" />
-                                                            <i class="icon-envelope"></i>
-                                                        </span>
-                                                    </label>
-
-                                                    <label>
-                                                        <span class="block input-icon input-icon-right">
-                                                            <input type="text" class="span12" placeholder="Username" />
-                                                            <i class="icon-user"></i>
-                                                        </span>
-                                                    </label>
-                                                    <label>
-                                                        <span class="block input-icon input-icon-right">
-                                                            <input type="text" class="span12" placeholder="Contact" />
-                                                            <i class="icon-user"></i>
-                                                        </span>
-                                                    </label>
-
-                                                    <label>
-                                                        <span class="block input-icon input-icon-right">
-                                                            <input type="password" class="span12" placeholder="Password" />
-                                                            <i class="icon-lock"></i>
-                                                        </span>
-                                                    </label>
-
-                                                    <label>
-                                                        <span class="block input-icon input-icon-right">
-                                                            <input type="password" class="span12" placeholder="Repeat password" />
-                                                            <i class="icon-retweet"></i>
-                                                        </span>
-                                                    </label>
-
-
-
-                                                    <div class="space-24"></div>
-
-                                                    <div class="clearfix">
-                                                        <button type="reset" class="width-30 pull-left btn btn-small">
-                                                            <i class="icon-refresh"></i>
-                                                            Reset
-                                                        </button>
-
-                                                        <button onclick="return false;" class="width-65 pull-right btn btn-small btn-success">
-                                                            Register
-
-                                                        </button>
-                                                    </div>
-                                                </fieldset>
-                                                </form>
-                                            </div>
-
-
-                                        </div><!--/widget-body-->
-                                    </div><!--/signup-box-->
-                                </div>
-
-                                <div id="member-tab" class="tab-pane">
-                                    <div class="clearfix">
-                                        <table id="sample-table-2" class="table table-striped table-bordered table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th class="center">
-                                                        <label>
-                                                            <input type="checkbox" />
-                                                            <span class="lbl"></span>
-                                                        </label>
-                                                    </th>
-                                                    <th>Domain</th>
-                                                    <th>Price</th>
-                                                    <th class="hidden-480">Clicks</th>
-
-                                                    <th class="hidden-phone">
-                                                        <i class="icon-time bigger-110 hidden-phone"></i>
-                                                        Update
-                                                    </th>
-                                                    <th class="hidden-480">Status</th>
-
-                                                    <th></th>
-                                                </tr>
-                                            </thead>
-
-                                            <tbody>
-
-
-                                                <tr>
-                                                    <td class="center">
-                                                        <label>
-                                                            <input type="checkbox" />
-                                                            <span class="lbl"></span>
-                                                        </label>
-                                                    </td>
-
-                                                    <td>
-                                                        <a href="#">view.com</a>
-                                                    </td>
-                                                    <td>$45</td>
-                                                    <td class="hidden-480">4,100</td>
-                                                    <td class="hidden-phone">Mar 12</td>
-
-                                                    <td class="hidden-480">
-                                                        <span class="label label-success">Registered</span>
-                                                    </td>
-
-                                                    <td class="td-actions">
-                                                        <div class="hidden-phone visible-desktop action-buttons">
-                                                            <a class="blue" href="#">
-                                                                <i class="icon-zoom-in bigger-130"></i>
-                                                            </a>
-
-                                                            <a class="green" href="#">
-                                                                <i class="icon-pencil bigger-130"></i>
-                                                            </a>
-
-                                                            <a class="red" href="#">
-                                                                <i class="icon-trash bigger-130"></i>
-                                                            </a>
-                                                        </div>
-
-                                                        <div class="hidden-desktop visible-phone">
-                                                            <div class="inline position-relative">
-                                                                <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
-                                                                    <i class="icon-caret-down icon-only bigger-120"></i>
-                                                                </button>
-
-                                                                <ul class="dropdown-menu dropdown-icon-only dropdown-yellow pull-right dropdown-caret dropdown-close">
-                                                                    <li>
-                                                                        <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
-                                                                            <span class="blue">
-                                                                                <i class="icon-zoom-in bigger-120"></i>
-                                                                            </span>
-                                                                        </a>
-                                                                    </li>
-
-                                                                    <li>
-                                                                        <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
-                                                                            <span class="green">
-                                                                                <i class="icon-edit bigger-120"></i>
-                                                                            </span>
-                                                                        </a>
-                                                                    </li>
-
-                                                                    <li>
-                                                                        <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
-                                                                            <span class="red">
-                                                                                <i class="icon-trash bigger-120"></i>
-                                                                            </span>
-                                                                        </a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td class="center">
-                                                        <label>
-                                                            <input type="checkbox" />
-                                                            <span class="lbl"></span>
-                                                        </label>
-                                                    </td>
-
-                                                    <td>
-                                                        <a href="#">nice.com</a>
-                                                    </td>
-                                                    <td>$38</td>
-                                                    <td class="hidden-480">3,940</td>
-                                                    <td class="hidden-phone">Feb 12</td>
-
-                                                    <td class="hidden-480">
-                                                        <span class="label label-info arrowed arrowed-righ">Sold</span>
-                                                    </td>
-
-                                                    <td class="td-actions">
-                                                        <div class="hidden-phone visible-desktop action-buttons">
-                                                            <a class="blue" href="#">
-                                                                <i class="icon-zoom-in bigger-130"></i>
-                                                            </a>
-
-                                                            <a class="green" href="#">
-                                                                <i class="icon-pencil bigger-130"></i>
-                                                            </a>
-
-                                                            <a class="red" href="#">
-                                                                <i class="icon-trash bigger-130"></i>
-                                                            </a>
-                                                        </div>
-
-                                                        <div class="hidden-desktop visible-phone">
-                                                            <div class="inline position-relative">
-                                                                <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
-                                                                    <i class="icon-caret-down icon-only bigger-120"></i>
-                                                                </button>
-
-                                                                <ul class="dropdown-menu dropdown-icon-only dropdown-yellow pull-right dropdown-caret dropdown-close">
-                                                                    <li>
-                                                                        <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
-                                                                            <span class="blue">
-                                                                                <i class="icon-zoom-in bigger-120"></i>
-                                                                            </span>
-                                                                        </a>
-                                                                    </li>
-
-                                                                    <li>
-                                                                        <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
-                                                                            <span class="green">
-                                                                                <i class="icon-edit bigger-120"></i>
-                                                                            </span>
-                                                                        </a>
-                                                                    </li>
-
-                                                                    <li>
-                                                                        <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
-                                                                            <span class="red">
-                                                                                <i class="icon-trash bigger-120"></i>
-                                                                            </span>
-                                                                        </a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td class="center">
-                                                        <label>
-                                                            <input type="checkbox" />
-                                                            <span class="lbl"></span>
-                                                        </label>
-                                                    </td>
-
-                                                    <td>
-                                                        <a href="#">fine.com</a>
-                                                    </td>
-                                                    <td>$25</td>
-                                                    <td class="hidden-480">2,983</td>
-                                                    <td class="hidden-phone">Apr 01</td>
-
-                                                    <td class="hidden-480">
-                                                        <span class="label label-warning">Expiring</span>
-                                                    </td>
-
-                                                    <td class="td-actions">
-                                                        <div class="hidden-phone visible-desktop action-buttons">
-                                                            <a class="blue" href="#">
-                                                                <i class="icon-zoom-in bigger-130"></i>
-                                                            </a>
-
-                                                            <a class="green" href="#">
-                                                                <i class="icon-pencil bigger-130"></i>
-                                                            </a>
-
-                                                            <a class="red" href="#">
-                                                                <i class="icon-trash bigger-130"></i>
-                                                            </a>
-                                                        </div>
-
-                                                        <div class="hidden-desktop visible-phone">
-                                                            <div class="inline position-relative">
-                                                                <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
-                                                                    <i class="icon-caret-down icon-only bigger-120"></i>
-                                                                </button>
-
-                                                                <ul class="dropdown-menu dropdown-icon-only dropdown-yellow pull-right dropdown-caret dropdown-close">
-                                                                    <li>
-                                                                        <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
-                                                                            <span class="blue">
-                                                                                <i class="icon-zoom-in bigger-120"></i>
-                                                                            </span>
-                                                                        </a>
-                                                                    </li>
-
-                                                                    <li>
-                                                                        <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
-                                                                            <span class="green">
-                                                                                <i class="icon-edit bigger-120"></i>
-                                                                            </span>
-                                                                        </a>
-                                                                    </li>
-
-                                                                    <li>
-                                                                        <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
-                                                                            <span class="red">
-                                                                                <i class="icon-trash bigger-120"></i>
-                                                                            </span>
-                                                                        </a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td class="center">
-                                                        <label>
-                                                            <input type="checkbox" />
-                                                            <span class="lbl"></span>
-                                                        </label>
-                                                    </td>
-
-                                                    <td>
-                                                        <a href="#">good.com</a>
-                                                    </td>
-                                                    <td>$50</td>
-                                                    <td class="hidden-480">6,500</td>
-                                                    <td class="hidden-phone">Feb 02</td>
-
-                                                    <td class="hidden-480">
-                                                        <span class="label label-inverse arrowed-in">Flagged</span>
-                                                    </td>
-
-                                                    <td class="td-actions">
-                                                        <div class="hidden-phone visible-desktop action-buttons">
-                                                            <a class="blue" href="#">
-                                                                <i class="icon-zoom-in bigger-130"></i>
-                                                            </a>
-
-                                                            <a class="green" href="#">
-                                                                <i class="icon-pencil bigger-130"></i>
-                                                            </a>
-
-                                                            <a class="red" href="#">
-                                                                <i class="icon-trash bigger-130"></i>
-                                                            </a>
-                                                        </div>
-
-                                                        <div class="hidden-desktop visible-phone">
-                                                            <div class="inline position-relative">
-                                                                <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
-                                                                    <i class="icon-caret-down icon-only bigger-120"></i>
-                                                                </button>
-
-                                                                <ul class="dropdown-menu dropdown-icon-only dropdown-yellow pull-right dropdown-caret dropdown-close">
-                                                                    <li>
-                                                                        <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
-                                                                            <span class="blue">
-                                                                                <i class="icon-zoom-in bigger-120"></i>
-                                                                            </span>
-                                                                        </a>
-                                                                    </li>
-
-                                                                    <li>
-                                                                        <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
-                                                                            <span class="green">
-                                                                                <i class="icon-edit bigger-120"></i>
-                                                                            </span>
-                                                                        </a>
-                                                                    </li>
-
-                                                                    <li>
-                                                                        <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
-                                                                            <span class="red">
-                                                                                <i class="icon-trash bigger-120"></i>
-                                                                            </span>
-                                                                        </a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td class="center">
-                                                        <label>
-                                                            <input type="checkbox" />
-                                                            <span class="lbl"></span>
-                                                        </label>
-                                                    </td>
-
-                                                    <td>
-                                                        <a href="#">great.com</a>
-                                                    </td>
-                                                    <td>$55</td>
-                                                    <td class="hidden-480">6,400</td>
-                                                    <td class="hidden-phone">Feb 24</td>
-
-                                                    <td class="hidden-480">
-                                                        <span class="label label-success">Registered</span>
-                                                    </td>
-
-                                                    <td class="td-actions">
-                                                        <div class="hidden-phone visible-desktop action-buttons">
-                                                            <a class="blue" href="#">
-                                                                <i class="icon-zoom-in bigger-130"></i>
-                                                            </a>
-
-                                                            <a class="green" href="#">
-                                                                <i class="icon-pencil bigger-130"></i>
-                                                            </a>
-
-                                                            <a class="red" href="#">
-                                                                <i class="icon-trash bigger-130"></i>
-                                                            </a>
-                                                        </div>
-
-                                                        <div class="hidden-desktop visible-phone">
-                                                            <div class="inline position-relative">
-                                                                <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
-                                                                    <i class="icon-caret-down icon-only bigger-120"></i>
-                                                                </button>
-
-                                                                <ul class="dropdown-menu dropdown-icon-only dropdown-yellow pull-right dropdown-caret dropdown-close">
-                                                                    <li>
-                                                                        <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
-                                                                            <span class="blue">
-                                                                                <i class="icon-zoom-in bigger-120"></i>
-                                                                            </span>
-                                                                        </a>
-                                                                    </li>
-
-                                                                    <li>
-                                                                        <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
-                                                                            <span class="green">
-                                                                                <i class="icon-edit bigger-120"></i>
-                                                                            </span>
-                                                                        </a>
-                                                                    </li>
-
-                                                                    <li>
-                                                                        <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
-                                                                            <span class="red">
-                                                                                <i class="icon-trash bigger-120"></i>
-                                                                            </span>
-                                                                        </a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-
-
-                                            </tbody>
-                                        </table>    
-
-
-                                    </div>
-
-                                    <div class="center">
-                                        <i class="icon-group icon-2x green"></i>
-
-                                        &nbsp;
-                                        <a href="#">
-                                            See all members &nbsp;
-                                            <i class="icon-arrow-right"></i>
-                                        </a>
-                                    </div>
-
-                                    <div class="hr hr-double hr8"></div>
-                                </div><!--member-tab-->
-
-                                <div id="comment-tab" class="tab-pane">
-                                    <div class="comments">
-                                        <div class="well well-large">
-                                            <div class="widget-body">
-                                                <div class="widget-main">
-                                                    <h4 class="header green lighter bigger">
-
-                                                        New user Role
-                                                    </h4>
-
-                                                    <fieldset>
-
-
-                                                        <label>
-                                                            <span class="block input-icon input-icon-right">
-                                                                <input type="text" class="span12" placeholder="Role" />
-                                                                <i class="icon-user"></i>
+                        <div class="widget-main padding-8">
+                            <div class="row-fluid">
+                                <table id="sample-table-2" class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th class="center">
+                                                <label>
+                                                    <input type="checkbox" />
+                                                    <span class="lbl"></span>
+                                                </label>
+                                            </th>
+                                            <th>Name</th>
+                                            <th>E-mail</th>
+                                            <th class="hidden-480">Contact</th>
+                                              <th class="hidden-480"></th>
+                                            <th class="hidden-480">Role</th>
+                                             <th class="hidden-480">Station</th>
+                                            <th class="hidden-phone">                                              
+                                               Last Updated
+                                            </th>
+                                            <th class="hidden-480">Active</th>
+
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+  <?php
+                                        if (is_array($users) && count($users)) {
+                                            foreach ($users as $loop) {
+                                                ?>  
+
+                                        <tr>
+                                            <td class="center">
+                                                <label>
+                                                    <input type="checkbox" />
+                                                    <span class="lbl"></span>
+                                                </label>
+                                            </td>
+
+                                            <td>
+                                                <a href="#"><?= $loop->name ?></a>
+                                            </td>
+                                            <td><?= $loop->email ?></td>
+                                            <td class="hidden-480"><?= $loop->contact ?></td>
+                                            <td class="hidden-phone"><?= $loop->contact2 ?></td>
+
+                                            <td class="hidden-480">
+                                                <span class="label label-success"><?= $loop->role ?></span>
+                                            </td>
+                                             <td class="hidden-480">
+                                                <span class="label label-info"><?= $loop->station ?></span>
+                                            </td>
+                                               <td class="hidden-480">
+                                                <span class="label label-yellow"><?= $loop->create ?></span>
+                                            </td>
+
+                                          <td> 
+                                                        <a href="<?php echo base_url() . "index.php/User/edit/" . $loop->id; ?>" class="tooltip-info" data-rel="tooltip" title="View">
+                                                            <span class="blue">
+                                                                <i class="icon-edit bigger-120"></i>
                                                             </span>
-                                                        </label>
-                                                        <h4 class="header green lighter bigger">
-
-                                                            Please select the user privileges
-                                                        </h4>
-                                                        <div class="span5">
-                                                            <label>
-                                                                <input name="form-field-checkbox" class="ace-checkbox-2" type="checkbox" />
-                                                                <span class="lbl"> Create</span>
-                                                            </label>
-
-                                                            <label>
-                                                                <input name="form-field-checkbox" class="ace-checkbox-2" type="checkbox" />
-                                                                <span class="lbl"> Edit</span>
-                                                            </label>
-                                                        </div>
-                                                        <div class="span5">
-
-                                                            <label>
-                                                                <input name="form-field-checkbox" class="ace-checkbox-2" type="checkbox" />
-                                                                <span class="lbl"> Read</span>
-                                                            </label>
-                                                            <label>
-                                                                <input name="form-field-checkbox" class="ace-checkbox-2" type="checkbox" />
-                                                                <span class="lbl">Update</span>
-                                                            </label>
-
-
-                                                        </div>
-
-
-                                                        <div class="space-24"></div>
-
-                                                        <div class="span5">
-
-                                                            <button onclick="return false;" class="width-65 pull-right btn btn-small btn-success">
-                                                                Submit
-
-                                                            </button>
-                                                        </div>
-                                                    </fieldset>
-                                                    </form>
-                                                </div>
-
-
-                                            </div><!--/widget-body-->
-                                        </div><!--/signup-box-->
-                                    </div>
-
-                                    <div class="hr hr8"></div>
-
-                                    <table id="sample-table-2" class="table table-striped table-bordered table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th class="center">
-                                                    <label>
-                                                        <input type="checkbox" />
-                                                        <span class="lbl"></span>
-                                                    </label>
-                                                </th>
-                                                <th>Role name</th>
-                                                <th>Create</th>
-                                                <th>Read</th>
-                                                <th class="hidden-480">Update</th>
-
-                                                <th class="hidden-phone">
-                                                    <i class="icon-action"></i>
-                                                    Delete
-                                                </th>
-                                                <th class="hidden-480">Action</th>
-                                                <th class="hidden-480">Status</th>
-
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-
-                                        <tbody>
-
-
-                                            <tr>
-                                                <td class="center">
-                                                    <label>
-                                                        <input type="checkbox" />
-                                                        <span class="lbl"></span>
-                                                    </label>
-                                                </td>
-
-                                                <td>
-                                                    <a href="#">Administrator</a>
-                                                </td>
-                                                <td>True</td>
-                                                <td class="hidden-480">True</td>
-                                                <td class="hidden-phone">True</td>
-                                                <td class="hidden-480">
-                                                    False
-                                                </td>
-
-
-                                                <td class="td-actions">
-                                                    <div class="hidden-phone visible-desktop action-buttons">
-                                                        <a class="blue" href="#">
-                                                            <i class="icon-zoom-in bigger-130"></i>
                                                         </a>
-
-                                                        <a class="green" href="#">
-                                                            <i class="icon-pencil bigger-130"></i>
+                                                        <a href="<?php echo base_url() . "index.php/User/delete/" . $loop->id; ?>" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                                            <span class="red">
+                                                                <i class="icon-trash bigger-120"></i>
+                                                            </span>
                                                         </a>
+                                                    </td>
 
-                                                        <a class="red" href="#">
-                                                            <i class="icon-trash bigger-130"></i>
-                                                        </a>
-                                                    </div>
+                                                    <td>  <label class="pull-right inline">
+                                                            <small class="muted"></small>
+                                                            <input id="id-button-borders" checked="" type="checkbox" class="ace-switch ace-switch-5" />
+                                                            <span class="lbl"></span>
+                                                        </label></td>
+                                        </tr>
 
-                                                    <div class="hidden-desktop visible-phone">
-                                                        <div class="inline position-relative">
-                                                            <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
-                                                                <i class="icon-caret-down icon-only bigger-120"></i>
-                                                            </button>
+                                        <?php }}?>
 
-                                                            <ul class="dropdown-menu dropdown-icon-only dropdown-yellow pull-right dropdown-caret dropdown-close">
-                                                                <li>
-                                                                    <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
-                                                                        <span class="blue">
-                                                                            <i class="icon-zoom-in bigger-120"></i>
-                                                                        </span>
-                                                                    </a>
-                                                                </li>
-
-                                                                <li>
-                                                                    <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
-                                                                        <span class="green">
-                                                                            <i class="icon-edit bigger-120"></i>
-                                                                        </span>
-                                                                    </a>
-                                                                </li>
-
-                                                                <li>
-                                                                    <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
-                                                                        <span class="red">
-                                                                            <i class="icon-trash bigger-120"></i>
-                                                                        </span>
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td >
-
-                                                    <label class="pull-right inline">
-                                                        <small class="muted"></small>
-                                                        <input id="id-button-borders" checked="" type="checkbox" class="ace-switch ace-switch-5" />
-                                                        <span class="lbl"></span>
-                                                    </label>
-
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td class="center">
-                                                    <label>
-                                                        <input type="checkbox" />
-                                                        <span class="lbl"></span>
-                                                    </label>
-                                                </td>
-
-                                                <td>
-                                                    <a href="#">Administrator</a>
-                                                </td>
-                                                <td>True</td>
-                                                <td class="hidden-480">True</td>
-                                                <td class="hidden-phone">True</td>
-                                                <td class="hidden-480">
-                                                    False
-                                                </td>
-
-
-                                                <td class="td-actions">
-                                                    <div class="hidden-phone visible-desktop action-buttons">
-                                                        <a class="blue" href="#">
-                                                            <i class="icon-zoom-in bigger-130"></i>
-                                                        </a>
-
-                                                        <a class="green" href="#">
-                                                            <i class="icon-pencil bigger-130"></i>
-                                                        </a>
-
-                                                        <a class="red" href="#">
-                                                            <i class="icon-trash bigger-130"></i>
-                                                        </a>
-                                                    </div>
-
-                                                    <div class="hidden-desktop visible-phone">
-                                                        <div class="inline position-relative">
-                                                            <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
-                                                                <i class="icon-caret-down icon-only bigger-120"></i>
-                                                            </button>
-
-                                                            <ul class="dropdown-menu dropdown-icon-only dropdown-yellow pull-right dropdown-caret dropdown-close">
-                                                                <li>
-                                                                    <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
-                                                                        <span class="blue">
-                                                                            <i class="icon-zoom-in bigger-120"></i>
-                                                                        </span>
-                                                                    </a>
-                                                                </li>
-
-                                                                <li>
-                                                                    <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
-                                                                        <span class="green">
-                                                                            <i class="icon-edit bigger-120"></i>
-                                                                        </span>
-                                                                    </a>
-                                                                </li>
-
-                                                                <li>
-                                                                    <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
-                                                                        <span class="red">
-                                                                            <i class="icon-trash bigger-120"></i>
-                                                                        </span>
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td >
-
-                                                    <label class="pull-right inline">
-                                                        <small class="muted"></small>
-                                                        <input id="id-button-borders" checked="" type="checkbox" class="ace-switch ace-switch-5" />
-                                                        <span class="lbl"></span>
-                                                    </label>
-
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="center">
-                                                    <label>
-                                                        <input type="checkbox" />
-                                                        <span class="lbl"></span>
-                                                    </label>
-                                                </td>
-
-                                                <td>
-                                                    <a href="#">Administrator</a>
-                                                </td>
-                                                <td>True</td>
-                                                <td class="hidden-480">True</td>
-                                                <td class="hidden-phone">True</td>
-                                                <td class="hidden-480">
-                                                    False
-                                                </td>
-
-
-                                                <td class="td-actions">
-                                                    <div class="hidden-phone visible-desktop action-buttons">
-                                                        <a class="blue" href="#">
-                                                            <i class="icon-zoom-in bigger-130"></i>
-                                                        </a>
-
-                                                        <a class="green" href="#">
-                                                            <i class="icon-pencil bigger-130"></i>
-                                                        </a>
-
-                                                        <a class="red" href="#">
-                                                            <i class="icon-trash bigger-130"></i>
-                                                        </a>
-                                                    </div>
-
-                                                    <div class="hidden-desktop visible-phone">
-                                                        <div class="inline position-relative">
-                                                            <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
-                                                                <i class="icon-caret-down icon-only bigger-120"></i>
-                                                            </button>
-
-                                                            <ul class="dropdown-menu dropdown-icon-only dropdown-yellow pull-right dropdown-caret dropdown-close">
-                                                                <li>
-                                                                    <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
-                                                                        <span class="blue">
-                                                                            <i class="icon-zoom-in bigger-120"></i>
-                                                                        </span>
-                                                                    </a>
-                                                                </li>
-
-                                                                <li>
-                                                                    <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
-                                                                        <span class="green">
-                                                                            <i class="icon-edit bigger-120"></i>
-                                                                        </span>
-                                                                    </a>
-                                                                </li>
-
-                                                                <li>
-                                                                    <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
-                                                                        <span class="red">
-                                                                            <i class="icon-trash bigger-120"></i>
-                                                                        </span>
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td >
-
-                                                    <label class="pull-right inline">
-                                                        <small class="muted"></small>
-                                                        <input id="id-button-borders" checked="" type="checkbox" class="ace-switch ace-switch-5" />
-                                                        <span class="lbl"></span>
-                                                    </label>
-
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td class="center">
-                                                    <label>
-                                                        <input type="checkbox" />
-                                                        <span class="lbl"></span>
-                                                    </label>
-                                                </td>
-
-                                                <td>
-                                                    <a href="#">Administrator</a>
-                                                </td>
-                                                <td>True</td>
-                                                <td class="hidden-480">True</td>
-                                                <td class="hidden-phone">True</td>
-                                                <td class="hidden-480">
-                                                    False
-                                                </td>
-
-
-                                                <td class="td-actions">
-                                                    <div class="hidden-phone visible-desktop action-buttons">
-                                                        <a class="blue" href="#">
-                                                            <i class="icon-zoom-in bigger-130"></i>
-                                                        </a>
-
-                                                        <a class="green" href="#">
-                                                            <i class="icon-pencil bigger-130"></i>
-                                                        </a>
-
-                                                        <a class="red" href="#">
-                                                            <i class="icon-trash bigger-130"></i>
-                                                        </a>
-                                                    </div>
-
-                                                    <div class="hidden-desktop visible-phone">
-                                                        <div class="inline position-relative">
-                                                            <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
-                                                                <i class="icon-caret-down icon-only bigger-120"></i>
-                                                            </button>
-
-                                                            <ul class="dropdown-menu dropdown-icon-only dropdown-yellow pull-right dropdown-caret dropdown-close">
-                                                                <li>
-                                                                    <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
-                                                                        <span class="blue">
-                                                                            <i class="icon-zoom-in bigger-120"></i>
-                                                                        </span>
-                                                                    </a>
-                                                                </li>
-
-                                                                <li>
-                                                                    <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
-                                                                        <span class="green">
-                                                                            <i class="icon-edit bigger-120"></i>
-                                                                        </span>
-                                                                    </a>
-                                                                </li>
-
-                                                                <li>
-                                                                    <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
-                                                                        <span class="red">
-                                                                            <i class="icon-trash bigger-120"></i>
-                                                                        </span>
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td >
-
-                                                    <label class="pull-right inline">
-                                                        <small class="muted"></small>
-                                                        <input id="id-button-borders" checked="" type="checkbox" class="ace-switch ace-switch-5" />
-                                                        <span class="lbl"></span>
-                                                    </label>
-
-                                                </td>
-                                            </tr>
-
-
-                                        </tbody>
-                                    </table>   
-
-                                    <div class="hr hr-double hr8"></div>
-                                </div>
+                                    </tbody>
+                                </table>    
                             </div>
-                        </div><!--/widget-main-->
-                    </div><!--/widget-body-->
-                </div><!--/widget-box-->
-            </div><!--/span-->
 
-        </div><!--/row-->
+                        </div>
+                    </div>
+                </div>
+            </div><!--/span-->
+         </div>
+
+      
 
         <!--PAGE CONTENT ENDS-->
     </div><!--/.span-->
@@ -948,4 +313,52 @@
 </div><!--/.main-content-->
 </div><!--/.main-container-->
 
-<?php require_once(APPPATH . 'views/footer.php'); ?>
+<?php require_once(APPPATH . 'views/footer_report.php'); ?>
+<script type="text/javascript">
+    $('#Loading_name').hide();
+    $("#name").blur (function (e) {
+
+        var name = $("#name").val();
+
+        if (name != null) {           // show loader 
+         
+            $('#Loading_name').show();
+            $.post("<?php echo base_url() ?>index.php/User/check", {
+                name: name
+            }, function (response) {
+                //#emailInfo is a span which will show you message
+                $('#Loading_name').hide();
+                setTimeout(finishAjax('Loading_name', escape(response)), 400);
+            });
+        }
+        function finishAjax(id, response) {
+            $('#' + id).html(unescape(response));
+            $('#' + id).fadeIn();
+        }
+    }
+
+    );
+ $('#Loading_email').hide();
+    $("#email").blur (function (e) {
+
+        var email = $("#email").val();
+
+        if (email != null) {           // show loader 
+         
+            $('#Loading_email').show();
+            $.post("<?php echo base_url() ?>index.php/User/check_email", {
+                email: email
+            }, function (response) {
+                //#emailInfo is a span which will show you message
+                $('#Loading_email').hide();
+                setTimeout(finishAjax('Loading_email', escape(response)), 400);
+            });
+        }
+        function finishAjax(id, response) {
+            $('#' + id).html(unescape(response));
+            $('#' + id).fadeIn();
+        }
+    }
+
+    );
+</script>

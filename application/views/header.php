@@ -26,6 +26,7 @@
         <link rel="stylesheet" href="<?= base_url(); ?>assets/css/ace.min.css" />
         <link rel="stylesheet" href="<?= base_url(); ?>assets/css/ace-responsive.min.css" />
         <link rel="stylesheet" href="<?= base_url(); ?>assets/css/ace-skins.min.css" />
+        <link href="<?= base_url(); ?>css/mine.css" rel="stylesheet" />
 
         <!--[if lte IE 8]>
           <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
@@ -40,7 +41,7 @@
                 <div class="container-fluid">
                     <a href="#" class="brand">
                         <small>
-
+                            <img src="<?= base_url() ?>images/logo.fw.png" height="100px" width="80px"/>
                             Weather information management system
                         </small>
                     </a><!--/.brand-->
@@ -257,9 +258,9 @@
 
                         <li class="light-blue">
                             <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                                    <span class="user-info">
+                                <span class="user-info">
                                     <small>Welcome,</small>
-                                    User
+                                   <?php echo $this -> session -> userdata('name'); ?>
                                 </span>
 
                                 <i class="icon-caret-down"></i>
@@ -283,7 +284,7 @@
                                 <li class="divider"></li>
 
                                 <li>
-                                    <a href="#">
+                                    <a href="<?php echo base_url() . "index.php/welcome/logout"; ?>">
                                         <i class="icon-off"></i>
                                         Logout
                                     </a>
@@ -293,173 +294,131 @@
                     </ul><!--/.ace-nav-->
                 </div><!--/.container-fluid-->
             </div><!--/.navbar-inner-->
+            <div class="sidebar-shortcuts" id="sidebar-shortcuts">
+                <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+                     <div class="btn-group">
+                        <button data-toggle="dropdown" class="btn btn-small btn-default dropdown-toggle">
+                            Daily
+                            <i class="icon-angle-down icon-on-right"></i>
+                        </button>
+
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="<?php echo base_url() . "index.php/metar/everyday"; ?>">Weather</a>
+                            </li>
+
+                            <li>
+                                <a href="<?php echo base_url() . "index.php/metar/"; ?>">Metar</a>
+                            </li>
+                             <li>
+                                <a href="<?php echo base_url() . "index.php/welcome/login"; ?>">Home</a>
+                            </li>
+
+                        </ul>
+                    </div><!--/btn-group-->
+                      <div class="btn-group">
+                        <button data-toggle="dropdown" class="btn btn-small btn-default dropdown-toggle">
+                            Reports
+                            <i class="icon-angle-down icon-on-right"></i>
+                        </button>
+
+                        <ul class="dropdown-menu">
+                             <li>
+                                <a href="<?php echo base_url() . "index.php/welcome/reports/"; ?>">All</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo base_url() . "index.php/dekadal/"; ?>">Dekadal</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo base_url() . "index.php/rainfall/"; ?>">Rainfall</a>
+                            </li>
+                             <li>
+                                <a href="<?php echo base_url() . "index.php/monthly/"; ?>">Monthly</a>
+                            </li>
+
+                        </ul>
+                    </div><!--/btn-group-->
+                    
+                  
+
+                    <a href="<?php echo base_url() . "index.php/synoptic/"; ?>">  <button class="btn btn-small btn-default">
+                            <i class="icon-pencil">  Synoptic Register</i>
+                        </button></a>
+
+                    <a href="<?php echo base_url() . "index.php/metar"; ?>">  <button class="btn btn-small btn-default">
+                            <i class="icon-group"> Metar Book</i>
+                        </button></a>
+
+                    <a href="<?php echo base_url() . "index.php/Welcome/schedule"; ?>">   <button class="btn btn-small btn-default">
+                            <i class="icon-cogs">Calendar And Schedules  </i>
+                        </button></a>
+
+                    <a href="<?php echo base_url() . "index.php/Welcome/form"; ?>">  <button class="btn btn-small btn-default">
+                            <i class="icon-cogs">Forms(Register) </i>
+                        </button></a>
+
+                 
+                    <div class="btn-group">
+                        <button data-toggle="dropdown" class="btn btn-small btn-default dropdown-toggle">
+                            Users
+                            <i class="icon-angle-down icon-on-right"></i>
+                        </button>
+
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="<?php echo base_url() . "index.php/user/"; ?>">User</a>
+                            </li>
+
+                            <li>
+                                <a href="<?php echo base_url() . "index.php/role/"; ?>">Roles</a>
+                            </li>
+                             <li>
+                                <a href="<?php echo base_url() . "index.php/logs/"; ?>">Logs</a>
+                            </li>
+
+                        </ul>
+                    </div><!--/btn-group-->
+                    
+
+
+                   
+
+                    <a href="<?php echo base_url() . "index.php/station"; ?>">  <button class="btn btn-small btn-default">
+                            <i class="icon-cogs">Stations </i>
+                        </button></a>
+
+                    <a href="<?php echo base_url() . "index.php/element/"; ?>">  <button class="btn btn-small btn-default">
+                            <i class="icon-cogs">Elements  </i>
+                        </button></a>
+                    <a href="<?php echo base_url() . "index.php/instrument"; ?>">  <button class="btn btn-small btn-default">
+                            <i class="icon-cogs">Instrument </i>
+                        </button></a>
+                    <a href="<?php echo base_url() . "index.php/archive"; ?>">  <button class="btn btn-small btn-default">
+                            <i class="icon-cogs">Archive </i>
+                        </button></a>
+
+                </div>
+
+                <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+                    <span class="btn btn-success"></span>
+
+                    <span class="btn btn-info"></span>
+
+                    <span class="btn btn-warning"></span>
+
+                    <span class="btn btn-danger"></span>
+                </div>
+
+
+
+            </div><!--#sidebar-shortcuts-->
         </div>
+       
 
         <div class="main-container container-fluid">
             <a class="menu-toggler" id="menu-toggler" href="#">
                 <span class="menu-text"></span>
             </a>
 
-            <div class="sidebar" id="sidebar">
-                <div class="sidebar-shortcuts" id="sidebar-shortcuts">
-                    <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
-                        <button class="btn btn-small btn-success">
-                            <i class="icon-signal"></i>
-                        </button>
-
-                        <button class="btn btn-small btn-info">
-                            <i class="icon-pencil"></i>
-                        </button>
-
-                        <button class="btn btn-small btn-warning">
-                            <i class="icon-group"></i>
-                        </button>
-
-                        <button class="btn btn-small btn-danger">
-                            <i class="icon-cogs"></i>
-                        </button>
-                    </div>
-
-                    <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
-                        <span class="btn btn-success"></span>
-
-                        <span class="btn btn-info"></span>
-
-                        <span class="btn btn-warning"></span>
-
-                        <span class="btn btn-danger"></span>
-                    </div>
-                </div><!--#sidebar-shortcuts-->
-
-                <ul class="nav nav-list">
-                         <li>
-                        <a href="<?php echo base_url()."index.php/Welcome/reports"; ?>">
-                            <i class="icon-bar-chart"></i>
-                            <span class="menu"> Reports </span>
-                        </a>
-                    </li>
-                        <li>
-                        <a href="<?php echo base_url()."index.php/Welcome/schedule"; ?>">
-                            <i class="icon-calendar"></i>
-
-                            <span class="menu-text">
-                                Calendar And Schedules
-                                <span class="badge badge-transparent tooltip-error" title="2&nbsp;Important&nbsp;Events">
-                                    <i class="icon-warning-sign red bigger-130"></i>
-                                </span>
-                            </span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="<?php echo base_url()."index.php/Welcome/user"; ?>">
-                            <i class="icon-group"></i>
-                            <span class="menu-text"> Users </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<?php echo base_url()."index.php/Welcome/station"; ?>">
-                            <i class="icon-home"></i>
-                            <span class="menu-text"> Stations </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<?php echo base_url()."index.php/Welcome/element"; ?>">
-                            <i class="icon-cloud"></i>
-                            <span class="menu-text"> Elements </span>
-                        </a>
-                    </li>
-                     <li>
-                        <a href="<?php echo base_url()."index.php/Welcome/instrument"; ?>">
-                            <i class="icon-beaker"></i>
-                            <span class="menu-text"> Instruments </span>
-                        </a>
-                    </li>
-                      <li>
-                        <a href="<?php echo base_url()."index.php/Welcome/archive"; ?>">
-                            <i class="icon-folder-open-alt"></i>
-                            <span class="menu-text"> Archive </span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="#" class="dropdown-toggle">
-                            <i class="icon-cog"></i>
-                            <span class="menu-text"> Other  </span>
-
-                            <b class="arrow icon-angle-down"></b>
-                        </a>
-
-                        <ul class="submenu">
-                             <li>
-                                <a href="elements.html">
-                                    <i class="icon-double-angle-right"></i>
-                               Events
-                                </a>
-                            </li>
-                            <li>
-                                <a href="elements.html">
-                                    <i class="icon-double-angle-right"></i>
-                                  Units
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="buttons.html">
-                                    <i class="icon-double-angle-right"></i>
-                             Metric
-                                </a>
-                            </li>
-                             <li>
-                                <a href="buttons.html">
-                                    <i class="icon-double-angle-right"></i>
-                             Limits
-                                </a>
-                            </li>
-                            
 
 
-                   
-                        </ul>
-                    </li>
-
-         
-
-               
-
-            
-
-                
-
-                </ul><!--/.nav-list-->
-
-                <div class="sidebar-collapse" id="sidebar-collapse">
-                    <i class="icon-double-angle-left"></i>
-                </div>
-            </div>
-
-            <div class="main-content">
-                <div class="breadcrumbs" id="breadcrumbs">
-                    <ul class="breadcrumb">
-                        <li>
-                            <i class="icon-home home-icon"></i>
-                            <a href="#">Home</a>
-
-                            <span class="divider">
-                                <i class="icon-angle-right arrow-icon"></i>
-                            </span>
-                        </li>
-                        <li class="active">Dashboard</li>
-                    </ul><!--.breadcrumb-->
-
-                    <div class="nav-search" id="nav-search">
-                        <form class="form-search" />
-                        <span class="input-icon">
-                            <input type="text" placeholder="Search ..." class="input-small nav-search-input" id="nav-search-input" autocomplete="off" />
-                            <i class="icon-search nav-search-icon"></i>
-                        </span>
-                        </form>
-                    </div><!--#nav-search-->
-                </div>
-                	<div class="page-content">
-					

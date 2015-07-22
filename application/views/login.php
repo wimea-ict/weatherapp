@@ -46,7 +46,8 @@
                                        
                                         <span class="red">Weather Data Information System</span>
                                         
-                                    </h1>
+                                    </h1>  
+                                    <img src="<?= base_url() ?>images/logo.fw.png" height="100px" width="150px"/>
                                     <h4 class="blue">&copy; AWS</h4>
                                 </div>
                             </div>
@@ -62,7 +63,7 @@
 
                                                 <h4 class="header blue lighter bigger">
                                                    
-                                                     Enter Your login credentials to continue
+                                                     Enter your login credentials to continue
                                                 </h4>
 
                                                 <div class="space-6"></div>
@@ -71,14 +72,14 @@
                                                 <fieldset>
                                                     <label>
                                                         <span class="block input-icon input-icon-right">
-                                                            <input type="text" class="span12" placeholder="Username" />
+                                                            <input type="text" class="span12" id="email" name="email" placeholder="E-mail" />
                                                             <i class="icon-user"></i>
                                                         </span>
                                                     </label>
 
                                                     <label>
                                                         <span class="block input-icon input-icon-right">
-                                                            <input type="password" class="span12" placeholder="Password" />
+                                                            <input type="password" class="span12" id="password" name="password" placeholder="Password" />
                                                             <i class="icon-lock"></i>
                                                         </span>
                                                     </label>
@@ -86,7 +87,7 @@
                                                     <div class="space"></div>
 
                                                     <div class="clearfix">
-                                                       
+                                                          <?php echo $this->session->flashdata('msg');?> 
                                                         <button type="submit" class="width-35 pull-right btn btn-small btn-primary">
                                                             <i class="icon-key"></i>
                                                             Login
@@ -95,7 +96,7 @@
 
                                                     <div class="space-4"></div>
                                                 </fieldset>
-                                                </form>
+                        </form>
 
                                                
 
@@ -169,65 +170,96 @@
                                             <div class="widget-main">
                                                 <h4 class="header green lighter bigger">
                                                    
-                                                   User Registration
+                                                   User registration
                                                 </h4>
 
                                                 <div class="space-6"></div>
                                                 <p> Enter your details to begin: </p>
 
                                       
-                                                <fieldset>
-                                                    <label>
-                                                        <span class="block input-icon input-icon-right">
-                                                            <input type="email" class="span12" placeholder="Email" />
-                                                            <i class="icon-envelope"></i>
-                                                        </span>
-                                                    </label>
+                                        <form id="user-form" name="user-form" enctype="multipart/form-data"  action='<?= base_url(); ?>index.php/User/save'  method="post">            
 
-                                                    <label>
-                                                        <span class="block input-icon input-icon-right">
-                                                            <input type="text" class="span12" placeholder="Username" />
-                                                            <i class="icon-user"></i>
-                                                        </span>
-                                                    </label>
-                                                      <label>
-                                                        <span class="block input-icon input-icon-right">
-                                                            <input type="text" class="span12" placeholder="Contact" />
-                                                            <i class="icon-user"></i>
-                                                        </span>
-                                                    </label>
+                                            <fieldset>
+                                    <label>
 
-                                                    <label>
-                                                        <span class="block input-icon input-icon-right">
-                                                            <input type="password" class="span12" placeholder="Password" />
-                                                            <i class="icon-lock"></i>
-                                                        </span>
-                                                    </label>
-
-                                                    <label>
-                                                        <span class="block input-icon input-icon-right">
-                                                            <input type="password" class="span12" placeholder="Repeat password" />
-                                                            <i class="icon-retweet"></i>
-                                                        </span>
-                                                    </label>
-
+                                                    <span class="block input-icon input-icon-right">
+                                                        <input type="email" name="email" id="email" class="span12" placeholder="Email" />
+                                                      <span id="Loading_email" name ="Loading_email"><img src="<?= base_url(); ?>images/ajax-loader.gif" alt="Ajax Indicator" /></span>
                                                   
+                                                    </span>
+                                                </label>
 
-                                                    <div class="space-24"></div>
+                                                <label>
+                                                    <span class="block input-icon input-icon-right">
+                                                        <input type="text" name="name" id="name" class="span12" placeholder="name" />
+                                                        <span id="Loading_name" name ="Loading_name"><img src="<?= base_url(); ?>images/ajax-loader.gif" alt="Ajax Indicator" /></span>
+                                                               
+                                                    </span>
+                                                </label>
+                                                <label>
+                                                    <span class="block input-icon input-icon-right">
+                                                        <input type="text" name="contact" id="contact" class="span12" placeholder="Contact" />
+                                                       
+                                                    </span>
+                                                     <span class="block input-icon input-icon-right">
+                                                         <input type="text" id="contact2" name="contact2" class="span12" placeholder="Contact 2" />
+                                                         <input type="hidden" id="front" name="front" class="span12" value="front" />
+                                                       
+                                                    </span>
+                                                </label>
 
-                                                    <div class="clearfix">
-                                                        <button type="reset" class="width-30 pull-left btn btn-small">
-                                                            <i class="icon-refresh"></i>
-                                                            Reset
-                                                        </button>
+                                                <label>
+                                                    <span class="block input-icon input-icon-right">
+                                                        <input type="password" name="password" id="password" class="span12" placeholder="Password" />
+                                                       
+                                                    </span>
+                                                </label>
 
-                                                        <button onclick="return false;" class="width-65 pull-right btn btn-small btn-success">
-                                                            Register
-                                                            <i class="icon-arrow-right icon-on-right"></i>
-                                                        </button>
-                                                    </div>
-                                                </fieldset>
-                                                </form>
+                                                <label>
+                                                    <span class="block input-icon input-icon-right">
+                                                        <input type="password" name="password2" id="password2" class="span12" placeholder="Repeat password" />
+                                                    
+                                                    </span>
+                                                </label>
+                                                 <label>
+                                                    <span class="block input-icon input-icon-right">
+                                                        Select the user role
+                                                        <select id="role" name="role">
+                                                            <?php
+                                        if (is_array($roles) && count($roles)) {
+                                            foreach ($roles as $loop) {
+                                                ?>                        
+                                                            <option value="<?=$loop->name?>" /><?=$loop->name?>
+                                                    
+
+                                        <?php }}?>
+                                                </select></span>
+                                                     
+                                                        <span class="block input-icon input-icon-right">
+                                                            Select the station if it applies   <select id="station" name="station">
+                                                            <?php
+                                        if (is_array($stations) && count($stations)) {
+                                            foreach ($stations as $loop) {
+                                                ?>                        
+                                                            <option value="<?=$loop->name?>" /><?=$loop->name?>
+                                                    
+
+                                        <?php }}?>
+                                                </select></span>
+                                                </label>
+                                                <div class="clearfix">
+                                                    <button type="reset" class="width-10 pull-right btn btn-small btn-success" >
+                                                        <i class="icon-refresh"></i>
+                                                        Reset
+                                                    </button>
+
+                                                    <button class="width-10 btn btn-small"  >
+                                                     Submit
+
+                                                    </button>
+                                                </div>
+                                            </fieldset>
+                                            </form>
                                             </div>
 
                                             <div class="toolbar center">
@@ -296,3 +328,51 @@ window.jQuery || document.write("<script src='assets/js/jquery-1.10.2.min.js'>"+
         </script>
     </body>
 </html>
+<script type="text/javascript">
+    $('#Loading_name').hide();
+    $("#name").blur (function (e) {
+
+        var name = $("#name").val();
+
+        if (name != null) {           // show loader 
+         
+            $('#Loading_name').show();
+            $.post("<?php echo base_url() ?>index.php/User/check", {
+                name: name
+            }, function (response) {
+                //#emailInfo is a span which will show you message
+                $('#Loading_name').hide();
+                setTimeout(finishAjax('Loading_name', escape(response)), 400);
+            });
+        }
+        function finishAjax(id, response) {
+            $('#' + id).html(unescape(response));
+            $('#' + id).fadeIn();
+        }
+    }
+
+    );
+ $('#Loading_email').hide();
+    $("#email").blur (function (e) {
+
+        var email = $("#email").val();
+
+        if (email != null) {           // show loader 
+         
+            $('#Loading_email').show();
+            $.post("<?php echo base_url() ?>index.php/User/check_email", {
+                email: email
+            }, function (response) {
+                //#emailInfo is a span which will show you message
+                $('#Loading_email').hide();
+                setTimeout(finishAjax('Loading_email', escape(response)), 400);
+            });
+        }
+        function finishAjax(id, response) {
+            $('#' + id).html(unescape(response));
+            $('#' + id).fadeIn();
+        }
+    }
+
+    );
+</script>

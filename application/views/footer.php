@@ -85,10 +85,10 @@
 			
 			  var placeholder = $('#piechart-placeholder').css({'width':'90%' , 'min-height':'150px'});
 			  var data = [
-				{ label: "social networks",  data: 38.7, color: "#68BC31"},
-				{ label: "search engines",  data: 24.5, color: "#2091CF"},
-				{ label: "ad campaings",  data: 8.2, color: "#AF4E96"},
-				{ label: "direct traffic",  data: 18.6, color: "#DA5430"},
+				{ label: "East",  data: 38.7, color: "#68BC31"},
+				{ label: "West",  data: 24.5, color: "#2091CF"},
+				{ label: "North",  data: 8.2, color: "#AF4E96"},
+				{ label: "South",  data: 18.6, color: "#DA5430"},
 				{ label: "other",  data: 10, color: "#FEE074"}
 			  ]
 			  function drawPieChart(placeholder, data, position) {
@@ -172,9 +172,9 @@
 			
 				var sales_charts = $('#sales-charts').css({'width':'100%' , 'height':'220px'});
 				$.plot("#sales-charts", [
-					{ label: "Domains", data: d1 },
-					{ label: "Hosting", data: d2 },
-					{ label: "Services", data: d3 }
+					{ label: "Daily", data: d1 },
+					{ label: "Weekly", data: d2 },
+					{ label: "Monthly", data: d3 }
 				], {
 					hoverable: true,
 					shadowSize: 0,

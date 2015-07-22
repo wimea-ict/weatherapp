@@ -1,11 +1,11 @@
 <?php require_once(APPPATH . 'views/header.php'); ?>
 
-     <link rel="stylesheet" href="assets/css/jquery-ui-1.10.3.custom.min.css" />
-		<link rel="stylesheet" href="<?= base_url(); ?>assets/css/chosen.css" />
-		<link rel="stylesheet" href="<?= base_url(); ?>assets/css/datepicker.css" />
-		<link rel="stylesheet" href="<?= base_url(); ?>assets/css/bootstrap-timepicker.css" />
-		<link rel="stylesheet" href="<?= base_url(); ?>assets/css/daterangepicker.css" />
-		<link rel="stylesheet" href="<?= base_url(); ?>assets/css/colorpicker.css" />
+<link rel="stylesheet" href="assets/css/jquery-ui-1.10.3.custom.min.css" />
+<link rel="stylesheet" href="<?= base_url(); ?>assets/css/chosen.css" />
+<link rel="stylesheet" href="<?= base_url(); ?>assets/css/datepicker.css" />
+<link rel="stylesheet" href="<?= base_url(); ?>assets/css/bootstrap-timepicker.css" />
+<link rel="stylesheet" href="<?= base_url(); ?>assets/css/daterangepicker.css" />
+<link rel="stylesheet" href="<?= base_url(); ?>assets/css/colorpicker.css" />
 
 
 <div class="row-fluid">
@@ -17,7 +17,7 @@
                     <div class="widget-header">
                         <h4 class="lighter smaller">
                             <i class="icon-file icon-2x green"></i>
-                      Files & Archive
+                            Files & Archive
                         </h4>
 
                         <div class="widget-toolbar no-border">
@@ -45,55 +45,76 @@
                                             <div class="widget-main">
 
                                                 <div class="span6">
-                                                    <div class="well well-large"> 
+                                                    <form id="station-form" name="station-form" enctype="multipart/form-data"  action='<?= base_url(); ?>index.php/archive/save'  method="post">            
 
-                                                        <label for="form-field-select-1">Name</label>
-                                                        <input type="text" class="span12" placeholder="Name" />
+                                                        <div class="well well-large"> 
+                                                            <span >Report/form type:<br><select id="form" name="form">
+                                                                    <option value="Metar" />Metar
+                                                                    <option value="Synoptic" />Synoptic register
+                                                                    <option value="Dekadal" />Dekadal
+                                                                </select></span><br>
+                                                            <label for="form-field-select-1">Name</label>
+                                                            <input type="text" class="span12" placeholder="Name" id="name" name="name" />
+                                                            <label for="form-field-select-1">Station</label>
+                                                            <select id="station" name="station">                                                       
+                                                                <?php
+                                                                if (is_array($stations) && count($stations)) {
+                                                                    foreach ($stations as $loop) {
+                                                                        ?>                        
+                                                                        <option value="<?= $loop->name ?>" /><?= $loop->name ?>
 
-                                                      	<div class="widget-body">
-												<div class="widget-main">
+
+                                                                    <?php }
+                                                                }
+                                                                ?>
+                                                            </select>
+
+
+
+                                                            <div class="widget-body">
+                                                                <div class="widget-main">
 <!--													<input type="file" id="id-input-file-2" />-->
-													<input multiple="" type="file" id="id-input-file-3" />
-													<label>
-														<input type="checkbox" name="file-format" id="id-file-format" />
-														<span class="lbl"> Allow only images</span>
-													</label>
-												</div>
-											</div>
-                                                        <div class="row-fluid">
-                                                            <label for="id-date-range-picker-1">(Period)Start Date - End Date</label>
-                                                        </div>
-
-                                                        <div class="control-group">
-                                                            <div class="row-fluid input-prepend">
-                                                                <span class="add-on">
-                                                                    <i class="icon-calendar"></i>
-                                                                </span>
-
-                                                                <input class="span10" type="text" name="date-range-picker" id="id-date-range-picker-1" />
+                                                                    <input type="file" id="id-input-file-3" name="userfile" />
+                                                                    <label>
+                                                                        <input type="checkbox" name="file-format" id="id-file-format" />
+                                                                        <span class="lbl"> Allow only images</span>
+                                                                    </label>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                       
-                                                       <label for="form-field-select-1">Description</label>
-                                                        <input type="text" class="span12" placeholder="Details" />                                                    
-                                                      
-                                                        <div class="form-group">
-
-                                                             <div class="clearfix">
-                                                                <br>                               <button type="reset" class="width-30 pull-left btn btn-small">
-                                                                    <i class="icon-refresh"></i>
-                                                                    Clear
-                                                                </button>
-
-                                                                <button onclick="return false;" class="width-65 pull-right btn btn-small btn-success">
-                                                                    Submit
-
-                                                                </button>
+                                                            <div class="row-fluid">
+                                                                <label for="id-date-range-picker-1">(Period)Start Date - End Date</label>
                                                             </div>
-                                                        </div>                   
 
-                                                    </div>
+                                                            <div class="control-group">
+                                                                <div class="row-fluid input-prepend">
+                                                                    <span class="add-on">
+                                                                        <i class="icon-calendar"></i>
+                                                                    </span>
 
+                                                                    <input class="span10" type="text" name="date-range-picker" id="id-date-range-picker-1" />
+                                                                </div>
+                                                            </div>
+
+                                                            <label for="form-field-select-1">Description</label>
+                                                            <input type="text" class="span12" id="description" name="description" placeholder="Details" />                                                    
+
+                                                            <div class="form-group">
+
+                                                                <div class="clearfix">
+                                                                    <br>                               <button type="reset" class="width-10 pull-left btn btn-small">
+                                                                        <i class="icon-refresh"></i>
+                                                                        Clear
+                                                                    </button>
+
+                                                                    <button type="submit" class="width-15 pull-right btn btn-small btn-success">
+                                                                        Submit
+
+                                                                    </button>
+                                                                </div>
+                                                            </div>                   
+
+                                                        </div>
+                                                    </form>
 
 
                                                     <fieldset>
@@ -107,9 +128,22 @@
 
 
                                                     </fieldset>
-                                                    </form>
-                                                </div>
 
+                                                </div>
+                                                <div class="widget-box span6">
+                                                    <div class="widget-header header-color-green2">
+                                                        <h4 class="lighter smaller">Browse Files</h4>
+                                                    </div>
+
+                                                    <div class="widget-body">
+                                                        <div class="widget-main padding-8">
+                                                            <div id="tree2" class="tree"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <script type="text/javascript">
+                                                    var $assets = "assets";//this will be used in fuelux.tree-sampledata.js
+                                                </script>
 
                                             </div><!--/widget-body-->
                                         </div><!--/signup-box-->
@@ -127,389 +161,71 @@
                                                             <span class="lbl"></span>
                                                         </label>
                                                     </th>
-                                                    <th>Domain</th>
-                                                    <th>Price</th>
-                                                    <th class="hidden-480">Clicks</th>
+                                                    <th>Form</th>
+                                                    <th>Name</th>
+                                                    <th>Station</th>
+                                                    <th class="hidden-480">Period</th>
 
-                                                    <th class="hidden-phone">
-                                                        <i class="icon-time bigger-110 hidden-phone"></i>
-                                                        Update
-                                                    </th>
-                                                    <th class="hidden-480">Status</th>
+                                                    <th class="hidden-phone">Description </th>
+                                                    <th class="hidden-480">Submitted On:</th>
+
+                                                    <th>File</th
 
                                                     <th></th>
                                                 </tr>
                                             </thead>
 
                                             <tbody>
+                                                <?php
+                                                if (is_array($files) && count($files)) {
+                                                    foreach ($files as $loop) {
+                                                        ?>  
+
+                                                        <tr>
+                                                            <td class="center">
+                                                                <label>
+                                                                    <input type="checkbox" />
+                                                                    <span class="lbl"></span>
+                                                                </label>
+                                                            </td>
+                                                            <td>
+                                                                <a href="#"><?= $loop->form ?></a>
+                                                            </td>
+                                                            <td>
+                                                                <a href="#"><?= $loop->name ?></a>
+                                                            </td>
+
+                                                            <td class="hidden-480"><?= $loop->station ?></td>
+                                                            <td class="hidden-phone"><?= $loop->period ?></td>
+
+                                                            <td class="hidden-480">
+                                                                <span class="label label-success"><?= $loop->description ?></span>
+                                                            </td>
+                                                            <td><?= $loop->submitted ?></td>
+                                                            <td><?= $loop->file ?></td>
 
 
-                                                <tr>
-                                                    <td class="center">
-                                                        <label>
-                                                            <input type="checkbox" />
-                                                            <span class="lbl"></span>
-                                                        </label>
-                                                    </td>
 
-                                                    <td>
-                                                        <a href="#">view.com</a>
-                                                    </td>
-                                                    <td>$45</td>
-                                                    <td class="hidden-480">4,100</td>
-                                                    <td class="hidden-phone">Mar 12</td>
+                                                            <td class="td-actions">
 
-                                                    <td class="hidden-480">
-                                                        <span class="label label-success">Registered</span>
-                                                    </td>
+                                                                <a href="<?php echo base_url() . "index.php/archive/delete/" . $loop->id; ?>" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                                                    <span class="red">
+                                                                        <i class="icon-trash bigger-120"></i>
+                                                                    </span>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    <?php }
+                                                }
+                                                ?>
 
-                                                    <td class="td-actions">
-                                                        <div class="hidden-phone visible-desktop action-buttons">
-                                                            <a class="blue" href="#">
-                                                                <i class="icon-zoom-in bigger-130"></i>
-                                                            </a>
-
-                                                            <a class="green" href="#">
-                                                                <i class="icon-pencil bigger-130"></i>
-                                                            </a>
-
-                                                            <a class="red" href="#">
-                                                                <i class="icon-trash bigger-130"></i>
-                                                            </a>
-                                                        </div>
-
-                                                        <div class="hidden-desktop visible-phone">
-                                                            <div class="inline position-relative">
-                                                                <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
-                                                                    <i class="icon-caret-down icon-only bigger-120"></i>
-                                                                </button>
-
-                                                                <ul class="dropdown-menu dropdown-icon-only dropdown-yellow pull-right dropdown-caret dropdown-close">
-                                                                    <li>
-                                                                        <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
-                                                                            <span class="blue">
-                                                                                <i class="icon-zoom-in bigger-120"></i>
-                                                                            </span>
-                                                                        </a>
-                                                                    </li>
-
-                                                                    <li>
-                                                                        <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
-                                                                            <span class="green">
-                                                                                <i class="icon-edit bigger-120"></i>
-                                                                            </span>
-                                                                        </a>
-                                                                    </li>
-
-                                                                    <li>
-                                                                        <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
-                                                                            <span class="red">
-                                                                                <i class="icon-trash bigger-120"></i>
-                                                                            </span>
-                                                                        </a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td class="center">
-                                                        <label>
-                                                            <input type="checkbox" />
-                                                            <span class="lbl"></span>
-                                                        </label>
-                                                    </td>
-
-                                                    <td>
-                                                        <a href="#">nice.com</a>
-                                                    </td>
-                                                    <td>$38</td>
-                                                    <td class="hidden-480">3,940</td>
-                                                    <td class="hidden-phone">Feb 12</td>
-
-                                                    <td class="hidden-480">
-                                                        <span class="label label-info arrowed arrowed-righ">Sold</span>
-                                                    </td>
-
-                                                    <td class="td-actions">
-                                                        <div class="hidden-phone visible-desktop action-buttons">
-                                                            <a class="blue" href="#">
-                                                                <i class="icon-zoom-in bigger-130"></i>
-                                                            </a>
-
-                                                            <a class="green" href="#">
-                                                                <i class="icon-pencil bigger-130"></i>
-                                                            </a>
-
-                                                            <a class="red" href="#">
-                                                                <i class="icon-trash bigger-130"></i>
-                                                            </a>
-                                                        </div>
-
-                                                        <div class="hidden-desktop visible-phone">
-                                                            <div class="inline position-relative">
-                                                                <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
-                                                                    <i class="icon-caret-down icon-only bigger-120"></i>
-                                                                </button>
-
-                                                                <ul class="dropdown-menu dropdown-icon-only dropdown-yellow pull-right dropdown-caret dropdown-close">
-                                                                    <li>
-                                                                        <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
-                                                                            <span class="blue">
-                                                                                <i class="icon-zoom-in bigger-120"></i>
-                                                                            </span>
-                                                                        </a>
-                                                                    </li>
-
-                                                                    <li>
-                                                                        <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
-                                                                            <span class="green">
-                                                                                <i class="icon-edit bigger-120"></i>
-                                                                            </span>
-                                                                        </a>
-                                                                    </li>
-
-                                                                    <li>
-                                                                        <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
-                                                                            <span class="red">
-                                                                                <i class="icon-trash bigger-120"></i>
-                                                                            </span>
-                                                                        </a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td class="center">
-                                                        <label>
-                                                            <input type="checkbox" />
-                                                            <span class="lbl"></span>
-                                                        </label>
-                                                    </td>
-
-                                                    <td>
-                                                        <a href="#">fine.com</a>
-                                                    </td>
-                                                    <td>$25</td>
-                                                    <td class="hidden-480">2,983</td>
-                                                    <td class="hidden-phone">Apr 01</td>
-
-                                                    <td class="hidden-480">
-                                                        <span class="label label-warning">Expiring</span>
-                                                    </td>
-
-                                                    <td class="td-actions">
-                                                        <div class="hidden-phone visible-desktop action-buttons">
-                                                            <a class="blue" href="#">
-                                                                <i class="icon-zoom-in bigger-130"></i>
-                                                            </a>
-
-                                                            <a class="green" href="#">
-                                                                <i class="icon-pencil bigger-130"></i>
-                                                            </a>
-
-                                                            <a class="red" href="#">
-                                                                <i class="icon-trash bigger-130"></i>
-                                                            </a>
-                                                        </div>
-
-                                                        <div class="hidden-desktop visible-phone">
-                                                            <div class="inline position-relative">
-                                                                <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
-                                                                    <i class="icon-caret-down icon-only bigger-120"></i>
-                                                                </button>
-
-                                                                <ul class="dropdown-menu dropdown-icon-only dropdown-yellow pull-right dropdown-caret dropdown-close">
-                                                                    <li>
-                                                                        <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
-                                                                            <span class="blue">
-                                                                                <i class="icon-zoom-in bigger-120"></i>
-                                                                            </span>
-                                                                        </a>
-                                                                    </li>
-
-                                                                    <li>
-                                                                        <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
-                                                                            <span class="green">
-                                                                                <i class="icon-edit bigger-120"></i>
-                                                                            </span>
-                                                                        </a>
-                                                                    </li>
-
-                                                                    <li>
-                                                                        <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
-                                                                            <span class="red">
-                                                                                <i class="icon-trash bigger-120"></i>
-                                                                            </span>
-                                                                        </a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td class="center">
-                                                        <label>
-                                                            <input type="checkbox" />
-                                                            <span class="lbl"></span>
-                                                        </label>
-                                                    </td>
-
-                                                    <td>
-                                                        <a href="#">good.com</a>
-                                                    </td>
-                                                    <td>$50</td>
-                                                    <td class="hidden-480">6,500</td>
-                                                    <td class="hidden-phone">Feb 02</td>
-
-                                                    <td class="hidden-480">
-                                                        <span class="label label-inverse arrowed-in">Flagged</span>
-                                                    </td>
-
-                                                    <td class="td-actions">
-                                                        <div class="hidden-phone visible-desktop action-buttons">
-                                                            <a class="blue" href="#">
-                                                                <i class="icon-zoom-in bigger-130"></i>
-                                                            </a>
-
-                                                            <a class="green" href="#">
-                                                                <i class="icon-pencil bigger-130"></i>
-                                                            </a>
-
-                                                            <a class="red" href="#">
-                                                                <i class="icon-trash bigger-130"></i>
-                                                            </a>
-                                                        </div>
-
-                                                        <div class="hidden-desktop visible-phone">
-                                                            <div class="inline position-relative">
-                                                                <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
-                                                                    <i class="icon-caret-down icon-only bigger-120"></i>
-                                                                </button>
-
-                                                                <ul class="dropdown-menu dropdown-icon-only dropdown-yellow pull-right dropdown-caret dropdown-close">
-                                                                    <li>
-                                                                        <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
-                                                                            <span class="blue">
-                                                                                <i class="icon-zoom-in bigger-120"></i>
-                                                                            </span>
-                                                                        </a>
-                                                                    </li>
-
-                                                                    <li>
-                                                                        <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
-                                                                            <span class="green">
-                                                                                <i class="icon-edit bigger-120"></i>
-                                                                            </span>
-                                                                        </a>
-                                                                    </li>
-
-                                                                    <li>
-                                                                        <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
-                                                                            <span class="red">
-                                                                                <i class="icon-trash bigger-120"></i>
-                                                                            </span>
-                                                                        </a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td class="center">
-                                                        <label>
-                                                            <input type="checkbox" />
-                                                            <span class="lbl"></span>
-                                                        </label>
-                                                    </td>
-
-                                                    <td>
-                                                        <a href="#">great.com</a>
-                                                    </td>
-                                                    <td>$55</td>
-                                                    <td class="hidden-480">6,400</td>
-                                                    <td class="hidden-phone">Feb 24</td>
-
-                                                    <td class="hidden-480">
-                                                        <span class="label label-success">Registered</span>
-                                                    </td>
-
-                                                    <td class="td-actions">
-                                                        <div class="hidden-phone visible-desktop action-buttons">
-                                                            <a class="blue" href="#">
-                                                                <i class="icon-zoom-in bigger-130"></i>
-                                                            </a>
-
-                                                            <a class="green" href="#">
-                                                                <i class="icon-pencil bigger-130"></i>
-                                                            </a>
-
-                                                            <a class="red" href="#">
-                                                                <i class="icon-trash bigger-130"></i>
-                                                            </a>
-                                                        </div>
-
-                                                        <div class="hidden-desktop visible-phone">
-                                                            <div class="inline position-relative">
-                                                                <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
-                                                                    <i class="icon-caret-down icon-only bigger-120"></i>
-                                                                </button>
-
-                                                                <ul class="dropdown-menu dropdown-icon-only dropdown-yellow pull-right dropdown-caret dropdown-close">
-                                                                    <li>
-                                                                        <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
-                                                                            <span class="blue">
-                                                                                <i class="icon-zoom-in bigger-120"></i>
-                                                                            </span>
-                                                                        </a>
-                                                                    </li>
-
-                                                                    <li>
-                                                                        <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
-                                                                            <span class="green">
-                                                                                <i class="icon-edit bigger-120"></i>
-                                                                            </span>
-                                                                        </a>
-                                                                    </li>
-
-                                                                    <li>
-                                                                        <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
-                                                                            <span class="red">
-                                                                                <i class="icon-trash bigger-120"></i>
-                                                                            </span>
-                                                                        </a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
 
 
                                             </tbody>
-                                        </table>    
-
+                                        </table>     
 
                                     </div>
 
-                                    <div class="center">
-                                        <i class="icon-group icon-2x green"></i>
-
-                                        &nbsp;
-                                        <a href="#">
-                                            See all members &nbsp;
-                                            <i class="icon-arrow-right"></i>
-                                        </a>
-                                    </div>
 
                                     <div class="hr hr-double hr8"></div>
                                 </div><!--member-tab-->
@@ -525,6 +241,7 @@
         <!--PAGE CONTENT ENDS-->
     </div><!--/.span-->
 </div><!--/.row-fluid-->
+
 </div><!--/.page-content-->
 
 
@@ -532,6 +249,48 @@
 </div><!--/.main-container-->
 
 <?php require_once(APPPATH . 'views/footer_instrument.php'); ?>
+<script src="<?= base_url(); ?>assets/js/fuelux/data/fuelux.tree-sampledata.js"></script>
+<script src="<?= base_url(); ?>assets/js/fuelux/fuelux.tree.min.js"></script>
+
+<script type="text/javascript">
+                                                    $(function () {
+
+                                                        $('#tree1').ace_tree({
+                                                            dataSource: treeDataSource,
+                                                            multiSelect: true,
+                                                            loadingHTML: '<div class="tree-loading"><i class="icon-refresh icon-spin blue"></i></div>',
+                                                            'open-icon': 'icon-minus',
+                                                            'close-icon': 'icon-plus',
+                                                            'selectable': true,
+                                                            'selected-icon': 'icon-ok',
+                                                            'unselected-icon': 'icon-remove'
+                                                        });
+
+                                                        $('#tree2').ace_tree({
+                                                            dataSource: treeDataSource2,
+                                                            loadingHTML: '<div class="tree-loading"><i class="icon-refresh icon-spin blue"></i></div>',
+                                                            'open-icon': 'icon-folder-open',
+                                                            'close-icon': 'icon-folder-close',
+                                                            'selectable': false,
+                                                            'selected-icon': null,
+                                                            'unselected-icon': null
+                                                        });
 
 
-	
+
+                                                        /**
+                                                         $('#tree1').on('loaded', function (evt, data) {
+                                                         });
+                                                         
+                                                         $('#tree1').on('opened', function (evt, data) {
+                                                         });
+                                                         
+                                                         $('#tree1').on('closed', function (evt, data) {
+                                                         });
+                                                         
+                                                         $('#tree1').on('selected', function (evt, data) {
+                                                         });
+                                                         */
+                                                    });
+</script>
+<script src="<?= base_url(); ?>js/scanner.js"></script>
