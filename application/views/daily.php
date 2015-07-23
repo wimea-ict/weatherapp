@@ -46,6 +46,7 @@
                             <i class="icon-calendar"></i>
                         </span>
                     </span>
+                   
                 </div>
                 <div class="form-group well">
                     <div class="well-small span4">  <label>Previous date:</label><input name="dateyesterday" class="date-picker" id="dateyesterday" value="<?php echo date('Y-m-d',strtotime("-1 days"));?>"  name="dateyesterday" type="text" data-date-format="yyyy-mm-dd" /></span>
