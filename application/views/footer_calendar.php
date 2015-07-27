@@ -107,7 +107,7 @@
                                              ?>
                     {
                          title: '<?php echo $loops->actual.'mm';?>',
-			start: new Date(<?=$y?>, <?=$m?>,<?=$d?>),
+			start: new Date(<?=$y?>, <?=$m-1?>,<?=$d?>),
 			className: 'label-success'},
                                                                  
             <?php }  }  ?> 

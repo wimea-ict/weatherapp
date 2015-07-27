@@ -1,6 +1,6 @@
 <?php require_once(APPPATH . 'views/header.php'); ?>
 
-<link rel="stylesheet" href="assets/css/jquery-ui-1.10.3.custom.min.css" />
+<link rel="stylesheet" href="<?= base_url(); ?>assets/css/jquery-ui-1.10.3.custom.min.css" />
 <link rel="stylesheet" href="<?= base_url(); ?>assets/css/chosen.css" />
 <link rel="stylesheet" href="<?= base_url(); ?>assets/css/datepicker.css" />
 <link rel="stylesheet" href="<?= base_url(); ?>assets/css/bootstrap-timepicker.css" />
@@ -49,9 +49,12 @@
 
                                                         <div class="well well-large"> 
                                                             <span >Report/form type:<br><select id="form" name="form">
-                                                                    <option value="Metar" />Metar
-                                                                    <option value="Synoptic" />Synoptic register
+                                                                    <option value="Metar book" />Metar book
+                                                                    <option value="Synoptic register" />Synoptic register
                                                                     <option value="Dekadal" />Dekadal
+                                                                    <option value="Rainfall card" />Rainfall card
+                                                                    <option value="Weather summary" />Weather summary
+                                                                      <option value="Climatological observation" />Climatological observation
                                                                 </select></span><br>
                                                             <label for="form-field-select-1">Name</label>
                                                             <input type="text" class="span12" placeholder="Name" id="name" name="name" />
@@ -64,7 +67,8 @@
                                                                         <option value="<?= $loop->name ?>" /><?= $loop->name ?>
 
 
-                                                                    <?php }
+                                                                    <?php
+                                                                    }
                                                                 }
                                                                 ?>
                                                             </select>
@@ -215,7 +219,8 @@
                                                                 </a>
                                                             </td>
                                                         </tr>
-                                                    <?php }
+                                                    <?php
+                                                    }
                                                 }
                                                 ?>
 

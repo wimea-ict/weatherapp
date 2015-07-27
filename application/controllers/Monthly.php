@@ -85,8 +85,7 @@ class Monthly extends CI_Controller {
                $resv->visibility15 = $res->visibility;  
                $resv->hpa15 = $res->station_pressure_hpa; 
              
-               }
-             
+               }             
              
             }
             array_push($all, $resv);
