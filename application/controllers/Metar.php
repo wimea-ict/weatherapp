@@ -396,6 +396,15 @@ class Metar extends CI_Controller {
         $haze = $this->input->post('haze');
         $storm = $this->input->post('storm'); 
         $quake = $this->input->post('quake'); 
+         $height = $this->input->post('height'); 
+          $duration = $this->input->post('duration'); 
+           $sunshine = $this->input->post('sunshine'); 
+            $radiationtype = $this->input->post('type'); 
+             $radiation = $this->input->post('radiation'); 
+              $evaptype1 = $this->input->post('evaptype1'); 
+               $evap1 = $this->input->post('evap1'); 
+                $evaptype2 = $this->input->post('evaptype2'); 
+                 $evap2 = $this->input->post('evap2'); 
         $user = 'test';
         $submitted = date('Y-m-d');
         $approved = 'false';              
@@ -411,7 +420,7 @@ class Metar extends CI_Controller {
             echo '<div class="alert alert-error"><strong> Data already submitted for '.$date.'</strong></div>';
         }else{      
           
-            $daily = array('station' => $station,'date' => $date,'max'=>$max, 'min' => $min,'actual' => $actual, 'anemometer' => $anemometer, 'wind' => $wind, 'maxi' => $maxi, 'user' =>$user,'submitted'=>$submitted,'approved'=>$approved,'rain'=>$rain,'thunder'=>$thunder,'fog'=>$fog,'haze'=>$haze,'storm'=>$storm,'quake'=>$quake);
+            $daily = array('station' => $station,'date' => $date,'max'=>$max, 'min' => $min,'actual' => $actual, 'anemometer' => $anemometer, 'wind' => $wind, 'maxi' => $maxi, 'user' =>$user,'submitted'=>$submitted,'approved'=>$approved,'rain'=>$rain,'thunder'=>$thunder,'fog'=>$fog,'haze'=>$haze,'storm'=>$storm,'quake'=>$quake,'height'=>$height,'duration'=>$duration,'sunshine'=>$sunshine,'radiationtype'=>$radiationtype,'radiation'=>$radiation,'evaptype1'=>$evaptype1,'evap1'=>$evap1,'evaptype2'=>$evaptype2,'evap2'=>$evap2);
            $this->MD->save($daily, 'daily'); 
            $log = array('user' => $this->session -> userdata('name'),'userid'=>$this->session -> userdata('id'),'action' => 'saved daily weather information','details'=>  $this->session-> userdata('name').'submit of weather information ', 'date' => date('Y-m-d H:i:s'),'ip' => $this->input->ip_address(), 'url' =>'');
            $this->MD->save($log, 'logs'); 

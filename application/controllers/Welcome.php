@@ -123,7 +123,14 @@ class Welcome extends CI_Controller {
     }
 
     public function schedule() {
-        $this->load->view('schedule');
+         $query = $this->MD->show('instrument'); 
+        if ($query) {
+             $data['instruments'] = $query;
+        } else {
+            $data['instruments'] = array();
+        }
+        
+        $this->load->view('schedule',$data);
     }
 
     public function reports() {
@@ -168,6 +175,15 @@ class Welcome extends CI_Controller {
             $resv->haze = $v->haze;
             $resv->storm = $v->storm;
             $resv->quake = $v->quake;
+              $resv->height = $v->height;
+                $resv->duration = $v->duration;
+                  $resv->sunshine = $v->sunshine;
+                    $resv->radiationtype = $v->radiationtype;
+                      $resv->radiation = $v->radiation;
+                        $resv->evaptype1 = $v->evaptype1;
+                          $resv->evap = $v->evap;
+                            $resv->evaptype2 = $v->evaptype2;
+                              $resv->evap = $v->evap;
 
 
 

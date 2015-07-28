@@ -68,7 +68,7 @@
                             
                               <td>Wet bulb </td>
                             <td >   <input type="text" id="wet" name="wet" class="input-mini" />      </td>
-                            <td>Relative humidity</td>
+                            <td>Relative humidity(%)</td>
                               <td><input type="text" id="humidity" name="humidity" class="input-mini" /></td>
                           
                             <td ></td>

@@ -48,25 +48,40 @@
                     </span>
                    
                 </div>
-                <div class="form-group well">
-                    <div class="well-small span4">  <label>Previous date:</label><input name="dateyesterday" class="date-picker" id="dateyesterday" value="<?php echo date('Y-m-d',strtotime("-1 days"));?>"  name="dateyesterday" type="text" data-date-format="yyyy-mm-dd" /></span>
+              
+                    <div class="well-small span3">  <label>Previous date:</label><input name="dateyesterday" class="date-picker" id="dateyesterday" value="<?php echo date('Y-m-d',strtotime("-1 days"));?>"  name="dateyesterday" type="text" data-date-format="yyyy-mm-dd" /></span>
                         <label>Max temperature:</label><input type="text" id="maxtemp" name="maxtemp" class="float-right" />
                      
                         <label>Min temperature:</label><input type="text" id="mintemp" name="mintemp" class="float-right" />
-                    </div>
-                    <div class="well-small span4">
-                        <label>  Actual rainfall:</label><input type="text" id="actualrain" name="actualrain"  />
-                    <label> Anemometer reading:</label><input type="text" id="anemometer" name="anemometer"  />
-                    <label> Wind run:</label><input type="text" id="windrun" name="windrun" />
+                        <label>  Actual rainfall(mm):</label><input type="text" id="actualrain" name="actualrain"  />
+                       <label> Sunshine(Hrs):</label><input type="text" id="sunshine" name="sunshine"  />
+                        <label> GPM:</label><input type="text" id="gpm" name="gpm"  />
                         
                     </div>
-                    <div class="well-small span4">
-                        <label> Sunshine:</label><input type="text" id="sunshine" name="sunshine"  />
-                        <label> GPM:</label><input type="text" id="gpm" name="gpm"  />
-                        <label> Rainfall @1500z:</label><input type="text" id="maxtemp2" name="maxtemp2"  />
+                    <div class="well-small span3">
+                        <h2>EVAP.PANS</h2>
+                        <label> Type:</label><input type="text" id="evaptype1" name="evaptype1"  />
+                        <label> EVAP(mm):</label><input type="text" id="evap1" name="evap1"  />
+                          <label> Type:</label><input type="text" id="evaptype2" name="evaptype2"  />
+                          <label> EVAP(mm):</label><input type="text" id="evap2" name="evap2"  />
+                       
+                        
+                    </div>
+                    <div class="well-small span3">
+                       
+                          <h2>Rainfall</h2>
+                            <label> Rainfall:</label><input type="text" id="maxtemp2" name="maxtemp2"  />
+                             <label>  Duration(Hrs):</label><input type="text" id="duration" name="duration"  />
+                             <h2>Radiation</h2>
+                         <label> Type:</label><input type="text" id="type" name="type"  />
+                          <label> Radiation:</label><input type="text" id="radiation" name="radiation"  />
                         
                     </div>
                     
+                    
+                         <h2>Anemometer reading </h2>
+                    <label>Wind run(KM):</label><input type="text" id="anemometer" name="anemometer"  />
+                      <label> Height:</label><input type="text" id="height" name="height"  />
                    
                 
                                    
@@ -87,20 +102,45 @@
                                         
                                      
                      <br>  
-                     <button onclick="" name="daily" id="daily" class="width-10 pull-right btn btn-small btn-yellow"  style="width: 7% !important; margin-bottom: 1px;" > Submit  </button>
+                     <button onclick="" name="daily" id="daily" class="width-10 pull-right btn btn-small btn-app"  style="width: 7% !important; margin-bottom: 1px;" > Submit  </button>
                      <span id="Loading_daily"  name ="Loading_daily"><img src="<?= base_url(); ?>images/ajax-loader.gif" alt="Ajax Indicator" /></span><br>
         
                    
                      
-                   
-                </div>
-  
+               
                 <!--PAGE CONTENT ENDS-->
 
             </div><!--/.page-content-->
             </form>
             
         </div><!--/.main-container-->
+        
+        
+        <div class="form-group well alert-success">
+     
+ <form id="edit-form" name="edit-form" enctype="multipart/form-data"  action='<?= base_url(); ?>index.php/metar/rainfall'  method="post">            
+     <h3>Daily Periodical rainfall</h3>
+                    <span class="span3 ">Rainfall(mm) :<input class="form-control"  id="rain" readonly="" name="rain" ></span>
+
+                    <span for="form-field-select-1">Duration:<input class="form-control"  id="duration" readonly="" name="duration" ></input>   
+                    </span>
+                 <div class="input-append bootstrap-timepicker">
+                      <label for="timepicker1">Time Picker</label>
+                                                        <input id="timepicker1" type="text" class="input-small" />
+                                                        <span class="add-on">
+                                                            <i class="icon-time"></i>
+                                                        </span>
+                                                    </div>
+                     <span> Select the date:<input class="span3 date-picker" id="datenow" value="<?php echo date('Y-m-d');?>"  name="datenow" type="text" data-date-format="yyyy-mm-dd" />
+                        <span class="add-on">
+                            <i class="icon-calendar"></i>
+                        </span>
+                    </span>
+                      <button onclick="" name="daily" id="daily" class="width-10 pull-right btn btn-small btn-app"  style="width: 7% !important; margin-bottom: 1px;" > Submit  </button>
+                </form> 
+                </div>
+        
+        
          <span id="Loading"  name ="Loading"><img src="<?= base_url(); ?>images/ajax-loader.gif" alt="Ajax Indicator" /></span><br>
                                                          
        

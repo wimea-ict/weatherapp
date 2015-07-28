@@ -353,9 +353,9 @@
                             <i class="icon-cogs">Calendar And Schedules  </i>
                         </button></a>
 
-                    <a href="<?php echo base_url() . "index.php/Welcome/form"; ?>">  <button class="btn btn-small btn-default">
+<!--                    <a href="<?php echo base_url() . "index.php/Welcome/form"; ?>">  <button class="btn btn-small btn-default">
                             <i class="icon-cogs">Forms(Register) </i>
-                        </button></a>
+                        </button></a>-->
 
                  
                     <div class="btn-group">
