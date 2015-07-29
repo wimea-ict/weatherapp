@@ -116,31 +116,7 @@
          <span id="Loading_daily"  name ="Loading_daily"><img src="<?= base_url(); ?>images/ajax-loader.gif" alt="Ajax Indicator" /></span><br>
         
         
-        <div class="form-group well alert-success">
-     
- <form id="edit-form" name="edit-form" enctype="multipart/form-data"  action='<?= base_url(); ?>index.php/metar/rainfall'  method="post">            
-     <h3>Daily Periodical rainfall</h3>
-                    <span class="span3 ">Rainfall(mm) :<input class="form-control"  id="rain_now"  name="rain_now" ></span>
-
-                    <span for="form-field-select-1">Duration(Hrs.):<input class="form-control"  id="duration_now"  name="duration_now" ></input>   
-                    </span>
-                 <div class="input-append bootstrap-timepicker">
-                      <label for="timepicker1">Time Picker</label>
-                                                        <input id="timepicker1" type="text" class="input-small" />
-                                                        <span class="add-on">
-                                                            <i class="icon-time"></i>
-                                                        </span>
-                                                    </div>
-                     <span> Select the date:<input class="span3 date-picker" id="daterain" value="<?php echo date('Y-m-d');?>"  name="daterain" type="text" data-date-format="yyyy-mm-dd" />
-                        <span class="add-on">
-                            <i class="icon-calendar"></i>
-                        </span>
-                    </span>
-                      <button onclick="" name="rainy" id="rainy" class="width-10 pull-right btn btn-small btn-app"  style="width: 7% !important; margin-bottom: 1px;" > Submit  </button>
-                </form> 
-                </div>
-          <span id="Loading_rainy"  name ="Loading_rainy"><img src="<?= base_url(); ?>images/ajax-loader.gif" alt="Ajax Indicator" /></span><br>
-       
+    
         
          <span id="Loading"  name ="Loading"><img src="<?= base_url(); ?>images/ajax-loader.gif" alt="Ajax Indicator" /></span><br>
                                                          

@@ -94,15 +94,9 @@ var treeDataSource = new DataSourceTree({data: tree_data});
 
 
 
-
-
-
-
-
-
-
-
 var tree_data_2 = {
+     
+    
 	'pictures' : {name: 'Pictures', type: 'folder', 'icon-class':'red'}	,
 	'music' : {name: 'Music', type: 'folder', 'icon-class':'orange'}	,
 	'video' : {name: 'Video', type: 'folder', 'icon-class':'blue'}	,
