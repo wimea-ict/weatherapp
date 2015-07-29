@@ -10,21 +10,9 @@
 <div class="main-container container-fluid">
 
     <div class="page-content">
-        <div class="page-header position-relative">
-             
-            <h1>
-              Daily weather records
+      
 
-            </h1>
-        </div><!--/.page-header-->
-
-        <div class="row-fluid">
-            <form id="edit-form" name="edit-form" enctype="multipart/form-data"  action='<?= base_url(); ?>index.php/metar/save'  method="post">            
-
-  
-            <div class="span12">
-                <!--PAGE CONTENT BEGINS-->
-               <div class="form-group well alert-info">
+           <div class="form-group well alert-info">
      
 
                     <span class="span3 ">Station : <select id="station" name="station">
@@ -48,78 +36,11 @@
                     </span>
                    
                 </div>
-              
-                    <div class="well-small span3">  <label>Previous date:</label><input name="dateyesterday" class="date-picker" id="dateyesterday" value="<?php echo date('Y-m-d',strtotime("-1 days"));?>"  name="dateyesterday" type="text" data-date-format="yyyy-mm-dd" /></span>
-                        <label>Max temperature:</label><input type="text" id="maxtemp" name="maxtemp" class="float-right" />
-                     
-                        <label>Min temperature:</label><input type="text" id="mintemp" name="mintemp" class="float-right" />
-                        <label>  Actual rainfall(mm):</label><input type="text" id="actualrain" name="actualrain"  />
-                       <label> Sunshine(Hrs):</label><input type="text" id="sunshine" name="sunshine"  />
-                        <label> GPM:</label><input type="text" id="gpm" name="gpm"  />
-                        
-                    </div>
-                    <div class="well-small span3">
-                        <h2>EVAP.PANS</h2>
-                        <label> Type:</label><input type="text" id="evaptype1" name="evaptype1"  />
-                        <label> EVAP(mm):</label><input type="text" id="evap1" name="evap1"  />
-                          <label> Type:</label><input type="text" id="evaptype2" name="evaptype2"  />
-                          <label> EVAP(mm):</label><input type="text" id="evap2" name="evap2"  />
-                       
-                        
-                    </div>
-                    <div class="well-small span3">
-                       
-                          <h2>Rainfall</h2>
-                            <label> Rainfall:</label><input type="text" id="maxtemp2" name="maxtemp2"  />
-                             <label>  Duration(Hrs):</label><input type="text" id="duration" name="duration"  />
-                             <h2>Radiation</h2>
-                         <label> Type:</label><input type="text" id="type" name="type"  />
-                          <label> Radiation:</label><input type="text" id="radiation" name="radiation"  />
-                        
-                    </div>
-                    
-                    
-                         <h2>Anemometer reading </h2>
-                    <label>Wind run(KM):</label><input type="text" id="anemometer" name="anemometer"  />
-                      <label> Height:</label><input type="text" id="height" name="height"  />
-                   
-                
-                                   
-                                        <label class="control-label">Did  we have </label>
-                                        <input name="rain" id="rain" value="true" type="checkbox" />
-                                                <span class="lbl"> Rain</span>
-                                                <input name="thunder" id="thunder" value="true"  type="checkbox" />
-                                                <span class="lbl">Thunder storm (Ts)</span>
-                                                <input name="fog" id="fog"  value="true" class="ace-checkbox-2" type="checkbox" />
-                                                <span class="lbl">Fog(Fg)</span>
-                                                <input name="haze" id="haze"  value="true" class="ace-checkbox-2" type="checkbox" />
-                                                <span class="lbl">Haze(Hz)</span>
-                                                <input name="storm" id="storm"  value="true" class="ace-checkbox-2" type="checkbox" />
-                                                <span class="lbl">Hail Storm(HS)</span>
-                                                <input name="quake" id="quake"  value="true" class="ace-checkbox-2" type="checkbox" />
-                                                <span class="lbl">Earth Quake(EQ)</span>
-                                                
-                                        
-                                     
-                     <br>  
-                     <button onclick="" name="daily" id="daily" class="width-10 pull-right btn btn-small btn-app"  style="width: 7% !important; margin-bottom: 1px;" > Submit  </button>
-                    
-                   
-                     
-               
-                <!--PAGE CONTENT ENDS-->
-
-            </div><!--/.page-content-->
-            </form>
-            
-        </div><!--/.main-container-->
-         <span id="Loading_daily"  name ="Loading_daily"><img src="<?= base_url(); ?>images/ajax-loader.gif" alt="Ajax Indicator" /></span><br>
-        
         
         <div class="form-group well alert-success">
      
  <form id="edit-form" name="edit-form" enctype="multipart/form-data"  action='<?= base_url(); ?>index.php/metar/rainfall'  method="post">            
-     <h3>Daily Periodical rainfall</h3>
+    <h3> <i class="icon-cloud"></i>Daily Periodical rainfall</h3>
                     <span class="span3 ">Rainfall(mm) :<input class="form-control"  id="rain_now"  name="rain_now" ></span>
 
                     <span for="form-field-select-1">Duration(Hrs.):<input class="form-control"  id="duration_now"  name="duration_now" ></input>   
@@ -143,7 +64,74 @@
        
         
          <span id="Loading"  name ="Loading"><img src="<?= base_url(); ?>images/ajax-loader.gif" alt="Ajax Indicator" /></span><br>
-                                                         
+                       <table id="sample-table-2" class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="center">
+                                        <label>
+                                            <input type="checkbox" />
+                                            <span class="lbl"></span>
+                                        </label>
+                                    </th>
+                                    <th>Date</th>
+                                    <th>Station</th>
+                                    <th class="hidden-480">Amount(mm)t</th>
+
+                                    <th class="hidden-phone">Time started </th>
+                                    
+                                    <th>Duration(Hrs.)</th>
+                                    <th>Date of submission </th>
+                                    <th>Submitted by</th>
+                                    
+                                    <th></th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+<?php
+if (is_array($rain) && count($rain)) {
+    foreach ($rain as $loop) {
+        ?>  
+
+                                        <tr>
+                                            <td class="center">
+                                                <label>
+                                                    <input type="checkbox" />
+                                                    <span class="lbl"></span>
+                                                </label>
+                                            </td>
+
+                                            <td>
+                                                <a href="#"><?= $loop->date ?></a>
+                                            </td>
+
+                                            <td class="hidden-480"><?= $loop->station ?></td>
+                                            <td class="hidden-phone"><?= $loop->rain ?></td>
+
+                                            <td class="hidden-480">
+                                                <span class="label label-success"><?= $loop->time ?></span>
+                                            </td>                                           
+                                            <td><?= $loop->duration ?></td>                                           
+                                            <td><?= $loop->submitted ?></td>
+                                             <td><?= $loop->user ?></td>
+
+
+                                            <td class="td-actions">
+                                              
+                                                <a href="<?php echo base_url() . "index.php/metar/rain/delete/" . $loop->id; ?>" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                                    <span class="red">
+                                                        <i class="icon-trash bigger-120"></i>
+                                                    </span>
+                                                </a>
+                                            </td>
+                                        </tr>
+    <?php }
+} ?>
+
+
+
+                            </tbody>
+                        </table>                                                    
        
 
         <?php require_once(APPPATH . 'views/footer_instrument.php'); ?>

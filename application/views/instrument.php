@@ -233,9 +233,8 @@ if (is_array($elements) && count($elements)) {
                                     <th>Station</th>
                                     <th class="hidden-480">Element</th>
 
-                                    <th class="hidden-phone">   Date registered </th>
-                                    <th class="hidden-480">Date of Expiry</th>
-
+                                    <th class="hidden-phone">   Date registered- Expire </th>
+                                    
                                     <th>Code</th
                                     <th>Manufacturer</th>
                                     <th>Manufacturer</th>
@@ -269,8 +268,7 @@ if (is_array($instruments) && count($instruments)) {
 
                                             <td class="hidden-480">
                                                 <span class="label label-success"><?= $loop->dateRegister ?></span>
-                                            </td>
-                                            <td><?= $loop->dateExpire ?></td>
+                                            </td>                                           
                                             <td><?= $loop->code ?></td>
                                             <td><?= $loop->manufacturer ?></td>
                                             <td><?= $loop->description ?></td>

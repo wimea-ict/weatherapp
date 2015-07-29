@@ -46,6 +46,7 @@ class Metar extends CI_Controller {
     }
     
       public function everyday() {
+          
         $query = $this->MD->show('metar');
       //  var_dump($query);
         if ($query) {
@@ -74,6 +75,45 @@ class Metar extends CI_Controller {
         }
         
         $this->load->view('daily', $data);
+    }
+    
+     
+      public function rainfall() {
+          
+        $query = $this->MD->show('metar');
+      //  var_dump($query);
+        if ($query) {
+             $data['users'] = $query;
+        } else {
+            $data['users'] = array();
+        }
+        $query = $this->MD->show('role'); 
+        if ($query) {
+             $data['roles'] = $query;
+        } else {
+            $data['roles'] = array();
+        }
+         $query = $this->MD->show('station'); 
+        if ($query) {
+             $data['stations'] = $query;
+        } else {
+            $data['stations'] = array();
+        }
+          $query = $this->MD->show('rain'); 
+        if ($query) {
+             $data['rain'] = $query;
+        } else {
+            $data['rain'] = array();
+        }
+       // get($field,$value,$table)
+        $query = $this->MD->get('day',date('Y-m-d'),'metar'); 
+        if ($query) {
+             $data['metas'] = $query;
+        } else {
+            $data['metas'] = array();
+        }
+        
+        $this->load->view('rain', $data);
     }
 
     public function save() {
@@ -382,8 +422,10 @@ class Metar extends CI_Controller {
         $this->load->helper(array('form', 'url'));
   //{date:date,max:max,min:min,actual:actual,anemometer:anemometer,wind:wind,maxi:maxi,station:station}
         
-        $date = $this->input->post('date');
-        $station = $this->input->post('station');
+       $date = $this->input->post('date');
+        // $date = date('Y-m-d');
+      $station = $this->input->post('station');
+        // $station = "muk";
         $max = $this->input->post('max');
         $min = $this->input->post('min');
         $actual = $this->input->post('actual');
@@ -405,7 +447,7 @@ class Metar extends CI_Controller {
                $evap1 = $this->input->post('evap1'); 
                 $evaptype2 = $this->input->post('evaptype2'); 
                  $evap2 = $this->input->post('evap2'); 
-        $user = 'test';
+        $user = '';
         $submitted = date('Y-m-d');
         $approved = 'false';              
                
@@ -423,6 +465,42 @@ class Metar extends CI_Controller {
             $daily = array('station' => $station,'date' => $date,'max'=>$max, 'min' => $min,'actual' => $actual, 'anemometer' => $anemometer, 'wind' => $wind, 'maxi' => $maxi, 'user' =>$user,'submitted'=>$submitted,'approved'=>$approved,'rain'=>$rain,'thunder'=>$thunder,'fog'=>$fog,'haze'=>$haze,'storm'=>$storm,'quake'=>$quake,'height'=>$height,'duration'=>$duration,'sunshine'=>$sunshine,'radiationtype'=>$radiationtype,'radiation'=>$radiation,'evaptype1'=>$evaptype1,'evap1'=>$evap1,'evaptype2'=>$evaptype2,'evap2'=>$evap2);
            $this->MD->save($daily, 'daily'); 
            $log = array('user' => $this->session -> userdata('name'),'userid'=>$this->session -> userdata('id'),'action' => 'saved daily weather information','details'=>  $this->session-> userdata('name').'submit of weather information ', 'date' => date('Y-m-d H:i:s'),'ip' => $this->input->ip_address(), 'url' =>'');
+           $this->MD->save($log, 'logs'); 
+           
+           echo '<div class="alert alert-info"><strong>Information  submitted</strong></div>';
+                     
+        }
+    }
+    
+      public function rain() {
+        
+        $this->load->helper(array('form', 'url'));
+  //date:date,rain:rain,time:time,duration:duration
+        
+       $date = $this->input->post('date');
+        // $date = date('Y-m-d');
+       $rain = $this->input->post('rain');
+        $station =$this->input->post('station');
+        $time = $this->input->post('time');
+        $duration = $this->input->post('duration');       
+       
+        $user = $this->session -> userdata('name');
+        $submitted = date('Y-m-d');                    
+               
+        if($station==""){            
+             echo '<div class="alert alert-error"><strong>Please select a station</strong></div>';           
+            return;
+        }       
+        //echo $date;
+       $get_result = $this->MD->check($time,'rain','rain');
+      // var_dump($get_result);
+        if(!$get_result){  
+            echo '<div class="alert alert-error"><strong> Data already submitted for '.$time.'</strong></div>';
+        }else{      
+          
+            $rain = array('station' => $station,'date' => $date,'rain'=>$rain,'time'=>$time,'duration'=>$duration,'user' =>$user,'submitted'=>$submitted);
+           $this->MD->save($rain, 'rain'); 
+           $log = array('user' => $this->session -> userdata('name'),'userid'=>$this->session -> userdata('id'),'action' => 'saved daily rainfall information','details'=>  $this->session-> userdata('name').'submit of weather information ', 'date' => date('Y-m-d H:i:s'),'ip' => $this->input->ip_address(), 'url' =>'');
            $this->MD->save($log, 'logs'); 
            
            echo '<div class="alert alert-info"><strong>Information  submitted</strong></div>';

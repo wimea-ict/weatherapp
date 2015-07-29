@@ -78,7 +78,7 @@ class Welcome extends CI_Controller {
                     );
                    
 			$this -> session -> set_userdata($newdata);
-                    $log = array('user' => $this->session -> userdata('name'),'userid'=>$this->session -> userdata('id'),'action' => 'logout','details'=>  $this->session-> userdata('name').' has logged out ', 'date' => date('Y-m-d H:i:s'),'ip' => $this->input->ip_address(), 'url' =>'www.');
+                    $log = array('user' => $this->session -> userdata('name'),'userid'=>$this->session -> userdata('id'),'action' => 'login','details'=>  $this->session-> userdata('name').' has logged in ', 'date' => date('Y-m-d H:i:s'),'ip' => $this->input->ip_address(), 'url' =>'www.');
                     $this->MD->save($log, 'logs'); 
                     $this->load->view('home');
                 } else {
