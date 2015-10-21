@@ -467,7 +467,7 @@ class Metar extends CI_Controller {
            $log = array('user' => $this->session -> userdata('name'),'userid'=>$this->session -> userdata('id'),'action' => 'saved daily weather information','details'=>  $this->session-> userdata('name').'submit of weather information ', 'date' => date('Y-m-d H:i:s'),'ip' => $this->input->ip_address(), 'url' =>'');
            $this->MD->save($log, 'logs'); 
            
-           echo '<div class="alert alert-info"><strong>Information  submitted</strong></div>';
+           echo '<br><div class="alert alert-info span12"><strong>Information  submitted</strong></div>';
                      
         }
     }
@@ -503,7 +503,7 @@ class Metar extends CI_Controller {
            $log = array('user' => $this->session -> userdata('name'),'userid'=>$this->session -> userdata('id'),'action' => 'saved daily rainfall information','details'=>  $this->session-> userdata('name').'submit of weather information ', 'date' => date('Y-m-d H:i:s'),'ip' => $this->input->ip_address(), 'url' =>'');
            $this->MD->save($log, 'logs'); 
            
-           echo '<div class="alert alert-info"><strong>Information  submitted</strong></div>';
+           echo '<br><div class="alert alert-info"><strong>Rainfall information  submitted</strong></div>';
                      
         }
     }

@@ -38,8 +38,7 @@
 		<script src="<?= base_url(); ?>assets/js/jquery.ui.touch-punch.min.js"></script>
 		<script src="<?= base_url(); ?>assets/js/fullcalendar.min.js"></script>
 		<script src="<?= base_url(); ?>assets/js/bootbox.min.js"></script>
-                 <script src="<?= base_url(); ?>assets/js/jquery.easy-pie-chart.min.js"></script>
-		<!--ace scripts-->
+                 <script src="<?= base_url(); ?>assets/js/jquery.easy-pie-chart.min.js"></script>	<!--ace scripts-->
 
 		<script src="<?= base_url(); ?>assets/js/ace-elements.min.js"></script>
 		<script src="<?= base_url(); ?>assets/js/ace.min.js"></script>
