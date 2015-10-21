@@ -107,3 +107,23 @@ td.rotate > div > span {
     border: 0px solid #E5E5E5;
     border-radius: 4px;
 }
+iframe {
+    display:block;
+    width:100%;
+}
+.infobox {
+   
+    width: auto;
+   
+}
+.span12 {
+    width: 100%;
+}
+.ace-nav > li {
+    line-height: 100%;
+}
+.ace-nav > li a {
+   
+    max-height: 100%;
+   
+}

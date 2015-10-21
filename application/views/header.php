@@ -23,7 +23,9 @@
 
         <!--ace styles-->
 
-        <link rel="stylesheet" href="<?= base_url(); ?>assets/css/ace.min.css" />
+        <link rel="stylesheet" href="<?= base_url(); ?>assets/css/ace-responsive.min.css" />
+        <link rel="stylesheet" href="<?= base_url(); ?>assets/css/ace-skins.min.css" />
+        <link href="<?= base_url(); ?>css/mine.css" rel="stylesheet" />    <link rel="stylesheet" href="<?= base_url(); ?>assets/css/ace.min.css" />
         <link rel="stylesheet" href="<?= base_url(); ?>assets/css/ace-responsive.min.css" />
         <link rel="stylesheet" href="<?= base_url(); ?>assets/css/ace-skins.min.css" />
         <link href="<?= base_url(); ?>css/mine.css" rel="stylesheet" />
@@ -47,52 +49,11 @@
                     </a><!--/.brand-->
 
                     <ul class="nav ace-nav pull-right">
-          
-                 
-
-                        <li class="green">
-                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                <i class="icon-envelope icon-animated-vertical"></i>
-                                <span class="badge badge-success">5</span>
-                            </a>
-
-                            <ul class="pull-right dropdown-navbar dropdown-menu dropdown-caret dropdown-closer">
-                                <li class="nav-header">
-                                    <i class="icon-envelope-alt"></i>
-                                    5 Messages
-                                </li>
-
-                                <li>
-                                    <a href="#">
-                                          <span class="msg-body">
-                                            <span class="msg-title">
-                                                <span class="blue">Alex:</span>
-                                                Ciao sociis natoque penatibus et auctor ...
-                                            </span>
-
-                                            <span class="msg-time">
-                                                <i class="icon-time"></i>
-                                                <span>a moment ago</span>
-                                            </span>
-                                        </span>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="#">
-                                        See all messages
-                                        <i class="icon-arrow-right"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="light-blue">
+                        <li class="">
                             <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                                <span class="user-info">
+                              
                                     <small>Welcome,</small>
-                                   <?php echo $this -> session -> userdata('name'); ?>
-                                </span>
+                                   <?php echo $this -> session -> userdata('name'); ?>                         
 
                                 <i class="icon-caret-down"></i>
                             </a>
@@ -125,33 +86,31 @@
                     </ul><!--/.ace-nav-->
                 </div><!--/.container-fluid-->
             </div><!--/.navbar-inner-->
-            <div class="sidebar-shortcuts" id="sidebar-shortcuts">
-                <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
-                     <div class="btn-group">
-                        <button data-toggle="dropdown" class="btn btn-small btn-default dropdown-toggle">
+        </div>
+            <div class="span12">
+              <div class="btn-group">
+                        <button data-toggle="dropdown" class=" btn btn-small btn-default dropdown-toggle">
                             Daily
                             <i class="icon-angle-down icon-on-right"></i>
                         </button>
 
                         <ul class="dropdown-menu">
-                            <li>
-                                <a href="<?php echo base_url() . "index.php/welcome/login"; ?>">Home</a>
+                            <li >
+                              <a  href="<?php echo base_url(). "index.php/welcome/start"; ?>" target="myframe"> Home</a>
                             </li>
                             <li>
-                                <a href="<?php echo base_url() . "index.php/metar/everyday"; ?>">Weather</a>
+                                 <a  href="<?php echo base_url() . "index.php/metar/everyday"; ?>" target="myframe">Weather</a>
                             </li>
                              <li>
-                                <a href="<?php echo base_url() . "index.php/metar/rainfall"; ?>">Rainfall</a>
+                                <a target="myframe" href="<?php echo base_url() . "index.php/metar/rainfall"; ?>">Rainfall</a>
                             </li>
 
                             <li>
-                                <a href="<?php echo base_url() . "index.php/metar/"; ?>">Metar</a>
-                            </li>
-                             
+                                <a target="myframe" href="<?php echo base_url() . "index.php/metar/"; ?>">Metar</a>
+                            </li>                            
 
                         </ul>
-                    </div><!--/btn-group-->
-                      <div class="btn-group">
+              </div>
                         <button data-toggle="dropdown" class="btn btn-small btn-default dropdown-toggle">
                             Reports
                             <i class="icon-angle-down icon-on-right"></i>
@@ -159,32 +118,29 @@
 
                         <ul class="dropdown-menu">
                              <li>
-                                <a href="<?php echo base_url() . "index.php/welcome/reports/"; ?>">All</a>
+                                <a target="myframe" href="<?php echo base_url() . "index.php/welcome/reports/"; ?>">All</a>
                             </li>
                             <li>
-                                <a href="<?php echo base_url() . "index.php/dekadal/"; ?>">Dekadal</a>
+                                <a target="myframe" href="<?php echo base_url() . "index.php/dekadal/"; ?>">Dekadal</a>
                             </li>
                             <li>
-                                <a href="<?php echo base_url() . "index.php/rainfall/"; ?>">Rainfall</a>
+                                <a target="myframe" href="<?php echo base_url() . "index.php/rainfall/"; ?>">Rainfall</a>
                             </li>
                              <li>
-                                <a href="<?php echo base_url() . "index.php/monthly/"; ?>">Monthly</a>
+                                <a target="myframe" href="<?php echo base_url() . "index.php/monthly/"; ?>">Monthly</a>
                             </li>
 
-                        </ul>
-                    </div><!--/btn-group-->
-                    
-                  
+                        </ul>                  
 
-                    <a href="<?php echo base_url() . "index.php/synoptic/"; ?>">  <button class="btn btn-small btn-default">
+                    <a target="frame" href="<?php echo base_url() . "index.php/synoptic/"; ?>">  <button class="btn btn-small btn-default">
                             <i class="icon-pencil">  Synoptic Register</i>
                         </button></a>
 
-                    <a href="<?php echo base_url() . "index.php/metar"; ?>">  <button class="btn btn-small btn-default">
+                    <a target="frame" href="<?php echo base_url() . "index.php/metar"; ?>">  <button class="btn btn-small btn-default">
                             <i class="icon-group"> Metar Book</i>
                         </button></a>
 
-                    <a href="<?php echo base_url() . "index.php/Welcome/schedule"; ?>">   <button class="btn btn-small btn-default">
+                    <a target="frame" href="<?php echo base_url() . "index.php/Welcome/schedule"; ?>">   <button class="btn btn-small btn-default">
                             <i class="icon-cogs">Calendar And Schedules  </i>
                         </button></a>
 
@@ -195,11 +151,14 @@
                  
                     <div class="btn-group">
                         <button data-toggle="dropdown" class="btn btn-small btn-default dropdown-toggle">
-                            Users
+                            Stations
                             <i class="icon-angle-down icon-on-right"></i>
                         </button>
 
                         <ul class="dropdown-menu">
+                             <li>
+                                <a target="myframe" href="<?php echo base_url() . "index.php/station"; ?>">Stations</a>
+                            </li>
                             <li>
                                 <a href="<?php echo base_url() . "index.php/user/"; ?>">User</a>
                             </li>
@@ -213,14 +172,7 @@
 
                         </ul>
                     </div><!--/btn-group-->
-                    
-
-
                    
-
-                    <a href="<?php echo base_url() . "index.php/station"; ?>">  <button class="btn btn-small btn-default">
-                            <i class="icon-cogs">Stations </i>
-                        </button></a>
 
                     <a href="<?php echo base_url() . "index.php/element/"; ?>">  <button class="btn btn-small btn-default">
                             <i class="icon-cogs">Elements  </i>
@@ -234,26 +186,11 @@
 
                 </div>
 
-                <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
-                    <span class="btn btn-success"></span>
+               
+							
 
-                    <span class="btn btn-info"></span>
+			
 
-                    <span class="btn btn-warning"></span>
-
-                    <span class="btn btn-danger"></span>
-                </div>
-
-
-
-            </div><!--#sidebar-shortcuts-->
-        </div>
-       
-
-        <div class="main-container container-fluid">
-            <a class="menu-toggler" id="menu-toggler" href="#">
-                <span class="menu-text"></span>
-            </a>
-
+  
 
 

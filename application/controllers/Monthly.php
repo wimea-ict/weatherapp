@@ -387,7 +387,8 @@ class Monthly extends CI_Controller {
 
                                                 </div><!--/widget-body-->
                                             </div>';
-        } else {
+        } 
+        else {
           
            echo $date.' no values ';
         

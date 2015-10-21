@@ -1,4 +1,4 @@
-<?php require_once(APPPATH . 'views/header.php'); ?>
+
 <link rel="stylesheet" href="assets/css/jquery-ui-1.10.3.custom.min.css" />
 <link rel="stylesheet" href="<?= base_url(); ?>assets/css/chosen.css" />
 <link rel="stylesheet" href="<?= base_url(); ?>assets/css/datepicker.css" />
@@ -576,7 +576,7 @@
 
             });
         </script>
-         <script type="text/javascript">
+   <script type="text/javascript">
 $('#Loading').hide();
  $('#Loading_daily').hide();  
            

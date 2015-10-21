@@ -1,6 +1,3 @@
-<?php require_once(APPPATH . 'views/header.php'); ?>
-
-
 
 <div class="main-container container-fluid">
 
@@ -403,14 +400,14 @@
                                         <tbody>
                                             <tr>
                                                 <th><label>Day </label> </th>
-                                                <th colspan="5" ><label>0600Z <br>TEMPERATURES oC</label> </th>
+                                                <th colspan="5" ><label>0600Z <br>TEMPERATURES <sup>o</sup>C</label> </th>
                                                 <th > <label>  <h3>0600Z Relative humidity(%)</h3> </label></th>
                                                   <th colspan="2" ><label>Anemometer</label> </th>
                                                 <th colspan="2" >  <label><h3>RAINFALL</h3> </label> </th>
                                                 <th> <label>sunshine Hrs. </label></th>
                                                     <th colspan="2" ><label>Radiometer</label> </th>
                                                 <th colspan="4" > <h3>  EVAP.PANS  </h3>  </th>
-                                      <th colspan="3" ><label>1200Z <br>TEMPERATURES oC</label> </th>
+                                    <th colspan="3" ><label>1200Z <br>TEMPERATURES <sup>o</sup>C</label> </th>
                                         <th > <label>  <h3>1200Z Relative humidity(%)</h3> </label></th>
                                          <th > </th>
                                         </tr>

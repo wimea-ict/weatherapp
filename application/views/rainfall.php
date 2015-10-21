@@ -1,12 +1,4 @@
-<?php require_once(APPPATH . 'views/header.php'); ?>
-
-
-
-	<div class="main-container container-fluid">
-			
-		
-
-			
+<div class="main-container container-fluid">
 
 				<div class="page-content">
 					<div class="page-header position-relative">
@@ -97,7 +89,7 @@
 			
 		</div><!--/.main-container-->
 
-<?php require_once(APPPATH . 'views/footer_calendar.php'); ?>
+<?php require_once(APPPATH . 'views/footers.php'); ?>
 
 
 	

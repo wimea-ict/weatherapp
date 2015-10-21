@@ -28,7 +28,10 @@ class Welcome extends CI_Controller {
         }
         $this->load->view('login', $data);
     }
-    
+     public function start()
+	{
+		$this->load->view('view-start');
+	}
       public function logout() {
           
      $this -> session -> sess_destroy();

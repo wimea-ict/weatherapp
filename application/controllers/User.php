@@ -44,8 +44,8 @@ class User extends CI_Controller {
         $password= $this->input->post('password');
         $role = $this->input->post('role');
         $contact2 = $this->input->post('contact2');
-          $station = $this->input->post('station');
-           $page = $this->input->post('front');
+        $station = $this->input->post('station');
+        $page = $this->input->post('front');
         
         $password =$password;
         $key =$email;
