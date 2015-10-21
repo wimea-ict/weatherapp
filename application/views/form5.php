@@ -1,13 +1,17 @@
-<?php require_once(APPPATH . 'views/header.php'); ?>
+
+<link rel="stylesheet" href="<?= base_url(); ?>assets/css/ace.min.css" />     
+<link rel="stylesheet" href="<?= base_url(); ?>assets/css/ace-skins.min.css" />       
+
+<link rel="stylesheet" href="<?= base_url(); ?>assets/css/chosen.css" />
+<link rel="stylesheet" href="<?= base_url(); ?>assets/css/datepicker.css" />
+<link rel="stylesheet" href="<?= base_url(); ?>assets/css/bootstrap-timepicker.css" />
+<link rel="stylesheet" href="<?= base_url(); ?>assets/css/daterangepicker.css" />
+<link rel="stylesheet" href="<?= base_url(); ?>assets/css/bootstrap.min.css" />
+<link href="<?= base_url(); ?>css/mine.css" rel="stylesheet" />
 
 
-<div class="main-container container-fluid">
-
-    <div class="page-content">
         <div class="page-header position-relative">
-            <h3>
-                <i class="icon-edit icon-1x green"> AAXX SYNOPTIC REGISTER</i>
-            </h3>
+            <h4>  AAXX SYNOPTIC REGISTER </h4>
               <a href="<?php echo base_url() . "index.php/synoptic/vertical"; ?>">  View vertical form</a>
               <a href="<?php echo base_url() . "index.php/synoptic/full"; ?>">  complete vertical form</a>
             
@@ -34,7 +38,8 @@
                                 }
                             }
                             ?>
-                        </select></span>
+                        </select>
+                    </span>
 
                     <span for="form-field-select-1">Station No:<input class="form-control"  id="number" readonly="" name="number" ></input>   
                     </span>
@@ -66,7 +71,7 @@
                                     ?>   
                    
       <div class="success">
-                    <h3>AAXX Info</h3>
+                      <h4>AAXX Info</h4>
                       Block Number:<?=$loop->station?>
                     Station:<?=$loop->station?>
                     Date:<?=  date('Y-m-d')?>
@@ -155,7 +160,7 @@
 
                         </tbody>
                     </table>
-                                     <h2>Section one</h2>
+                                      <h4>Section one</h4>
                     <table id="sample-table-1" class="table table-striped table-bordered table-hover">
                         <thead>
                              
@@ -292,7 +297,7 @@
 
                         </tbody>
                     </table>
-                                         <h3>Section indicator 333</h3>
+                                         <h4>Section indicator 333</h4>
                     <table id="sample-table-1" class="table table-striped table-bordered table-hover">
                         <thead>
                             <tr>

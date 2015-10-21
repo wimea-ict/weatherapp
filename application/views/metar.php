@@ -8,8 +8,6 @@
 <link rel="stylesheet" href="<?= base_url(); ?>assets/css/bootstrap.min.css" />
 <link href="<?= base_url(); ?>css/mine.css" rel="stylesheet" />
 
-
-
     <div class="page-content">
         <div class="page-header position-relative">
              
@@ -77,24 +75,27 @@
                   <hr>
                   
                   
-       </div>
-       <div class="form-inline well alert-warning">
-            <label>METAR/SPECI   </label>
-              <select class="input-mini" id="type" name="type">
+       
+          
+       <label>metar/speci   </label>
+                                <select  id="type" name="type">
                                     <option value="META" />META
                                     <option value="SPECI" />SPECI 
                                 </select>
+            
              <a href="#">CCCC</a>
              <input type="text" name="code" id="code" class="input-mini" />
               <a href="#">YYGGgg<span class="degree">z</span></a>
               <input type="text" class="input-mini" id="datetime" name="datetime" value="<?php echo date('d'). date('H')."00Z";?>"/>
-                <a href="#">Dddff/f<span class="foot-note">m</span>/f<span class="foot-note">m</span></a>
-                <input class="input-mini input-mask-phone" type="text" id="wind" name="wind" />  
+              <hr> 
+              <a href="#">Dddff/f<span class="foot-note">m</span>/f<span class="foot-note">m</span></a>
+                <input class="input-mask-phone" type="text" id="wind" name="wind" />  
                 <a href="#">WW or CAVOK</a>
                 <input class="input-mini input-mask-height" type="text" id="visibility" name="visibility" />
             <label><a href="#">W<span class="foot-note">1</span>W<span class="foot-note">1</span></a> </label>
             <input class="input-medium input-mask-product" type="text" id="cloud" name="cloud" />
-             <a href="#">N<span class="foot-note">1</span>CCh<span class="foot-note">1</span>h<span class="foot-note">1</span>N<span class="foot-note">n</span>CChhhN<span class="foot-note">h</span>CChhh</a>
+           
+            <a href="#">N<span class="foot-note">1</span>CCh<span class="foot-note">1</span>h<span class="foot-note">1</span>N<span class="foot-note">n</span>CChhhN<span class="foot-note">h</span>CChhh</a>
              <select class="input-mini" id="present" name="present">
                                     <option value="Fg" />Fg
                                     <option value="Hz" />Hz 
@@ -131,9 +132,7 @@
             </form>
             
         </div><!--/.main-container-->
-        <h4>Today's metar</h4>
-        <div class="well well-large" id="meta" >
-                                                <div class="widget-body">
+        <h4>Today's metar</h4>                                            
                                          
    <table id="sample-table-2" class="table table-striped table-bordered table-hover">
 
@@ -240,8 +239,7 @@
                 </table>
 
 
-                                                </div><!--/widget-body-->
-                                            </div><!--/signup-box-->
+                                       
 
         <?php require_once(APPPATH . 'views/footer_instrument.php'); ?>
 

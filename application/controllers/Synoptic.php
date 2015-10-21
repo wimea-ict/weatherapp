@@ -34,6 +34,25 @@ class Synoptic extends CI_Controller {
 
         $this->load->view('form5', $data);
     }
+       public function tab() {
+
+        $query = $this->MD->show('station');
+        if ($query) {
+            $data['stations'] = $query;
+        } else {
+            $data['stations'] = array();
+        }
+        // get($field,$value,$table)
+        //$query = $this->MD->get('day', date('Y-m-d'), 'metar');
+         // $query = $this->MD->get('day','2015-07-8','metar'); 
+       $query = $this->MD->query("SELECT * FROM metar LEFT JOIN synoptic ON metar.datetime = synoptic.time WHERE metar.day = '".date('Y-m-d')."'"); 
+        if ($query) {
+            $data['metas'] = $query;
+        } else {
+            $data['metas'] = array();
+        }
+        $this->load->view('view-synoptic', $data);
+    }
     public function vertical() {
 
         $query = $this->MD->show('station');

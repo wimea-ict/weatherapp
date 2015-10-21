@@ -1,6 +1,12 @@
-<?php require_once(APPPATH . 'views/header.php'); ?>
+<link rel="stylesheet" href="<?= base_url(); ?>assets/css/ace.min.css" />     
+<link rel="stylesheet" href="<?= base_url(); ?>assets/css/ace-skins.min.css" />       
 
-
+<link rel="stylesheet" href="<?= base_url(); ?>assets/css/chosen.css" />
+<link rel="stylesheet" href="<?= base_url(); ?>assets/css/datepicker.css" />
+<link rel="stylesheet" href="<?= base_url(); ?>assets/css/bootstrap-timepicker.css" />
+<link rel="stylesheet" href="<?= base_url(); ?>assets/css/daterangepicker.css" />
+<link rel="stylesheet" href="<?= base_url(); ?>assets/css/bootstrap.min.css" />
+<link href="<?= base_url(); ?>css/mine.css" rel="stylesheet" />
 
 <div class="main-container container-fluid">
 

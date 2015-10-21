@@ -111,6 +111,8 @@
 
                         </ul>
               </div>
+           
+              <div class="btn-group">
                         <button data-toggle="dropdown" class="btn btn-small btn-default dropdown-toggle">
                             Reports
                             <i class="icon-angle-down icon-on-right"></i>
@@ -130,17 +132,36 @@
                                 <a target="myframe" href="<?php echo base_url() . "index.php/monthly/"; ?>">Monthly</a>
                             </li>
 
-                        </ul>                  
+                        </ul>    
+              </div>
 
-                    <a target="frame" href="<?php echo base_url() . "index.php/synoptic/"; ?>">  <button class="btn btn-small btn-default">
-                            <i class="icon-pencil">  Synoptic Register</i>
-                        </button></a>
+                     <div class="btn-group">
+                        <button data-toggle="dropdown" class="btn btn-small btn-default dropdown-toggle">
+                           Synoptic Register
+                            <i class="icon-angle-down icon-on-right"></i>
+                        </button>
 
-                    <a target="frame" href="<?php echo base_url() . "index.php/metar"; ?>">  <button class="btn btn-small btn-default">
+                        <ul class="dropdown-menu">
+                             <li>
+                                <a target="myframe" href="<?php echo base_url() . "index.php/synoptic/"; ?>">Tabular</a>
+                            </li>
+                            <li>
+                                <a target="myframe" href="<?php echo base_url() . "index.php/synoptic/tab"; ?>">Tabbed</a>
+                            </li>
+
+
+                        </ul>
+                    </div><!--/btn-group-->
+                
+                
+                
+                
+
+                    <a target="myframe" href="<?php echo base_url() . "index.php/metar"; ?>">  <button class="btn btn-small btn-default">
                             <i class="icon-group"> Metar Book</i>
                         </button></a>
 
-                    <a target="frame" href="<?php echo base_url() . "index.php/Welcome/schedule"; ?>">   <button class="btn btn-small btn-default">
+                    <a target="myframe" href="<?php echo base_url() . "index.php/Welcome/schedule"; ?>">   <button class="btn btn-small btn-default">
                             <i class="icon-cogs">Calendar And Schedules  </i>
                         </button></a>
 
@@ -160,27 +181,28 @@
                                 <a target="myframe" href="<?php echo base_url() . "index.php/station"; ?>">Stations</a>
                             </li>
                             <li>
-                                <a href="<?php echo base_url() . "index.php/user/"; ?>">User</a>
+                                <a target="myframe" href="<?php echo base_url() . "index.php/user/"; ?>">User</a>
                             </li>
 
                             <li>
-                                <a href="<?php echo base_url() . "index.php/role/"; ?>">Roles</a>
+                                <a target="myframe" href="<?php echo base_url() . "index.php/role/"; ?>">Roles</a>
                             </li>
                              <li>
-                                <a href="<?php echo base_url() . "index.php/logs/"; ?>">Logs</a>
+                                <a target="myframe" href="<?php echo base_url() . "index.php/logs/"; ?>">Logs</a>
                             </li>
 
                         </ul>
                     </div><!--/btn-group-->
+                    
                    
 
-                    <a href="<?php echo base_url() . "index.php/element/"; ?>">  <button class="btn btn-small btn-default">
+                    <a target="myframe" href="<?php echo base_url() . "index.php/element/"; ?>">  <button class="btn btn-small btn-default">
                             <i class="icon-cogs">Elements  </i>
                         </button></a>
-                    <a href="<?php echo base_url() . "index.php/instrument"; ?>">  <button class="btn btn-small btn-default">
+                    <a target="myframe" href="<?php echo base_url() . "index.php/instrument"; ?>">  <button class="btn btn-small btn-default">
                             <i class="icon-cogs">Instrument </i>
                         </button></a>
-                    <a href="<?php echo base_url() . "index.php/archive"; ?>">  <button class="btn btn-small btn-default">
+                    <a target="myframe" href="<?php echo base_url() . "index.php/archive"; ?>">  <button class="btn btn-small btn-default">
                             <i class="icon-cogs">Archive </i>
                         </button></a>
 
