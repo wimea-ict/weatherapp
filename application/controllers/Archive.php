@@ -174,7 +174,7 @@ class Archive extends CI_Controller {
         
                     $id = $this->uri->segment(3);
                  
-                    $query = $this->Md->delete($id,'instrument');
+                    $query = $this->Md->delete($id,'archive');
                  
                     if ($this->db->affected_rows() > 0) {
                         $msg='<span style="color:red">Information Deleted Fields</span>';
@@ -189,11 +189,11 @@ class Archive extends CI_Controller {
          }
          function get(){
          
-            $station = $this->input->post('station');
+            $station = $this->input->post('archive');
            //  $station ='Makerere';
            // header('Content-Type: application/x-json; charset=utf-8');
             //($where,$data,$table)
-            echo json_encode($this->Md->get('name',$station,'station'));
+            echo json_encode($this->Md->get('name',$station,'archive'));
         }
     
     
