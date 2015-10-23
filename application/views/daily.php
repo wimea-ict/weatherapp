@@ -1,5 +1,7 @@
 
-
+ <div class=" container-fluid">
+      <div class="page-content">
+           <div class="row-fluid">
 <link rel="stylesheet" href="<?= base_url(); ?>assets/css/ace.min.css" />     
 <link rel="stylesheet" href="<?= base_url(); ?>assets/css/ace-skins.min.css" />       
 
@@ -13,17 +15,18 @@
 
         <div class="page-header position-relative">
 
-            <h3>
-                Daily weather records
-
-            </h3>
+            <h4> Daily weather records   </h4>
         </div><!--/.page-header-->
 
-        <div class="row-fluid">
-            <form id="edit-form" name="edit-form"  enctype="multipart/form-data"  action='<?= base_url(); ?>index.php/metar/save'  method="post">            
-                <div class="span4">
-                    
-                        <label class="control-label" >Station</label>
+       
+        <div class="span12">   
+            <form id="edit-form"  name="edit-form"  enctype="multipart/form-data"  action='<?= base_url(); ?>index.php/metar/save'  method="post">            
+             
+                
+                
+                <div class="span12 well alert-success">
+                      
+                         <div class="span2"><label class="control-label" >Station</label>
                             <select id="station" class="span12 form-control" name="station">
                                 <option value="" />
                                 <?php
@@ -35,53 +38,77 @@
 
                                     <?php }
                                 } ?>
-                            </select>
+                            </select></div>
                      
-                            <label class="control-label">Station No</label>
-                            <input class="form-control span12"  id="number" readonly="" name="number" ></input>   
-                                     <label>Select the date</label><input class= date-picker" id="datenow" value="<?php echo date('Y-m-d'); ?>"  name="datenow" type="text" data-date-format="yyyy-mm-dd" />
-                            <span class="add-on">
-                                <i class="icon-calendar"></i>
-                            </span>
-                        <label class="control-label">Previous date:</label>
-                        <input name="dateyesterday" class="date-picker form-control" id="dateyesterday" value="<?php echo date('Y-m-d', strtotime("-1 days")); ?>"  name="dateyesterday" type="text" data-date-format="yyyy-mm-dd" />
+                            <div class="span2"> <label class="control-label">Station No</label>
+                                <input class=""  id="number" readonly="" name="number" ></input>  </div> 
+                                  <div class="span2">    <label>Select the date</label>
+                                     <input class= date-picker" id="datenow" value="<?php echo date('Y-m-d'); ?>"  name="datenow" type="text" data-date-format="YYYY-MM-DD" />
+                                  </div>
+                      <div class="span2">   <label class="control-label">Previous date:</label>
+                        <input name="dateyesterday" class="date-picker form-control" id="dateyesterday" value="<?php echo date('Y-m-d', strtotime("-1 days")); ?>"  name="dateyesterday" type="text" data-date-format="YYYY-MM-DD" />
                  
-                        <label>Max temperature:</label>
-                        <input type="text" id="maxtemp" name="maxtemp" class="float-right" />
-
-                        <label>Min temperature:</label><input type="text" id="mintemp" name="mintemp" class="float-right" />
-                        <label>  Actual rainfall(mm):</label><input type="text" id="actualrain" name="actualrain"  />
-                        <label> Sunshine(Hrs):</label><input type="text" id="sunshine" name="sunshine"  />
-                        <label> GPM:</label><input type="text" id="gpm" name="gpm"  />
+                      </div>
 
                  
                     
                 </div> 
-                <div class="span4">
-                     <h4>Evap.pans</h4>
-                        <label> Type:</label><input type="text" id="evaptype1" name="evaptype1"  />
-                        <label> EVAP(mm):</label><input type="text" id="evap1" name="evap1"  />
-                        <label> Type:</label><input type="text" id="evaptype2" name="evaptype2"  />
-                        <label> EVAP(mm):</label><input type="text" id="evap2" name="evap2"  />
+                <div class="span12 well ">
+                      <h4>Temperature</h4>
+                      <div class="span2" >  <label>Max temperature:</label>
+                        <input type="text" id="maxtemp" name="maxtemp" class="float-right" />
+                      </div>                          
+                        <div class="span2"> 
+                            <label>Min temperature:</label>
+                            <input type="text" id="mintemp" name="mintemp" class="float-right" />
+                        </div>
+                      <div class="span2"> 
+                        <label>  Actual rainfall(mm):</label>
+                        <input type="text" id="actualrain" name="actualrain"  /></div>
+                       <div class="span2">  <label> Sunshine(Hrs):</label>
+                           <input type="text" id="sunshine" name="sunshine"  /></div>
+                      <div class="span2">   <label> GPM:</label><input type="text" id="gpm" name="gpm"  /></div>
+  
 
-
-                        <h4>Rainfall</h4>
-                        <label> Rainfall:</label><input type="text" id="maxtemp2" name="maxtemp2"  />
-                        <label>  Duration(Hrs):</label><input type="text" id="duration" name="duration"  />
-                        <h4>Radiation</h4>
-                        <label> Type:</label><input type="text" id="type" name="type"  />
-                        <label> Radiation:</label><input type="text" id="radiation" name="radiation"  />
-                    
                   
                     
                 </div> 
 
-                <div class="span4">                
+                <div class="span12 well">                
+                      
+                     <h4>Evap.pans</h4>
+                     <div class="span3">  <label> Type:</label><input type="text" id="evaptype1" name="evaptype1"  /></div>
+                     <div class="span3">   <label> EVAP(mm):</label><input type="text" id="evap1" name="evap1"  /></div>
+                     <div class="span2">   <label> Type:</label><input type="text" id="evaptype2" name="evaptype2"  /></div>
+                     <div class="span2">   <label> EVAP(mm):</label><input type="text" id="evap2" name="evap2"  /></div>
+
                     
-                        <h4>Anemometer reading </h4>
-                    <label>Wind run(KM):</label><input type="text" id="anemometer" name="anemometer"  />
-                    <label> Height:</label><input type="text" id="height" name="height"  />
-                    <label class="control-label">Did  we have </label>
+ 
+                </div><!--/.page-content-->
+                <div class="span4 "> 
+                
+                 
+                        <h4>Rainfall</h4>
+                       <div class="span5">   <label> Rainfall:</label><input type="text" id="maxtemp2" name="maxtemp2"  /></div>
+                      <div class="span5">    <label>  Duration(Hrs):</label><input type="text" id="duration" name="duration"  /></div>
+                </div>   
+                <div class="span4 ">    
+                    <h4>Radiation</h4>
+                      <div class="span5">    <label> Type:</label><input type="text" id="type" name="type"  /></div>
+                       <div class="span5">   <label> Radiation:</label><input type="text" id="radiation" name="radiation"  /></div>
+                </div>
+
+                <div class="span4 "> 
+                 <h4>Anemometer reading </h4>
+                   <div class="span5">   <label>Wind run(KM):</label><input type="text" id="anemometer" name="anemometer"  /></div>
+                   <div class="span5">   <label> Height:</label><input type="text" id="height" name="height"  /></div>
+                
+                </div>
+                
+                
+               
+                <div class="span12 well">  
+                     <div class="span8">    <label class="control-label">Did  we have </label>
                     <input name="rain" id="rain" value="true" type="checkbox" />
                     <span class="lbl"> Rain</span>
                     <input name="thunder" id="thunder" value="true"  type="checkbox" />
@@ -94,29 +121,31 @@
                     <span class="lbl">Hail Storm(HS)</span>
                     <input name="quake" id="quake"  value="true" class="ace-checkbox-2" type="checkbox" />
                     <span class="lbl">Earth Quake(EQ)</span>  
-                       <hr>
-                    <button onclick="" name="daily" id="daily" class="btn span6" > Submit  </button>
+                   
+                    <button onclick="" name="daily" id="daily" class="btn btn-info " > Submit  </button>
 
-
-                    <!--PAGE CONTENT ENDS-->
- 
-                </div><!--/.page-content-->
+                </div>
+                
+                
+                
+                </div>
           
  </form>
-        </div><!--/.main-container-->
-        <span id="Loading_daily"  name ="Loading_daily"><img src="<?= base_url(); ?>images/ajax-loader.gif" alt="Ajax Indicator" /></span><br>
+       
+        <span id="Loading_daily"  name ="Loading_daily"><img src="<?= base_url(); ?>images/ajax-loader.gif" alt="loading" /></span><br>
 
 
 
 
-        <span id="Loading"  name ="Loading"><img src="<?= base_url(); ?>images/ajax-loader.gif" alt="Ajax Indicator" /></span><br>
-
+        <span id="Loading"  name ="Loading"><img src="<?= base_url(); ?>images/ajax-loader.gif" alt="loading" /></span><br>
+ </div>
+ </div>
+      </div>
+     </div>
  <script src="<?php echo base_url(); ?>js/jQuery-2.1.4.min.js" type="text/javascript"></script>
        
-        
-        <script src="<?= base_url(); ?>assets/js/date-time/bootstrap-datepicker.min.js"></script>
-        <script src="<?= base_url(); ?>assets/js/date-time/bootstrap-timepicker.min.js"></script>
-        <script src="<?= base_url(); ?>assets/js/date-time/moment.min.js"></script>
+        <script src="<?php echo base_url(); ?>js/moment-with-locales.js"></script>
+<script src="<?php echo base_url(); ?>js/bootstrap-datetimepicker.js"></script>
       
         <script type="text/javascript">
             $('#Loading').hide();
@@ -222,6 +251,13 @@
 
 
             }); //end change
+            
+             $('#datenow').datetimepicker({
+            format: 'YYYY-MM-DD'
+        });
+        $('#dateyesterday').datetimepicker({
+            format: 'YYYY-MM-DD'
+        });
 
 
         </script>

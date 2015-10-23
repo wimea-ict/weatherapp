@@ -1,6 +1,29 @@
 
 /* Gamma Gallery Style */
-
+body {
+    padding: 5px;
+   
+}
+.well {
+   
+    padding: 5px;
+   
+}
+.tabs-left > .nav-tabs {
+  
+    margin-right: 0px;
+    border-left: 0px solid #DDD;
+}
+.tab-content {
+   
+    padding: 9px 5px;
+   
+}
+.ace-nav > li {
+  
+    background: none repeat scroll 0% 0%;
+   
+}
 
 table tr td.small
 {
@@ -29,6 +52,13 @@ table tr td.center
 .input-mini {
     margin-bottom: 0px !important;
     width: 6% !important;
+    height: auto !important;
+    float: none;
+    padding: 0px;
+}
+.input-minis {
+    margin-bottom: 0px !important;
+    width: 100% !important;
     height: auto !important;
     float: none;
     padding: 0px;
@@ -132,4 +162,111 @@ select {
 }
 input, textarea, .uneditable-input {
     width: 150px;
+}
+.scroll {
+  overflow:auto;
+  padding-right: 1%;
+}
+
+.CSSTableGenerator {
+	margin:0px;padding:0px;
+	width:100%;
+	box-shadow: 10px 10px 5px #888888;
+	border:1px solid #eae3e3;
+	
+	-moz-border-radius-bottomleft:0px;
+	-webkit-border-bottom-left-radius:0px;
+	border-bottom-left-radius:0px;
+	
+	-moz-border-radius-bottomright:0px;
+	-webkit-border-bottom-right-radius:0px;
+	border-bottom-right-radius:0px;
+	
+	-moz-border-radius-topright:0px;
+	-webkit-border-top-right-radius:0px;
+	border-top-right-radius:0px;
+	
+	-moz-border-radius-topleft:0px;
+	-webkit-border-top-left-radius:0px;
+	border-top-left-radius:0px;
+}.CSSTableGenerator table{
+    border-collapse: collapse;
+        border-spacing: 0;
+	width:100%;
+	height:100%;
+	margin:0px;padding:0px;
+}.CSSTableGenerator tr:last-child td:last-child {
+	-moz-border-radius-bottomright:0px;
+	-webkit-border-bottom-right-radius:0px;
+	border-bottom-right-radius:0px;
+}
+.CSSTableGenerator table tr:first-child td:first-child {
+	-moz-border-radius-topleft:0px;
+	-webkit-border-top-left-radius:0px;
+	border-top-left-radius:0px;
+}
+.CSSTableGenerator table tr:first-child td:last-child {
+	-moz-border-radius-topright:0px;
+	-webkit-border-top-right-radius:0px;
+	border-top-right-radius:0px;
+}.CSSTableGenerator tr:last-child td:first-child{
+	-moz-border-radius-bottomleft:0px;
+	-webkit-border-bottom-left-radius:0px;
+	border-bottom-left-radius:0px;
+}.CSSTableGenerator tr:hover td{
+	background-color:#ffffff;
+		
+
+}
+.CSSTableGenerator td{
+	vertical-align:middle;
+	
+	background-color:#eaeae3;
+
+	border:1px solid #eae3e3;
+	border-width:0px 1px 1px 0px;
+	text-align:left;
+	padding:0px;
+	font-size:10px;
+	font-family:Arial;
+	font-weight:normal;
+	color:#000000;
+}.CSSTableGenerator tr:last-child td{
+	border-width:0px 1px 0px 0px;
+}.CSSTableGenerator tr td:last-child{
+	border-width:0px 0px 1px 0px;
+}.CSSTableGenerator tr:last-child td:last-child{
+	border-width:0px 0px 0px 0px;
+}
+.CSSTableGenerator tr:first-child td{
+		background:-o-linear-gradient(bottom, #aad4ff 5%, #aad4ff 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #aad4ff), color-stop(1, #aad4ff) );
+	background:-moz-linear-gradient( center top, #aad4ff 5%, #aad4ff 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#aad4ff", endColorstr="#aad4ff");	background: -o-linear-gradient(top,#aad4ff,aad4ff);
+
+	background-color:#aad4ff;
+	border:0px solid #eae3e3;
+	text-align:center;
+	border-width:0px 0px 1px 1px;
+	font-size:14px;
+	font-family:Arial;
+	font-weight:bold;
+	color:#ffffff;
+}
+.CSSTableGenerator tr:first-child:hover td{
+	background:-o-linear-gradient(bottom, #aad4ff 5%, #aad4ff 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #aad4ff), color-stop(1, #aad4ff) );
+	background:-moz-linear-gradient( center top, #aad4ff 5%, #aad4ff 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#aad4ff", endColorstr="#aad4ff");	background: -o-linear-gradient(top,#aad4ff,aad4ff);
+
+	background-color:#aad4ff;
+}
+.CSSTableGenerator tr:first-child td:first-child{
+	border-width:0px 0px 1px 0px;
+}
+.CSSTableGenerator tr:first-child td:last-child{
+	border-width:0px 0px 1px 1px;
+}
+.row-fluid [class*="span"] {
+   
+    margin-left: 0%;
+   
 }

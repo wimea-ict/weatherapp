@@ -8,13 +8,14 @@ class Station extends CI_Controller {
 
         parent::__construct();
         error_reporting(E_PARSE);
-        $this->load->model('MD');
+        $this->load->model('Md');
         $this->load->library('session');
+          $this->load->library('helper');
        
     }
 
     public function index() {
-        $query = $this->MD->show('station');
+        $query = $this->Md->show('station');
       //  var_dump($query);
         if ($query) {
              $data['stations'] = $query;
@@ -46,22 +47,22 @@ class Station extends CI_Controller {
                  $created = $this->input->post('created');
        
        
-        $get_result = $this->MD->check($name,'name','station');
+        $get_result = $this->Md->check($name,'name','station');
         
         if(!$get_result){
             $this->session->set_flashdata('msg', 'this station is already registered');
               redirect('/station', 'refresh');
         }
-         $get_result = $this->MD->check($code,'code','station');
+         $get_result = $this->Md->check($code,'code','station');
         if(!$get_result){
             $this->session->set_flashdata('msg', 'this station code is already in use');
               redirect('/station', 'refresh');
         }
         if ($code!=""){
         $station = array('number' => $number,'name' => $name, 'location' => $location,'country' => $country, 'region' => $region, 'code' => $code, 'city' => $city, 'latitude'=>$latitude,'longitude'=>$longitude,'altitude'=>$altitude,'opened'=>$opened,'closed'=>$closed,'status'=>'active','type'=>$type,'created' => date('Y-m-d'));
-        $this->MD->save($station, 'station');
+        $this->Md->save($station, 'station');
          $log = array('user' => $this->session -> userdata('name'),'userid'=>$this->session -> userdata('id'),'action' => 'save','details'=>  $name.' station added ', 'date' => date('Y-m-d H:i:s'),'ip' => $this->input->ip_address(), 'url' =>'');
-           $this->MD->save($log, 'logs');
+           $this->Md->save($log, 'logs');
         redirect('/station', 'refresh');
         return;
         }
@@ -73,7 +74,7 @@ class Station extends CI_Controller {
     public  function edit(){
         $this->load->helper(array('form', 'url'));
          $id = $this->uri->segment(3);
-         $query = $this->MD->show('station');
+         $query = $this->Md->show('station');
  
         if ($query) {
              $data['users'] = $query;
@@ -81,14 +82,14 @@ class Station extends CI_Controller {
             $data['users'] = array();
         }
         
-          $query = $this->MD->get('id',$id,'station');
+          $query = $this->Md->get('id',$id,'station');
     
         if ($query) {
              $data['userID'] = $query;
         } else {
             $data['userID'] = array();
         }
-          $query = $this->MD->show('role'); 
+          $query = $this->Md->show('role'); 
         if ($query) {
              $data['roles'] = $query;
         } else {
@@ -122,9 +123,9 @@ class Station extends CI_Controller {
          
         $station = array('number' => $number,'name' => $name, 'location' => $location,'country' => $country, 'region' => $region, 'code' => $code, 'city' => $city, 'latitude'=>$latitude,'longitude'=>$longitude,'altitude'=>$altitude,'opened'=>$opened,'closed'=>$closed,'status'=>'active','type'=>$type,'created' => date('Y-m-d'));
         // update($id, $data,$table)
-        $this->MD->update($id,$station, 'station');
+        $this->Md->update($id,$station, 'station');
          $log = array('user' => $this->session -> userdata('name'),'userid'=>$this->session -> userdata('id'),'action' => 'update','details'=>  $name.' station updated', 'date' => date('Y-m-d H:i:s'),'ip' => $this->input->ip_address(), 'url' =>'');
-           $this->MD->save($log, 'logs');
+           $this->Md->save($log, 'logs');
            $this->session->set_flashdata('msg', 'The '.$name.' has been updated');        
        redirect('/station', 'refresh');
                    return;
@@ -134,9 +135,9 @@ class Station extends CI_Controller {
         
                     $id = $this->uri->segment(3);
                  
-                    $query = $this->MD->delete($id,'station');
+                    $query = $this->Md->delete($id,'station');
                      $log = array('user' => $this->session -> userdata('name'),'userid'=>$this->session -> userdata('id'),'action' => 'delete','details'=> ' station deletion', 'date' => date('Y-m-d H:i:s'),'ip' => $this->input->ip_address(), 'url' =>'');
-                     $this->MD->save($log, 'logs');
+                     $this->Md->save($log, 'logs');
                  
                     if ($this->db->affected_rows() > 0) {
                         $msg='<span style="color:red">Information Deleted Fields</span>';
@@ -155,7 +156,7 @@ class Station extends CI_Controller {
      
         $station = ($station == "") ? $this->input->post('name') :$role;
         //check($value,$field,$table)
-        $get_result = $this->MD->check($role,'name','station');
+        $get_result = $this->Md->check($role,'name','station');
 
         if (!$get_result)
             echo '<span style="color:#f00"> name already in use. </span>';
@@ -167,7 +168,7 @@ class Station extends CI_Controller {
      
         $email = $this->input->post('email');
         //check($value,$field,$table)
-        $get_result = $this->MD->check($role,'email','station');
+        $get_result = $this->Md->check($role,'email','station');
 
         if (!$get_result)
             echo '<span style="color:#f00">email already in use. </span>';
@@ -180,7 +181,7 @@ class Station extends CI_Controller {
            //  $station ='Makerere';
            // header('Content-Type: application/x-json; charset=utf-8');
             //($where,$data,$table)
-            echo json_encode($this->MD->get('name',$station,'station'));
+            echo json_encode($this->Md->get('name',$station,'station'));
         }
     
     

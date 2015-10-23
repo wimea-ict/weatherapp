@@ -99,7 +99,7 @@
 			
 		</div><!--/.main-container-->
 
-<?php require_once(APPPATH . 'views/footers.php'); ?>
+<?php require_once(APPPATH . 'views/footer_report.php'); ?>
 
 
 	

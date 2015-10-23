@@ -7,13 +7,14 @@ class Role extends CI_Controller {
     function __construct() {
 
         parent::__construct();
-        error_reporting(E_PARSE);
-        $this->load->model('MD');
+       error_reporting(E_PARSE);
+        $this->load->model('Md');
         $this->load->library('session');
+          $this->load->library('helper');
     }
 
     public function index() {
-        $query = $this->MD->show('role');
+        $query = $this->Md->show('role');
       //  var_dump($query);
         if ($query) {
              $data['roles'] = $query;
@@ -25,16 +26,16 @@ class Role extends CI_Controller {
     }
 
     public function save() {
+        
+        
         $this->load->helper(array('form', 'url'));
         $role = $this->input->post('role');
-        $create = $this->input->post('creates');
-        $edits = $this->input->post('edits');
-        $read = $this->input->post('reads');
-        $update = $this->input->post('updates');
-        $delete = $this->input->post('deletes');
+        $actions = $this->input->post('actions');
+        $views = $this->input->post('views');
        
-        $get_result = $this->MD->check($role,'name','role');
-        if(!$get_result){
+       
+        $get_result = $this->Md->check($role,'name','role');
+        if($get_result){
             $this->session->set_flashdata('msg', '<div class="alert alert-error">
                                                    
                                                 <strong>
@@ -43,10 +44,10 @@ class Role extends CI_Controller {
               redirect('/Role', 'refresh');
         }
         if ($role!=""){
-        $role = array('name' => $role, 'create' => $create, 'edit' => $edits, 'read' => $read, 'update' => $update, 'delete' => $delete,'status'=>'true');
-        $this->MD->save($role, 'role');
+        $role = array('name' => $role, 'actions' => $actions,'views'=>$views, 'status'=>'true','created'=>  date('Y-m-d'));
+        $this->Md->save($role, 'role');
           $log = array('user' => $this->session -> userdata('name'),'userid'=>$this->session -> userdata('id'),'action' => 'save','details'=> 'role information  ', 'date' => date('Y-m-d H:i:s'),'ip' => $this->input->ip_address(), 'url' =>'');
-        $this->MD->save($log, 'logs'); 
+         $this->Md->save($log, 'logs'); 
         
         
         redirect('/Role', 'refresh');
@@ -62,17 +63,18 @@ class Role extends CI_Controller {
         }
     }
     public  function edit(){
+        
         $this->load->helper(array('form', 'url'));
          $id = $this->uri->segment(3);
-         $query = $this->MD->show('role');
+         $query = $this->Md->show('role');
  
         if ($query) {
              $data['roles'] = $query;
         } else {
             $data['roles'] = array();
         }
-        
-          $query = $this->MD->get($id,'role');
+        //get($field,$value,$table)
+          $query = $this->Md->get('id',$id,'role');
     
         if ($query) {
              $data['roleID'] = $query;
@@ -88,19 +90,16 @@ class Role extends CI_Controller {
         $this->load->helper(array('form', 'url'));
         $id = $this->input->post('roleID');
         $role = $this->input->post('edit_role');
-        $create = $this->input->post('creates');
-        $edits = $this->input->post('edits');
-        $read = $this->input->post('reads');
-        $update = $this->input->post('updates');
-        $delete = $this->input->post('deletes');
-        $roles = array('name' => $role, 'create' => $create, 'edit' => $edits, 'read' => $read, 'update' => $update, 'delete' => $delete);
-        $this->MD->update($id,$roles, 'role');
-        $log = array('user' => $this->session -> userdata('name'),'userid'=>$this->session -> userdata('id'),'action' => 'update','details'=> 'role information update ', 'date' => date('Y-m-d H:i:s'),'ip' => $this->input->ip_address(), 'url' =>'');
-        $this->MD->save($log, 'logs'); 
-           $this->session->set_flashdata('msg', '<div class="alert alert-info">
+        $actions = $this->input->post('edit_actions');
+        $views = $this->input->post('edit_views');
+        $roles = array('name' => $role, 'actions' => $actions, 'views'=>$views,'status'=>'true','created'=>  date('Y-m-d'));
+        $this->Md->update($id,$roles, 'role');
+       // $log = array('user' => $this->session -> userdata('name'),'userid'=>$this->session -> userdata('id'),'action' => 'update','details'=> 'role information update ', 'date' => date('Y-m-d H:i:s'),'ip' => $this->input->ip_address(), 'url' =>'');
+        //$this->Md->save($log, 'logs'); 
+         $this->session->set_flashdata('msg', '<div class="alert alert-info">
                                                    
                                                 <strong>
-                                                  This role '.$role.' has already been updated	</strong>									
+                                                  This role '.$role.' has been updated	</strong>									
 						</div>');        
        redirect('/Role', 'refresh');
                    return;
@@ -110,9 +109,9 @@ class Role extends CI_Controller {
         
                     $id = $this->uri->segment(3);
                  
-                    $query = $this->MD->delete($id,'role');
-                    $log = array('user' => $this->session -> userdata('name'),'userid'=>$this->session -> userdata('id'),'action' => 'delete','details'=> 'role information delete ', 'date' => date('Y-m-d H:i:s'),'ip' => $this->input->ip_address(), 'url' =>'');
-                    $this->MD->save($log, 'logs'); 
+                    $query = $this->Md->delete($id,'role');
+                 //   $log = array('user' => $this->session -> userdata('name'),'userid'=>$this->session -> userdata('id'),'action' => 'delete','details'=> 'role information delete ', 'date' => date('Y-m-d H:i:s'),'ip' => $this->input->ip_address(), 'url' =>'');
+                   // $this->Md->save($log, 'logs'); 
                  
                     if ($this->db->affected_rows() > 0) {
                         $msg='<div class="alert alert-info">
@@ -135,13 +134,14 @@ class Role extends CI_Controller {
          }
 
       public function check($role) {
+          
         $this->load->helper(array('form', 'url'));
      
         $role = ($role == "") ? $this->input->post('role') :$role;
         //check($value,$field,$table)
-        $get_result = $this->MD->check($role,'name','role');
+        $get_result = $this->Md->check($role,'name','role');
 
-        if (!$get_result)
+        if ($get_result)
             echo '<div class="alert alert-error">
                                                    
                                                 <strong>

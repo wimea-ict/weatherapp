@@ -1,13 +1,19 @@
-<?php require_once(APPPATH . 'views/header.php'); ?>
 
+<div class=" container-fluid">
+      <div class="page-content">
+           <div class="row-fluid">
+<link rel="stylesheet" href="<?= base_url(); ?>assets/css/ace.min.css" />     
+<link rel="stylesheet" href="<?= base_url(); ?>assets/css/ace-skins.min.css" />   
 
-<div class="main-container container-fluid">
+<link rel="stylesheet" href="<?= base_url(); ?>assets/css/chosen.css" />
+<link rel="stylesheet" href="<?= base_url(); ?>assets/css/datepicker.css" />
+<link rel="stylesheet" href="<?= base_url(); ?>assets/css/bootstrap-timepicker.css" />
+<link rel="stylesheet" href="<?= base_url(); ?>assets/css/daterangepicker.css" />
+<link rel="stylesheet" href="<?= base_url(); ?>assets/css/bootstrap.min.css" />
+<link href="<?= base_url(); ?>css/mine.css" rel="stylesheet" />
 
-    <div class="page-content">
-        <div class="page-header position-relative">
-            <h3>
-                <i class="icon-edit icon-1x green"> AAXX SYNOPTIC REGISTER</i>
-            </h3>
+       
+             AAXX SYNOPTIC REGISTER
               <a href="<?php echo base_url() . "index.php/synoptic/vertical"; ?>">  View vertical form</a>
               <a href="<?php echo base_url() . "index.php/synoptic/full"; ?>">  complete vertical form</a>
             
@@ -318,7 +324,11 @@
                                                     </button>
 
                 </div>
-            </form>    
+            </form>   
+        </div>
+          </div>
+    </div>
+
 
 <?php require_once(APPPATH . 'views/footer_calendar.php'); ?>
 

@@ -51,8 +51,10 @@
                 
                 
                 
-                            <span class="well-large">  
-                    <table id="sample-table-2" class="table table-striped table-bordered table-hover">
+                            <span class="well-large"> 
+                                    <input type="button" class="btn-default" onclick="ExportToExcel('datatable')" value="Export to Excel">
+              
+                    <table id="sampletable"  class="table table-striped table-bordered table-hover">
                     
                     <tbody>
                         <tr>
@@ -250,7 +252,7 @@
                 </table>     
                   
                 </span>
-
+ </div>
 
                 <!--PAGE CONTENT ENDS-->
 
@@ -260,4 +262,10 @@
 
         <?php require_once(APPPATH . 'views/footer_report.php'); ?>
 
-
+<script type="text/javascript">
+function ExportToExcel(datatable){
+       var htmltable= document.getElementById('sampletable');
+       var html = htmltable.outerHTML;
+       window.open('data:application/vnd.ms-excel,' + encodeURIComponent(html));
+    }
+</script>

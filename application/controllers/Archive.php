@@ -8,32 +8,32 @@ class Archive extends CI_Controller {
 
         parent::__construct();
         error_reporting(E_PARSE);
-        $this->load->model('MD');
+        $this->load->model('Md');
         $this->load->library('session');
-       
+         $this->load->library('helper');
     }
 
     public function index() {
-        $query = $this->MD->show('archive');
+        $query = $this->Md->show('archive');
       //  var_dump($query);
         if ($query) {
              $data['files'] = $query;
         } else {
             $data['files'] = array();
         }
-         $query = $this->MD->show('element');
+         $query = $this->Md->show('element');
          if ($query) {
              $data['elements'] = $query;
         } else {
             $data['elements'] = array();
         }
-         $query = $this->MD->show('station'); 
+         $query = $this->Md->show('station'); 
         if ($query) {
              $data['stations'] = $query;
         } else {
             $data['stations'] = array();
         }
-        $query = $this->MD->show('instrument'); 
+        $query = $this->Md->show('instrument'); 
         if ($query) {
              $data['instruments'] = $query;
         } else {
@@ -76,10 +76,10 @@ class Archive extends CI_Controller {
         $file = $data['file_name'];
         
         $archive = array('file' => $file, 'name' => $name, 'station' => $station,'form' => $form, 'period' => $period,'description'=>$description,'submitted' => date('Y-m-d H:i:s'));
-        $file_id= $this->MD->save($archive, 'archive');
+        $file_id= $this->Md->save($archive, 'archive');
         
          $log = array('user' => $this->session -> userdata('name'),'userid'=>$this->session -> userdata('id'),'action' => 'save','details'=>  $name.' file  upload', 'date' => date('Y-m-d H:i:s'),'ip' => $this->input->ip_address(), 'url' =>'');
-         $this->MD->save($log, 'logs');
+         $this->Md->save($log, 'logs');
        
             if($file_id)
             {
@@ -101,33 +101,33 @@ class Archive extends CI_Controller {
     public  function edit(){
         $this->load->helper(array('form', 'url'));
          $id = $this->uri->segment(3);
-           $query = $this->MD->show('element');
+           $query = $this->Md->show('element');
       //  var_dump($query);
         if ($query) {
              $data['elements'] = $query;
         } else {
             $data['elements'] = array();
         }
-         $query = $this->MD->show('element');
+         $query = $this->Md->show('element');
          if ($query) {
              $data['elements'] = $query;
         } else {
             $data['elements'] = array();
         }
-         $query = $this->MD->show('station'); 
+         $query = $this->Md->show('station'); 
         if ($query) {
              $data['stations'] = $query;
         } else {
             $data['stations'] = array();
         }
-        $query = $this->MD->show('instrument'); 
+        $query = $this->Md->show('instrument'); 
         if ($query) {
              $data['instruments'] = $query;
         } else {
             $data['stations'] = array();
         }
        
-         $query = $this->MD->show('instrument');
+         $query = $this->Md->show('instrument');
  
         if ($query) {
              $data['elements'] = $query;
@@ -135,7 +135,7 @@ class Archive extends CI_Controller {
             $data['elements'] = array();
         }
         
-          $query = $this->MD->get('id',$id,'instrument');
+          $query = $this->Md->get('id',$id,'instrument');
     
         if ($query) {
              $data['instrumentID'] = $query;
@@ -164,7 +164,7 @@ class Archive extends CI_Controller {
         
        $instrument = array('name' => $name, 'station' => $station,'element' => $element, 'dateRegister' => $dateRegister, 'dateExpire' => $dateExpire, 'code' => $code,'manufacturer'=>$manufacturer, 'description'=>$description,'submitted' => date('Y-m-d H:i:s'));
               // update($id, $data,$table)
-        $this->MD->update($id,$instrument, 'instrument');
+        $this->Md->update($id,$instrument, 'instrument');
            $this->session->set_flashdata('msg', 'The '.$name.' has been updated');        
        redirect('/Archive', 'refresh');
                    return;
@@ -174,7 +174,7 @@ class Archive extends CI_Controller {
         
                     $id = $this->uri->segment(3);
                  
-                    $query = $this->MD->delete($id,'instrument');
+                    $query = $this->Md->delete($id,'instrument');
                  
                     if ($this->db->affected_rows() > 0) {
                         $msg='<span style="color:red">Information Deleted Fields</span>';
@@ -193,7 +193,7 @@ class Archive extends CI_Controller {
            //  $station ='Makerere';
            // header('Content-Type: application/x-json; charset=utf-8');
             //($where,$data,$table)
-            echo json_encode($this->MD->get('name',$station,'station'));
+            echo json_encode($this->Md->get('name',$station,'station'));
         }
     
     

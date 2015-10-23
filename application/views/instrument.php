@@ -107,30 +107,30 @@
 
             <div class="span12">
                 <div class="well-large">
-                    <i class="icon-home icon-2x green"></i>
-
+                 
                     <a href="#collapseOne" data-parent="#accordion2" data-toggle="collapse" class="accordion-toggle collapsed">
-                        <span class="arrowed-in-right"></span> <button  class="width-10 pull-left btn  btn-mini btn-yellow">   ADD INSTRUMENT   </button>
-                    </a><a href="" data-parent="#accordion2" data-toggle="collapse" class="accordion-toggle collapsed float-right">
-                        <span class="arrowed-in-right "></span> <button  class="width-10 pull-left btn float-right  btn-mini btn-success">          DELETE SELECTED      </button>     </a>
+                        <span class="arrowed-in-right"></span> <button  class="width-10 pull-left btn  btn-yellow">   ADD INSTRUMENT   </button>
+                    </a>
+                    <a href="" data-parent="#accordion2" data-toggle="collapse" class="accordion-toggle collapsed float-right">
+                        <span class="arrowed-in-right "></span> <button  class="width-10 pull-left btn float-right  btn-success">          DELETE SELECTED      </button>     </a>
 
 
 
                     <div class="row-fluid">
                         <div id="accordion2" class="accordion">
                             <div class="accordion-group">
-                                <div class="accordion-body collapse" id="collapseOne">
+                                <div class="accordion-body collapse span12" id="collapseOne">
                                     <div class="accordion-inner">
 
-                                        <h4> Enter instrument details to below: </h4>
+                                        <h5> Enter instrument details to below: </h5>
                                         <form id="station-form" name="station-form" enctype="multipart/form-data"  action='<?= base_url(); ?>index.php/instrument/save'  method="post">            
 
-                                            <div class="alert-info span6 padding-5">
+                                            <div class=" span6 padding-5">
 
 
 
                                                 <label for="form-field-select-1">Name</label>
-                                                <input type="text" name="name" id="name" class="span12" placeholder="Name" />
+                                                <input type="text" name="name" id="name" class="span11" placeholder="Name" />
 
                                                 <div class="form-group">
                                                     <label for="form-field-select-1">Station</label>
@@ -181,16 +181,16 @@ if (is_array($elements) && count($elements)) {
 
 
                                             </div>         
-                                            <div class="alert-info span6 padding-5">
+                                            <div class="span6 padding-5">
 
 
 
                                                 <label for="form-field-select-1">Code</label>
-                                                <input type="text" class="span12" placeholder="Code" name="code" id="code" />
+                                                <input type="text" class="span11" placeholder="Code" name="code" id="code" />
                                                 <label for="form-field-select-1">Manufacturer</label>
-                                                <input type="text" class="span12" placeholder="Name" name="manufacturer" id="manufacturer" />
+                                                <input type="text" class="span11" placeholder="Name" name="manufacturer" id="manufacturer" />
                                                 <label for="form-field-select-1">Description</label>
-                                                <input type="text" class="span12" placeholder="Name" id="description" name="description" />                                                    
+                                                <input type="text" class="span11" placeholder="Name" id="description" name="description" />                                                    
 
                                                 <div class="form-group">
 
@@ -235,7 +235,7 @@ if (is_array($elements) && count($elements)) {
 
                                     <th class="hidden-phone">   Date registered- Expire </th>
                                     
-                                    <th>Code</th
+                                    <th>Code</th>
                                     <th>Manufacturer</th>
                                     <th>Manufacturer</th>
                                     <th>Description</th>

@@ -8,34 +8,36 @@ class Metar extends CI_Controller {
 
         parent::__construct();
         error_reporting(E_PARSE);
-        $this->load->model('MD');
+        $this->load->model('Md');
         $this->load->library('session');
         $this->load->library('encrypt');
          date_default_timezone_set("Africa/Nairobi");
+           $this->load->library('helper');
     }
 
     public function index() {
-        $query = $this->MD->show('metar');
+        
+        $query = $this->Md->show('metar');
       //  var_dump($query);
         if ($query) {
              $data['users'] = $query;
         } else {
             $data['users'] = array();
         }
-        $query = $this->MD->show('role'); 
+        $query = $this->Md->show('role'); 
         if ($query) {
              $data['roles'] = $query;
         } else {
             $data['roles'] = array();
         }
-         $query = $this->MD->show('station'); 
+         $query = $this->Md->show('station'); 
         if ($query) {
              $data['stations'] = $query;
         } else {
             $data['stations'] = array();
         }
        // get($field,$value,$table)
-        $query = $this->MD->get('day',date('Y-m-d'),'metar'); 
+        $query = $this->Md->get('day',date('Y-m-d'),'metar'); 
         if ($query) {
              $data['metas'] = $query;
         } else {
@@ -47,27 +49,27 @@ class Metar extends CI_Controller {
     
       public function everyday() {
           
-        $query = $this->MD->show('metar');
+        $query = $this->Md->show('metar');
       //  var_dump($query);
         if ($query) {
              $data['users'] = $query;
         } else {
             $data['users'] = array();
         }
-        $query = $this->MD->show('role'); 
+        $query = $this->Md->show('role'); 
         if ($query) {
              $data['roles'] = $query;
         } else {
             $data['roles'] = array();
         }
-         $query = $this->MD->show('station'); 
+         $query = $this->Md->show('station'); 
         if ($query) {
              $data['stations'] = $query;
         } else {
             $data['stations'] = array();
         }
        // get($field,$value,$table)
-        $query = $this->MD->get('day',date('Y-m-d'),'metar'); 
+        $query = $this->Md->get('day',date('Y-m-d'),'metar'); 
         if ($query) {
              $data['metas'] = $query;
         } else {
@@ -80,33 +82,33 @@ class Metar extends CI_Controller {
      
       public function rainfall() {
           
-        $query = $this->MD->show('metar');
+        $query = $this->Md->show('metar');
       //  var_dump($query);
         if ($query) {
              $data['users'] = $query;
         } else {
             $data['users'] = array();
         }
-        $query = $this->MD->show('role'); 
+        $query = $this->Md->show('role'); 
         if ($query) {
              $data['roles'] = $query;
         } else {
             $data['roles'] = array();
         }
-         $query = $this->MD->show('station'); 
+         $query = $this->Md->show('station'); 
         if ($query) {
              $data['stations'] = $query;
         } else {
             $data['stations'] = array();
         }
-          $query = $this->MD->show('rain'); 
+          $query = $this->Md->show('rain'); 
         if ($query) {
              $data['rain'] = $query;
         } else {
             $data['rain'] = array();
         }
        // get($field,$value,$table)
-        $query = $this->MD->get('day',date('Y-m-d'),'metar'); 
+        $query = $this->Md->get('day',date('Y-m-d'),'metar'); 
         if ($query) {
              $data['metas'] = $query;
         } else {
@@ -117,6 +119,18 @@ class Metar extends CI_Controller {
     }
 
     public function save() {
+        
+         $sessdata=$this->session -> userdata('actions');
+      if ($this->helper->allowed ($sessdata,'save')) {
+        
+         $this->session->set_flashdata('msg', $this->session -> userdata('actions').'<div class="alert alert-error">
+                                                   
+                                                <strong>
+                                               You do not have permission to execute this task	</strong>									
+						</div>');
+
+         redirect('metar/', 'refresh');
+       }
         
         $this->load->helper(array('form', 'url'));
         
@@ -141,15 +155,15 @@ class Metar extends CI_Controller {
          $wind_speed = $wind_info[1];
           $wind_unit = $wind_info[2];
        
-        $get_result = $this->MD->check($datetime,'datetime','metar');
+        $get_result = $this->Md->check($datetime,'datetime','metar');
         if(!$get_result){
             if($type=='SPECI'){
                 
         $metar = array('station' => $station,'type' => $type,'datetime'=>$datetime, 'timezone' => 'GMT','wind_direction' => $wind_direction, 'wind_speed' => $wind_speed, 'unit' => $wind_unit, 'visibility' => $visibility, 'present_weather' =>$present,'cloud'=>$cloud,'air_temperature'=>$air_temperature,'humidity'=> $humidity,'dew_temperature'=>$dew_temperature,'wet_bulb'=>$wet_bulb,'station_pressure_hpa'=>$station_pressure,'sea_pressure_hpa'=>$sea_pressure,'recent_weather'=>$recent_weather,'submitted'=>date('Y-m-d H:m:s'),'user'=>'test','day'=>$day);
-        $this->MD->save($metar, 'metar');
+        $this->Md->save($metar, 'metar');
         
          $log = array('user' => $this->session -> userdata('name'),'userid'=>$this->session -> userdata('id'),'action' => 'save','details'=> 'meta information saved ', 'date' => date('Y-m-d H:i:s'),'ip' => $this->input->ip_address(), 'url' =>'');
-           $this->MD->save($log, 'logs'); 
+           $this->Md->save($log, 'logs'); 
       
             redirect('/metar', 'refresh');
             return;
@@ -166,7 +180,7 @@ class Metar extends CI_Controller {
         
         if ($station!=""){
         $metar = array('station' => $station,'type' => $type,'datetime'=>$datetime, 'timezone' => 'GMT','wind_direction' => $wind_direction, 'wind_speed' => $wind_speed, 'unit' => $wind_unit, 'visibility' => $visibility, 'present_weather' =>$present,'cloud'=>$cloud,'air_temperature'=>$air_temperature,'humidity'=> $humidity,'dew_temperature'=>$dew_temperature,'wet_bulb'=>$wet_bulb,'station_pressure_hpa'=>$station_pressure,'sea_pressure_hpa'=>$sea_pressure,'recent_weather'=>$recent_weather,'submitted'=>date('Y-m-d H:m:s'),'user'=>'test','day'=>$day);
-        $this->MD->save($metar, 'metar');
+        $this->Md->save($metar, 'metar');
       
             redirect('/metar', 'refresh');
             return;
@@ -184,7 +198,7 @@ class Metar extends CI_Controller {
     public  function edit(){
         $this->load->helper(array('form', 'url'));
          $id = $this->uri->segment(3);
-         $query = $this->MD->show('metar');
+         $query = $this->Md->show('metar');
  
         if ($query) {
              $data['users'] = $query;
@@ -192,20 +206,20 @@ class Metar extends CI_Controller {
             $data['users'] = array();
         }
         
-          $query = $this->MD->get('id',$id,'metar');
+          $query = $this->Md->get('id',$id,'metar');
     
         if ($query) {
              $data['userID'] = $query;
         } else {
             $data['userID'] = array();
         }
-          $query = $this->MD->show('role'); 
+          $query = $this->Md->show('role'); 
         if ($query) {
              $data['roles'] = $query;
         } else {
             $data['roles'] = array();
         }
-         $query = $this->MD->show('station'); 
+         $query = $this->Md->show('station'); 
         if ($query) {
              $data['stations'] = $query;
         } else {
@@ -233,15 +247,15 @@ class Metar extends CI_Controller {
 
             $password = $this->encrypt->encode($msg, $key);
             $metar = array( 'password' => $password,'create' => date('Y-m-d'));     
-            $this->MD->update($id,$metar, 'metar');
+            $this->Md->update($id,$metar, 'metar');
             
         }
          
         $metar = array('email' => $email,'name' => $name, 'contact' => $contact,'role' => $role, 'active' => 'true','station'=>$station,'create' => date('Y-m-d'));
       // update($id, $data,$table)
-        $this->MD->update($id,$metar, 'metar');
+        $this->Md->update($id,$metar, 'metar');
          $log = array('user' => $this->session -> userdata('name'),'userid'=>$this->session -> userdata('id'),'action' => 'updated','details'=> ' ', 'date' => date('Y-m-d H:i:s'),'ip' => $this->input->ip_address(), 'url' =>'');
-           $this->MD->save($log, 'logs'); 
+           $this->Md->save($log, 'logs'); 
            $this->session->set_flashdata('msg', 'The '.$name.' has been updated');        
        redirect('/Role', 'refresh');
                    return;
@@ -251,7 +265,7 @@ class Metar extends CI_Controller {
         
                     $id = $this->uri->segment(3);
                  
-                    $query = $this->MD->delete($id,'metar');
+                    $query = $this->Md->delete($id,'metar');
                  
                     if ($this->db->affected_rows() > 0) {
                         $msg='<span style="color:red">Information Deleted Fields</span>';
@@ -270,7 +284,7 @@ class Metar extends CI_Controller {
      
         $metar = ($metar == "") ? $this->input->post('name') :$metar;
         //check($value,$field,$table)
-        $get_result = $this->MD->check($metar,'name','metar');
+        $get_result = $this->Md->check($metar,'name','metar');
 
         if (!$get_result)
             echo '<span style="color:#f00"> name already in use. </span>';
@@ -282,7 +296,7 @@ class Metar extends CI_Controller {
      
         $email = $this->input->post('email');
         //check($value,$field,$table)
-        $get_result = $this->MD->check($email,'email','metar');
+        $get_result = $this->Md->check($email,'email','metar');
 
         if (!$get_result)
             echo '<span style="color:#f00">email already in use. </span>';
@@ -293,7 +307,7 @@ class Metar extends CI_Controller {
         $this->load->helper(array('form', 'url'));
         $date = trim($this->input->post('date'));
     
-        $get_result = $this->MD->get('day',$date,'metar');
+        $get_result = $this->Md->get('day',$date,'metar');
      
        // var_dump($get_result);
         if ($get_result) {         
@@ -418,7 +432,17 @@ class Metar extends CI_Controller {
         }
     }
      public function daily() {
+         $sessdata=$this->session -> userdata('actions');
+      if ($this->helper->allowed ($sessdata,'save')) {
         
+         $this->session->set_flashdata('msg', $this->session -> userdata('actions').'<div class="alert alert-error">
+                                                   
+                                                <strong>
+                                               You do not have permission to execute this task	</strong>									
+						</div>');
+
+         redirect('metar/', 'refresh');
+       }
         $this->load->helper(array('form', 'url'));
   //{date:date,max:max,min:min,actual:actual,anemometer:anemometer,wind:wind,maxi:maxi,station:station}
         
@@ -456,16 +480,16 @@ class Metar extends CI_Controller {
             return;
         }       
         //echo $date;
-       $get_result = $this->MD->check($date,'date','daily');
+       $get_result = $this->Md->check($date,'date','daily');
       // var_dump($get_result);
       if(!$get_result){  
             echo '<div class="alert alert-error"><strong> Data already submitted for '.$date.'</strong></div>';
         }else{      
           
-            $daily = array('station' => $station,'date' => $date,'max'=>$max, 'min' => $min,'actual' => $actual, 'anemometer' => $anemometer, 'wind' => $wind, 'maxi' => $maxi, 'user' =>$user,'submitted'=>$submitted,'approved'=>$approved,'rain'=>$rain,'thunder'=>$thunder,'fog'=>$fog,'haze'=>$haze,'storm'=>$storm,'quake'=>$quake,'height'=>$height,'duration'=>$duration,'sunshine'=>$sunshine,'radiationtype'=>$radiationtype,'radiation'=>$radiation,'evaptype1'=>$evaptype1,'evap1'=>$evap1,'evaptype2'=>$evaptype2,'evap2'=>$evap2);
-           $this->MD->save($daily, 'daily'); 
+            $daily = array('station' => $station,'date' => $date,'max'=>$max, 'min' => $min,'actual' => $actual, 'anemometer' => $anemometer, 'wind' => $wind, 'maxi' => $maxi, 'user' =>$this->session -> userdata('name'),'submitted'=>$submitted,'approved'=>$approved,'rain'=>$rain,'thunder'=>$thunder,'fog'=>$fog,'haze'=>$haze,'storm'=>$storm,'quake'=>$quake,'height'=>$height,'duration'=>$duration,'sunshine'=>$sunshine,'radiationtype'=>$radiationtype,'radiation'=>$radiation,'evaptype1'=>$evaptype1,'evap1'=>$evap1,'evaptype2'=>$evaptype2,'evap2'=>$evap2);
+           $this->Md->save($daily, 'daily'); 
            $log = array('user' => $this->session -> userdata('name'),'userid'=>$this->session -> userdata('id'),'action' => 'saved daily weather information','details'=>  $this->session-> userdata('name').'submit of weather information ', 'date' => date('Y-m-d H:i:s'),'ip' => $this->input->ip_address(), 'url' =>'');
-           $this->MD->save($log, 'logs'); 
+           $this->Md->save($log, 'logs'); 
            
            echo '<br><div class="alert alert-info span12"><strong>Information  submitted</strong></div>';
                      
@@ -492,16 +516,16 @@ class Metar extends CI_Controller {
             return;
         }       
         //echo $date;
-       $get_result = $this->MD->check($time,'rain','rain');
+       $get_result = $this->Md->check($time,'rain','rain');
       // var_dump($get_result);
         if(!$get_result){  
             echo '<div class="alert alert-error"><strong> Data already submitted for '.$time.'</strong></div>';
         }else{      
           
             $rain = array('station' => $station,'date' => $date,'rain'=>$rain,'time'=>$time,'duration'=>$duration,'user' =>$user,'submitted'=>$submitted);
-           $this->MD->save($rain, 'rain'); 
+           $this->Md->save($rain, 'rain'); 
            $log = array('user' => $this->session -> userdata('name'),'userid'=>$this->session -> userdata('id'),'action' => 'saved daily rainfall information','details'=>  $this->session-> userdata('name').'submit of weather information ', 'date' => date('Y-m-d H:i:s'),'ip' => $this->input->ip_address(), 'url' =>'');
-           $this->MD->save($log, 'logs'); 
+           $this->Md->save($log, 'logs'); 
            
            echo '<br><div class="alert alert-info"><strong>Rainfall information  submitted</strong></div>';
                      

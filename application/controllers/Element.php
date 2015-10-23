@@ -8,13 +8,14 @@ class Element extends CI_Controller {
 
         parent::__construct();
         error_reporting(E_PARSE);
-        $this->load->model('MD');
+        $this->load->model('Md');
         $this->load->library('session');
+          $this->load->library('helper');
        
     }
 
     public function index() {
-        $query = $this->MD->show('element');
+        $query = $this->Md->show('element');
       //  var_dump($query);
         if ($query) {
              $data['elements'] = $query;
@@ -38,7 +39,7 @@ class Element extends CI_Controller {
         $description = $this->input->post('description');    
        
        
-        $get_result = $this->MD->check($name,'name','element');
+        $get_result = $this->Md->check($name,'name','element');
         
         if(!$get_result){
             $this->session->set_flashdata('msg', 'this element is already registered');
@@ -47,7 +48,7 @@ class Element extends CI_Controller {
     
         if ($name!=""){
         $element = array('name' => $name, 'abbrev' => $abbrev,'type' => $type, 'units' => $units, 'scale' => $scale, 'limits' => $limits, 'description'=>$description,'submitted' => date('Y-m-d'));
-        $this->MD->save($element, 'element');
+        $this->Md->save($element, 'element');
         redirect('/element', 'refresh');
         return;
         }
@@ -59,7 +60,7 @@ class Element extends CI_Controller {
     public  function edit(){
         $this->load->helper(array('form', 'url'));
          $id = $this->uri->segment(3);
-         $query = $this->MD->show('element');
+         $query = $this->Md->show('element');
  
         if ($query) {
              $data['elements'] = $query;
@@ -67,7 +68,7 @@ class Element extends CI_Controller {
             $data['elements'] = array();
         }
         
-          $query = $this->MD->get('id',$id,'element');
+          $query = $this->Md->get('id',$id,'element');
     
         if ($query) {
              $data['elementID'] = $query;
@@ -95,7 +96,7 @@ class Element extends CI_Controller {
          
         $element = array('name' => $name, 'abbrev' => $abbrev,'type' => $type, 'units' => $units, 'scale' => $scale, 'limits' => $limits, 'description'=>$description,'submitted' => date('Y-m-d'));
            // update($id, $data,$table)
-        $this->MD->update($id,$element, 'element');
+        $this->Md->update($id,$element, 'element');
            $this->session->set_flashdata('msg', 'The '.$name.' has been updated');        
        redirect('/element', 'refresh');
                    return;
@@ -105,7 +106,7 @@ class Element extends CI_Controller {
         
                     $id = $this->uri->segment(3);
                  
-                    $query = $this->MD->delete($id,'element');
+                    $query = $this->Md->delete($id,'element');
                  
                     if ($this->db->affected_rows() > 0) {
                         $msg='<span style="color:red">Information Deleted Fields</span>';
@@ -124,7 +125,7 @@ class Element extends CI_Controller {
      
         $station = ($station == "") ? $this->input->post('name') :$role;
         //check($value,$field,$table)
-        $get_result = $this->MD->check($role,'name','station');
+        $get_result = $this->Md->check($role,'name','station');
 
         if (!$get_result)
             echo '<span style="color:#f00"> name already in use. </span>';
@@ -138,7 +139,7 @@ class Element extends CI_Controller {
            //  $station ='Makerere';
            // header('Content-Type: application/x-json; charset=utf-8');
             //($where,$data,$table)
-            echo json_encode($this->MD->get('name',$station,'station'));
+            echo json_encode($this->Md->get('name',$station,'station'));
         }
     
     

@@ -38,6 +38,17 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
 
     <body>
+      <?php 
+    
+    function allowed ($sessdata,$action){
+    
+        return (strpos($sessdata,$action) ==TRUE);    
+   }
+     $see = $this -> session -> userdata('views');
+    
+    ?>
+        
+        
         <div class="navbar">
             <div class="navbar-inner">
                 <div class="container-fluid">
@@ -52,29 +63,12 @@
                         <li class="">
                             <a data-toggle="dropdown" href="#" class="dropdown-toggle">
                               
-                                    <small>Welcome,</small>
-                                   <?php echo $this -> session -> userdata('name'); ?>                         
-
+                                <h4>  <?php echo $this -> session -> userdata('role'); ?> :  <?php echo $this -> session -> userdata('name'); ?>                        
+  </h4>
                                 <i class="icon-caret-down"></i>
                             </a>
 
                             <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-closer">
-                                <li>
-                                    <a href="#">
-                                        <i class="icon-cog"></i>
-                                        Settings
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="#">
-                                        <i class="icon-user"></i>
-                                        Profile
-                                    </a>
-                                </li>
-
-                                <li class="divider"></li>
-
                                 <li>
                                     <a href="<?php echo base_url() . "index.php/welcome/logout"; ?>">
                                         <i class="icon-off"></i>
@@ -87,7 +81,30 @@
                 </div><!--/.container-fluid-->
             </div><!--/.navbar-inner-->
         </div>
-            <div class="span12">
+          <?php  if (allowed ($see,'data entry')) {  ?>
+          <a  href="<?php echo base_url(). "index.php/welcome/start"; ?>" target="myframe"><button class="btn btn-small btn-info"> Home </button></a>
+          
+           <a  href="<?php echo base_url() . "index.php/metar/everyday"; ?>" target="myframe"><button class="btn btn-small btn-info">Weather </button></a>
+                         
+                      <a target="myframe" href="<?php echo base_url() . "index.php/metar/rainfall"; ?>"><button class="btn btn-small btn-info">Rainfall </button></a>
+                         
+            <a target="myframe" href="<?php echo base_url() . "index.php/metar"; ?>">  <button class="btn btn-small btn-info">
+                            Metar Book
+                        </button></a>
+                      
+                      
+                   
+                                <a target="myframe" href="<?php echo base_url() . "index.php/synoptic/"; ?>"><button class="btn btn-small btn-info">synoptic tabular form </button></a>
+                           
+                                <a target="myframe" href="<?php echo base_url() . "index.php/synoptic/tab"; ?>"><button class="btn btn-small btn-info">Synoptic view</button></a>
+                         
+
+        
+        
+          
+            
+            <?php } ?>
+                     <?php  if (allowed ($see,'manage')) {  ?>
               <div class="btn-group">
                         <button data-toggle="dropdown" class=" btn btn-small btn-default dropdown-toggle">
                             Daily
@@ -125,9 +142,9 @@
                             <li>
                                 <a target="myframe" href="<?php echo base_url() . "index.php/dekadal/"; ?>">Dekadal</a>
                             </li>
-                            <li>
+<!--                            <li>
                                 <a target="myframe" href="<?php echo base_url() . "index.php/rainfall/"; ?>">Rainfall</a>
-                            </li>
+                            </li>-->
                              <li>
                                 <a target="myframe" href="<?php echo base_url() . "index.php/monthly/"; ?>">Monthly</a>
                             </li>
@@ -206,8 +223,8 @@
                             <i class="icon-cogs">Archive </i>
                         </button></a>
 
-                </div>
-
+           
+   <?php } ?>
                
 							
 

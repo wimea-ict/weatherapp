@@ -210,20 +210,21 @@ else { ?>
     <?php } ?>
     
     
-         <div class="span11">
-            <div class="span12">
-                <div class="widget-box">
-                    <div class="widget-header widget-header-flat">
-                        <a href="#collapseOne" data-parent="#accordion2" data-toggle="collapse" class="accordion-toggle collapsed">
-                       <span class="arrowed-in-right"></span> <button  class="width-10 pull-left btn  btn-mini btn-yellow">   ADD USER   </button>
+         <div class="span12">
+               <a href="#collapseOne" data-parent="#accordion2" data-toggle="collapse" class="accordion-toggle collapsed">
+                       <span class="arrowed-in-right"></span> <button  class="width-10 pull-left btn  btn-yellow">   ADD USER   </button>
                                         </a><a href="" data-parent="#accordion2" data-toggle="collapse" class="accordion-toggle collapsed float-right">
-                       <span class="arrowed-in-right "></span> <button  class="width-10 pull-left btn float-right  btn-mini btn-success">          DELETE SELECTED      </button>     </a>
-                    </div>
-
+                       <span class="arrowed-in-right "></span> <button  class="width-10 pull-left btn float-right  btn-success">          DELETE SELECTED      </button>     </a>
+                
+            <div class="span12">
+                
+                         
+                   
+                <div class="widget-box">
                     <div class="widget-body">
                         <div class="widget-main padding-8">
                             <div class="row-fluid">
-                                <table id="sample-table-2" class="table table-striped table-bordered table-hover">
+                                <table id="datatable" class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
                                             <th class="center">
@@ -322,6 +323,16 @@ else { ?>
 </div><!--/.main-container-->
 
 <?php require_once(APPPATH . 'views/footer_report.php'); ?>
+<script src='<?= base_url(); ?>js/jquery.dataTables.min.js'></script>
+
+<script src="<?= base_url(); ?>js/jquery.dataTables.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(function () {
+   $("#datatable").dataTable();
+
+});
+</script>
+
 <script type="text/javascript">
     $('#Loading_name').hide();
     $("#name").blur (function (e) {

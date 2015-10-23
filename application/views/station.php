@@ -17,110 +17,78 @@
         <div class="row-fluid">
             <div class="span12">
                 <div class="widget-box transparent" id="recent-box">
-                    <div class="widget-header">
-                        <h4 class="lighter smaller">
-                            <i class="icon-home icon-2x green"></i>
-                            Stations
-                        </h4>
+                 
+                        <h4 class="lighter smaller"> Stations      </h4>
+                     
                           <div id="accordion2" class="accordion">
                         <div class="accordion-group">
-                                <div class="accordion-heading">
-                                       
-                                </div>
+                              
 
                         <div class="accordion-body collapse" id="collapseOne">
                                 <div class="accordion-inner">
-                                           <div class="widget-body" style="padding: 3%;">
+                                           <div class="widget-body" >
                                             <h4> Enter station details to below: </h4>
                                <form id="station-form" name="station-form" enctype="multipart/form-data"  action='<?= base_url(); ?>index.php/station/save'  method="post">            
              
                                             <div class="widget-main">
 
-  <div class="span6"><div class="well well-large">   
+  <div class="span12">  
                                    
                                     
-                                <input type="text" class="span12" id="latitude" name="latitude" placeholder="Latitude"  />
+                                <input type="text" class="span6" id="latitude" name="latitude" placeholder="Latitude"  />
                                    
-                                <input type="text" class="span12" name="longitude" id="longitude" placeholder="Longitude" />
+                                <input type="text" class="span6" name="longitude" id="longitude" placeholder="Longitude" />
                                  
-                                 <input type="text" class="span12" name="altitude" id="altitude" placeholder="Altitude"  />
+                                 <input type="text" class="span6" name="altitude" id="altitude" placeholder="Altitude"  />
 
-                                                    <label>
-                                                        <span class="block input-icon input-icon-right">
-                                                             <input type="text" class="span12" id="number" name="number" placeholder="Station number" />  
-                                                        </span>
-                                                    </label>
-                                                    <label>
-                                                        <span class="block input-icon input-icon-right">
-                                                           <input type="text" id="name" name="name" class="span12" placeholder="Station name"  />   
-                                                        </span>
-                                                    </label>
+                                          
+                                                             <input type="text" class="span6" id="number" name="number" placeholder="Station number" />  
+                                                  
                                                  
-                                                       <label>
-                                                        <span class="block input-icon input-icon-right">
-                                                           <input type="text" id="location" name="location" class="span12" placeholder="Location" />
-                                                           
-                                                        </span>
-                                                    </label>
-                          <label>
-                                                        <span class="block input-icon input-icon-right">
-                                                            <input type="text" name="type" id="type" class="span12" placeholder="Type" />
-                                                            
-                                                        </span>                                                    
+                                                           <input type="text" id="name" name="name" class="span6" placeholder="Station name"  />   
                                                      
-
-                 
-</div></div>
-                                                 <div class="span6"><div class="well well-large">
-                       
- <input type="text" class="span12" name="country" id="country" placeholder="Country" />                                                             
+                                                 
+                                                           <input type="text" id="location" name="location" class="span6" placeholder="Location" />
+                                                           
+                          
+                                                            <input type="text" name="type" id="type" class="span6" placeholder="Type" />
+                                                         
+                                                     
+ <input type="text" class="span6" name="country" id="country" placeholder="Country" />                                                             
                            
                                    
-                                    <input type="text" class="span12" id="region" name="region" placeholder="Region/state" />
+                                    <input type="text" class="span6" id="region" name="region" placeholder="Region/state" />
                                    
-                               <input type="text" class="span12" id="code" name="code" placeholder="Block code"  />
+                               <input type="text" class="span6" id="code" name="code" placeholder="Block code"  />
                                   
-                                <input type="text" class="span12" id="city" name="city" placeholder="city"  />
-                                                    <label>
-                                                        <span class="block input-icon input-icon-right">
-                                                            <input type="text" class="span12" name="opened" id="opened" placeholder="year opened" />
-                                                            
-                                                        </span>
-                                                    </label>
-                                                    <label>
-                                                        <span class="block input-icon input-icon-right">
-                                                            <input type="text" class=" span12" name="closed" id="closed" placeholder="Year closed" />
-                                                            
-                                                        </span>
-                                                    </label>
+                                <input type="text" class="span6" id="city" name="city" placeholder="city"  />
                                                  
-                                                       <label>
-                                                        <span class="block input-icon input-icon-right">
-                                                            <input type="text" class="span12" id="status" name="status" placeholder="Status" />
+                                                            <input type="text" class="span6" name="opened" id="opened" placeholder="year opened" />
+                                                
+                                                            <input type="text" class=" span6" name="closed" id="closed" placeholder="Year closed" />
+                                                             <input type="text" class="span6" id="status" name="status" placeholder="Status" />
                                                            
-                                                        </span>
-                                                    </label>
-                          <label>
-                                                        <span class="block input-icon input-icon-right">
-                                                            <input type="text" name="type" id="type" class="span12" placeholder="Type" />
+                                     
+                                                            <input type="text" name="type" id="type" class="span6" placeholder="Type" />
                                                             
-                                                        </span>
+                                                      
                                                      
-                                                     
-                                                      <div class="clearfix">
-                                                        <button type="reset" class="width-30 pull-left btn btn-small">
+                                                      <div class="clearfix span6">
+                                                        <button type="reset" class=" pull-left btn btn-small">
                                                             <i class="icon-refresh"></i>
                                                             Clear
                                                         </button>
 
-                                                        <button  class="width-65 pull-right btn btn-small btn-success">
+                                                        <button  class=" pull-right btn btn-small btn-success">
                                                            Submit
 
                                                         </button>
                                                     </div>
                                                      
-                                                     </div></div>
-                                                
+
+                 
+</div></div>
+                                          
                                              
                                                 
                                             </div>
@@ -135,12 +103,16 @@
    <div class="span11">
             <div class="span12">
                 <div class="widget-box">
-                    <div class="widget-header widget-header-flat">
+                 
                         <a href="#collapseOne" data-parent="#accordion2" data-toggle="collapse" class="accordion-toggle collapsed">
-                       <span class="arrowed-in-right"></span> <button  class="width-10 pull-left btn  btn-mini btn-yellow">   ADD STATION   </button>
+                    
+                       
+                       <button  class="width-10 pull-left btn  btn-yellow">   ADD STATION   </button>
                                         </a><a href="" data-parent="#accordion2" data-toggle="collapse" class="accordion-toggle collapsed float-right">
-                       <span class="arrowed-in-right "></span> <button  class="width-10 pull-left btn float-right  btn-mini btn-success">          DELETE SELECTED      </button>     </a>
-                    </div>
+                      
+                       
+                       <button  class="width-10 pull-left btn float-right   btn-success">          DELETE SELECTED      </button>     </a>
+            
 
                     <div class="widget-body">
                         <div class="widget-main padding-8">
@@ -230,7 +202,7 @@
                 </div>
             </div><!--/span-->
          </div>                      
-                    </div>
+                   
 
            
                 </div><!--/widget-box-->

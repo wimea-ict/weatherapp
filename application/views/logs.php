@@ -11,7 +11,7 @@
 <div class="row-fluid">
      <div class="page-content"> 
     <h1>User logs</h1>
-           <table id="sample-table-2" class="table table-striped table-bordered table-hover">
+           <table id="datatable" class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
                                             <th class="center">
@@ -84,6 +84,16 @@
 
 
 <?php require_once(APPPATH . 'views/footer_report.php'); ?>
+
+<script src='<?= base_url(); ?>js/jquery.dataTables.min.js'></script>
+
+<script src="<?= base_url(); ?>js/jquery.dataTables.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(function () {
+   $("#datatable").dataTable();
+
+});
+</script>
 <script type="text/javascript">
     $('#Loading_name').hide();
     $("#name").blur (function (e) {

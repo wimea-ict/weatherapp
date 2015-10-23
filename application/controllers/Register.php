@@ -7,19 +7,20 @@ class Register extends CI_Controller {
 
         parent::__construct();
        // error_reporting(E_PARSE);
-        $this->load->model('MD');
+        $this->load->model('Md');
         $this->load->library('session');
         $this->load->library('encrypt');
+          $this->load->library('helper');
     }
 	public function index()
 	{
-         $query = $this->MD->show('role'); 
+         $query = $this->Md->show('role'); 
         if ($query) {
              $data['roles'] = $query;
         } else {
             $data['roles'] = array();
         }
-         $query = $this->MD->show('station'); 
+         $query = $this->Md->show('station'); 
         if ($query) {
              $data['stations'] = $query;
         } else {

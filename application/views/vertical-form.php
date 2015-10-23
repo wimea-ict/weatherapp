@@ -1,13 +1,16 @@
-<?php require_once(APPPATH . 'views/header.php'); ?>
+<link rel="stylesheet" href="<?= base_url(); ?>assets/css/ace.min.css" />     
+<link rel="stylesheet" href="<?= base_url(); ?>assets/css/ace-skins.min.css" />       
+
+<link rel="stylesheet" href="<?= base_url(); ?>assets/css/chosen.css" />
+<link rel="stylesheet" href="<?= base_url(); ?>assets/css/datepicker.css" />
+<link rel="stylesheet" href="<?= base_url(); ?>assets/css/bootstrap-timepicker.css" />
+<link rel="stylesheet" href="<?= base_url(); ?>assets/css/daterangepicker.css" />
+<link rel="stylesheet" href="<?= base_url(); ?>assets/css/bootstrap.min.css" />
+<link href="<?= base_url(); ?>css/mine.css" rel="stylesheet" />
 
 
-<div class="main-container container-fluid">
-
-    <div class="page-content">
         <div class="page-header position-relative">
-            <h3>
-                <i class="icon-edit icon-1x green"> AAXX SYNOPTIC REGISTER</i>
-            </h3>
+            <h3>AAXX SYNOPTIC REGISTER   </h3>
         </div><!--/.page-header-->
 
         <div class="row-fluid">
@@ -63,7 +66,7 @@
                                     ?>   
              
       <div class="success">
-                    <h3>AAXX Info</h3>
+                    <h4>AAXX Info</h4>
                     Block Number:<?=$loop->station?>
                     Station:<?=$loop->station?>
                     Date:<?=  date('Y-m-d')?>
@@ -132,19 +135,19 @@
                                 <?php   } } }  ?>  
                             <tr>
 
-                                <td><input type="text" id="time" name="time" class="input-mini" style="border: none;" value="<?php echo date('d'). date('H')."00Z";?>"  /></td>
+                                <td><input type="text" id="time" name="time" class="input-minis" style="border: none;" value="<?php echo date('d'). date('H')."00Z";?>"  /></td>
 
-                                <td><input type="text"  id="ir" name="ir" class="input-mini" />  </td>
-                                <td><input type="text" id="ix" name="ix" class="input-mini"  /></td>
+                                <td><input type="text"  id="ir" name="ir" class="input-minis" />  </td>
+                                <td><input type="text" id="ix" name="ix" class="input-minis"  /></td>
                                 
                                 <td class="hidden-480">
-                                    <span class="center"><input type="text" id="h" name="h" class="input-mini"  /></span>
+                                    <span class="center"><input type="text" id="h" name="h" class="input-minis"  /></span>
                                 </td>
                                
-                                <td> <input type="text" id="vv" name="vv" class="input-mini"  /></td>
-                                <td> <input type="text" id="n" name="n" class="input-mini"  /></td>
-                                <td> <input type="text" id="dd" name="dd" class="input-mini" value="<?= $wind;?>"  /></td>
-                                <td> <input type="text" id="ff" name="ff" class="input-mini"  value="<?= $direction;?>" /></td>
+                                <td> <input type="text" id="vv" name="vv" class="input-minis"  /></td>
+                                <td> <input type="text" id="n" name="n" class="input-minis"  /></td>
+                                <td> <input type="text" id="dd" name="dd" class="input-minis" value="<?= $wind;?>"  /></td>
+                                <td> <input type="text" id="ff" name="ff" class="input-minis"  value="<?= $direction;?>" /></td>
                                
 
                             </tr>
@@ -152,7 +155,7 @@
 
                         </tbody>
                     </table>
-                                     <h2>Section one</h2>
+                                     <h4>Section one</h4>
                     <table id="sample-table-1" class="table table-striped table-bordered table-hover">
                         <thead>
                                 <tr>
@@ -238,25 +241,25 @@
                                    <?php }}} ?>
                             <tr>
 
-                                <td> <input type="text" id="T" name="T" class="input-mini" value="<?php echo $temperature; ?>"  /> </td>
+                                <td> <input type="text" id="T" name="T" class="input-minis" value="<?php echo $temperature; ?>"  /> </td>
 
-                                <td><input type="text" id="Td" name="Td" class="input-mini" value="<?php echo $dew; ?>" />  </td>
-                                <td><input type="text" id="Po" name="Po" class="input-mini" value="<?php echo  $pressure; ?>"  /></td>
-                                <td class="hidden-480"><input type="text" id="gisis" name="gisis" class="input-mini"  /></td>
+                                <td><input type="text" id="Td" name="Td" class="input-minis" value="<?php echo $dew; ?>" />  </td>
+                                <td><input type="text" id="Po" name="Po" class="input-minis" value="<?php echo  $pressure; ?>"  /></td>
+                                <td class="hidden-480"><input type="text" id="gisis" name="gisis" class="input-minis"  /></td>
 
                                 <td class="hidden-480">
-                                    <span class="center"><input type="text" id="rrr" name="rrr" class="input-mini"  /></span>
+                                    <span class="center"><input type="text" id="rrr" name="rrr" class="input-minis"  /></span>
                                 </td>
 
 
-                                <td><input type="text" id="Tr" name="Tr" class="input-mini"  /> </td>
-                                <td> <input type="text" id="present" name="present" class="input-mini"  /></td>
-                                <td> <input type="text" id="past" name="past" class="input-mini"  /></td>
-                                <td> <input type="text" id="Nh" name="Nh" class="input-mini"  /></td>
-                                <td> <input type="text" id="Cl" name="Cl" class="input-mini"  /></td>
-                                <td> <input type="text" id="Cm" name="Cm" class="input-mini"  /></td>
-                                <td> <input type="text" id="Ch" name="Ch" class="input-mini"  /></td>
-                                <td> <input type="text" id="maxtemp" name="maxtemp" class="input-mini"  /></td>
+                                <td><input type="text" id="Tr" name="Tr" class="input-minis"  /> </td>
+                                <td> <input type="text" id="present" name="present" class="input-minis"  /></td>
+                                <td> <input type="text" id="past" name="past" class="input-minis"  /></td>
+                                <td> <input type="text" id="Nh" name="Nh" class="input-minis"  /></td>
+                                <td> <input type="text" id="Cl" name="Cl" class="input-minis"  /></td>
+                                <td> <input type="text" id="Cm" name="Cm" class="input-minis"  /></td>
+                                <td> <input type="text" id="Ch" name="Ch" class="input-minis"  /></td>
+                                <td> <input type="text" id="maxtemp" name="maxtemp" class="input-minis"  /></td>
 
                             </tr>
 
@@ -264,7 +267,7 @@
 
                         </tbody>
                     </table>
-                                         <h3>Section indicator 333</h3>
+                                         <h4>Section indicator 333</h4>
                     <table id="sample-table-1" class="table table-striped table-bordered table-hover">
                       
                             
@@ -366,33 +369,33 @@
                                    <?php } }}?>
                                             <tr>
 
-                                                <td> <input type="text" id="Tq" name="Tq" class="input-mini"  /> </td>
-                                                <td><input type="text" id="Ro" name="Ro" class="input-mini" />  </td>
-                                                <td><input type="text" id="R1" name="R1" class="input-mini" />  </td>
-                                                <td><input type="text" id="Tx" name="Tx" class="input-mini" />  </td>
-                                                <td><input type="text" id="Tm" name="Tm" class="input-mini" />  </td>
-                                                <td><input type="text" id="EE" name="EE" class="input-mini" />  </td>
-                                                <td><input type="text" id="E" name="E" class="input-mini" />  </td>
-                                                <td><input type="text" id="sss" name="sss" class="input-mini" />  </td>
-                                                <td><input type="text" id="pchange" name="pchange" class="input-mini" />  </td>
-                                                <td><input type="text" id="p24" name="p24" class="input-mini" />  </td>
-                                                <td><input type="text" id="rr" name="rr" class="input-mini" />  </td>
+                                                <td> <input type="text" id="Tq" name="Tq" class="input-minis"  /> </td>
+                                                <td><input type="text" id="Ro" name="Ro" class="input-minis" />  </td>
+                                                <td><input type="text" id="R1" name="R1" class="input-minis" />  </td>
+                                                <td><input type="text" id="Tx" name="Tx" class="input-minis" />  </td>
+                                                <td><input type="text" id="Tm" name="Tm" class="input-minis" />  </td>
+                                                <td><input type="text" id="EE" name="EE" class="input-minis" />  </td>
+                                                <td><input type="text" id="E" name="E" class="input-minis" />  </td>
+                                                <td><input type="text" id="sss" name="sss" class="input-minis" />  </td>
+                                                <td><input type="text" id="pchange" name="pchange" class="input-minis" />  </td>
+                                                <td><input type="text" id="p24" name="p24" class="input-minis" />  </td>
+                                                <td><input type="text" id="rr" name="rr" class="input-minis" />  </td>
 
-                                                <td><input type="text" id="tr1" name="tr1" class="input-mini" />  </td>
-                                                <td><input type="text" id="ns" name="ns" class="input-mini"  /></td>
-                                                <td class="hidden-480"><input type="text" id="c" name="c" class="input-mini"  /></td>
-                                                <td class="hidden-phone"><input type="text" id="hs" name="hs" class="input-mini"  /></td>
+                                                <td><input type="text" id="tr1" name="tr1" class="input-minis" />  </td>
+                                                <td><input type="text" id="ns" name="ns" class="input-minis"  /></td>
+                                                <td class="hidden-480"><input type="text" id="c" name="c" class="input-minis"  /></td>
+                                                <td class="hidden-phone"><input type="text" id="hs" name="hs" class="input-minis"  /></td>
 
                                                 <td class="hidden-480">
-                                                    <span class="center"><input type="text" id="ns1" name="ns1" class="input-mini"  /></span>
+                                                    <span class="center"><input type="text" id="ns1" name="ns1" class="input-minis"  /></span>
                                                 </td>
 
 
-                                                <td><input type="text" id="c1" name="c1" class="input-mini"  /> </td>
-                                                <td> <input type="text" id="hs1" name="hs1" class="input-mini"  /></td>
-                                                <td> <input type="text" id="ns2" name="ns2" class="input-mini"  /></td>
-                                                <td> <input type="text" id="c2" name="c2" class="input-mini"  /></td>
-                                                <td> <input type="text" id="hs2" name="hs2" class="input-mini"  /></td>
+                                                <td><input type="text" id="c1" name="c1" class="input-minis"  /> </td>
+                                                <td> <input type="text" id="hs1" name="hs1" class="input-minis"  /></td>
+                                                <td> <input type="text" id="ns2" name="ns2" class="input-minis"  /></td>
+                                                <td> <input type="text" id="c2" name="c2" class="input-minis"  /></td>
+                                                <td> <input type="text" id="hs2" name="hs2" class="input-minis"  /></td>
                                                 <td > <input type="text" id="supplementary" name="supplementary"   /></td>
                                             </tr>
 
@@ -400,7 +403,7 @@
 
                                             </tbody>
                                             </table>
-                                            <h3>Section 555</h3>
+                                            <h4>Section 555</h4>
                                                 <table id="sample-table-1" class="table table-striped table-bordered table-hover">
                                                    
                                                     <tr>
@@ -431,11 +434,11 @@
                                      </tr><?php } }}?>
                                                      <tr>
                                                      
-                                                         <td><input type="text" id="wb" name="wb" value="<?=$wet?>" class="input-mini"  /></td>
+                                                         <td><input type="text" id="wb" name="wb" value="<?=$wet?>" class="input-minis"  /></td>
                                                     
-                                                         <td><input type="text" id="rh" name="rh" value="<?=$humidity?>"class="input-mini"  /></td>
+                                                         <td><input type="text" id="rh" name="rh" value="<?=$humidity?>"class="input-minis"  /></td>
                                                      
-                                                         <td><input type="text" id="vap" name="vap" value="<?=$vap?>" class="input-mini"  /></td>
+                                                         <td><input type="text" id="vap" name="vap" value="<?=$vap?>" class="input-minis"  /></td>
                                                         
                                                     </tr>
                                                     <tr> </tr>

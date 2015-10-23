@@ -1,3 +1,6 @@
+<div class=" container-fluid">
+      <div class="page-content">
+           <div class="row-fluid">
 <link rel="stylesheet" href="<?= base_url(); ?>assets/css/ace.min.css" />     
 <link rel="stylesheet" href="<?= base_url(); ?>assets/css/ace-skins.min.css" />   
 
@@ -83,107 +86,126 @@
 
                     <div class="tab-content">
                         <div id="info" class="tab-pane in active">
-                            <p>Time:GGG</p>
-                            <input type="text" id="time" name="time" class="input-mini"  value="<?php echo date('d') . date('H') . "00Z"; ?>"  />
-                            Inclusion or omission of precipitation(ir)
-                            <input type="text"  id="ir" name="ir" class="input-mini" /> 
-                            Type of station/present & past weather(ix)
-                            <input type="text" id="ix" name="ix" class="input-mini"  />
-                            Height of lowest cloud cover (h)    
-                            <span class="center"><input type="text" id="h" name="h" class="input-mini"  /></span>
-                            Horizontal visibility(vv)
-                            <input type="text" id="vv" name="vv" class="input-mini"  />
-                            Total cloud cover(N)
-                            <input type="text" id="n" name="n" class="input-mini"  />
-                            Wind speed(KT)  
-                            <input type="text" id="dd" name="dd" class="input-mini" value="<?= $wind; ?>"  />
-                            Wind direction(ff)
-                            <input type="text" id="ff" name="ff" class="input-mini"  value="<?= $direction; ?>" />
+                        <div class="span12">     
+                            
+                            <div class="span2">  <label>Time:GGG</label><br>
+                                <input type="text" id="time" name="time" class=""  value="<?php echo date('d') . date('H') . "00Z"; ?>"  /></div>
+                            <div class="span2">  <label> Inclusion or omission of precipitation(ir)</label>
+                                <input type="text"  id="ir" name="ir" class="" /> </div>
+                                <div class="span2">  <label> Type of station/present & past weather(ix)</label>
+                                 <input type="text" id="ix" name="ix" class=""  /></div>
+                            <div class="span2">  <label>  Height of lowest cloud cover (h)   </label> 
+                                <span class="center"><input type="text" id="h" name="h" class=""  /></span></div>
+                      <div class="span2">  <label>  Horizontal visibility(vv)</label><br>
+                                <input type="text" id="vv" name="vv" class=""  /></div>
+                                 <div class="span2">  <label>    Total cloud cover(N)</label><br>
+                                <input type="text" id="n" name="n" class=""  /></div>
+                                 <div class="span2">  <label>  Wind speed(KT)  </label><br>
+                                <input type="text" id="dd" name="dd" class="" value="<?= $wind; ?>"  /></div>
+                         <div class="span2">  <label>   Wind direction(ff)</label><br>
+                                <input type="text" id="ff" name="ff" class=""  value="<?= $direction; ?>" /></div>
 
-
+                        </div> 
+                            
+                     
                         </div>
 
                         <div id="one" class="tab-pane">
-
-                            <label>  <span class="lbl">Air temperature</span></label>
-                            <input type="text" id="T" name="T" class="input-mini" value="<?php echo $temperature; ?>"  /> 
-                            <label>Dew point temperature</label>
-                            <input type="text" id="Td" name="Td" class="input-mini" value="<?php echo $dew; ?>" /> 
-                            <label>Pressure at station level</label>
-                            <input type="text" id="Po" name="Po" class="input-mini" value="<?php echo $pressure; ?>"  />
-                            <label>   Group Indicator Standard isobaric surface</label>
-                            <input type="text" id="gisis" name="gisis" class="input-mini"  />
-                            <label>  Geopotential of standard Isobaric surface </label>
-                            <input type="text" id="rrr" name="rrr" class="input-mini"  />
-                            <label>  Amount of precipitation</label>
-                            <input type="text" id="Tr" name="Tr" class="input-mini"  />
-                            <label>   Duration period of precipitation</label>                        
-                            <label>  Present weather </label>
-                            <input type="text" id="present" name="present" class="input-mini"  />
-                            <label>   Past weather</label>
-                            <input type="text" id="past" name="past" class="input-mini"  />
-                            <label>   Amount of clouds(Cl) </label>
-                            <input type="text" id="Nh" name="Nh" class="input-mini"  />
-                            <label>   Clouds (Sc,St,Cu,Cb)</label>
-                            <input type="text" id="Cl" name="Cl" class="input-mini"  />
-                            <label>  Clouds (Ac,As,Ns) </label>
-                            <input type="text" id="Cm" name="Cm" class="input-mini"  />
-                            <label>  Clouds (C,Cc,Cs) </label>
-                            <input type="text" id="Ch" name="Ch" class="input-mini"  />
-                            <input type="text" id="maxtemp" name="maxtemp" class="input-mini"  />
-                        </div>
+ <div class="span12">  
+                            <div class="span2">  <label>  <span class="lbl">Air temperature</span></label><br>
+                                <input type="text" id="T" name="T" class="" value="<?php echo $temperature; ?>"  /> </div>
+                           <div class="span2">   <label>Dew point temperature</label><br>
+                            <input type="text" id="Td" name="Td" class="" value="<?php echo $dew; ?>" /> </div>
+                           <div class="span2">   <label>Pressure at station level</label><br>
+                            <input type="text" id="Po" name="Po" class="" value="<?php echo $pressure; ?>"  /></div>
+                     
+                                <div class="span2">  <label>   Group Indicator Standard isobaric surface</label>
+                            <input type="text" id="gisis" name="gisis" class=""  /></div>
+                            <div class="span2">  <label>  Geopotential of standard Isobaric surface </label>
+                            <input type="text" id="rrr" name="rrr" class=""  /></div>
+                           <div class="span2">   <label>  Amount of precipitation</label><br>
+                            <input type="text" id="Tr" name="Tr" class=""  /></div>
+                             <div class="span2">   <label>   Duration period of precipitation</label> 
+                                </div>                       
+                           <div class="span2">   <label>  Present weather </label>
+                            <input type="text" id="present" name="present" class=""  /></div>
+                           <div class="span2">   <label>   Past weather</label>
+                            <input type="text" id="past" name="past" class=""  /></div>
+                          <div class="span2">    <label>   Amount of clouds(Cl) </label>
+                            <input type="text" id="Nh" name="Nh" class=""  /></div>
+                            <div class="span2">    <label>   Clouds (Sc,St,Cu,Cb)</label>
+                            <input type="text" id="Cl" name="Cl" class=""  /></div>
+                          <div class="span2">    <label>  Clouds (Ac,As,Ns) </label>
+                            <input type="text" id="Cm" name="Cm" class=""  /></div>
+                           <div class="span2">   <label>  Clouds (C,Cc,Cs) </label>
+                               <input type="text" id="Ch" name="Ch" class=""  />
+                           </div>
+                             <div class="span2">
+                                 <label>Maximum temperature</label>
+                            <input type="text" id="maxtemp" name="maxtemp" class=""  />
+                             </div>
+ 
+ 
+ 
+ 
+ </div>
+                            
+                          
+                              
+                        
+                        </div> 
 
                         <div id="333" class="tab-pane">
 
+ <div class="span12"> 
+                         <div class="span2">  <label>Grass minimum temperature</label>
+                             <input type="text" id="Tq" name="Tq" class=""  /></div>
+                         <div class="span2">    <label>Character & intensity of precipitation</label>
+                             <input type="text" id="Ro" name="Ro" class="" /> </div>
+                           <div class="span2"> <label>Beginning or end of precipitation</label>
+                            <input type="text" id="R1" name="R1" class="" /></div> 
+                           <div class="span2">  <label>Maximum temperature</label><br>
+                            <input type="text" id="Tx" name="Tx" class="" /></div>
+                           <div class="span2"> <label>Minimum temperature</label><br>
+                            <input type="text" id="Tm" name="Tm" class="" /></div>
+                          <div class="span2">   <label>Amount of evaporation</label><br>
+                            <input type="text" id="EE" name="EE" class="" /> </div>
+                          <div class="span2"> <label>Indicator of  type of instrument</label>
+                            <input type="text" id="E" name="E" class="" /> </div>
+                           <div class="span2">  <label> Duration of sunshine</label><br>
+                            <input type="text" id="sss" name="sss" class="" /></div>
+                          <div class="span2">   <label>Sign of pressure change</label><br>
+                            <input type="text" id="pchange" name="pchange" class="" /> </div> 
+                           <div class="span2">  <label>Pressure change in 24 hours </label>
+                            <input type="text" id="p24" name="p24" class="" /> </div>                           
+                           <div class="span2">   <label> Amount of precipitation</label><br>
+                            <input type="text" id="rr" name="rr" class="" /></div>
+                           <div class="span2">  <label> Duration period of precipitation</label>
+                            <input type="text" id="tr1" name="tr1" class="" />    </div>                        
+                           <div class="span2">  <label>Amount of individual cloud layer</label>
+                            <input type="text" id="ns" name="ns" class=""  /></div>
 
-                            <span>Grass minimum temperature</span>
-                            <input type="text" id="Tq" name="Tq" class="input-mini"  />
-                            <span>Character & intensity of precipitation</span>
-                            <input type="text" id="Ro" name="Ro" class="input-mini" /> 
-                            <span>Beginning or end of precipitation</span>
-                            <input type="text" id="R1" name="R1" class="input-mini" /> 
-                            <span>Maximum temperature</span>
-                            <input type="text" id="Tx" name="Tx" class="input-mini" />
-                            <span>Minimum temperature</span>
-                            <input type="text" id="Tm" name="Tm" class="input-mini" />
-                            <span>Amount of evaporation</span>
-                            <input type="text" id="EE" name="EE" class="input-mini" /> 
-                            <span>Indicator of  type of instrument</span>
-                            <input type="text" id="E" name="E" class="input-mini" /> 
-                            <span> Duration of sunshine</span>
-                            <input type="text" id="sss" name="sss" class="input-mini" />
-                            <span>Sign of pressure change</span>
-                            <input type="text" id="pchange" name="pchange" class="input-mini" />  
-                            <span>Pressure change in 24 hours </span>
-                            <input type="text" id="p24" name="p24" class="input-mini" />                            
-                            <span> Amount of precipitation</span>
-                            <input type="text" id="rr" name="rr" class="input-mini" />
-                            <span> Duration period of precipitation</span>
-                            <input type="text" id="tr1" name="tr1" class="input-mini" />                            
-                            <span>Amount of individual cloud layer</span>
-                            <input type="text" id="ns" name="ns" class="input-mini"  />
+                          <div class="span2">   <label>Genus of cloud </label><br>
+                            <input type="text" id="c" name="c" class=""  /></div>
+                         <div class="span2">   <label>Height of base cloud layer or mass</label>
+                            <input type="text" id="hs" name="hs" class=""  /></div>
+                         <div class="span2">    <label>Amount of individual cloud layer</label>
+                            <input type="text" id="ns1" name="ns1" class="i"  /></div>
+                          <div class="span2">   <label>Genus of cloud </label><br>
+                            <input type="text" id="c1" name="c1" class=""  /></div>
+                          <div class="span2">   <label>Height of base cloud layer or mass</label>
+                            <input type="text" id="hs1" name="hs1" class=""  /></div>
+                          <div class="span2">    <label>Amount of individual cloud layer</label>
+                            <input type="text" id="ns2" name="ns2" class=""  /></div>
+                          <div class="span2">    <label>Genus of cloud</label><br>
+                            <input type="text" id="c2" name="c2" class=""  /></div>
+                          <div class="span2">   <label>Height of base cloud layer or mass</label>
+                            <input type="text" id="hs2" name="hs2" class=""  /></div>
 
-                            <span>Genus of cloud </span>
-                            <input type="text" id="c" name="c" class="input-mini"  />
-                            <span>Height of base cloud layer or mass</span>
-                            <input type="text" id="hs" name="hs" class="input-mini"  />
-                            <span>Amount of individual cloud layer</span>
-                            <input type="text" id="ns1" name="ns1" class="input-mini"  />
-                            <span>Genus of cloud</span>
-                            <input type="text" id="c1" name="c1" class="input-mini"  />
-                            <span>Height of base cloud layer or mass</span>
-                            <input type="text" id="hs1" name="hs1" class="input-mini"  />
-                            <span>Amount of individual cloud layer</span>
-                            <input type="text" id="ns2" name="ns2" class="input-mini"  />
-                            <span>Genus of cloud</span>
-                            <input type="text" id="c2" name="c2" class="input-mini"  />
-                            <span>Height of base cloud layer or mass</span>
-                            <input type="text" id="hs2" name="hs2" class="input-mini"  />
+                          <div class="span6">    <label>Supplementary information<br>9 11 ff highest gust <br>9 12 ff highest mean wind speed<br>9 43CL DP movement of C clouds</label>
+                            <input type="text" id="supplementary" name="supplementary"   /></div>
 
-                            <span><br><br> <br>Supplementary information<br>9 11 ff highest gust <br>9 12 ff highest mean wind speed<br>9 43CL DP movement of C clouds</span>
-                            <input type="text" id="supplementary" name="supplementary"   />
-
-
+ </div>
                         </div>
                         <div id="555" class="tab-pane">
                             
@@ -561,6 +583,8 @@
     </div><!--/.page-content-->
 
 </div><!--/.main-container-->
-
+</div>
+          </div>
+    </div>
 
 <?php require_once(APPPATH . 'views/footers.php'); ?>

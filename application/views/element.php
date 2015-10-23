@@ -99,27 +99,26 @@
 
             <div class="span12">
                 <div class="well-large">
-                         <i class="icon-home icon-2x green"></i>
-                         
+                                              
                         <a href="#collapseOne" data-parent="#accordion2" data-toggle="collapse" class="accordion-toggle collapsed">
-                       <span class="arrowed-in-right"></span> <button  class="width-10 pull-left btn  btn-mini btn-yellow">   ADD WEATHER ELEMENT   </button>
+                       <span class="arrowed-in-right"></span> <button  class="width-10 pull-left btn  btn-yellow">   ADD WEATHER ELEMENT   </button>
                                         </a><a href="" data-parent="#accordion2" data-toggle="collapse" class="accordion-toggle collapsed float-right">
-                       <span class="arrowed-in-right "></span> <button  class="width-10 pull-left btn float-right  btn-mini btn-success">          DELETE SELECTED      </button>     </a>
+                       <span class="arrowed-in-right "></span> <button  class="width-10 pull-left btn float-right   btn-success">          DELETE SELECTED      </button>     </a>
             
 
                   
                             <div class="row-fluid">
                                    <div id="accordion2" class="accordion">
                         <div class="accordion-group">
-                                       <div class="accordion-body collapse" id="collapseOne">
+                                       <div class="accordion-body collapse span12" id="collapseOne">
                                 <div class="accordion-inner">
                                           
                                             <h4> Enter element details to below: </h4>
                          <form id="station-form" name="station-form" enctype="multipart/form-data"  action='<?= base_url(); ?>index.php/element/save'  method="post">            
              
-                             <div class="alert-info span6 padding-5">
+                             <div class=" span6 padding-5">
                                                <label for="form-field-select-1">Name</label>
-                                               <input type="text" id="name"  name="name" class="span12" placeholder="Element" />
+                                               <input type="text" id="name"  name="name" class="span11" placeholder="Element" />
                                                         
                                                      <div class="form-group">
                             <label> Abbreviation(Abbrev) </label>
@@ -151,7 +150,7 @@
                                                         
                                                     </select>
                         </div>  </div>    
-                             <div class="alert-info span6 padding-12">
+                             <div class="span6 padding-12">
   <label for="form-field-select-1">Scale</label>
 
   <select id="scale" name="scale">
@@ -172,7 +171,7 @@
                         <div class="form-group">
 
                             <label> Description </label>
-                            <textarea class="span12" id="description" name="description" placeholder="Default Text"></textarea>
+                            <textarea class="span11" id="description" name="description" placeholder="Default Text"></textarea>
 												
                            <div class="clearfix">
                          <br>                               <button type="reset" class="width-10 pull-right btn btn-small">

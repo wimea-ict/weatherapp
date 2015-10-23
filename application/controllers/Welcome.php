@@ -8,19 +8,20 @@ class Welcome extends CI_Controller {
 
         parent::__construct();
         error_reporting(E_PARSE);
-        $this->load->model('MD');
+        $this->load->model('Md');
         $this->load->library('session');
         $this->load->library('encrypt');
+        $this->load->library('helper');
     }
 
     public function index() {
-        $query = $this->MD->show('role');
+        $query = $this->Md->show('role');
         if ($query) {
             $data['roles'] = $query;
         } else {
             $data['roles'] = array();
         }
-        $query = $this->MD->show('station');
+        $query = $this->Md->show('station');
         if ($query) {
             $data['stations'] = $query;
         } else {
@@ -36,7 +37,7 @@ class Welcome extends CI_Controller {
           
      $this -> session -> sess_destroy();
      $log = array('user' => $this->session -> userdata('name'),'userid'=>$this->session -> userdata('id'),'action' => 'logout','details'=>  $this->session-> userdata('name').' has logged out ', 'date' => date('Y-m-d H:i:s'),'ip' => $this->input->ip_address(), 'url' =>'www.');
-                      $this->MD->save($log, 'logs'); 
+                      $this->Md->save($log, 'logs'); 
      $this->load->view('login');
     
       }
@@ -57,11 +58,11 @@ class Welcome extends CI_Controller {
         $key = $email;
 
 
-        $get_result = $this->MD->check($email, 'email', 'user');
+        $get_result = $this->Md->check($email, 'email', 'user');
         if (!$get_result) {
             //$this->session->set_flashdata('msg', 'Welcome'.$email);
             //get($field,$value,$table)
-            $result = $this->MD->get('email', $email, 'user');
+            $result = $this->Md->get('email', $email, 'user');
            // var_dump($result);
             foreach ($result as $res) {
                 $key = $email;
@@ -81,8 +82,20 @@ class Welcome extends CI_Controller {
                     );
                    
 			$this -> session -> set_userdata($newdata);
+                        
+                         $infos = $this->Md->get('name',$res->role, 'role');                        
+                       
+                        $actions = "";
+                                                
+                        foreach ($infos as $info) {
+                                    $actiondata = array('actions' => $info->actions,'views'=>$info->views);                                
+                                } 
+                         $this->session->set_userdata($actiondata);
+                        
+                        
+                        
                     $log = array('user' => $this->session -> userdata('name'),'userid'=>$this->session -> userdata('id'),'action' => 'login','details'=>  $this->session-> userdata('name').' has logged in ', 'date' => date('Y-m-d H:i:s'),'ip' => $this->input->ip_address(), 'url' =>'www.');
-                    $this->MD->save($log, 'logs'); 
+                    $this->Md->save($log, 'logs'); 
                     $this->load->view('home');
                 } else {
                     $this->session->set_flashdata('msg', 'Invalid user');
@@ -98,7 +111,7 @@ class Welcome extends CI_Controller {
     }
 
     public function user() {
-        $query = $this->MD->show('role');
+        $query = $this->Md->show('role');
         //  var_dump($query);
         if ($query) {
             $data['roles'] = $query;
@@ -126,7 +139,7 @@ class Welcome extends CI_Controller {
     }
 
     public function schedule() {
-         $query = $this->MD->show('instrument'); 
+         $query = $this->Md->show('instrument'); 
         if ($query) {
              $data['instruments'] = $query;
         } else {
@@ -139,21 +152,21 @@ class Welcome extends CI_Controller {
     public function reports() {
 
 
-        $query = $this->MD->show('role');
+        $query = $this->Md->show('role');
         if ($query) {
             $data['roles'] = $query;
         } else {
             $data['roles'] = array();
         }
-        $query = $this->MD->show('station');
+        $query = $this->Md->show('station');
         if ($query) {
             $data['stations'] = $query;
         } else {
             $data['stations'] = array();
         }
         // get($field,$value,$table)
-        // $query = $this->MD->query("SELECT * FROM  daily RIGHT JOIN metar ON daily.date = metar.day  "); 
-        $query = $this->MD->query("SELECT * FROM daily");
+        // $query = $this->Md->query("SELECT * FROM  daily RIGHT JOIN metar ON daily.date = metar.day  "); 
+        $query = $this->Md->query("SELECT * FROM daily");
 
         if ($query) {
             $data['daily'] = $query;
@@ -163,7 +176,7 @@ class Welcome extends CI_Controller {
         $datetime = "09" . "00Z";
         $datetimes = "15" . "00Z";
         $all = array();
-        $query1 = $this->MD->query("select *  from daily");
+        $query1 = $this->Md->query("select *  from daily");
         foreach ($query1 as $v) {
             $resv = new stdClass();
             $resv->date = $v->date;
@@ -191,7 +204,7 @@ class Welcome extends CI_Controller {
 
 
 
-            $query2 = $this->MD->query("select * from metar WHERE day='" . $v->date . "'");
+            $query2 = $this->Md->query("select * from metar WHERE day='" . $v->date . "'");
             $results = $query2;
             //  var_dump($results);
             foreach ($results as $res) {

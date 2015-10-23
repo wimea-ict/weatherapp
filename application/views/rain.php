@@ -10,14 +10,16 @@
 <link href="<?= base_url(); ?>css/mine.css" rel="stylesheet" />
 
 
-<div class=" container">
+<div class=" container-fluid">
  <h4> Daily periodical rainfall</h4>
  <div class="row">
-<div class="span3">
+<div class="span12">
 
-
-    <div class="span3 ">
-        <label>Station</label>
+ <form id="edit-form" name="edit-form" enctype="multipart/form-data"  action='<?= base_url(); ?>index.php/metar/rainfall'  method="post">            
+  
+    <div class="span12 form-group well alert-success ">
+        
+        <div class="span2"><label>Station</label>
         <select id="station" name="station">
             <option value="" />
             <?php
@@ -29,52 +31,51 @@
 
                 <?php }
             } ?>
-        </select>
-    </div>
-
-    <div class="span4 " >
-        <label>  Station number</label>
-        <input class="form-control"  id="number" readonly="" name="number" ></input>   
-    </div>
-    
-         
-        <input type="hidden" class="form-control span3 date-picker" id="datenow" value="<?php echo date('Y-m-d'); ?>"  name="datenow" type="text"  />
-      
- 
-
-
-</div>
-
-<div class="form-group  span3">
-
-    <form id="edit-form" name="edit-form" enctype="multipart/form-data"  action='<?= base_url(); ?>index.php/metar/rainfall'  method="post">            
-       
-        <div class="span3 ">
-              <label>Rainfall(mm) </label>
-            <input class="form-control"  id="rain_now"  name="rain_now" ></div>
-
-        <div class="span3" >  <label>Duration(Hrs)  </label>
+        </select></div>
+         <div class="span2"> <label>  Station number</label>
+             <input class="form-control"  id="number" readonly="" name="number" ></input>  </div>
+        <div class="span2">
+           <label>Rainfall(mm) </label>
+            <input class="form-control"  id="rain_now"  name="rain_now" ></div>  
+            
+             <div class="span2">
+            <label>Duration(Hrs)  </label>
             <input class="form-control"  id="duration_now"  name="duration_now" ></input>   
-        </div>
-   
-       
-    </form> 
-</div>
-    <div class="span3">
-        
-             <div class="span3 input-append bootstrap-timepicker">
-            <label for="timepicker1">Time Picker</label>
-            <input id="timepicker1" type="text" class="input-small" />
-           
-        </div>
-        <div class="span3 ">
-            <label>  Select the date  </label>
+            
+        </div> 
+        <div class="span2 input-append bootstrap-timepicker">
+            <label for="timepicker1">Time</label>
+            <input id="timepicker1" type="text" class="form-control"  /> 
+            
+        </div> 
+        <div class="span1">
+            <label> Date  </label>
             <input class="form-control span3 date-picker" id="daterain" value="<?php echo date('Y-m-d'); ?>"  name="daterain" type="text"  />
-           
+             <input type="hidden" class=" date-picker" id="datenow" value="<?php echo date('Y-m-d'); ?>"  name="datenow" type="text"  />
+    <button onclick="" name="rainy" id="rainy" class=" btn btn-small"> Submit  </button> 
+            
+            
         </div>
-         <button onclick="" name="rainy" id="rainy" class="span3 btn btn-small"> Submit  </button>
+      
+            
+        </div> 
+       
+             
+             
     </div>
- </div>
+
+  
+         
+      
+
+       
+   
+</div>
+ 
+        </form> 
+
+ 
+  
     <span id="Loading_rainy" class="span6" name ="Loading_rainy"><img src="<?= base_url(); ?>images/ajax-loader.gif" alt="Ajax Indicator" /></span><br>
 
 
