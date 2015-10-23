@@ -85,6 +85,7 @@ padding:5px;
                             <i class="icon-file icon-2x green"></i>
                             Files & Archive
                         </h4>
+                          <?php echo $this->session->flashdata('msg'); ?>
 
                         <div class="widget-toolbar no-border">
                             <ul class="nav nav-tabs" id="recent-tab">
