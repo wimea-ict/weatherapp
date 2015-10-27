@@ -48,17 +48,14 @@
                     </span>
                 </div>
 
-                
-                
-                
-                            <span class="well-large"> 
-                                    <input type="button" class="btn-default" onclick="ExportToExcel('datatable')" value="Export to Excel">
+        <span class="well-large"> 
+         <input type="button" class="btn-default" onclick="ExportToExcel('datatable')" value="Export to Excel">
               
                     <table id="sampletable"  class="table table-striped table-bordered table-hover">
                     
                     <tbody>
                         <tr>
-                             <th  >
+                             <th>
                                 <label>
                                   
                                 </label>
