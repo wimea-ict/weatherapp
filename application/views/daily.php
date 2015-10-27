@@ -45,10 +45,10 @@
                                   <div class="span2">    <label>Select the date</label>
                                      <input class= date-picker" id="datenow" value="<?php echo date('Y-m-d'); ?>"  name="datenow" type="text" data-date-format="YYYY-MM-DD" />
                                   </div>
-                      <div class="span2">   <label class="control-label">Previous date:</label>
+<!--                      <div class="span2">   <label class="control-label">Previous date:</label>
                         <input name="dateyesterday" class="date-picker form-control" id="dateyesterday" value="<?php echo date('Y-m-d', strtotime("-1 days")); ?>"  name="dateyesterday" type="text" data-date-format="YYYY-MM-DD" />
                  
-                      </div>
+                      </div>-->
 
                  
                     

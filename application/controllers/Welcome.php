@@ -83,7 +83,8 @@ class Welcome extends CI_Controller {
                    
 			$this -> session -> set_userdata($newdata);
                         
-                         $infos = $this->Md->get('name',$res->role, 'role');                        
+                       $infos = $this->Md->get('name',$res->role, 'role'); 
+                       
                        
                         $actions = "";
                                                 
@@ -91,7 +92,13 @@ class Welcome extends CI_Controller {
                                     $actiondata = array('actions' => $info->actions,'views'=>$info->views);                                
                                 } 
                          $this->session->set_userdata($actiondata);
-                        
+                         
+                         $stations = $this->Md->get('name',$res->station, 'station'); 
+                                                
+                        foreach ($stations as $stat) {
+                                    $stationdata = array('number' => $stat->number,'name'=>$stat->name,'city'=>$stat->city,'region'=>$stat->region,'code'=>$stat->code);                                
+                                } 
+                         $this->session->set_userdata($stationdata);  
                         
                         
                     $log = array('user' => $this->session -> userdata('name'),'userid'=>$this->session -> userdata('id'),'action' => 'login','details'=>  $this->session-> userdata('name').' has logged in ', 'date' => date('Y-m-d H:i:s'),'ip' => $this->input->ip_address(), 'url' =>'www.');

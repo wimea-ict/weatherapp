@@ -66,7 +66,463 @@
                                             <div class="span12">
                                                 <!--PAGE CONTENT BEGINS-->
 
+
                                                 <div class="row-fluid">
+
+                                                    <div class="span12 ">           
+                                                        <div class="rainfallcard" >
+                                                            <?php
+                                                            //  var_dump($daily);
+                                                            if (is_array($daily) && count($daily)) {
+                                                                foreach ($daily as $loop) {
+
+                                                                    $month = date('m', strtotime($loop->date));
+                                                                    $day = date('d', strtotime($loop->date));
+                                                                    $current_month = date('m');                                                                  
+                                                                    
+                                                                     if ($loop->actual<1){
+                                                                           
+                                                                            if ($loop->actual<0.1){
+                                                                                
+                                                                                $rain='TR';
+                                                                            }else{
+                                                                                
+                                                                                 $rain='NIL';
+                                                                            }
+                                                                        }
+                                                                        else{
+                                                                             $rain=$loop->actual;
+                                                                        }
+                                                                    
+                                                                      if ($month == $current_month+1) {
+                                                                          $first =  $rain;
+                                                                          
+                                                                      }
+                                                                    
+                                                                    if ($month == $current_month) {
+                                                                       if($loop->actual>1) {
+                                                                       $rains = $rains+1 ;
+                                                                       }
+                                                                       $sum =$sum+$loop->actual; 
+                                                                                
+                                                                        
+                                                                        if ($day == '1') {
+                                                                            $one = $rain;
+                                                                        }
+                                                                        if ($day == '2') {
+                                                                            $two = $rain;
+                                                                        }
+                                                                        if ($day == '3') {
+                                                                            $three = $rain;
+                                                                        }
+                                                                        if ($day == '4') {
+                                                                            $four = $rain;
+                                                                        }
+                                                                        if ($day == '5') {
+                                                                            $five = $rain;
+                                                                        }
+                                                                        if ($day == '6') {
+                                                                            $six = $rain;
+                                                                        }
+                                                                        if ($day == '7') {
+                                                                            $seven = $rain;
+                                                                        }
+                                                                        if ($day == '8') {
+                                                                            $eight = $rain;
+                                                                        }
+                                                                        if ($day == '9') {
+                                                                            $nine = $rain;
+                                                                        }
+                                                                        if ($day == '10') {
+                                                                            $ten = $rain;
+                                                                        }
+                                                                        if ($day == '11') {
+                                                                            $eleven = $rain;
+                                                                        }
+                                                                        if ($day == '12') {
+                                                                            $twelve = $rain;
+                                                                        }
+                                                                        if ($day == '13') {
+                                                                            $thirt = $rain;
+                                                                        }
+                                                                        if ($day == '14') {
+                                                                            $fourt = $rain;
+                                                                        }
+                                                                        if ($day == '15') {
+                                                                            $fith = $rain;
+                                                                        }
+                                                                        if ($day == '16') {
+                                                                            $sixth = $rain;
+                                                                        }
+                                                                        if ($day == '17') {
+                                                                            $seventh = $rain;
+                                                                        }
+                                                                        if ($day == '18') {
+                                                                            $eighth = $rain;
+                                                                        }
+                                                                        if ($day == '19') {
+                                                                            $nineth = $rain;
+                                                                        }
+                                                                        if ($day == '20') {
+                                                                            $twenty = $rain;
+                                                                        }
+                                                                        if ($day == '21') {
+                                                                            $twentyone = $rain;
+                                                                        }
+                                                                         if ($day == '22') {
+                                                                            $twentytwo = $rain;
+                                                                        }
+                                                                         if ($day == '23') {
+                                                                            $twentythree = $rain;
+                                                                        }
+                                                                         if ($day == '24') {
+                                                                            $twentyfour = $rain;
+                                                                        }
+                                                                         if ($day == '25') {
+                                                                            $twentyfive = $rain;
+                                                                        }
+                                                                         if ($day == '26') {
+                                                                          $twentysix = $rain;
+                                                                        }
+                                                                         if ($day == '27') {
+                                                                            $twentyseven = $rain;
+                                                                        }
+                                                                         if ($day == '28') {
+                                                                            $twentyeight = $rain;
+                                                                        }
+                                                                         if ($day == '29') {
+                                                                            $twentynine = $rain;
+                                                                        }
+                                                                         if ($day == '30') {
+                                                                        $thirty = $rain;
+                                                                        }
+                                                                         if ($day == '31') {
+                                                                          $thirtyone = $rain;
+                                                                        }
+                                                                        
+                                                                    }
+                                                                }
+                                                            }
+                                                            ?>
+                                                            <table >
+                                                                <tr>
+                                                                    <td colspan="2">
+Region
+                                                                    </td>
+                                                                    <td colspan="3">
+<?php echo $this -> session -> userdata('region');?>
+                                                                    </td>
+                                                                    <td colspan="2">
+District
+                                                                    </td>
+                                                                    <td colspan="3">
+<?php echo $this -> session -> userdata('city');?>
+                                                                    </td>
+                                                                    
+                                                                </tr>
+                                                                          <tr>
+                                                                    <td colspan="10">
+Station Name:  <?php echo $this -> session -> userdata('name');?>
+                                                                    </td>
+                                                                    
+                                                                    
+                                                                </tr>
+                                                                      <tr>
+                                                                    <td colspan="2">
+Number
+                                                                    </td>
+                                                                    <td colspan="3">
+ <?php echo $this -> session -> userdata('number');?>
+                                                                    </td>
+                                                                    <td colspan="2">
+Month
+                                                                    </td>
+                                                                    <td colspan="3">
+ <?php echo date('Y-sM');?>
+                                                                    </td>
+                                                                    
+                                                                </tr>
+                                                                    
+                                                                <tr>
+                                                                    <td>
+                                                                        2
+                                                                    </td>
+                                                                    <td >
+                                                                        3
+                                                                    </td>
+                                                                    <td>
+                                                                        4
+                                                                    </td>
+                                                                    <td>
+                                                                        5
+                                                                    </td>
+                                                                    <td>
+                                                                        6
+                                                                    </td>
+                                                                    <td>
+                                                                        7
+                                                                    </td>
+                                                                    <td>
+                                                                        8
+                                                                    </td>
+                                                                    <td>
+                                                                        9
+                                                                    </td>
+                                                                    <td>
+                                                                        10
+                                                                    </td>
+                                                                    <td>
+                                                                        11
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                  
+                                                                    <td>
+<?= $two; ?>
+                                                                    </td>
+                                                                    <td>
+<?= $three; ?>
+                                                                    </td>
+                                                                    <td>
+<?=$four?>
+                                                                    </td>
+                                                                    <td>
+<?=$five?>
+                                                                    </td>
+                                                                    <td>
+<?=$six?>
+                                                                    </td>
+                                                                    <td>
+<?=$seven?>
+                                                                    </td>
+                                                                    <td>
+<?=$eight?>
+                                                                    </td>
+                                                                    <td>
+<?=$nine?>
+                                                                    </td>
+                                                                    <td>
+<?=$ten?>
+                                                                    </td>
+                                                                      <td >
+<?= $eleven; ?>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td >
+                                                                        12
+                                                                    </td>
+                                                                    <td>
+                                                                        13
+                                                                    </td>
+                                                                    <td>
+                                                                        14
+                                                                    </td>
+                                                                    <td>
+                                                                        15
+                                                                    </td>
+                                                                    <td>
+                                                                        16
+                                                                    </td>
+                                                                    <td>
+                                                                        17
+                                                                    </td> 
+                                                                    <td>
+                                                                        18
+                                                                    </td> 
+                                                                    <td>
+                                                                        19
+                                                                    </td>  
+                                                                    <td>
+                                                                        20
+                                                                    </td> 
+                                                                    <td>
+                                                                        21
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td >
+<?=$twelve?>
+                                                                    </td>
+                                                                    <td>
+<?php echo $thirt; ?>
+                                                                    </td>
+                                                                    <td>
+<?=$fourt?>
+                                                                    </td>
+                                                                    <td>
+<?=$fith?>
+                                                                    </td>
+                                                                    <td>
+<?=$sixth?>
+                                                                    </td>
+                                                                    <td>
+<?=$seventh?>
+                                                                    </td>
+                                                                    <td>
+<?=$eighth?>
+                                                                    </td>
+                                                                    <td>
+<?=$nineth?>
+                                                                    </td>
+                                                                    <td>
+<?=$twenty?>
+                                                                    </td>
+                                                                    <td>
+<?=$twentyone?>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td >
+                                                                        22
+                                                                    </td>
+                                                                    <td>
+                                                                        23
+                                                                    </td>
+                                                                    <td>
+                                                                        24
+                                                                    </td>  
+                                                                    <td>
+                                                                        25
+                                                                    </td> 
+                                                                    <td>
+                                                                        26
+                                                                    </td>
+                                                                    <td>
+                                                                        27
+                                                                    </td> 
+                                                                    <td>
+                                                                        28
+                                                                    </td> 
+                                                                    <td>
+                                                                        29
+                                                                    </td>  
+                                                                    <td>
+                                                                        30
+                                                                    </td>
+                                                                    <td>
+                                                                        31
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td >
+<?=$twentytwo?>
+                                                                    </td>
+                                                                    <td>
+<?=$twentythree?>
+                                                                    </td>
+                                                                    <td>
+<?=$twentyfour?>
+                                                                    </td>
+                                                                    <td>
+<?=$twentyfive?>
+                                                                    </td>
+                                                                    <td>
+<?=$twentysix?>
+                                                                    </td>
+                                                                    <td>
+<?=$twentyseven?>
+                                                                    </td>
+                                                                    <td>
+<?=$twentyeight?>
+                                                                    </td>
+                                                                    <td>
+
+                                                                    </td>
+                                                                    <td>
+<?=$twentynine?>
+                                                                    </td>
+                                                                    <td>
+<?=$thirty?>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td >
+
+                                                                    </td>
+                                                                    <td colspan="3">
+                                                                        1<sup>st</sup> of following month 
+                                                                    </td>
+
+                                                                    <td colspan="2">
+                                                                        Total 
+                                                                    </td>
+                                                                    <td colspan="2">
+                                                                        Days 
+                                                                    </td>                      
+                                                                    <td colspan="2">
+
+                                                                    </td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td >
+
+                                                                    </td>
+                                                                    <td colspan="3">
+<?=$first?>
+                                                                    </td>
+
+                                                                    <td colspan="2">
+<?=$sum?>
+                                                                    </td>
+                                                                    <td colspan="2">
+<?=$rains?>
+                                                                    </td>                      
+                                                                    <td colspan="2">
+
+                                                                    </td>
+                                                                </tr>
+                                                                       <tr>
+                                                                    <td colspan="9">
+......................................................................................................................................
+                                                                    </td>
+                                                                     <td >
+Observer
+                                                                    </td>
+                                                                   
+                                                                </tr>
+                                                                       <tr>
+                                                                    <td colspan="2">
+AVERAGE
+                                                                    </td>
+                                                                    <td colspan="2" >
+YEARS
+                                                                    </td>
+                                                                    <td colspan="2">
+MAX.FALL
+                                                                    </td>
+                                                                    <td colspan="2">
+DATE(S)
+                                                                    </td>
+                                                                    <td colspan="4">
+
+                                                                    </td>
+                                                                   
+                                                                </tr>
+                                                             <tr>
+                                                                    <td colspan="2">
+
+                                                                    </td>
+                                                                    <td colspan="2" >
+
+                                                                    </td>
+                                                                    <td colspan="2">
+
+                                                                    </td>
+                                                                    <td colspan="2">
+
+                                                                    </td>
+                                                                    <td colspan="4">
+
+                                                                    </td>
+                                                                   
+                                                                </tr>
+                                                            </table>
+
+
+                                                        </div>
+                                                    </div>
                                                     <div class="span9">
                                                         <div class="space"></div>
 
@@ -105,15 +561,17 @@
 
                                                                     <select id="form-field-select-1">
 
-                                                                        <?php
-                                                                        if (is_array($stations) && count($stations)) {
-                                                                            foreach ($stations as $loop) {
-                                                                                ?>                        
+<?php
+if (is_array($stations) && count($stations)) {
+    foreach ($stations as $loop) {
+        ?>                        
                                                                                 <option value="<?= $loop->name ?>" /><?= $loop->name ?>
 
 
-                                                                            <?php }
-                                                                        } ?>
+    <?php
+    }
+}
+?>
 
 
                                                                     </select>
@@ -129,6 +587,9 @@
                                                             </div>
                                                         </div>
                                                     </div>
+
+
+
                                                 </div>
 
                                                 <!--PAGE CONTENT ENDS-->
@@ -302,14 +763,14 @@
 
                                         </tr> 
 
-                                        <?php
-                                        $cr = 1;
+<?php
+$cr = 1;
 
 
-                                        if (is_array($monthly) && count($monthly)) {
-                                            //var_dump($metas);
-                                            foreach ($monthly as $loop) {
-                                                ?>
+if (is_array($monthly) && count($monthly)) {
+    //var_dump($metas);
+    foreach ($monthly as $loop) {
+        ?>
                                                 <tr>
                                                     <td class="small" ><?php echo $cr++; ?></td>
                                                     <td class="small" ><?= $loop->max ?>  </td>
@@ -345,9 +806,10 @@
                                                     <td class="small"><input class="ace-checkbox-3" name="rain" id="rain"  <?php echo ($loop->storm == 'true') ? "checked" : "null"; ?> type="checkbox" /> </td>
                                                     <td class="small"><input class="ace-checkbox-3"  name="rain" id="rain"  <?php echo ($loop->quake == 'true') ? "checked" : "null"; ?> type="checkbox" /> </td>
                                                 </tr>
-                                                <?php }
-                                        }
-                                        ?> 
+                                                        <?php
+                                                    }
+                                                }
+                                                ?> 
 
 
 
@@ -373,118 +835,121 @@
                                 <div class="span12">
                                     <!--PAGE CONTENT BEGINS-->
 
-                               <div class="form-group well alert-success">
-     
-
-                    <span class="span3 ">Station : <select id="station" name="station">
-                                                            
-                                                            <?php
-                                        if (is_array($stations) && count($stations)) {
-                                            foreach ($stations as $loop) {
-                                                ?>                        
-                                                            <option value="<?=$loop->name?>" /><?=$loop->name?>
-                                                    
-
-                                        <?php }}?>
-                                                </select></span>
-
-                    <span for="form-field-select-1">Station No:<input class="form-control"  id="number" readonly="" name="number" ></input>   
-                    </span>
-                    <span> Select the date:<input class="span3 date-picker" id="datenow" value="<?php echo date('Y-m-d');?>"  name="datenow" type="text" data-date-format="yyyy-mm-dd" />
-                        <span class="add-on">
-                            <i class="icon-calendar"></i>
-                        </span>
-                    </span>
-                   
-                </div>
-
-                          <span class="well-large">  
-                                    <table id="sample-table-2" class="table table-striped table-bordered table-hover">
-
-                                        <tbody>
-                                            <tr>
-                                                <th><label>Day </label> </th>
-                                                <th colspan="5" ><label>0600Z <br>TEMPERATURES <sup>o</sup>C</label> </th>
-                                                <th > <label>  <h3>0600Z Relative humidity(%)</h3> </label></th>
-                                                  <th colspan="2" ><label>Anemometer</label> </th>
-                                                <th colspan="2" >  <label><h3>RAINFALL</h3> </label> </th>
-                                                <th> <label>sunshine Hrs. </label></th>
-                                                    <th colspan="2" ><label>Radiometer</label> </th>
-                                                <th colspan="4" > <h3>  EVAP.PANS  </h3>  </th>
-                                    <th colspan="3" ><label>1200Z <br>TEMPERATURES <sup>o</sup>C</label> </th>
-                                        <th > <label>  <h3>1200Z Relative humidity(%)</h3> </label></th>
-                                         <th > </th>
-                                        </tr>
-
-                                        <tr bgcolor="#F7ECF2">
-                                            <td class="center"> </td>
-                                             <td class="center"><a href="#">DRY BULB</a>  </td>
-                                            <td class="center"><a href="#">WET BULB</a>   </td>
-                                            <td class="center"> <a href="#">DEW POINT</a></td>
-                                            <td class="center" > MAX </td>
-                                            <td class="center"> <a href="#">MIN</a> </td>
-                                            <td class="center"><a href="#"></a>   </td>
-                                            <td class="center">Height   </td>
-                                            <td class="center">   Wind run km.</td>
-                                            <td class="center"> Amount(mm) </td>
-                                            <td class="center">Duration (Hrs)</td>
-                                            <td class="center"></td>
-                                            <td class="center">Type </td>
-                                            <td class="center"> <a href="#">Radiation</a></td>
-                                            <td class="center">Type </td>
-                                            <td class="center"><a href="#">EVAP(mm)</a>  </td>
-                                            <td class="center">Type </td>
-                                            <td class="center"><a href="#">EVAP(mm)</a>  </td>
-                                             <td class="center"><a href="#">DRY BULB</a>  </td>
-                                            <td class="center"><a href="#">WET BULB</a>   </td>
-                                            <td class="center"> <a href="#">DEW POINT</a></td>
-                                            <td class="center"><?= $loop->humid15; ?></td>
-                                            <td class="center"> </td>
-                                        </tr> 
-
-                                        <?php
-                                        $cr = 1;
+                                    <div class="form-group well alert-success">
 
 
-                                        if (is_array($monthly) && count($monthly)) {
-                                            //var_dump($metas);
-                                            foreach ($monthly as $loop) {
-                                                ?>
+                                        <span class="span3 ">Station : <select id="station" name="station">
+
+<?php
+if (is_array($stations) && count($stations)) {
+    foreach ($stations as $loop) {
+        ?>                        
+                                                        <option value="<?= $loop->name ?>" /><?= $loop->name ?>
+
+
+    <?php }
+}
+?>
+                                            </select></span>
+
+                                        <span for="form-field-select-1">Station No:<input class="form-control"  id="number" readonly="" name="number" ></input>   
+                                        </span>
+                                        <span> Select the date:<input class="span3 date-picker" id="datenow" value="<?php echo date('Y-m-d'); ?>"  name="datenow" type="text" data-date-format="yyyy-mm-dd" />
+                                            <span class="add-on">
+                                                <i class="icon-calendar"></i>
+                                            </span>
+                                        </span>
+
+                                    </div>
+
+                                    <span class="well-large">  
+                                        <table id="sample-table-2" class="table table-striped table-bordered table-hover">
+
+                                            <tbody>
                                                 <tr>
-                                                    <td class="small" ><?php echo $cr++; ?></td>
-                                                     <td class="small"> <?= $loop->air9; ?></td>
-                                                    <td class="small" > <?= $loop->wet9; ?></td>
-                                                    <td class="small" > <?= $loop->dew9; ?> </td>
-                                                    <td class="small" ><?= $loop->max ?>  </td>
-                                                    <td class="small">  <?= $loop->min ?></td>
-                                                    <td class="small"><?= $loop->humid9; ?></td>
-                                                    <td class="small">  <?= $loop->height ?></td>
-                                                     <td class="small">  <?= $loop->wind ?></td>
-                                                      <td class="small">  <?= $loop->duration ?></td>
-                                                    <td class="small"></td>
-                                                     <td class="small">  <?= $loop->type ?></td>
-                                                      <td class="small">  <?= $loop->radiation ?></td>
-                                                       <td class="small">  <?= $loop->evaptype1 ?></td>
-                                                    <td class="small" > <?= $loop->evap1; ?></td>
-                                                     <td class="small">  <?= $loop->evaptype2 ?></td>
-                                                    <td class="small" > <?= $loop->evap2; ?></td>
-                                                    <td class="small"> <?= $loop->air15; ?></td>
-                                                    <td class="small" > <?= $loop->wet15; ?></td>
-                                                    <td class="small" > <?= $loop->dew15; ?> </td>
-                                                    <td class="small"><?= $loop->humidity; ?></td>
-                                                    <td class="small"></td>
-                                                  
-                                                        </tr>
-                                                <?php }
-                                        }
-                                        ?> 
+                                                    <th><label>Day </label> </th>
+                                                    <th colspan="5" ><label>0600Z <br>TEMPERATURES <sup>o</sup>C</label> </th>
+                                                    <th > <label>  <h3>0600Z Relative humidity(%)</h3> </label></th>
+                                                    <th colspan="2" ><label>Anemometer</label> </th>
+                                                    <th colspan="2" >  <label><h3>RAINFALL</h3> </label> </th>
+                                                    <th> <label>sunshine Hrs. </label></th>
+                                                    <th colspan="2" ><label>Radiometer</label> </th>
+                                                    <th colspan="4" > <h3>  EVAP.PANS  </h3>  </th>
+                                            <th colspan="3" ><label>1200Z <br>TEMPERATURES <sup>o</sup>C</label> </th>
+                                            <th > <label>  <h3>1200Z Relative humidity(%)</h3> </label></th>
+                                            <th > </th>
+                                            </tr>
+
+                                            <tr bgcolor="#F7ECF2">
+                                                <td class="center"> </td>
+                                                <td class="center"><a href="#">DRY BULB</a>  </td>
+                                                <td class="center"><a href="#">WET BULB</a>   </td>
+                                                <td class="center"> <a href="#">DEW POINT</a></td>
+                                                <td class="center" > MAX </td>
+                                                <td class="center"> <a href="#">MIN</a> </td>
+                                                <td class="center"><a href="#"></a>   </td>
+                                                <td class="center">Height   </td>
+                                                <td class="center">   Wind run km.</td>
+                                                <td class="center"> Amount(mm) </td>
+                                                <td class="center">Duration (Hrs)</td>
+                                                <td class="center"></td>
+                                                <td class="center">Type </td>
+                                                <td class="center"> <a href="#">Radiation</a></td>
+                                                <td class="center">Type </td>
+                                                <td class="center"><a href="#">EVAP(mm)</a>  </td>
+                                                <td class="center">Type </td>
+                                                <td class="center"><a href="#">EVAP(mm)</a>  </td>
+                                                <td class="center"><a href="#">DRY BULB</a>  </td>
+                                                <td class="center"><a href="#">WET BULB</a>   </td>
+                                                <td class="center"> <a href="#">DEW POINT</a></td>
+                                                <td class="center"><?= $loop->humid15; ?></td>
+                                                <td class="center"> </td>
+                                            </tr> 
+
+<?php
+$cr = 1;
+
+
+if (is_array($monthly) && count($monthly)) {
+    //var_dump($metas);
+    foreach ($monthly as $loop) {
+        ?>
+                                                    <tr>
+                                                        <td class="small" ><?php echo $cr++; ?></td>
+                                                        <td class="small"> <?= $loop->air9; ?></td>
+                                                        <td class="small" > <?= $loop->wet9; ?></td>
+                                                        <td class="small" > <?= $loop->dew9; ?> </td>
+                                                        <td class="small" ><?= $loop->max ?>  </td>
+                                                        <td class="small">  <?= $loop->min ?></td>
+                                                        <td class="small"><?= $loop->humid9; ?></td>
+                                                        <td class="small">  <?= $loop->height ?></td>
+                                                        <td class="small">  <?= $loop->wind ?></td>
+                                                        <td class="small">  <?= $loop->duration ?></td>
+                                                        <td class="small"></td>
+                                                        <td class="small">  <?= $loop->type ?></td>
+                                                        <td class="small">  <?= $loop->radiation ?></td>
+                                                        <td class="small">  <?= $loop->evaptype1 ?></td>
+                                                        <td class="small" > <?= $loop->evap1; ?></td>
+                                                        <td class="small">  <?= $loop->evaptype2 ?></td>
+                                                        <td class="small" > <?= $loop->evap2; ?></td>
+                                                        <td class="small"> <?= $loop->air15; ?></td>
+                                                        <td class="small" > <?= $loop->wet15; ?></td>
+                                                        <td class="small" > <?= $loop->dew15; ?> </td>
+                                                        <td class="small"><?= $loop->humidity; ?></td>
+                                                        <td class="small"></td>
+
+                                                    </tr>
+        <?php
+    }
+}
+?> 
 
 
 
-                                        </tbody>
-                                    </table>     
+                                            </tbody>
+                                        </table>     
 
-                                </span>
+                                    </span>
 
 
                                     <!--PAGE CONTENT ENDS-->
@@ -503,12 +968,12 @@
 
         <div class="hr hr-double hr-dotted hr18"></div>
         <div class="span5">
-       
+
         </div><!--/span-->
 
         <div class="span7">
             <div class="widget-box transparent">
-               
+
 
                 <div class="widget-body">
                     <div class="widget-main padding-4">
@@ -585,10 +1050,12 @@ if (is_array($daily) && count($daily)) {
         ?>
                         {
                             title: '<?php echo $loops->actual . 'mm'; ?>',
-                            start: new Date(<?= $y ?>, <?= $m-1 ?>,<?= $d ?>),
+                            start: new Date(<?= $y ?>, <?= $m - 1 ?>,<?= $d ?>),
                             className: 'label-success'},
-    <?php }
-} ?>
+    <?php
+    }
+}
+?>
 
 
             ]

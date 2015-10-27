@@ -145,6 +145,7 @@
                             <td class="small"> <input class="input-mask-phone span12" type="text" id="wind" name="wind" />   </td>
                             <td class="small" > <input class="span12 input-mask-height" type="text" id="visibility" name="visibility" /> </td>
                             <td class="small" > <select class="span12" id="present" name="present">
+                                    <option value="Fg" />
                                     <option value="Fg" />Fg
                                     <option value="Hz" />Hz 
                                     <option value="RA" />RA
