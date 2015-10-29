@@ -14,6 +14,7 @@ class Archive extends CI_Controller {
     }
 
     public function index() {
+        
         $query = $this->Md->show('archive');
       //  var_dump($query);
         if ($query) {

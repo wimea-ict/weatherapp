@@ -3,28 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/wamp/www/weather/application/views/archive.php</file>
-            <file>file:/C:/wamp/www/weather/application/views/monthly.php</file>
-            <file>file:/C:/wamp/www/weather/application/controllers/Welcome.php</file>
-            <file>file:/C:/wamp/www/weather/application/views/rainfall.php</file>
-            <file>file:/C:/wamp/www/weather/application/views/reports.php</file>
-            <file>file:/C:/wamp/www/weather/application/views/station.php</file>
-            <file>file:/C:/wamp/www/weather/application/controllers/Rainfall.php</file>
-            <file>file:/C:/wamp/www/weather/application/views/dekadal.php</file>
-            <file>file:/C:/wamp/www/weather/application/views/header.php</file>
-            <file>file:/C:/wamp/www/weather/application/views/view-synoptic.php</file>
-            <file>file:/C:/wamp/www/weather/application/views/instrument.php</file>
-            <file>file:/C:/wamp/www/weather/application/views/roles.php</file>
             <file>file:/C:/wamp/www/weather/application/controllers/Metar.php</file>
-            <file>file:/C:/wamp/www/weather/application/controllers/Synoptic.php</file>
-            <file>file:/C:/wamp/www/weather/application/views/element.php</file>
-            <file>file:/C:/wamp/www/weather/application/controllers/Archive.php</file>
-            <file>file:/C:/wamp/www/weather/application/views/user.php</file>
-            <file>file:/C:/wamp/www/weather/application/controllers/Role.php</file>
-            <file>file:/C:/wamp/www/weather/application/views/rain.php</file>
-            <file>file:/C:/wamp/www/weather/application/views/logs.php</file>
-            <file>file:/C:/wamp/www/weather/application/views/home.php</file>
-            <file>file:/C:/wamp/www/weather/application/views/metar.php</file>
+            <file>file:/C:/wamp/www/weather/application/views/daily.php</file>
+            <file>file:/C:/wamp/www/weather/js/angular-resource.js</file>
+            <file>file:/C:/wamp/www/weather/application/models/Md.php</file>
+            <file>file:/C:/wamp/www/weather/application/controllers/Angular.php</file>
+            <file>file:/C:/wamp/www/weather/application/views/angular.php</file>
+            <file>file:/C:/wamp/www/weather/js/app.js</file>
+            <file>file:/C:/wamp/www/weather/application/controllers/Api.php</file>
         </group>
     </open-files>
 </project-private>

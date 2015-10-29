@@ -4,6 +4,7 @@ class Md extends CI_Model {
 
     function __construct() {
         parent::__construct();
+        	
     }
 
     function save($roles = NULL, $table) {
@@ -103,6 +104,18 @@ class Md extends CI_Model {
 
         return $this->db->list_fields($table);
     }
+    public function get_all()
+	{
+		$query = $this->db->get('daily');
+		return $query->result();
+	}
+	
+	public function get_task($id)
+	{
+		$this->db->where('id',$id);
+		$query = $this->db->get('daily');
+		return $query->result();
+	}
 
 }
 

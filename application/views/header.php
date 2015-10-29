@@ -116,11 +116,14 @@
                               <a  href="<?php echo base_url(). "index.php/welcome/start"; ?>" target="myframe"> Home</a>
                             </li>
                             <li>
-                                 <a  href="<?php echo base_url() . "index.php/metar/everyday"; ?>" target="myframe">Weather</a>
+                                 <a  href="<?php echo base_url() . "index.php/metar/everyday"; ?>" target="myframe">Daily weather</a>
                             </li>
                              <li>
                                 <a target="myframe" href="<?php echo base_url() . "index.php/metar/rainfall"; ?>">Rainfall</a>
                             </li>
+<!--                              <li>
+                                <a target="myframe" href="<?php echo base_url() . "index.php/angular/"; ?>">Angular</a>
+                            </li>-->
 
                             <li>
                                 <a target="myframe" href="<?php echo base_url() . "index.php/metar/"; ?>">Metar</a>
