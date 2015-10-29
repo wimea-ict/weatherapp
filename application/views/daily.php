@@ -11,7 +11,7 @@
 <link href="<?= base_url(); ?>css/mine.css" rel="stylesheet" />
 <link href="<?= base_url(); ?>css/app.css" rel="stylesheet" />
 
-<div class=" container-fluid">
+<div class="container-fluid">
     <div class="page-content">
         <div class="row-fluid"  data-ng-app="dailyApp">
 
@@ -25,10 +25,17 @@
             <div class="span12">   
                 <form id="edit-form"  name="edit-form"  enctype="multipart/form-data"  action='<?= base_url(); ?>index.php/metar/save'  method="post">            
 
-                    <div class=" span12 padding-5">
-
+                    <div class="row-fluid  span12 ">
+                        <div class="span4 well-large padding-5">
+                            <div class=" input-prepend">
+                            <label for="form-field-select-1">Select the date</label>
+                            <span class="add-on">
+                                <i class="icon-calendar"></i>
+                            </span> 
+                            <input class="span12 form-control date-picker" id="datenow" value="<?php echo date('Y-m-d'); ?>"  name="datenow" type="text" data-date-format="YYYY-MM-DD" />   
+                        </div>
                         <label for="form-field-select-1">Station name</label>
-                        <select id="station" class="span6 form-control" name="station">
+                        <select class="span12" id="station"  name="station">
                             <option value="" />
                             <?php
                             if (is_array($stations) && count($stations)) {
@@ -41,49 +48,56 @@
                             }
                             ?>
                         </select>
-                        <div class="form-group">
-                            <label for="form-field-select-1">Station number</label>
-                            <input class="span6"  id="number" readonly="" name="number" />
-
-                        </div>
-                        <div class="row-fluid input-prepend">
-                            <label>Select the date</label>
-                            <span class="add-on">
-                                <i class="icon-calendar"></i>
-                            </span> 
-                            <input class="span5 date-picker" id="datenow" value="<?php echo date('Y-m-d'); ?>"  name="datenow" type="text" data-date-format="YYYY-MM-DD" />   
-                        </div>
-                        <h4>Temperature</h4>
-                        <label>Max temperature:</label>
-                        <input class="span6" type="text" id="maxtemp" name="maxtemp"  />
+                          <label for="form-field-select-1">Station number</label>
+                            <input class="span12" id="number" readonly="" name="number" />
+                            
+                           
+                        <label for="form-field-select-1">Max temperature:</label>                         
+                        
+                              <input class="span12" type="text" id="maxtemp" name="maxtemp"  />
+                        
                         <label>Min temperature:</label>
-                        <input  class="span6"type="text" id="mintemp" name="mintemp"  />
-                        <label> Sunshine(Hrs):</label>
-                        <input class="span6" type="text" id="sunshine" name="sunshine"  />
-                        <label> GPM:</label><input class="span6" type="text" id="gpm" name="gpm"  />
-
-                        <h4>Evap.pans</h4>
-                        <label> Type:</label><input class="span6" type="text" id="evaptype1" name="evaptype1"  />
-                        <label> EVAP(mm):</label><input class="span6" type="text" id="evap1" name="evap1"  />
-                        <label> Type:</label><input class="span6" type="text" id="evaptype2" name="evaptype2"  />
-                        <label> EVAP(mm):</label><input class="span6" type="text" id="evap2" name="evap2"  />
-                        <h4>Rainfall</h4>
+                        <input class="span12" type="text" id="mintemp" name="mintemp"  />
+                        </div>
+                   
+                    <div class="span4 well-large padding-5">
+                      
                         <label>  Rainfall(mm): </label>
-                            <input class="span6" type="text" id="actualrain" name="actualrain" />
+                            <input class="span12"  type="text" id="actualrain" name="actualrain" />
                             <label>  Duration(Hrs):</label>
-                            <input class="span6" type="text" id="duration" name="duration" />
-                            <h4>Radiation</h4>
-                            <label> Type:</label>
-                            <input class="span6" type="text" id="type" name="type"/>
+                            <input class="span12"  type="text" id="duration" name="duration" />
+                            
+                            <label>Radiation type:</label>
+                            <input class="span12"  type="text" id="type" name="type"/>
                             <label> Radiation:</label>
-                            <input class="span6" type="text" id="radiation" name="radiation" />
-                            <h4>Anemometer reading </h4>
+                            <input  class="span12" type="text" id="radiation" name="radiation" />
+                           
                             <label>Wind run(KM):</label>
-                            <input class="span6" type="text" id="anemometer" name="anemometer" />
-                            <label> Height:</label>
-                            <input class="span6" type="text" id="height" name="height"/>
+                            <input class="span12"  type="text" id="anemometer" name="anemometer" />
+                            <label>Anemometer Height:</label>
+                            <input class="span12" type="text" id="height" name="height"/>
+                        
+                        
+                    </div>
+                        
+                       
+                        
+                         <div class="span4 well-large padding-5">
+                        <label> Sunshine(Hrs):</label>
+                        <input class="span12" type="text" id="sunshine" name="sunshine"  />
+                         <label> GPM:</label>
+                        <input  class="span12" type="text" id="gpm" name="gpm"  />
+                        
+                      
+                        <label> Evaporation Type:</label><input class="span12"  type="text" id="evaptype1" name="evaptype1"  />
+                        <label> EVAP(mm):</label><input class="span12" type="text" id="evap1" name="evap1"  />
+                        <label> Type:</label><input class="span12" type="text" id="evaptype2" name="evaptype2"  />
+                        <label> EVAP(mm):</label><input class="span12"  type="text" id="evap2" name="evap2"  />
+                        
+                         </div>                        
+                      
 
-                            <div class="span12 well">  
+                            <div class="span12 padding-5">  
                                 <label class="control-label">Did  we have </label>
                                 <input name="rain" id="rain" value="true" type="checkbox"/>
                                 <span class="lbl"> Rain</span>
@@ -100,15 +114,19 @@
                             </div>
                             <button  onclick="" name="daily" id="daily" class="span3 btn btn-info " > Submit  </button>
 
-                            </form>
+                         
 
                             <span id="Loading_daily"  name ="Loading_daily"><img src="<?= base_url(); ?>images/ajax-loader.gif" alt="loading" /></span><br>
 
                             <span id="Loading"  name ="Loading"><img src="<?= base_url(); ?>images/ajax-loader.gif" alt="loading" /></span><br>
-   </div>
+  
+                    
+                    </form>
+                            </div> 
+            </div>
                             </div>
                             </div>
-                            </div>
+</div>
                             <script src="<?php echo base_url(); ?>js/jQuery-2.1.4.min.js" type="text/javascript"></script>
 
 
