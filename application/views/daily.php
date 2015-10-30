@@ -48,7 +48,7 @@
                         <label for="form-field-select-1">Station name</label>
                         <select class="span12" id="station"  name="station">
                             <option value="" />  
-                            <option value="<?php echo $this -> session -> userdata('stationname'); ?>" />
+                            <option value="<?= $this -> session -> userdata('stationname');?>" ><?= $this -> session -> userdata('stationname');?></option>
                           
                             <?php
                             if (allowed ($see,'manage')) { 
@@ -357,8 +357,7 @@
                                     var min = $('#mintemp').val();
                                     var actual = $('#actualrain').val();
                                     var anemometer = $('#anemometer').val();
-                                    var wind = $('#windrun').val();
-                                  
+                                    var wind = $('#anemometer').val();                                  
                                     var station = $("#station").val();
 
 

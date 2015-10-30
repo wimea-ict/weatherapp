@@ -480,11 +480,9 @@ class Metar extends CI_Controller {
          $sessdata=$this->session -> userdata('actions');
       if ($this->helper->allowed ($sessdata,'save')) {
         
-         $this->session->set_flashdata('msg', $this->session -> userdata('actions').'<div class="alert alert-error">
-                                                   
-                                                <strong>
+         echo  $this->session -> userdata('actions').'<div class="alert alert-error">     <strong>
                                                You do not have permission to execute this task	</strong>									
-						</div>');
+						</div>';
 
          redirect('metar/', 'refresh');
        }
@@ -500,8 +498,8 @@ class Metar extends CI_Controller {
         $actual = $this->input->post('actual');
         $anemometer = $this->input->post('anemometer');
         $wind = $this->input->post('wind');
-        $maxi = $this->input->post('maxi'); 
-        $rain = $this->input->post('rain'); 
+        $maxi = ""; 
+        $rain = $this->input->post('actual');
         $thunder = $this->input->post('thunder');
         $fog = $this->input->post('fog'); 
         $haze = $this->input->post('haze');
@@ -531,9 +529,9 @@ class Metar extends CI_Controller {
             echo '<div class="alert alert-error"><strong> Data already submitted for '.$date.'</strong></div>';
         }else{      
           
-            $daily = array('station' => $station,'date' => $date,'max'=>$max, 'min' => $min,'actual' => $actual, 'anemometer' => $anemometer, 'wind' => $wind, 'maxi' => $maxi, 'user' =>$this->session -> userdata('name'),'submitted'=>$submitted,'approved'=>$approved,'rain'=>$rain,'thunder'=>$thunder,'fog'=>$fog,'haze'=>$haze,'storm'=>$storm,'quake'=>$quake,'height'=>$height,'duration'=>$duration,'sunshine'=>$sunshine,'radiationtype'=>$radiationtype,'radiation'=>$radiation,'evaptype1'=>$evaptype1,'evap1'=>$evap1,'evaptype2'=>$evaptype2,'evap2'=>$evap2);
+           $daily = array('station' => $station,'date' => $date,'max'=>$max, 'min' => $min,'actual' => $actual, 'anemometer' => $anemometer, 'wind' => $wind, 'maxi' => $maxi, 'user' =>$this->session -> userdata('username'),'submitted'=>$submitted,'approved'=>$approved,'rain'=>$rain,'thunder'=>$thunder,'fog'=>$fog,'haze'=>$haze,'storm'=>$storm,'quake'=>$quake,'height'=>$height,'duration'=>$duration,'sunshine'=>$sunshine,'radiationtype'=>$radiationtype,'radiation'=>$radiation,'evaptype1'=>$evaptype1,'evap1'=>$evap1,'evaptype2'=>$evaptype2,'evap2'=>$evap2);
            $this->Md->save($daily, 'daily'); 
-           $log = array('user' => $this->session -> userdata('name'),'userid'=>$this->session -> userdata('id'),'action' => 'saved daily weather information','details'=>  $this->session-> userdata('name').'submit of weather information ', 'date' => date('Y-m-d H:i:s'),'ip' => $this->input->ip_address(), 'url' =>'');
+           $log = array('user' => $this->session -> userdata('username'),'userid'=>$this->session -> userdata('id'),'action' => 'saved daily weather information','details'=>  $this->session-> userdata('stationname').'submit of weather information ', 'date' => date('Y-m-d H:i:s'),'ip' => $this->input->ip_address(), 'url' =>'');
            $this->Md->save($log, 'logs'); 
            
            echo '<br><div class="alert alert-info span12"><strong>Information  submitted</strong></div>';

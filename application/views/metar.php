@@ -11,6 +11,16 @@
 <link rel="stylesheet" href="<?= base_url(); ?>assets/css/daterangepicker.css" />
 <link rel="stylesheet" href="<?= base_url(); ?>assets/css/bootstrap.min.css" />
 <link href="<?= base_url(); ?>css/mine.css" rel="stylesheet" />
+<?php 
+    
+    function allowed ($sessdata,$action){
+    
+        return (strpos($sessdata,$action) ==TRUE);    
+   }
+     $see = $this -> session -> userdata('views');
+    
+    ?>
+        
 
 <div class="scroll row-fluid span12 ">
         <h4>Metar Book (Observed every hour)Aviation Routine Weather Report</h4>
@@ -22,19 +32,26 @@
 
             <div class="span12">
                 <div class="span3">
-                    <label >Station</label> 
-                    <select class="form-control" id="station" name="station">
-                        <option value="<?= $user->station ?>" /><?= $user->station ?>
-                        <?php
-                        if (is_array($stations) && count($stations)) {
-                            foreach ($stations as $loop) {
-                                ?>                        
-                                <option value="<?= $loop->name ?>" /><?= $loop->name ?>
-                                <?php
+                         <label for="form-field-select-1">Station name</label>
+                        <select class="span12" id="station"  name="station">
+                            <option value="" />  
+                            <option value="<?= $this -> session -> userdata('stationname');?>" ><?= $this -> session -> userdata('stationname');?></option>
+                          
+                            <?php
+                            if (allowed ($see,'manage')) { 
+                            if (is_array($stations) && count($stations)) {
+                                foreach ($stations as $loop) {
+                                    ?> 
+                <option value="<?= $loop->name ?>" /><?= $loop->name ?>                      
+ 
+                
+              
+
+                            <?php }}
                             }
-                        }
-                        ?>
-                    </select>
+                            ?>
+                
+                        </select>
                 </div>
                 <div class="span3">
                     <label >Station No  </label >
@@ -460,13 +477,13 @@
         var actual = $('#actualrain').val();
         var anemometer = $('#anemometer').val();
         var wind = $('#windrun').val();
-        var maxi = $('#maxtemp2').val();
+      
         var station = $("#station").val();
         console.log(station);
         $('#Loading_daily').show();
         if (station != "") {
 
-            $.post("<?php echo base_url() ?>index.php/metar/daily", {date: date, max: max, min: min, actual: actual, anemometer: anemometer, wind: wind, maxi: maxi, station: station, rain: $('#rain').val(), thunder: $('#thunder').val(), fog: $('#fog').val(), haze: $('#haze').val(), storm: $('#storm').val(), quake: $('#quake').val()}
+            $.post("<?php echo base_url() ?>index.php/metar/daily", {date: date, max: max, min: min, actual: actual, anemometer: anemometer, wind: wind, station: station, rain: $('#actualrain').val(), thunder: $('#thunder').val(), fog: $('#fog').val(), haze: $('#haze').val(), storm: $('#storm').val(), quake: $('#quake').val()}
             , function (response) {
                 //#emailInfo is a span which will show you message
                 $('#Loading_daily').hide();
