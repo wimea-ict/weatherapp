@@ -88,9 +88,6 @@
                             <input class="span12"  type="text" id="type" name="type"/>
                             <label> Radiation:</label>
                             <input  class="span12" type="text" id="radiation" name="radiation" />
-                           
-                           
-                        
                         
                     </div>
                         
