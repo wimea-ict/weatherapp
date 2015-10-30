@@ -207,14 +207,14 @@
                             
                        Group indicator  Sign of data 1 S<br>
   
-                                                      <span >Wet bulb Temperature</span>  
-                                                        <input type="text" id="wb" name="wb" value="<?=$wet?>" class="input-mini"  />
-                                                        <span>Relative Humidity(RH)</span>
-                                                      <input type="text" id="rh" name="rh" value="<?=$humidity?>"class="input-mini"  />
-                                                       Vapour Pressure(VAP)
-                                                  <input type="text" id="vap" name="vap" value="<?=$vap?>" class="input-mini"  />    
+                       <label >Wet bulb Temperature</label>  
+                                                        <input type="text" id="wb" name="wb" value="<?=$wet?>"   />
+                                                        <label>Relative Humidity(RH)</label>
+                                                      <input type="text" id="rh" name="rh" value="<?=$humidity?>"  />
+                                                     <label>  Vapour Pressure(VAP)</label>
+                                                  <input type="text" id="vap" name="vap" value="<?=$vap?>"   />    
                         
-                          <button  class="width-65 pull-right btn btn-small btn-yellow"  style="width: 10% !important; margin-bottom: 5px;" >
+                          <button  class=" pull-right btn btn-small btn-yellow span3"   >
                     Submit 
 
                 </button>

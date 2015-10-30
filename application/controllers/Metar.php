@@ -56,6 +56,13 @@ class Metar extends CI_Controller {
         } else {
             $data['users'] = array();
         }
+         $query = $this->Md->get('station',$this->session -> userdata('stationname'),'daily'); 
+      //  var_dump($query);
+        if ($query) {
+             $data['daily'] = $query;
+        } else {
+            $data['daily'] = array();
+        }
         $query = $this->Md->show('role'); 
         if ($query) {
              $data['roles'] = $query;
@@ -261,6 +268,44 @@ class Metar extends CI_Controller {
                    return;
         
     }
+    
+    public  function update_daily(){
+        
+        $this->load->helper(array('form', 'url'));
+         $id = $this->input->post('id');
+        //  $id = '3';
+        $max = $this->input->post('max');
+        $min = $this->input->post('min');
+        $actual = $this->input->post('actual');
+        $anemometer = $this->input->post('anemometer');
+        $wind = $this->input->post('wind');
+        $maxi = ""; 
+        $rain = $this->input->post('rain'); 
+        $thunder = $this->input->post('thunder');
+        $fog = $this->input->post('fog'); 
+        $haze = $this->input->post('haze');
+        $storm = $this->input->post('storm'); 
+        $quake = $this->input->post('quake'); 
+        $height = $this->input->post('height'); 
+        $duration = $this->input->post('duration'); 
+         // $duration = '5'; 
+        $sunshine = $this->input->post('sunshine'); 
+        $radiationtype = $this->input->post('radiationtype'); 
+        $radiation = $this->input->post('radiation'); 
+        $evaptype1 = $this->input->post('evaptype1'); 
+        $evap1 = $this->input->post('evap1'); 
+        $evaptype2 = $this->input->post('evaptype2'); 
+        $evap2 = $this->input->post('evap2');      
+            if ($id!="")     {
+         $daily = array('max'=>$max,'min' => $min,'actual' => $actual, 'anemometer' => $anemometer, 'wind' => $wind, 'maxi' => "", 'user' =>$this->session -> userdata('username'),'submitted'=>$submitted,'approved'=>$approved,'rain'=>$rain,'thunder'=>$thunder,'fog'=>$fog,'haze'=>$haze,'storm'=>$storm,'quake'=>$quake,'height'=>$height,'duration'=>$duration,'sunshine'=>$sunshine,'radiationtype'=>$radiationtype,'radiation'=>$radiation,'evaptype1'=>$evaptype1,'evap1'=>$evap1,'evaptype2'=>$evaptype2,'evap2'=>$evap2);
+           $this->Md->update($id,$daily, 'daily'); 
+           $log = array('user' => $this->session -> userdata('username'),'userid'=>$this->session -> userdata('id'),'action' => 'update daily weather information','details'=>  $this->session-> userdata('stationname').'update of weather information ', 'date' => date('Y-m-d H:i:s'),'ip' => $this->input->ip_address(), 'url' =>'');
+           $this->Md->save($log, 'logs'); 
+            $this->session->set_flashdata('msg', 'The '.$name.' has been updated'); 
+    }
+    }
+   
+    
     public function delete(){
         
                     $id = $this->uri->segment(3);

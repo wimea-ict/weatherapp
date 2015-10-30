@@ -37,14 +37,14 @@ class Welcome extends CI_Controller {
     public function logout() {
 
         $this->session->sess_destroy();
-        $log = array('user' => $this->session->userdata('name'), 'userid' => $this->session->userdata('id'), 'action' => 'logout', 'details' => $this->session->userdata('name') . ' has logged out ', 'date' => date('Y-m-d H:i:s'), 'ip' => $this->input->ip_address(), 'url' => 'www.');
+        $log = array('user' => $this->session->userdata('username'), 'userid' => $this->session->userdata('id'), 'action' => 'logout', 'details' => $this->session->userdata('stationname') . ' has logged out ', 'date' => date('Y-m-d H:i:s'), 'ip' => $this->input->ip_address(), 'url' => 'www.');
         $this->Md->save($log, 'logs');
         $this->load->view('login');
     }
 
     public function login() {
 
-        if ($this->session->userdata('name') != null) {
+        if ($this->session->userdata('username') != null) {
 
             $this->load->view('home');
             return;
@@ -72,7 +72,7 @@ class Welcome extends CI_Controller {
 
                     $newdata = array(
                         'id' => $res->id,
-                        'name' => $res->name,
+                        'username' => $res->name,
                         'email' => $res->email,
                         'contact' => $res->contact,
                         'status' => $res->active,
@@ -96,12 +96,10 @@ class Welcome extends CI_Controller {
                     $stations = $this->Md->get('name', $res->station, 'station');
 
                     foreach ($stations as $stat) {
-                        $stationdata = array('number' => $stat->number, 'name' => $stat->name, 'city' => $stat->city, 'region' => $stat->region, 'code' => $stat->code);
+                        $stationdata = array('number' => $stat->number, 'stationname' => $stat->name, 'city' => $stat->city, 'region' => $stat->region, 'code' => $stat->code);
                     }
                     $this->session->set_userdata($stationdata);
-
-
-                    $log = array('user' => $this->session->userdata('name'), 'userid' => $this->session->userdata('id'), 'action' => 'login', 'details' => $this->session->userdata('name') . ' has logged in ', 'date' => date('Y-m-d H:i:s'), 'ip' => $this->input->ip_address(), 'url' => 'www.');
+                    $log = array('user' => $this->session->userdata('username'), 'userid' => $this->session->userdata('id'), 'action' => 'login', 'details' => $this->session->userdata('username') . ' has logged in ', 'date' => date('Y-m-d H:i:s'), 'ip' => $this->input->ip_address(), 'url' => 'www.');
                     $this->Md->save($log, 'logs');
                     $this->load->view('home');
                 } else {

@@ -63,7 +63,7 @@
                         <li class="">
                             <a data-toggle="dropdown" href="#" class="dropdown-toggle">
                               
-                                <h4>  <?php echo $this -> session -> userdata('role'); ?> :  <?php echo $this -> session -> userdata('name'); ?>                        
+                                <h4>  <?php echo $this -> session -> userdata('role'); ?> :  <?php echo $this -> session -> userdata('username'); ?>                        
   </h4>
                                 <i class="icon-caret-down"></i>
                             </a>
