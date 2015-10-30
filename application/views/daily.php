@@ -9,28 +9,12 @@
 <link rel="stylesheet" href="<?= base_url(); ?>assets/css/daterangepicker.css" />
 <link rel="stylesheet" href="<?= base_url(); ?>assets/css/bootstrap.min.css" />
 <link href="<?= base_url(); ?>css/mine.css" rel="stylesheet" />
-  <?php 
-    
-    function allowed ($sessdata,$action){
-    
-        return (strpos($sessdata,$action) ==TRUE);    
-   }
-     $see = $this -> session -> userdata('views');
-    
-    ?>
-        
+ <?php require_once(APPPATH . 'views/permission.php'); ?> 
 
 <div class="container-fluid">
     <div class="page-content">
         <div class="row-fluid"  data-ng-app="dailyApp">
-
-
-            <div class="page-header position-relative">
-
                 <h4>Daily weather records:<?= $this -> session -> userdata('stationname');?> </h4>
-            </div><!--/.page-header-->
-
-
             <div class="span12">   
                  <span id="Loading_daily"  name ="Loading_daily"><img src="<?= base_url(); ?>images/ajax-loader.gif" alt="loading" /></span><br>
  
@@ -308,8 +292,9 @@
 
             </tbody>
         </table>
-                    </form>
+                  
                             </div> 
+                </form>
             </div>
                             </div>
                             </div>
@@ -368,6 +353,7 @@
                                         $.post("<?php echo base_url() ?>index.php/metar/daily", {date: date, max: max, min: min, actual: actual, anemometer: anemometer, wind: wind,station: station, rain: $('#rain').val(), thunder: $('#thunder').val(), fog: $('#fog').val(), haze: $('#haze').val(), storm: $('#storm').val(), quake: $('#quake').val(), height: $('#height').val(), duration: $('#duration').val(), sunshine: $('#sunshine').val(), type: $('#type').val(), radiation: $('#radiation').val(), evaptype1: $('#evaptype1').val(), evaptype2: $('#evaptype2').val(), evap1: $('#evap1').val(), evap2: $('#evap2').val()}
                                         , function (response) {
                                             //#emailInfo is a span which will show you message
+                                              
                                             $('#Loading_daily').hide();
                                             setTimeout(finishAjaxitem('Loading_daily', escape(response)), 200);
 
@@ -376,6 +362,8 @@
                                         function finishAjaxitem(id, response) {
                                             $('#' + id).html(unescape(response));
                                             $('#' + id).fadeIn();
+                                            location.reload();
+                                       
                                         }
 
                                     } else {
@@ -540,7 +528,7 @@
                                        $("#evaptype1_" + ID).html(evaptype1);
                                          $("#evap2_" + ID).html(evap2);
                                        $("#evaptype2_" + ID).html(evaptype2);
-                       
+                    
 
                     }
                 });

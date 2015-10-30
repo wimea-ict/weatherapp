@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="<?= base_url(); ?>assets/css/daterangepicker.css" />
 <link rel="stylesheet" href="<?= base_url(); ?>assets/css/bootstrap.min.css" />
 <link href="<?= base_url(); ?>css/mine.css" rel="stylesheet" />
-
+<?php require_once(APPPATH . 'views/permission.php'); ?> 
 
 <div class=" container-fluid">
  <h4> Daily periodical rainfall</h4>
@@ -16,22 +16,32 @@
 <div class="span12">
 
  <form id="edit-form" name="edit-form" enctype="multipart/form-data"  action='<?= base_url(); ?>index.php/metar/rainfall'  method="post">            
-  
+   <span id="Loading_rainy" class="span6" name ="Loading_rainy"><img src="<?= base_url(); ?>images/ajax-loader.gif" alt="Ajax Indicator" /></span><br>
+
     <div class="span12 form-group well alert-success ">
         
-        <div class="span2"><label>Station</label>
-        <select id="station" name="station">
-            <option value="" />
-            <?php
-            if (is_array($stations) && count($stations)) {
-                foreach ($stations as $loop) {
-                    ?>                        
-                    <option value="<?= $loop->name ?>" /><?= $loop->name ?>
+        <div class="span2">
+     <label for="form-field-select-1">Station name</label>
+                        <select class="span12" id="station"  name="station">
+                            <option value="" />  
+                            <option value="<?= $this -> session -> userdata('stationname');?>" ><?= $this -> session -> userdata('stationname');?></option>
+                          
+                            <?php
+                            if (allowed ($see,'manage')) { 
+                            if (is_array($stations) && count($stations)) {
+                                foreach ($stations as $loop) {
+                                    ?> 
+                <option value="<?= $loop->name ?>" /><?= $loop->name ?>                      
+ 
+                
+              
 
-
-                <?php }
-            } ?>
-        </select></div>
+                            <?php }}
+                            }
+                            ?>
+                
+                        </select>
+        </div>
          <div class="span2"> <label>  Station number</label>
              <input class="form-control"  id="number" readonly="" name="number" ></input>  </div>
         <div class="span2">
@@ -76,8 +86,7 @@
 
  
   
-    <span id="Loading_rainy" class="span6" name ="Loading_rainy"><img src="<?= base_url(); ?>images/ajax-loader.gif" alt="Ajax Indicator" /></span><br>
-
+   
 
 <span id="Loading"  name ="Loading"><img src="<?= base_url(); ?>images/ajax-loader.gif" alt="Ajax Indicator" /></span>
 

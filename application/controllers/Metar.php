@@ -87,7 +87,7 @@ class Metar extends CI_Controller {
     }
     
      
-      public function rainfall() {
+  public function rainfall() {
           
         $query = $this->Md->show('metar');
       //  var_dump($query);
@@ -551,7 +551,7 @@ class Metar extends CI_Controller {
         $time = $this->input->post('time');
         $duration = $this->input->post('duration');       
        
-        $user = $this->session -> userdata('name');
+        $user = $this->session -> userdata('username');
         $submitted = date('Y-m-d');                    
                
         if($station==""){            
@@ -567,7 +567,7 @@ class Metar extends CI_Controller {
           
             $rain = array('station' => $station,'date' => $date,'rain'=>$rain,'time'=>$time,'duration'=>$duration,'user' =>$user,'submitted'=>$submitted);
            $this->Md->save($rain, 'rain'); 
-           $log = array('user' => $this->session -> userdata('name'),'userid'=>$this->session -> userdata('id'),'action' => 'saved daily rainfall information','details'=>  $this->session-> userdata('name').'submit of weather information ', 'date' => date('Y-m-d H:i:s'),'ip' => $this->input->ip_address(), 'url' =>'');
+           $log = array('user' => $this->session -> userdata('username'),'userid'=>$this->session -> userdata('id'),'action' => 'saved daily rainfall information','details'=>  $this->session-> userdata('stationname').'submit of weather information ', 'date' => date('Y-m-d H:i:s'),'ip' => $this->input->ip_address(), 'url' =>'');
            $this->Md->save($log, 'logs'); 
            
            echo '<br><div class="alert alert-info"><strong>Rainfall information  submitted</strong></div>';

@@ -34,7 +34,7 @@ class Md extends CI_Model {
 
     function show($table) {
 
-        $query = $this->db->query("SELECT * FROM $table");
+        $query = $this->db->query("SELECT * FROM $table order by id desc " );
         $result = $query->result();
         return $result;
     }
@@ -50,6 +50,7 @@ class Md extends CI_Model {
         $this->db->select('*');
         $this->db->from($table);
         $this->db->where($field, $value);
+        $this->db->order_by("id", "desc");
         $query = $this->db->get();
         $result = $query->result();
         return $result;
