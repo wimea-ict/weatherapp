@@ -119,7 +119,7 @@
                                  <a  href="<?php echo base_url() . "index.php/metar/everyday"; ?>" target="myframe">Daily weather</a>
                             </li>
                              <li>
-                                <a target="myframe" href="<?php echo base_url() . "index.php/metar/rainfall"; ?>">Rainfall</a>
+                                <a target="myframe" href="<?php echo base_url() . "index.php/metar/rainfall"; ?>">Periodic Rainfall</a>
                             </li>
 <!--                              <li>
                                 <a target="myframe" href="<?php echo base_url() . "index.php/angular/"; ?>">Angular</a>
