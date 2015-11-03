@@ -76,7 +76,7 @@ class Instrument extends CI_Controller {
         $instrument = array('name' => $name, 'station' => $station,'element' => $element, 'dateRegister' => $dateRegister, 'dateExpire' => $dateExpire, 'code' => $code,'manufacturer'=>$manufacturer, 'description'=>$description,'submitted' => date('Y-m-d H:i:s'));
         $this->Md->save($instrument, 'instrument');
         
-         $log = array('user' => $this->session -> userdata('name'),'userid'=>$this->session -> userdata('id'),'action' => 'save','details'=> 'instrument information saved ', 'date' => date('Y-m-d H:i:s'),'ip' => $this->input->ip_address(), 'url' =>'');
+         $log = array('user' => $this->session -> userdata('username'),'userid'=>$this->session -> userdata('id'),'action' => 'save','details'=> 'instrument information saved ', 'date' => date('Y-m-d H:i:s'),'ip' => $this->input->ip_address(), 'url' =>'');
         $this->Md->save($log, 'logs'); 
          $this->session->set_flashdata('msg', 'Please input the name of the element');
          redirect('/instrument', 'refresh');
@@ -165,7 +165,7 @@ class Instrument extends CI_Controller {
        $instrument = array('name' => $name, 'station' => $station,'element' => $element, 'dateRegister' => $dateRegister, 'dateExpire' => $dateExpire, 'code' => $code,'manufacturer'=>$manufacturer, 'description'=>$description,'submitted' => date('Y-m-d H:i:s'));
               // update($id, $data,$table)
         $this->Md->update($id,$instrument, 'instrument');
-          $log = array('user' => $this->session -> userdata('name'),'userid'=>$this->session -> userdata('id'),'action' => 'update','details'=> 'instrument information updated ', 'date' => date('Y-m-d H:i:s'),'ip' => $this->input->ip_address(), 'url' =>'');
+          $log = array('user' => $this->session -> userdata('username'),'userid'=>$this->session -> userdata('id'),'action' => 'update','details'=> 'instrument information updated ', 'date' => date('Y-m-d H:i:s'),'ip' => $this->input->ip_address(), 'url' =>'');
         $this->Md->save($log, 'logs'); 
            $this->session->set_flashdata('msg', 'The '.$name.' has been updated');        
        redirect('/instrument', 'refresh');

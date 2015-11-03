@@ -11,15 +11,7 @@
 <link rel="stylesheet" href="<?= base_url(); ?>assets/css/daterangepicker.css" />
 <link rel="stylesheet" href="<?= base_url(); ?>assets/css/bootstrap.min.css" />
 <link href="<?= base_url(); ?>css/mine.css" rel="stylesheet" />
-<?php 
-    
-    function allowed ($sessdata,$action){
-    
-        return (strpos($sessdata,$action) ==TRUE);    
-   }
-     $see = $this -> session -> userdata('views');
-    
-    ?>
+ <?php require_once(APPPATH . 'views/permission.php'); ?> 
         
 
 <div class="scroll row-fluid span12 ">
@@ -27,6 +19,7 @@
 
         <?php echo $this->session->flashdata('msg'); ?>
 <div class="scroll row-fluid">
+    <?php  if ($role == 'Observer'||$role == 'Manager') {  ?>
         <form id="edit-form" name="edit-form" enctype="multipart/form-data"  action='<?= base_url(); ?>index.php/metar/save'  method="post">            
 
 
@@ -113,6 +106,11 @@
                                     <a href="#">  Air temperature</a>
                                 </label>
                             </td>
+                              <td class="center-head">
+                                <label>
+                                    <a href="#"> Relative humidity(%)</a>
+                                </label>
+                            </td>
                             <td class="center-head">
                                 <label>
                                     <a href="#"> Dew point</a>
@@ -124,11 +122,7 @@
                                 </label>
                             </td>
 
-                            <td class="center-head">
-                                <label>
-                                    <a href="#"> Relative humidity(%)</a>
-                                </label>
-                            </td>
+                          
 
                             <td class="center">
                                 <label> <a href="#">TT/T<span class="foot-note">d</span>T<span class="foot-note">d</span></a></label>
@@ -168,12 +162,13 @@
                                     <option value="RA" />RA
                                     <option value="Ts" />Ts
                                 </select>  </td>
-                            <td class="small"> <input class="span12 input-medium input-mask-product" type="text" id="cloud" name="cloud" /> </td>
+                             <td class="small"> <input class="span12 input-medium " type="text" id="cloud" name="cloud" /> </td>
                              <td class="small" > <input class="form-control span12" type="text" id="temperature" name="temperature"  /></td>
-                            <td class="small" ><input  class="form-control span12 " type="text" id="dew" name="dew"  /></td>
-                            <td class="small" > <input type="text" id="wet" name="wet" class="span12"  /></td>
-                            <td class="small" >  <input type="text" id="humidity" name="humidity" class="span12"   /></td>
+                             <td class="small" >  <input type="text" id="humidity" name="humidity" class="span12"   /></td>
                          
+                             <td class="small" ><input  class="form-control span12 " type="text" id="dew" name="dew"  /></td>
+                            <td class="small" > <input type="text" id="wet" name="wet" class="span12"  /></td>
+                            
 
                             <td class="small"> <input class="span5"  type="text"  name="temp1" id="temp1"  />/<input  class="span5" type="text" name="dew1" id="dew1" />
                             </td>
@@ -194,6 +189,7 @@
                 </table>
             </div>
         </form> 
+    <?php }?>
         <h4>Today's metar</h4>                                            
 
         <table id="sample-table-2" class="span12 table table-striped table-bordered table-hover" >
@@ -302,10 +298,37 @@
 
             </tbody>
         </table>
+ <?php  if ($role == 'Manager'||$role == 'Data') {  ?>
+ <label>Day/Month/Year </label>
  
+                                                                    <?php $months = array(1 => "January", 2 => "February", 3 => "March", 4 => "April", 5 => "May", 6 => "June", 7 => "July", 8 => "August", 9 => "September", 10 => "October", 11 => "November", 12 => "December"); ?>
 
+                                                                    <div class="span12">
+                                                                        <select class=" col-md-2 no"  name="day" id="day">
+                                                                            <option value=""></option>
+                                <?php for($d = 1; $d<=31; $d++ )
+                                    echo "<option value='$d'>$d</option>"?>
+                            </select>
+                                                                        <select  name="month" id="month" >
+                                                                             <option value=""></option>
+                                                                            <?php for ($m = 1; $m <= 12; $m++)
+                                                                                echo "<option value='$m'>" . $months[$m] . "</option>"
+                                                                                ?>
+                                                                        </select>
+                                                                        <select name="year" id="year" >
+                                                                             <option value=""></option>
+                                                                            <?php for ($y = date('Y'); $y >= 1902; $y--)
+                                                                                echo "<option value='$y'>$y</option>"
+                                                                                ?>
+                                                                        </select>
+                                                                        <button type="button" class="btn btn-info btn-small" id="generate" >generate</button>
+                                                                        <input type="button" class="btn btn-info btn-small" onclick="ExportToExcel('datatable')" value="Export to Excel">
+
+
+
+                                                                    </div>
     <span id="Loading"  name ="Loading"><img src="<?= base_url(); ?>images/ajax-loader.gif" alt="Ajax Indicator" /></span><br>
-
+   <?php }?>
 </div>    
 </div>   
 </div> 
@@ -358,8 +381,7 @@
         $('.input-mask-hpa').mask('999.9');
         $('.input-mask-height').mask('9999');
         $('.input-mask-eyescript').mask('~9.99 ~9.99 999');
-        $(".input-mask-product").mask('a**999 a**999aa a**999');
-
+       
 
 
 
@@ -452,10 +474,15 @@
         $('#stationinch').val(inch);
 
     }); //end change
-    $('#datenow').blur(function () {
+     $("#generate").on ("click",function (e) {
+         
+            var station = $("#station").val();
+            var month = $("#month").val();
+            var year = $("#year").val();
+             var day = $("#day").val();
         $('#meta').hide();
         $('#Loading').show();
-        $.post("<?php echo base_url() ?>index.php/metar/get", {date: $("#datenow").val()}
+        $.post("<?php echo base_url() ?>index.php/metar/get", {datenow: $("#datenow").val(),station:$("#code").val(),day:day,month:month,year:year}
         , function (response) {
             //#emailInfo is a span which will show you message
             $('#Loading').hide();
@@ -506,4 +533,11 @@
     }); //end change
 
 
+</script>
+<script type="text/javascript">
+    function ExportToExcel(datatable) {
+        var htmltable = document.getElementById('metar');
+        var html = htmltable.outerHTML;
+        window.open('data:application/vnd.ms-excel,' + encodeURIComponent(html));
+    }
 </script>

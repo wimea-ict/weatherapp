@@ -107,7 +107,8 @@
                                                                                 echo "<option value='$y'>$y</option>"
                                                                                 ?>
                                                                         </select>
-                                                                        <button type="button" class="btn btn-info btn-small" id="generate" >generate</button>  <input type="button" class="btn btn-info btn-small" onclick="ExportToExcel('datatable')" value="Export to Excel">
+                                                                        <button type="button" class="btn btn-info btn-small" id="generate" >generate</button>
+                                                                        <input type="button" class="btn btn-info btn-small" onclick="ExportToExcel('datatable')" value="Export to Excel">
 
 
 

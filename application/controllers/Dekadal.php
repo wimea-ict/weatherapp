@@ -128,7 +128,7 @@ class Dekadal extends CI_Controller {
                 $metar = array('station' => $station,'type' => $type,'datetime'=>$datetime, 'timezone' => 'GMT','wind_direction' => $wind_direction, 'wind_speed' => $wind_speed, 'unit' => $wind_unit, 'visibility' => $visibility, 'present_weather' =>$present,'cloud'=>$cloud,'air_temperature'=>$air_temperature,'humidity'=> $humidity,'dew_temperature'=>$dew_temperature,'wet_bulb'=>$wet_bulb,'station_pressure_hpa'=>$station_pressure,'sea_pressure_hpa'=>$sea_pressure,'recent_weather'=>$recent_weather,'submitted'=>date('Y-m-d H:m:s'),'user'=>'test','day'=>$day);
         $this->Md->save($metar, 'metar');
         
-        $log = array('user' => $this->session -> userdata('name'),'userid'=>$this->session -> userdata('id'),'action' => 'save','details'=> 'meta information saved ', 'date' => date('Y-m-d H:i:s'),'ip' => $this->input->ip_address(), 'url' =>'');
+        $log = array('user' => $this->session -> userdata('username'),'userid'=>$this->session -> userdata('id'),'action' => 'save','details'=> 'meta information saved ', 'date' => date('Y-m-d H:i:s'),'ip' => $this->input->ip_address(), 'url' =>'');
         $this->Md->save($log, 'logs'); 
       
       

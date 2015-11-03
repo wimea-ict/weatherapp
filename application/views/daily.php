@@ -150,6 +150,9 @@
                     <td class="center">
                         <a href="#">Anemometer</a>
                     </td>
+                      <td class="center">
+                        <a href="#">Height</a>
+                    </td>
 
 
                     <td class="center">
@@ -198,7 +201,7 @@
                     foreach ($daily as $loop) {
                         $id = $loop->id;
                         $max = $loop->max; $min = $loop->min;$actual = $loop->actual;
-                        $duration = $loop->duration; $anemometer = $loop->anemometer;                       
+                        $duration = $loop->duration; $anemometer = $loop->anemometer;  $height = $loop->height;                      
                         $wind = $loop->wind;  $rain = $loop->rain;$thunder = $loop->thunder;     
                         $fog=$loop->fog; $haze=$loop->haze; $storm=$loop->storm; $quake=$loop->quake; $sunshine=$loop->sunshine; $radiation=$loop->radiation; $radiationtype=$loop->radiationtype; $evap1=$loop->evap1; $evaptype1=$loop->evaptype1; $evap2=$loop->evap2; $evaptype2=$loop->evaptype2;
                         ?>  
@@ -223,6 +226,10 @@
                                 <td class="edit_td">
                              <span id="anemometer_<?php echo $id; ?>" class="text"><?php echo $anemometer; ?></span>
                             <input type="text" value="<?php echo $anemometer; ?>" class="editbox" id="anemometer_input_<?php echo $id; ?>"
+                              </td>
+                                <td class="edit_td">
+                             <span id="height_<?php echo $id; ?>" class="text"><?php echo $height; ?></span>
+                            <input type="text" value="<?php echo $height; ?>" class="editbox" id="height_input_<?php echo $id; ?>"
                               </td>
                                 <td class="edit_td">
                              <span id="wind_<?php echo $id; ?>" class="text"><?php echo $wind; ?></span>
@@ -469,6 +476,9 @@
             $("#evap2_input_" + ID).show();
             $("#evaptype2" + ID).hide();
             $("#evaptype2_input_" + ID).show();
+            
+             $("#height" + ID).hide();
+            $("#height_input_" + ID).show();
 
 
         }).change(function ()
@@ -493,10 +503,11 @@
             var evap2 = $("#evap2_input_" + ID).val();
              var evaptype2 = $("#evaptype2_input_" + ID).val();
                var evaptype1 = $("#evaptype1_input_" + ID).val();
+                 var height = $("#height_input_" + ID).val();
           
 
 
-            var dataString = 'id=' + ID + '&max=' + max + '&min=' + min+ '&actual=' + actual+ '&duration=' + duration+ '&anemometer=' + anemometer+ '&wind=' + wind+ '&rain=' + rain+ '&thunder=' + thunder+ '&fog=' + fog+ '&haze=' + haze+ '&storm=' + storm+ '&quake=' + quake+ '&sunshine=' + sunshine+ '&radiation=' + radiation+ '&radiationtype=' + radiationtype+ '&evap1=' + evap1+ '&evaptype1=' + evaptype1+ '&evap2=' + evap2+ '&evaptype2=' + evaptype2 ;
+            var dataString = 'id=' + ID + '&max=' + max + '&min=' + min+ '&actual=' + actual+ '&duration=' + duration+ '&anemometer=' + anemometer+ '&wind=' + wind+ '&rain=' + rain+ '&thunder=' + thunder+ '&fog=' + fog+ '&haze=' + haze+ '&storm=' + storm+ '&quake=' + quake+ '&sunshine=' + sunshine+ '&radiation=' + radiation+ '&radiationtype=' + radiationtype+ '&evap1=' + evap1+ '&evaptype1=' + evaptype1+ '&evap2=' + evap2+ '&evaptype2=' + evaptype2+ '&height=' + height ;
             $("#max_" + ID).html('<img src="<?= base_url(); ?>images/ajax-loader.gif" />'); // Loading image
             $("#min_" + ID).html('<img src="<?= base_url(); ?>images/ajax-loader.gif" />'); // Loading image
            
@@ -528,6 +539,7 @@
                                        $("#evaptype1_" + ID).html(evaptype1);
                                          $("#evap2_" + ID).html(evap2);
                                        $("#evaptype2_" + ID).html(evaptype2);
+                                         $("#height_" + ID).html(height);
                     
 
                     }

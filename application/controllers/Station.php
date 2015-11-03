@@ -61,13 +61,13 @@ class Station extends CI_Controller {
         if ($code!=""){
         $station = array('number' => $number,'name' => $name, 'location' => $location,'country' => $country, 'region' => $region, 'code' => $code, 'city' => $city, 'latitude'=>$latitude,'longitude'=>$longitude,'altitude'=>$altitude,'opened'=>$opened,'closed'=>$closed,'status'=>'active','type'=>$type,'created' => date('Y-m-d'));
         $this->Md->save($station, 'station');
-         $log = array('user' => $this->session -> userdata('name'),'userid'=>$this->session -> userdata('id'),'action' => 'save','details'=>  $name.' station added ', 'date' => date('Y-m-d H:i:s'),'ip' => $this->input->ip_address(), 'url' =>'');
+         $log = array('user' => $this->session -> userdata('username'),'userid'=>$this->session -> userdata('id'),'action' => 'save','details'=>  $name.' station added ', 'date' => date('Y-m-d H:i:s'),'ip' => $this->input->ip_address(), 'url' =>'');
            $this->Md->save($log, 'logs');
         redirect('/station', 'refresh');
         return;
         }
         else{
-              $this->session->set_flashdata('msg', 'Please input the name of the ');
+              $this->session->set_flashdata('msg', '<span style="color:#f00">Missing information station</span>');
               redirect('/station', 'refresh');            
         }
     }
@@ -124,7 +124,7 @@ class Station extends CI_Controller {
         $station = array('number' => $number,'name' => $name, 'location' => $location,'country' => $country, 'region' => $region, 'code' => $code, 'city' => $city, 'latitude'=>$latitude,'longitude'=>$longitude,'altitude'=>$altitude,'opened'=>$opened,'closed'=>$closed,'status'=>'active','type'=>$type,'created' => date('Y-m-d'));
         // update($id, $data,$table)
         $this->Md->update($id,$station, 'station');
-         $log = array('user' => $this->session -> userdata('name'),'userid'=>$this->session -> userdata('id'),'action' => 'update','details'=>  $name.' station updated', 'date' => date('Y-m-d H:i:s'),'ip' => $this->input->ip_address(), 'url' =>'');
+         $log = array('user' => $this->session -> userdata('username'),'userid'=>$this->session -> userdata('id'),'action' => 'update','details'=>  $name.' station updated', 'date' => date('Y-m-d H:i:s'),'ip' => $this->input->ip_address(), 'url' =>'');
            $this->Md->save($log, 'logs');
            $this->session->set_flashdata('msg', 'The '.$name.' has been updated');        
        redirect('/station', 'refresh');
@@ -136,7 +136,7 @@ class Station extends CI_Controller {
                     $id = $this->uri->segment(3);
                  
                     $query = $this->Md->delete($id,'station');
-                     $log = array('user' => $this->session -> userdata('name'),'userid'=>$this->session -> userdata('id'),'action' => 'delete','details'=> ' station deletion', 'date' => date('Y-m-d H:i:s'),'ip' => $this->input->ip_address(), 'url' =>'');
+                     $log = array('user' => $this->session -> userdata('username'),'userid'=>$this->session -> userdata('id'),'action' => 'delete','details'=> ' station deletion', 'date' => date('Y-m-d H:i:s'),'ip' => $this->input->ip_address(), 'url' =>'');
                      $this->Md->save($log, 'logs');
                  
                     if ($this->db->affected_rows() > 0) {
@@ -182,7 +182,7 @@ class Station extends CI_Controller {
            // header('Content-Type: application/x-json; charset=utf-8');
             //($where,$data,$table)
             echo json_encode($this->Md->get('name',$station,'station'));
-        }
+   }
     
     
     

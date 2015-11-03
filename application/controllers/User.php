@@ -64,12 +64,12 @@ class User extends CI_Controller {
          $get_result = $this->Md->check($email,'email','user');
         if(!$get_result){
             $this->session->set_flashdata('msg', 'this name is already in use');
-              redirect('/User', 'refresh');
+              redirect('/user', 'refresh');
         }
         if ($email!=""){
         $user = array('email' => $email,'name' => $name,'station'=>$station, 'contact' => $contact,'contact2' => $contact2, 'password' => $password, 'role' => $role, 'active' => 'false', 'create' => date('Y-m-d'));
         $this->Md->save($user, 'user');
-          $log = array('user' => $this->session -> userdata('name'),'userid'=>$this->session -> userdata('id'),'action' => 'save','details'=>  $name.' user information save ', 'date' => date('Y-m-d H:i:s'),'ip' => $this->input->ip_address(), 'url' =>'');
+          $log = array('user' => $this->session -> userdata('username'),'userid'=>$this->session -> userdata('id'),'action' => 'save','details'=>  $name.' user information save ', 'date' => date('Y-m-d H:i:s'),'ip' => $this->input->ip_address(), 'url' =>'');
            $this->Md->save($log, 'logs'); 
           if ($page==""){
             redirect('/user', 'refresh');
@@ -139,7 +139,7 @@ class User extends CI_Controller {
             $password = $this->encrypt->encode($msg, $key);
             $user = array( 'password' => $password,'create' => date('Y-m-d'));     
             $this->Md->update($id,$user, 'user');
-             $log = array('user' => $this->session -> userdata('name'),'userid'=>$this->session -> userdata('id'),'upate' => 'save','details'=>  $name.' user password updated ', 'date' => date('Y-m-d H:i:s'),'ip' => $this->input->ip_address(), 'url' =>'');
+             $log = array('user' => $this->session -> userdata('username'),'userid'=>$this->session -> userdata('id'),'upate' => 'save','details'=>  $name.' user password updated ', 'date' => date('Y-m-d H:i:s'),'ip' => $this->input->ip_address(), 'url' =>'');
            $this->Md->save($log, 'logs');
             
         }
@@ -148,7 +148,7 @@ class User extends CI_Controller {
       // update($id, $data,$table)
         $this->Md->update($id,$user, 'user');
         
-         $log = array('user' => $this->session -> userdata('name'),'userid'=>$this->session -> userdata('id'),'action' => 'update','details'=>  $name.' user information updated', 'date' => date('Y-m-d H:i:s'),'ip' => $this->input->ip_address(), 'url' =>'');
+         $log = array('user' => $this->session -> userdata('username'),'userid'=>$this->session -> userdata('id'),'action' => 'update','details'=>  $name.' user information updated', 'date' => date('Y-m-d H:i:s'),'ip' => $this->input->ip_address(), 'url' =>'');
            $this->Md->save($log, 'logs');
            $this->session->set_flashdata('msg', 'The '.$name.' has been updated');        
        redirect('/user', 'refresh');
@@ -161,7 +161,7 @@ class User extends CI_Controller {
                  
                     $query = $this->Md->delete($id,'user');
                     
-                     $log = array('user' => $this->session -> userdata('name'),'userid'=>$this->session -> userdata('id'),'action' => 'delete','details'=>' user information deleted', 'date' => date('Y-m-d H:i:s'),'ip' => $this->input->ip_address(), 'url' =>'');
+                     $log = array('user' => $this->session -> userdata('username'),'userid'=>$this->session -> userdata('id'),'action' => 'delete','details'=>' user information deleted', 'date' => date('Y-m-d H:i:s'),'ip' => $this->input->ip_address(), 'url' =>'');
                       $this->Md->save($log, 'logs');
                  
                     if ($this->db->affected_rows() > 0) {

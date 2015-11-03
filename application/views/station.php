@@ -22,7 +22,7 @@
                      
                           <div id="accordion2" class="accordion">
                         <div class="accordion-group">
-                              
+                         <?php echo $this->session->flashdata('msg'); ?> 
 
                         <div class="accordion-body collapse" id="collapseOne">
                                 <div class="accordion-inner">
@@ -42,10 +42,10 @@
                                  <input type="text" class="span6" name="altitude" id="altitude" placeholder="Altitude"  />
 
                                           
-                                                             <input type="text" class="span6" id="number" name="number" placeholder="Station number" />  
+                                                             <input type="text" class="span6" id="number" name="number" required="true" placeholder="Station number" />  
                                                   
                                                  
-                                                           <input type="text" id="name" name="name" class="span6" placeholder="Station name"  />   
+                                                             <input type="text" id="name" name="name" class="span6" required="true" placeholder="Station name"  />   
                                                      
                                                  
                                                            <input type="text" id="location" name="location" class="span6" placeholder="Location" />
@@ -59,7 +59,7 @@
                                    
                                     <input type="text" class="span6" id="region" name="region" placeholder="Region/state" />
                                    
-                               <input type="text" class="span6" id="code" name="code" placeholder="Block code"  />
+                                    <input type="text" class="span6" id="code" required="true" name="code" placeholder="Block code"  />
                                   
                                 <input type="text" class="span6" id="city" name="city" placeholder="city"  />
                                                  

@@ -79,7 +79,7 @@ class Archive extends CI_Controller {
         $archive = array('file' => $file, 'name' => $name, 'station' => $station,'form' => $form, 'period' => $period,'description'=>$description,'submitted' => date('Y-m-d H:i:s'));
         $file_id= $this->Md->save($archive, 'archive');
         
-         $log = array('user' => $this->session -> userdata('name'),'userid'=>$this->session -> userdata('id'),'action' => 'save','details'=>  $name.' file  upload', 'date' => date('Y-m-d H:i:s'),'ip' => $this->input->ip_address(), 'url' =>'');
+         $log = array('user' => $this->session -> userdata('username'),'userid'=>$this->session -> userdata('id'),'action' => 'save','details'=>  $name.' file  upload', 'date' => date('Y-m-d H:i:s'),'ip' => $this->input->ip_address(), 'url' =>'');
          $this->Md->save($log, 'logs');
        
             if($file_id)

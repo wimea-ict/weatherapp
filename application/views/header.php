@@ -38,15 +38,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
 
     <body>
-      <?php 
-    
-    function allowed ($sessdata,$action){
-    
-        return (strpos($sessdata,$action) ==TRUE);    
-   }
-     $see = $this -> session -> userdata('views');
-    
-    ?>
+       <?php require_once(APPPATH . 'views/permission.php'); ?> 
         
         
         <div class="navbar">
@@ -81,7 +73,7 @@
                 </div><!--/.container-fluid-->
             </div><!--/.navbar-inner-->
         </div>
-          <?php  if (allowed ($see,'data entry')) {  ?>
+          <?php  if ($role =='Observer') {  ?>
           <a  href="<?php echo base_url(). "index.php/welcome/start"; ?>" target="myframe"><button class="btn btn-small btn-info"> Home </button></a>
           
            <a  href="<?php echo base_url() . "index.php/metar/everyday"; ?>" target="myframe"><button class="btn btn-small btn-info">Weather </button></a>
@@ -104,7 +96,7 @@
           
             
             <?php } ?>
-                     <?php  if (allowed ($see,'manage')) {  ?>
+                      <?php  if ($role == 'Manager') {  ?>
               <div class="btn-group">
                         <button data-toggle="dropdown" class=" btn btn-small btn-default dropdown-toggle">
                             Daily

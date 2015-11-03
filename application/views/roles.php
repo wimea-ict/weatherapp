@@ -70,6 +70,9 @@
 
     <?php }
 } else { ?>
+                                   <?php echo $this->session->flashdata('msg');?>
+                                  <span id="Loading" name ="Loading"><img src="<?= base_url(); ?>images/ajax-loader.gif" alt="Ajax Indicator" /></span> 
+                                                                 
 <form id="role-form" name="role-form" enctype="multipart/form-data"  action='<?= base_url(); ?>index.php/Role/save'  method="post">            
                                             
 
@@ -78,7 +81,7 @@
                                                     <div class="widget-main">
                                                       
                                                         <fieldset>
-                                                   <?php echo $this->session->flashdata('msg');?>									
+                                                								
 						
                                                           
                                                             <h4 class="header green lighter bigger">
@@ -88,8 +91,7 @@
                                                          
                                                                
                                                                    <input type="text" class="span3" id="role" name="role" required="" placeholder="Role" />
-                                                                    <span id="Loading" name ="Loading"><img src="<?= base_url(); ?>images/ajax-loader.gif" alt="Ajax Indicator" /></span> 
-                                                                 
+                                                                  
                                                                     
                                                                   <span class="lbl"> Actions</span>
                                                                     <input type="text" class="span3" id="actions" name="actions"   />
@@ -122,21 +124,28 @@
                                     <thead>
                                         <tr>
                                             <th class="center">
-                                                <label>
-                                                    <input type="checkbox" />
-                                                    <span class="lbl"></span>
-                                                </label>
+                                              
                                             </th>
-                                            <th>Role name</th>
+                                            <th>Name</th>
                                             <th>Actions</th>
                                             <th>Views</th>                                          
-                                                <th class="hidden-480"> </th>
+                                                <th class="hidden-480">Manage </th>
 
                                           
                                         </tr>
                                     </thead>
 
                                     <tbody>
+                                           <tr class="warning">
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>                                                 
+                                                    <td></td>
+
+                                                    
+                                                   
+                                                </tr>
                                         <?php
                                         if (is_array($roles) && count($roles)) {
                                             foreach ($roles as $loop) {
