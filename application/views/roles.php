@@ -14,7 +14,7 @@
         <div class="row-fluid">
             <div class="span12">
                 <div class="widget-box transparent" id="recent-box">
-                   
+                   Currently only 3 roles are defined Manager,Observer,Data and O/C.please assign roles accordingly
                      
                         <div class="widget">
                             <div class="widget-main padding-4">

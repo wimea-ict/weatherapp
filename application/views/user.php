@@ -10,6 +10,8 @@
 
 
 <div class="row-fluid">
+      Currently only 3 roles are defined Manager,Observer,Data and O/C.please assign roles accordingly
+                 
     <?php
                                     if (is_array($userID) && count($userID))
                                         {
