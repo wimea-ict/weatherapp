@@ -46,8 +46,34 @@
                         </span>
                     </span>
                 </div>
-                <span class="well-large"> 
-                    <input type="button" class="btn-default" onclick="ExportToExcel('datatable')" value="Export to Excel">
+                <div class="scroll well-large"> 
+                    <label>Month/Year </label>
+ 
+                                                                    <?php $months = array(1 => "January", 2 => "February", 3 => "March", 4 => "April", 5 => "May", 6 => "June", 7 => "July", 8 => "August", 9 => "September", 10 => "October", 11 => "November", 12 => "December"); ?>
+
+                                                                    <div class="span12">
+                       
+                                                                        <select  name="month" id="month" >
+                                                                             <option value=""></option>
+                                                                            <?php for ($m = 1; $m <= 12; $m++)
+                                                                                echo "<option value='$m'>" . $months[$m] . "</option>"
+                                                                                ?>
+                                                                        </select>
+                                                                        <select name="year" id="year" >
+                                                                             <option value=""></option>
+                                                                            <?php for ($y = date('Y'); $y >= 1902; $y--)
+                                                                                echo "<option value='$y'>$y</option>"
+                                                                                ?>
+                                                                        </select>
+                                                                        <button type="button" class="btn btn-info btn-small" id="generate" >generate</button>
+                                                                        <input type="button" class="btn btn-info btn-small" onclick="ExportToExcel('datatable')" value="Export to Excel">
+
+
+
+                                                                    </div>
+    <span id="Loading"  name ="Loading"><img src="<?= base_url(); ?>images/ajax-loader.gif" alt="Ajax Indicator" /></span><br>
+  
+                   <!--        <div class="scroll row-fluid">           
                     <table id="datatable" class="table table-striped table-bordered table-hover">
                     
                     <tbody>
@@ -67,11 +93,9 @@
                             </th>
                         </tr>
                         <tr>
+                      
                             
-                           <td class="center">
-                                                          </td>
-                            
-                             <td class="center" >
+                             <td class="center" colspan="2" >
                                DATE
                             </td>
                             <td class="center" colspan="5">
@@ -108,12 +132,10 @@
                             
                         </tr>
                              <tr>
-                             <td class="center">
+                             <td class="center" colspan="2">
                                
                             </td>
-                               <td class="center">
-                               
-                            </td>
+                            
 
                             <td class="center">
                                 <a href="#">MAX</a>
@@ -180,48 +202,45 @@
                            
                         </tr> 
                          
-                          <?php
-                          
-                               $cr=1;
-                              
+                          <?php                          
+                               $cr=1;                            
                          
-                          if (is_array($dekadal) && count($dekadal)) { 
+                          if (is_array($dekadal) && count($dekadal) ) { 
                            
                            foreach ($dekadal as $loop) { 
+                               $pieces = explode("-", $loop->date);                      
+                               
+                               
                                  ?>                              
                                
                                   <tr>
-                                        <td class="small" ><?php echo $cr++; ?></td>
-                                <td class="small" ><?php echo $loop->date; ?></td>
+                            <td class="small" ><a><?php echo $cr++; ?></a></td>
+                            <td class="small" ><?php echo $loop->date; ?></td>
                             <td class="small" ><?=$loop->max?>  </td>
                             <td class="small">  <?=$loop->min?></td>
                             <td class="small"> <?=$loop->air9;?></td>
                             <td class="small" > <?=$loop->wet9;?></td>
                             <td class="small" > <?=$loop->dew9;?> </td>
-                             <td class="small" > <?=$loop->humid9;?></td>
-                             <td class="small"> <?=$loop->wind9;?></td>
-                             <td class="small"> <?=$loop->speed9;?></td>
-                              <td class="small"> <?=$loop->rain;?></td>
-                             
-                              
-                              
-                                   <td class="small"> <?=$loop->air15;?></td>
+                            <td class="small" > <?=$loop->humid9;?></td>
+                            <td class="small"> <?=$loop->wind9;?></td>
+                            <td class="small"> <?=$loop->speed9;?></td>
+                            <td class="small"> <?=$loop->rain;?></td>
+                            <td class="small"> <?=$loop->air15;?></td>
                             <td class="small" > <?=$loop->wet15;?></td>
                             <td class="small" > <?=$loop->dew15;?> </td>
-                             <td class="small" > <?=$loop->humid15;?></td>
-                             <td class="small"> <?=$loop->wind15;?></td>
-                             <td class="small"> <?=$loop->speed15;?></td>
-                              <td class="small"> <?=$loop->rain15;?></td>
-                                  </tr>
-                              <?php                                
-                          } } ?> 
+                            <td class="small" > <?=$loop->humid15;?></td>
+                            <td class="small"> <?=$loop->wind15;?></td>
+                            <td class="small"> <?=$loop->speed15;?></td>
+                            <td class="small"> <?=$loop->rain15;?></td>
+                                </tr>
+                            <?php  }} ?> 
                     
                        
                     
                     </tbody>
                 </table>     
-                   
-                </span>
+              </div>     -->
+                </div>
           
               
 
@@ -234,11 +253,63 @@
     </div>
         <?php require_once(APPPATH . 'views/footer_report.php'); ?>
 
-
 <script type="text/javascript">
-function ExportToExcel(datatable){
-       var htmltable= document.getElementById('datatable');
-       var html = htmltable.outerHTML;
-       window.open('data:application/vnd.ms-excel,' + encodeURIComponent(html));
+    $('#Loading').hide();
+    $('#Loading_daily').hide();
+
+    $('#station').change(function () {
+        var station = $('#station').val();
+        if (station != "") {
+
+            $.post("<?= base_url() ?>/index.php/station/get", {station: $("#station").val()}
+            , function (station) {
+                var json = JSON.parse(station);
+                $('#number').empty();
+                $('#code').empty();
+                //   console.log(json[0].number);
+                $("#number").val(json[0].number);
+                $("#code").val(json[0].code);
+
+            });
+
+
+        } else {
+
+            $('#number').empty();
+            $('#code').empty();
+        }
+    }); //end change
+
+
+  
+     $("#generate").on ("click",function (e) {
+         
+            var station = $("#station").val();
+            var month = $("#month").val();
+            var year = $("#year").val();
+           
+        $('#meta').hide();
+        $('#Loading').show();
+        $.post("<?php echo base_url() ?>index.php/dekadal/gets", {datenow: $("#datenow").val(),station:$("#station").val(),month:month,year:year}
+        , function (response) {
+            //#emailInfo is a span which will show you message
+            $('#Loading').hide();
+            setTimeout(finishAjaxitem('Loading', escape(response)), 200);
+
+        }); //end change
+
+        function finishAjaxitem(id, response) {
+            $('#' + id).html(unescape(response));
+            $('#' + id).fadeIn();
+        }
+    });
+
+  
+</script>
+<script type="text/javascript">
+    function ExportToExcel(datatable) {
+        var htmltable = document.getElementById('metar');
+        var html = htmltable.outerHTML;
+        window.open('data:application/vnd.ms-excel,' + encodeURIComponent(html));
     }
 </script>

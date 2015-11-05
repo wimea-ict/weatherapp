@@ -4,15 +4,6 @@
         <link href="<?= base_url(); ?>assets/css/bootstrap-responsive.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="<?= base_url(); ?>assets/css/font-awesome.min.css" />
 
-        <!--[if IE 7]>
-          <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
-        <![endif]-->
-
-        <!--page specific plugin styles-->
-
-        <!--fonts-->
-
-        <!--ace styles-->
 
         <link rel="stylesheet" href="<?= base_url(); ?>assets/css/ace.min.css" />
         <link rel="stylesheet" href="<?= base_url(); ?>assets/css/ace-responsive.min.css" />
@@ -426,7 +417,7 @@
 
             <div class="vspace-6"></div>
 
-
+<?php foreach ($dir as $loops){ echo $loops->station_pressure_hpa.','; }?>
         </div><!--/row-->
 
         <div class="hr hr-double hr-dotted hr18"></div>
@@ -598,135 +589,71 @@ $(function () {
 
 
 		</script>
-     	<script type="text/javascript">
-$(function () {
-
-    // Parse the data from an inline table using the Highcharts Data plugin
-    $('#container-pressure').highcharts({
-        data: {
-            table: 'freq',
-            startRow: 1,
-            endRow: 17,
-            endColumn: 7
-        },
-
-        chart: {
-            polar: true,
-            type: 'column'
-        },
-
-        title: {
-            text: 'Wind rose for Makerere weather station'
-        },
-
-        subtitle: {
-            text: 'Source: UNMA'
-        },
-
-        pane: {
-            size: '85%'
-        },
-
-        legend: {
-            align: 'right',
-            verticalAlign: 'top',
-            y: 100,
-            layout: 'vertical'
-        },
-
-        xAxis: {
-            tickmarkPlacement: 'on'
-        },
-
-        yAxis: {
-            min: 0,
-            endOnTick: false,
-            showLastLabel: true,
-            title: {
-                text: 'Frequency (%)'
-            },
-            labels: {
-                formatter: function () {
-                    return this.value + '%';
-                }
-            },
-            reversedStacks: false
-        },
-
-        tooltip: {
-            valueSuffix: '%'
-        },
-
-        plotOptions: {
-            series: {
-                stacking: 'normal',
-                shadow: false,
-                groupPadding: 0,
-                pointPlacement: 'on'
-            }
-        }
-    });
-});
-		</script>
+                <script src="<?= base_url(); ?>js/json2.min.js"></script>
+  <script language="javascript">
+    // code to create a data set that looks like data: [[5, 2], [6, 3], [8, 2]]
+    var windDirection, windSpeed, windDirectionJSON, windSpeedJSON, windDataJSON;
+    windDirection = "[<?php foreach ($dir as $loop){ echo $loop->wind_direction.',';}?>0,89]";
+    windSpeed = "[<?php foreach ($dir as $loop){ echo $loop->wind_speed.',';}?>0,9]";
+    windDirectionJSON = JSON.parse(windDirection);
+    windSpeedJSON = JSON.parse(windSpeed);
+    windDataJSON = [];
+    for (i = 0; i < windDirectionJSON.length; i++) {
+        windDataJSON.push([ windDirectionJSON[i], windSpeedJSON[i] ]);
+    }
+</script>
 		<script type="text/javascript">
 $(function () {
-
-    // Parse the data from an inline table using the Highcharts Data plugin
+    var categories = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW'];
     $('#container-rose').highcharts({
-        data: {
-            table: 'freq',
-            startRow: 1,
-            endRow: 17,
-            endColumn: 7
-        },
-
+        series: [{
+            data: windDataJSON
+        }],
         chart: {
             polar: true,
             type: 'column'
         },
-
         title: {
-            text: 'Wind rose for Makere weather station'
+            text: 'Wind Rose for <?php echo $this ->session->userdata('stationname'); ?>'
         },
-
-        subtitle: {
-            text: 'Source: UNMA'
-        },
-
         pane: {
             size: '85%'
         },
-
         legend: {
             align: 'right',
             verticalAlign: 'top',
             y: 100,
             layout: 'vertical'
         },
-
         xAxis: {
-            tickmarkPlacement: 'on'
+            min: 0,
+            max: 360,
+            type: "",
+            tickInterval: 22.5,
+            tickmarkPlacement: 'on',
+            labels: {
+                formatter: function () {
+                    return categories[this.value / 22.5] + '°';
+                }
+            }
         },
-
         yAxis: {
             min: 0,
             endOnTick: false,
             showLastLabel: true,
             title: {
-                text: 'Frequency (%)'
+                text: 'speed (KT)'
             },
             labels: {
                 formatter: function () {
-                    return this.value + '%';
+                    return this.value + 'KT';
                 }
             },
             reversedStacks: false
         },
-
         tooltip: {
-            valueSuffix: '%'
+            valueSuffix: 'KT'
         },
-
         plotOptions: {
             series: {
                 stacking: 'normal',
@@ -755,18 +682,17 @@ $(function () {
             }
         },
         title: {
-            text: 'Average Atmoshperic pressure'
+            text: 'Monthly  atmospheric pressure'
         },
         subtitle: {
-            text: 'Test options by dragging the sliders below'
+            text: ''
         },
         plotOptions: {
             column: {
-                depth: 25
-            }
+                depth: 25            }
         },
         series: [{
-            data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
+            data: [<?php foreach ($dir as $loops){ echo ($loops->station_pressure_hpa).','; }?> ]
         }]
     });
 

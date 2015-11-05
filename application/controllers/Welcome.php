@@ -31,7 +31,44 @@ class Welcome extends CI_Controller {
     }
 
     public function start() {
-        $this->load->view('view-start');
+        
+           $query = $this->Md->show('daily');
+        //  var_dump($query);
+        if ($query) {
+            $data['daily'] = $query;
+        } else {
+            $data['daily'] = array();
+        }
+        
+         $query = $this->Md->query('select wind_direction,wind_speed,station_pressure_hpa,day from metar where Month(day)="'.date('m').'" AND YEAR(day)="'.  date('Y').'" AND station ="'.$this -> session -> userdata('code').'" ');
+       
+        if ($query) {
+            $data['dir'] = $query;
+        } else {
+            $data['dir'] = array();
+        }
+      //  var_dump($query);
+       
+        $query = $this->Md->show('metar');
+        if ($query) {
+            $data['metars'] = $query;
+        } else {
+            $data['metars'] = array();
+        }
+        $query = $this->Md->show('rain');
+        if ($query) {
+            $data['rains'] = $query;
+        } else {
+            $data['rains'] = array();
+        }
+        $query = $this->Md->show('synoptic');
+        if ($query) {
+            $data['synoptics'] = $query;
+        } else {
+            $data['synoptics'] = array();
+        }
+        
+        $this->load->view('view-start',$data);
     }
 
     public function logout() {

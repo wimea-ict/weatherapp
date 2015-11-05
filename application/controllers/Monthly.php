@@ -35,67 +35,8 @@ class Monthly extends CI_Controller {
         } else {
             $data['stations'] = array();
         }
-         $datetime = "09"."00Z";
-         $datetimes = "15"."00Z";
-         $all = array();
-         $query1 = $this->Md->query("select *  from daily");
-        foreach ($query1 as $v) {
-            $resv = new stdClass();
-           $resv->date = $v->date;
-            $resv->max = $v->max;
-             $resv->min = $v->min;
-              $resv->rain = $v->actual;
-              $resv->actual2= $v->maxi;
-                                       
-                                         $resv->rain = $v->rain;
-                                         $resv->thunder = $v->thunder;
-                                         $resv->fog = $v->fog;
-                                        $resv->haze = $v->haze;
-                                         $resv->storm = $v->storm;
-                                         $resv->quake = $v->quake;
-              
-              
-              
-              
-            $query2 = $this->Md->query("select * from metar WHERE day='".$v->date."'");
-            $results = $query2;
-          //  var_dump($results);
-            foreach($results as $res){
-               
-               if ((strpos($res->datetime, $datetime))&& $res->day==$v->date){       
-              
-               $resv->air9 = $res->air_temperature;
-                 $resv->wet9 = $res->wet_bulb; 
-                   $resv->dew9 = $res->dew_temperature;
-                     $resv->humid9 = $res->humidity; 
-                       $resv->wind9 = $res->wind_direction;
-                         $resv->speed9 = $res->wind_speed; 
-               $resv->visibility9 = $res->visibility;  
-               $resv->hpa9 = $res->station_pressure_hpa; 
-             
-             
-               }
-                if ((strpos($res->datetime, $datetimes))&& $res->day==$v->date){       
-                
-              $resv->air15 = $res->air_temperature;
-                 $resv->wet15 = $res->wet_bulb; 
-                   $resv->dew15 = $res->dew_temperature;
-                     $resv->humid15 = $res->humidity; 
-                       $resv->wind15 = $res->wind_direction;
-                         $resv->speed15 = $res->wind_speed; 
-               $resv->visibility15 = $res->visibility;  
-               $resv->hpa15 = $res->station_pressure_hpa; 
-             
-               }             
-             
-            }
-            array_push($all, $resv);
-        }
-    //    var_dump($all);
-       
-    
-            $data['monthly'] = $all;
-      
+        
+   
         $this->load->view('monthly', $data);
     }
 
@@ -112,6 +53,7 @@ class Monthly extends CI_Controller {
 
          redirect('monthly/', 'refresh');
        }
+       
         
         $this->load->helper(array('form', 'url'));
         
@@ -123,13 +65,13 @@ class Monthly extends CI_Controller {
         $present = $this->input->post('present');
         $cloud = $this->input->post('cloud');
         $station_pressure = $this->input->post('stationhpa');
-          $sea_pressure = $this->input->post('seahpa');
-            $recent_weather = $this->input->post('recent');
-              $air_temperature = $this->input->post('temperature');
-              $humidity = $this->input->post('humidity');
-                 $dew_temperature = $this->input->post('dew');
-                  $wet_bulb = $this->input->post('wet');
-                  $day = $this->input->post('datenow');
+        $sea_pressure = $this->input->post('seahpa');
+        $recent_weather = $this->input->post('recent');
+        $air_temperature = $this->input->post('temperature');
+        $humidity = $this->input->post('humidity');
+        $dew_temperature = $this->input->post('dew');
+        $wet_bulb = $this->input->post('wet');
+        $day = $this->input->post('datenow');
         
         $wind_info = explode(' ', $wind);
         $wind_direction = $wind_info[0];
@@ -173,6 +115,389 @@ class Monthly extends CI_Controller {
               redirect('/metar', 'refresh');            
         }
     }
+      public function gets() {
+        
+        $this->load->helper(array('form', 'url'));
+        //$datenow = trim($this->input->post('datenow'));
+    echo    $station = trim($this->input->post('station'));
+        $monthed = trim($this->input->post('month'));
+        $yeared = trim($this->input->post('year'));
+        
+        if ($station!=" " && $monthed!=" " && $yeared!=" "){
+        unset($sql);
+
+        if ($monthed){
+            $sql[] = "MONTH(date) = '$monthed' ";
+        }
+        if ($yeared){
+            $sql[] = " YEAR(date) = '$yeared' ";
+        }
+       
+        $sql[] = "station = '$station'";
+        
+
+        $query = "SELECT * FROM daily ";
+
+        if (!empty($sql)) {
+            $query .= ' WHERE ' . implode(' AND ', $sql);
+        }
+        $datetime = "09" . "00Z";
+        $datetimes = "15" . "00Z";
+        $all = array();
+        $month = date('m');
+        $year = date('Y');
+        $query1 = $this->Md->query($query);
+        
+        //var_dump($query1);
+        foreach ($query1 as $v) {
+            $resv = new stdClass();
+            $resv->date = $v->date;
+            $resv->max = $v->max;
+            $resv->min = $v->min;
+            $resv->rain = $v->actual;
+            $resv->actual2= $v->maxi;
+              
+           $resv->rain = $v->rain;
+           $resv->thunder = $v->thunder;
+            $resv->fog = $v->fog;
+            $resv->haze = $v->haze;
+            $resv->storm = $v->storm;
+            $resv->quake = $v->quake;
+            
+            $query2 = $this->Md->query("select * from metar WHERE day='" . $v->date . "'");
+            $results = $query2;
+            //var_dump($results);
+            foreach ($results as $res) {
+
+                if ((strpos($res->datetime, $datetime)) && $res->day == $v->date) {
+
+                    $resv->air9 = $res->air_temperature;
+                    $resv->wet9 = $res->wet_bulb;
+                    $resv->dew9 = $res->dew_temperature;
+                    $resv->humid9 = $res->humidity;
+                    $resv->wind9 = $res->wind_direction;
+                    $resv->speed9 = $res->wind_speed;
+                    $resv->visibility9 = $res->visibility;
+                    $resv->hpa9 = $res->station_pressure_hpa;
+                }
+                if ((strpos($res->datetime, $datetimes)) && $res->day == $v->date) {
+
+                    $resv->air15 = $res->air_temperature;
+                    $resv->wet15 = $res->wet_bulb;
+                    $resv->dew15 = $res->dew_temperature;
+                    $resv->humid15 = $res->humidity;
+                    $resv->wind15 = $res->wind_direction;
+                    $resv->speed15 = $res->wind_speed;
+                    $resv->visibility15 = $res->visibility;
+                    $resv->hpa15 = $res->station_pressure_hpa;
+                }
+            }
+            array_push($all, $resv);
+        }
+          
+            echo '   <h4>' .'Station '.$station.'  '. date('F', mktime(0, 0, 0, $monthed, 10)).' '. $yeared . 'Summary</h4>             
+                                         
+   <table id="metar" class="table table-striped table-bordered table-hover">
+
+                    <tbody>  
+                      <tr>
+                             <th>
+                                <label>
+                                  
+                                </label>
+                            </th>
+                            <th colspan="3" >
+                                <label>
+                                  
+                                </label>
+                            </th>
+                            <th colspan="9" >
+                                <label>
+                                    <h3>  Time of Observation 0600Z</h3>
+                                </label>
+                            </th>
+                             <th colspan="9" >
+                                <label>
+                                    <h3>  Time of Observation 1200Z   </h3>
+                                </label>
+                            </th>
+                              <th colspan="2" >
+                                <label>
+                                  
+                                </label>
+                            </th>
+                            <th colspan="10" >
+                                 <h3>  DAYS WITH  </h3>
+                            </th>
+                        </tr>
+               
+                             <tr bgcolor="#F7ECF2">
+                             <td class="center">
+                               DATE
+                            </td>
+
+                            <td class="center" >
+                               MAX
+                            </td>
+                              <td class="center">
+                                <a href="#">MIN</a>
+                            </td>
+                               <td class="center">
+                                <a href="#">SUNSHINE</a>
+                            </td>
+                            
+                              <td class="center">
+                                <a href="#">DB</a>
+                            </td>
+                            
+                              <td class="center">
+                                <a href="#">WB</a>
+                            </td>
+                            <td class="center">
+                                <a href="#">DP</a>
+                            </td>
+                             <td class="center">
+                                VP
+                            </td>
+                             <td class="center">
+                                RH(%)
+                            </td>
+                             <td class="center">
+                                CLP
+                            </td>
+                             <td class="center">
+                                GPM
+                            </td>
+                             <td class="center">
+                              <sup>o</sup>  WIND 
+                            </td>
+                             <td class="center">
+                                DIRECTION
+                            </td>
+                             <td class="center">
+                                FF
+                            </td>
+                              <td class="center">
+                              SPEED(m/s)
+                            </td>
+                            
+                            
+                            
+                              <td class="center">
+                                <a href="#">DB</a>
+                            </td>
+                            
+                              <td class="center">
+                                <a href="#">WB</a>
+                            </td>
+                            <td class="center">
+                                <a href="#">DP</a>
+                            </td>
+                             <td class="center">
+                                VP
+                            </td>
+                             <td class="center">
+                                RH(%)
+                            </td>
+                             <td class="center">
+                                CLP
+                            </td>
+                             <td class="center">
+                                GPM
+                            </td>
+                             <td class="center">
+                                <sup>o</sup>WIND 
+                            </td>
+                             <td class="center">
+                                DIRECTION
+                            </td>
+                             <td class="center">
+                                FF
+                            </td>
+                              <td class="center">
+                                SPEED(m/s)
+                            </td>
+                            
+                            
+                         
+                              <td class="center">
+                                <a href="#">WIND RUN</a>
+                            </td>
+                            
+                              <td class="center">
+                                <a href="#">R/F</a>
+                            </td>
+                            
+                              <td class="center">
+                                <a href="#">R/DAY</a>
+                            </td>
+                             <td class="center">
+                                <a href="#">TS</a>
+                            </td>
+                            
+                              <td class="center">
+                                <a href="#">FG</a>
+                            </td>
+                          
+                              <td class="center">
+                                <a href="#">HZ</a>
+                            </td>
+                           
+                              <td class="center">
+                                <a href="#">HAIL</a>
+                            </td>
+                         
+                              <td class="center">
+                                <a href="#">EARTH QUAKE</a>
+                            </td>                         
+                           
+                           
+                        </tr>  ';
+
+            $cr = 1;
+            if (is_array($all) && count($all)) {
+
+                foreach ($all as $loop) {
+                    
+                    $direction = 'none';
+                    $speed = round(($loop->speed9 * 0.514444), 2);
+                    $speed2 = round(($loop->speed15 * 0.514444), 2);
+                    
+                     if ($loop->wind9==" "){
+                      $direction = 'N/A';
+                      
+                   }
+                    if ($loop->wind15==" "){
+                      $direction2 = 'N/A';
+                      
+                   }
+                   
+                    if (in_array($loop->wind9, range(348, 11.2)))
+                        $direction = 'N';
+                     if (in_array($loop->wind9, range(11.25, 33.75)))
+                        $direction = 'NNE';
+                      if (in_array($loop->wind9, range(33.75, 56.25)))
+                        $direction = 'NE';
+                    if (in_array($loop->wind9, range(56.25, 78.75)))
+                        $direction = 'ENE';
+                    if (in_array($loop->wind9, range(78.75 , 101.25)))
+                        $direction = 'E';
+                    if (in_array($loop->wind9, range(101.25 , 123.75)))
+                        $direction = 'ESE';
+                    if (in_array($loop->wind9, range(123.75 , 146.25)))
+                        $direction = 'SE';
+                    if (in_array($loop->wind9, range(146.25 , 168.75)))
+                        $direction = 'SSE';
+                    if (in_array($loop->wind9, range(168.75 , 191.25)))
+                        $direction = 'S';
+                    if (in_array($loop->wind9, range(191.25 , 213.75)))
+                        $direction = 'SSW';
+                     if (in_array($loop->wind9, range(213.75 , 236.25)))
+                        $direction = 'SW';
+                      if (in_array($loop->wind9, range(236.25 , 258.75)))
+                        $direction = 'WSW';
+                       if (in_array($loop->wind9, range(258.75 , 281.25)))
+                        $direction = 'W';
+                        if (in_array($loop->wind9, range(281.25 , 303.75)))
+                        $direction = 'WNW';
+                    if (in_array($loop->wind9, range(303.75 , 326.25)))
+                        $direction = 'NW';
+                    if (in_array($loop->wind9, range(326.25 , 348.75)))
+                        $direction = 'NNW';                   
+                    
+                    
+                    
+                    if (in_array($loop->wind15, range(348, 11.2)))
+                        $direction2 = 'N';
+                     if (in_array($loop->wind15, range(11.25, 33.75)))
+                        $direction2 = 'NNE';
+                      if (in_array($loop->wind15, range(33.75, 56.25)))
+                        $direction2 = 'NE';
+                    if (in_array($loop->wind15, range(56.25, 78.75)))
+                        $direction2 = 'ENE';
+                    if (in_array($loop->wind15, range(78.75 ,101.25)))
+                        $direction2 = 'E';
+                    if (in_array($loop->wind15, range(101.25, 123.75)))
+                        $direction2 = 'ESE';
+                    if (in_array($loop->wind15, range(123.75 ,146.25)))
+                        $direction2 = 'SE';
+                    if (in_array($loop->wind15, range(146.25 , 168.75)))
+                        $direction2 = 'SSE';
+                    if (in_array($loop->wind9, range(168.75 , 191.25)))
+                        $direction2 = 'S';
+                    if (in_array($loop->wind15, range(191.25 , 213.75)))
+                        $direction2 = 'SSW';
+                     if (in_array($loop->wind15, range(213.75 , 236.25)))
+                        $direction2 = 'SW';
+                      if (in_array($loop->wind15, range(236.25 , 258.75)))
+                        $direction2 = 'WSW';
+                       if (in_array($loop->wind15, range(258.75 , 281.25)))
+                        $direction2 = 'W';
+                        if (in_array($loop->wind15, range(281.25 , 303.75)))
+                        $direction2 = 'WNW';
+                    if (in_array($loop->wind15, range(303.75 , 326.25)))
+                        $direction2 = 'NW';
+                    if (in_array($loop->wind15, range(326.25 , 348.75)))
+                        $direction2 = 'NNW';
+                                
+                    
+                   
+
+                    echo '  <tr>
+                            <td class="small" ><a>' . $cr++ . '</a></td>                           
+                            <td class="small" >' . $loop->max . ' </td>
+                            <td class="small">' . $loop->min . '</td>
+                            <td class="small"></td>
+                            <td class="small">' . $loop->air9 . '</td>
+                            <td class="small" >' . $loop->wet9 . '</td>
+                            <td class="small" >' . $loop->dew9 . '</td>
+                            <td class="small"></td>
+                            <td class="small" >' . $loop->humid9 . '</td>
+                                       <td class="small"></td>
+                                   <td class="small"></td>
+                            <td class="small">' . $loop->wind9 . '<sup>o</sup></td>
+                                 <td class="small">' .$direction . '</td>
+                            <td class="small">' . $loop->speed9 . '</td>
+                                   <td class="small">'.$speed. '</td>
+                          
+                                
+
+
+                            <td class="small">' . $loop->air15 . '</td>
+                            <td class="small" >' . $loop->wet15 . '</td>
+                            <td class="small" >' . $loop->dew15 . ' </td>
+                             <td class="small"></td>
+                            <td class="small" >' . $loop->humid15 . '</td>
+                                  <td class="small"></td>
+                               <td class="small"></td>
+                            <td class="small">' . $loop->wind15 . '<sup>o</sup></td>
+                                 <td class="small">' .$direction2 . '</td>
+                            <td class="small">' . $loop->speed15 . '</td>
+                                   <td class="small">'.$speed2. '</td>
+                             <td class="small"> </td>
+                              <td class="small"> </td>
+                              
+                              <td class="small" >'.$loop->rain.'</td>
+                              <td class="small">'.$loop->thunder.'</td>
+                              <td class="small">'.$loop->fog .'</td>
+                              <td class="small">'.$loop->haze .' </td>
+                              <td class="small">'.$loop->storm.' </td>
+                              </tr> ';
+                }
+
+
+                echo '</tbody>
+                </table>  ';
+            } else {
+
+                echo date('F', mktime(0, 0, 0, $monthed, 10)). ' has no values ';
+            }
+        }else{
+            echo 'Please select/input the criteria to generate this report';
+        }
+    }
+
+ 
     public  function edit(){
         $this->load->helper(array('form', 'url'));
          $id = $this->uri->segment(3);
