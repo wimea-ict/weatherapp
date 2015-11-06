@@ -132,16 +132,23 @@
 
                         <ul class="dropdown-menu">
                              <li>
-                                <a target="myframe" href="<?php echo base_url() . "index.php/welcome/reports/"; ?>">All</a>
+                                <a target="myframe" href="<?php echo base_url() . "index.php/welcome/reports/"; ?>">Rainfall card</a>
                             </li>
                             <li>
                                 <a target="myframe" href="<?php echo base_url() . "index.php/dekadal/"; ?>">Dekadal</a>
                             </li>
-<!--                            <li>
-                                <a target="myframe" href="<?php echo base_url() . "index.php/rainfall/"; ?>">Rainfall</a>
-                            </li>-->
+                          <li>
+                                <a target="myframe" href="<?php echo base_url() . "index.php/rainfall/report"; ?>">Rainfall report(6a)</a>
+                            </li>
                              <li>
-                                <a target="myframe" href="<?php echo base_url() . "index.php/monthly/"; ?>">Monthly</a>
+                                <a target="myframe" href="<?php echo base_url() . "index.php/monthly/"; ?>">Monthly summary</a>
+                            </li>
+                            
+                              <li>
+                                <a target="myframe" href="<?php echo base_url() . "index.php/climatological/"; ?>">Climatological observations </a>
+                            </li>
+                             <li>
+                                <a target="myframe" href="<?php echo base_url() . "index.php/metar/report"; ?>">Metar information </a>
                             </li>
 
                         </ul>    

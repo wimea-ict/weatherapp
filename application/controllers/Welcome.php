@@ -240,10 +240,6 @@ class Welcome extends CI_Controller {
             $resv->evap = $v->evap;
             $resv->evaptype2 = $v->evaptype2;
             $resv->evap = $v->evap;
-
-
-
-
             $query2 = $this->Md->query("select * from metar WHERE day='" . $v->date . "'");
             $results = $query2;
             //  var_dump($results);

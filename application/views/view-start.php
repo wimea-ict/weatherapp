@@ -124,21 +124,21 @@
                         <li class="active">
                             <a data-toggle="tab" href="#home3">
                                 <i class="pink icon-dashboard bigger-110"></i>
-                                Monthly rainfall report(FORM 496)
+                              Wind rose & atmospheric pressure
                             </a>
                         </li>
 
                         <li>
                             <a data-toggle="tab" href="#profile3">
                                 <i class="blue icon-user bigger-110"></i>
-                                Weather Summary form (FORM 10)
+                                Average weather data
                             </a>
                         </li>
 
                         <li>
                             <a data-toggle="tab" href="#dropdown13">
                                 <i class="icon-rocket"></i>
-                                Climatological Form(626A)
+                           Average temperatures
                             </a>
                         </li>
                     </ul>

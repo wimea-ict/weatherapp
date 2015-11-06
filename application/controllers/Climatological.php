@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Metar extends CI_Controller {
+class Climatological extends CI_Controller {
 
     function __construct() {
 
@@ -16,146 +16,203 @@ class Metar extends CI_Controller {
     }
 
     public function index() {
-
-        $query = $this->Md->show('metar');
+        // $query = $this->Md->show('metar');
         //  var_dump($query);
-        if ($query) {
-            $data['users'] = $query;
-        } else {
-            $data['users'] = array();
-        }
-        $query = $this->Md->show('role');
-        if ($query) {
-            $data['roles'] = $query;
-        } else {
-            $data['roles'] = array();
-        }
+   
         $query = $this->Md->show('station');
         if ($query) {
             $data['stations'] = $query;
         } else {
             $data['stations'] = array();
         }
-        // get($field,$value,$table)
-        $query = $this->Md->get('day', date('Y-m-d'), 'metar');
-        if ($query) {
-            $data['metas'] = $query;
-        } else {
-            $data['metas'] = array();
-        }
 
-        $this->load->view('metar', $data);
-    }
-     public function report() {
 
-             
-        $query = $this->Md->show('station');
-        if ($query) {
-            $data['stations'] = $query;
-        } else {
-            $data['stations'] = array();
-        }
-        // get($field,$value,$table)
-        $query = $this->Md->get('day', date('Y-m-d'), 'metar');
-        if ($query) {
-            $data['metas'] = $query;
-        } else {
-            $data['metas'] = array();
-        }
-
-        $this->load->view('metar-report', $data);
+        $this->load->view('Climatological-form', $data);
     }
 
-    public function everyday() {
+    public function gets() {
 
-        $query = $this->Md->show('metar');
-        //  var_dump($query);
-        if ($query) {
-            $data['users'] = $query;
-        } else {
-            $data['users'] = array();
-        }
-        $query = $this->Md->get('station', $this->session->userdata('stationname'), 'daily');
-        //  var_dump($query);
-        if ($query) {
-            $data['daily'] = $query;
-        } else {
-            $data['daily'] = array();
-        }
-        $query = $this->Md->show('role');
-        if ($query) {
-            $data['roles'] = $query;
-        } else {
-            $data['roles'] = array();
-        }
-        $query = $this->Md->show('station');
-        if ($query) {
-            $data['stations'] = $query;
-        } else {
-            $data['stations'] = array();
-        }
-        // get($field,$value,$table)
-        $query = $this->Md->get('day', date('Y-m-d'), 'metar');
-        if ($query) {
-            $data['metas'] = $query;
-        } else {
-            $data['metas'] = array();
-        }
+        $this->load->helper(array('form', 'url'));
+        //$datenow = trim($this->input->post('datenow'));
+        $station = trim($this->input->post('station'));
+        $monthed = trim($this->input->post('month'));
+        $yeared = trim($this->input->post('year'));
 
-        $this->load->view('daily', $data);
-    }
+        if ($station != " " && $monthed != " " && $yeared != " ") {
+            unset($sql);
 
-    public function rainfall() {
+            if ($monthed) {
+                $sql[] = "MONTH(date) = '$monthed' ";
+            }
+            if ($yeared) {
+                $sql[] = " YEAR(date) = '$yeared' ";
+            }
 
-        $query = $this->Md->show('metar');
-        //  var_dump($query);
-        if ($query) {
-            $data['users'] = $query;
-        } else {
-            $data['users'] = array();
-        }
-        $query = $this->Md->show('role');
-        if ($query) {
-            $data['roles'] = $query;
-        } else {
-            $data['roles'] = array();
-        }
-        $query = $this->Md->show('station');
-        if ($query) {
-            $data['stations'] = $query;
-        } else {
-            $data['stations'] = array();
-        }
-        $query = $this->Md->show('rain');
-        if ($query) {
-            $data['rain'] = $query;
-        } else {
-            $data['rain'] = array();
-        }
-        // get($field,$value,$table)
-        $query = $this->Md->get('day', date('Y-m-d'), 'metar');
-        if ($query) {
-            $data['metas'] = $query;
-        } else {
-            $data['metas'] = array();
-        }
+            $sql[] = "station = '$station'";
 
-        $this->load->view('rain', $data);
+
+            $query = "SELECT * FROM daily ";
+
+            if (!empty($sql)) {
+                $query .= ' WHERE ' . implode(' AND ', $sql);
+            }
+            
+            $datetime = "09" . "00Z";
+            $datetimes = "15" . "00Z";
+            $all = array();
+            $month = date('m');
+            $year = date('Y');
+            $query1 = $this->Md->query($query);
+
+            //var_dump($query1);
+            foreach ($query1 as $v) {
+                $resv = new stdClass();
+                $resv->date = $v->date;
+                $resv->max = $v->max;
+                $resv->min = $v->min;
+                $resv->rain = $v->actual;
+                 $resv->actual2 = $v->maxi;
+
+            $resv->rain = $v->rain;
+            $resv->thunder = $v->thunder;
+            $resv->fog = $v->fog;
+            $resv->haze = $v->haze;
+            $resv->storm = $v->storm;
+            $resv->quake = $v->quake;
+            $resv->height = $v->height;
+            $resv->duration = $v->duration;
+            $resv->sunshine = $v->sunshine;
+            $resv->radiationtype = $v->radiationtype;
+            $resv->radiation = $v->radiation;
+            $resv->evaptype1 = $v->evaptype1;
+            $resv->evap = $v->evap;
+            $resv->evaptype2 = $v->evaptype2;
+            $resv->evap = $v->evap;
+                
+                
+                
+                
+                $query2 = $this->Md->query("select * from metar WHERE day='" . $v->date . "'");
+                $results = $query2;
+                //var_dump($results);
+                foreach ($results as $res) {
+
+                    if ((strpos($res->datetime, $datetime)) && $res->day == $v->date) {
+
+                        $resv->air9 = $res->air_temperature;
+                        $resv->wet9 = $res->wet_bulb;
+                        $resv->dew9 = $res->dew_temperature;
+                        $resv->humid9 = $res->humidity;
+                        $resv->wind9 = number_format($res->wind_direction,0);
+                        $resv->speed9 = $res->wind_speed;
+                        $resv->visibility9 = $res->visibility;
+                        $resv->hpa9 = $res->station_pressure_hpa;
+                    }
+                    if ((strpos($res->datetime, $datetimes)) && $res->day == $v->date) {
+
+                        $resv->air15 = $res->air_temperature;
+                        $resv->wet15 = $res->wet_bulb;
+                        $resv->dew15 = $res->dew_temperature;
+                        $resv->humid15 = $res->humidity;
+                        $resv->wind15 = number_format($res->wind_direction,0);
+                        $resv->speed15 = $res->wind_speed;
+                        $resv->visibility15 = $res->visibility;
+                        $resv->hpa15 = $res->station_pressure_hpa;
+                    }
+                }
+                array_push($all, $resv);
+            }
+
+            echo '   <h4>' . 'Station ' . $station . '  ' . date('F', mktime(0, 0, 0, $monthed, 10)) . ' ' . $yeared . ' Climatological observations</h4>             
+                                         
+    <table id="sample-table-2" class="table table-striped table-bordered table-hover">
+
+                                            <tbody>
+                                                <tr>
+                                                    <th><label>Day </label> </th>
+                                                    <th colspan="5" ><label>0600Z <br>TEMPERATURES <sup>o</sup>C</label> </th>
+                                                    <th > <label> 0600Z Relative humidity(%) </label></th>
+                                                    <th colspan="2" ><label>Anemometer</label> </th>
+                                                    <th colspan="2" >  <label>RAINFALL </label> </th>
+                                                    <th> <label>sunshine Hrs. </label></th>
+                                                    <th colspan="2" ><label>Radiometer</label> </th>
+                                                    <th colspan="4" > <label> EVAP.PANS</label>   </th>
+                                            <th colspan="3" ><label>1200Z <br>TEMPERATURES <sup>o</sup>C</label> </th>
+                                            <th > <label>1200Z Relative humidity(%) </label></th>
+                                            
+                                            </tr>
+
+                                            <tr bgcolor="#F7ECF2">
+                                                <td class="center"> </td>
+                                                <td class="center"><a href="#">DRY BULB</a>  </td>
+                                                <td class="center"><a href="#">WET BULB</a>   </td>
+                                                <td class="center"> <a href="#">DEW POINT</a></td>
+                                                <td class="center" > MAX </td>
+                                                <td class="center"> <a href="#">MIN</a> </td>
+                                                <td class="center"><a href="#"></a>   </td>
+                                                <td class="center">Height   </td>
+                                                <td class="center">   Wind run km.</td>
+                                                <td class="center"> Amount(mm) </td>
+                                                <td class="center">Duration (Hrs)</td>
+                                                <td class="center"></td>
+                                                <td class="center">Type </td>
+                                                <td class="center"> <a href="#">Radiation</a></td>
+                                                <td class="center">Type </td>
+                                                <td class="center"><a href="#">EVAP(mm)</a>  </td>
+                                                <td class="center">Type </td>
+                                                <td class="center"><a href="#">EVAP(mm)</a>  </td>
+                                                <td class="center"><a href="#">DRY BULB</a>  </td>
+                                                <td class="center"><a href="#">WET BULB</a>   </td>
+                                                <td class="center"> <a href="#">DEW POINT</a></td>
+                                                <td class="center"></td>
+                                               
+                                            </tr>  ';
+
+            $cr = 1;
+            if (is_array($all) && count($all)) {
+                // var_dump($all);
+
+                foreach ($all as $loop) {   
+
+                    echo '   </tr>  <td class="small" '.$cr++.'</td>
+                                                        <td class="small"> '.$loop->air9.'</td>
+                                                        <td class="small" >'.$loop->wet9.'</td>
+                                                        <td class="small" >'.$loop->dew9.' </td>
+                                                        <td class="small" >'.$loop->max .'  </td>
+                                                        <td class="small">'.$loop->min.'</td>
+                                                        <td class="small">'. $loop->humid9.'</td>
+                                                        <td class="small">'.$loop->height.'</td>
+                                                        <td class="small">'. $loop->wind.'</td>
+                                                        <td class="small">'.$loop->duration.'</td>
+                                                        <td class="small"></td>
+                                                        <td class="small">'. $loop->type.'</td>
+                                                        <td class="small">'.$loop->radiation .'</td>
+                                                        <td class="small">'.$loop->evaptype1.'</td>
+                                                        <td class="small" >'. $loop->evap1.'</td>
+                                                        <td class="small">'.$loop->evaptype2 .'</td>
+                                                        <td class="small" >'. $loop->evap2.'</td>
+                                                        <td class="small">'.$loop->air15.'</td>
+                                                        <td class="small" >'. $loop->wet15.'</td>
+                                                        <td class="small" >'.$loop->dew15.' </td>
+                                                        <td class="small">'.$loop->humidity.'</td>
+                                                        <td class="small"></td>
+                                                      
+                                        </tr> ';
+                }
+
+
+                echo '</tbody>
+                </table>  ';
+            } else {
+
+                echo date('F', mktime(0, 0, 0, $monthed, 10)) . ' has no values ';
+            }
+        } else {
+            echo 'Please select/input the criteria to generate this report';
+        }
     }
 
     public function save() {
-
-        $sessdata = $this->session->userdata('actions');
-        if ($this->helper->allowed($sessdata, 'save')) {
-
-            $this->session->set_flashdata('msg', $this->session->userdata('actions') . '<div class="alert alert-error">
-                                                   
-                                                <strong>
-                                               You do not have permission to execute this task	</strong>									
-						</div>');
-
-            redirect('metar/', 'refresh');
-        }
 
         $this->load->helper(array('form', 'url'));
 
@@ -187,8 +244,9 @@ class Metar extends CI_Controller {
                 $metar = array('station' => $station, 'type' => $type, 'datetime' => $datetime, 'timezone' => 'GMT', 'wind_direction' => $wind_direction, 'wind_speed' => $wind_speed, 'unit' => $wind_unit, 'visibility' => $visibility, 'present_weather' => $present, 'cloud' => $cloud, 'air_temperature' => $air_temperature, 'humidity' => $humidity, 'dew_temperature' => $dew_temperature, 'wet_bulb' => $wet_bulb, 'station_pressure_hpa' => $station_pressure, 'sea_pressure_hpa' => $sea_pressure, 'recent_weather' => $recent_weather, 'submitted' => date('Y-m-d H:m:s'), 'user' => 'test', 'day' => $day);
                 $this->Md->save($metar, 'metar');
 
-                $log = array('user' => $this->session->userdata('name'), 'userid' => $this->session->userdata('id'), 'action' => 'save', 'details' => 'meta information saved ', 'date' => date('Y-m-d H:i:s'), 'ip' => $this->input->ip_address(), 'url' => '');
+                $log = array('user' => $this->session->userdata('username'), 'userid' => $this->session->userdata('id'), 'action' => 'save', 'details' => 'meta information saved ', 'date' => date('Y-m-d H:i:s'), 'ip' => $this->input->ip_address(), 'url' => '');
                 $this->Md->save($log, 'logs');
+
 
                 redirect('/metar', 'refresh');
                 return;
@@ -276,51 +334,9 @@ class Metar extends CI_Controller {
         $metar = array('email' => $email, 'name' => $name, 'contact' => $contact, 'role' => $role, 'active' => 'true', 'station' => $station, 'create' => date('Y-m-d'));
         // update($id, $data,$table)
         $this->Md->update($id, $metar, 'metar');
-        $log = array('user' => $this->session->userdata('name'), 'userid' => $this->session->userdata('id'), 'action' => 'updated', 'details' => ' ', 'date' => date('Y-m-d H:i:s'), 'ip' => $this->input->ip_address(), 'url' => '');
-        $this->Md->save($log, 'logs');
         $this->session->set_flashdata('msg', 'The ' . $name . ' has been updated');
         redirect('/Role', 'refresh');
         return;
-    }
-
-    public function update_daily() {
-
-        $this->load->helper(array('form', 'url'));
-        $id = $this->input->post('id');
-        //  $id = '3';
-        $max = $this->input->post('max');
-        $min = $this->input->post('min');
-        $actual = $this->input->post('actual');
-        $anemometer = $this->input->post('anemometer');
-        $wind = $this->input->post('wind');
-        $maxi = "";
-        $rain = $this->input->post('rain');
-        $thunder = $this->input->post('thunder');
-        $fog = $this->input->post('fog');
-        $haze = $this->input->post('haze');
-        $storm = $this->input->post('storm');
-        $quake = $this->input->post('quake');
-        $height = $this->input->post('height');
-        $duration = $this->input->post('duration');
-        // $duration = '5'; 
-        $sunshine = $this->input->post('sunshine');
-        $radiationtype = $this->input->post('radiationtype');
-        $radiation = $this->input->post('radiation');
-        $evaptype1 = $this->input->post('evaptype1');
-        $evap1 = $this->input->post('evap1');
-        $evaptype2 = $this->input->post('evaptype2');
-        $evap2 = $this->input->post('evap2');
-        $height = $this->input->post('height');
-
-        if ($id != "") {
-            $daily = array('max' => $max, 'min' => $min, 'actual' => $actual, 'anemometer' => $anemometer, 'height' => $height, 'wind' => $wind, 'maxi' => "", 'user' => $this->session->userdata('username'), 'submitted' => $submitted, 'approved' => $approved, 'rain' => $rain, 'thunder' => $thunder, 'fog' => $fog, 'haze' => $haze, 'storm' => $storm, 'quake' => $quake, 'height' => $height, 'duration' => $duration, 'sunshine' => $sunshine, 'radiationtype' => $radiationtype, 'radiation' => $radiation, 'evaptype1' => $evaptype1, 'evap1' => $evap1, 'evaptype2' => $evaptype2, 'evap2' => $evap2);
-            $this->Md->update($id, $daily, 'daily');
-            $log = array('user' => $this->session->userdata('username'), 'userid' => $this->session->userdata('id'), 'action' => 'update daily weather information', 'details' => $this->session->userdata('stationname') . 'update of weather information ', 'date' => date('Y-m-d H:i:s'), 'ip' => $this->input->ip_address(), 'url' => '');
-            $this->Md->save($log, 'logs');
-            echo '<div class="alert alert-error">     <strong>
-                                              information updated</strong>									
-						</div>';
-        }
     }
 
     public function delete() {
@@ -367,42 +383,22 @@ class Metar extends CI_Controller {
     }
 
     public function get() {
-
         $this->load->helper(array('form', 'url'));
-        //$datenow = trim($this->input->post('datenow'));
-        $station = trim($this->input->post('station'));
-        $day = trim($this->input->post('day'));
-        $month = trim($this->input->post('month'));
-        $year = trim($this->input->post('year'));
-        unset($sql);
+        $date = trim($this->input->post('date'));
 
-        if ($day)
-            $sql[] = "DAY(day) = '$day' ";
-        if ($month)
-            $sql[] = "MONTH(day) = '$month' ";
-        if ($year)
-            $sql[] = " YEAR(day) = '$year' ";
-        if ($station)
-            $sql[] = "station = '$station' ";       
-
-        $query = "SELECT * FROM metar";
-
-        if (!empty($sql)) {
-            $query .= ' WHERE ' . implode(' AND ', $sql);
-        }
-
-        $get_result = $this->Md->query($query);
+        $get_result = $this->Md->get('day', $date, 'metar');
 
         // var_dump($get_result);
         if ($get_result) {
 
-            echo '   <h4>' . $day.'/'.$month.'/'.$year. ' METAR DATA</h4>             
+            echo '  <div class="well well-large" id="meta" >
+                                                <div class="widget-body">
                                          
-   <table id="metar" class="table table-striped table-bordered table-hover">
+   <table id="sample-table-2" class="table table-striped table-bordered table-hover">
 
                     <tbody>  
                           
-                        <tr bgcolor="#F7ECF2">
+                        <tr>
                             <td class="center-head">
                                 <label>
                                     METAR/SPECI
@@ -420,12 +416,6 @@ class Metar extends CI_Controller {
 
                             <td class="center">
                                 <a href="#">Dddff/f<span class="foot-note">m</span>/f<span class="foot-note">m</span></a>
-                            </td>
-                             <td class="center">
-                                <a href="#">Speed M/S</a>
-                            </td>
-                              <td class="center">
-                                <a href="#">Direction</a>
                             </td>
 
 
@@ -476,29 +466,15 @@ class Metar extends CI_Controller {
                         </tr>';
             if (is_array($get_result) && count($get_result)) {
                 foreach ($get_result as $loop) {
-                    $direction = 'none' ;
-                         $speed = round(($loop->wind_speed*0.514444),2);                     
-                    if(in_array($loop->wind_direction, range(0, 90)))$direction ='NE';
-                     if(in_array($loop->wind_direction, range(90, 180)))$direction ='SE';
-                    if(in_array($loop->wind_direction, range(180, 270)))$direction ='SW';
-                     if(in_array($loop->wind_direction, range(270, 360)))$direction ='NW';
-                     
-                       if($loop->wind_direction==0) $direction = 'N';
-                      if($loop->wind_direction==45) $direction = 'NE';
-                        if($loop->wind_direction==90) $direction = 'E';
-                          if($loop->wind_direction==180) $direction = 'S';
-                            if($loop->wind_direction==270) $direction = 'W';  
 
                     echo '<tr>
                             <td class="small" >' . $loop->type . '</td>
                             <td class="small" >' . $loop->station . ' </td>
                             <td class="small">' . $loop->datetime . '</td>
                             <td class="small">' . $loop->wind_direction . ' ' . $loop->wind_speed . ' ' . $loop->unit . '</td>
-                               <td class="small">' .$speed. '</td>  
-                     <td class="small">' .$direction. '</td>
                      <td class="small" >' . $loop->visibility . '</td>
-                     <td class="small" >' . $loop->present_weather . '</td>
-                     <td class="small">' . $loop->cloud . '</td>
+                      <td class="small" >' . $loop->present_weather . '</td>
+                                <td class="small">' . $loop->cloud . '</td>
                                               <td class="small">' . $loop->air_temperature . '</td>
                                            
                                             <td class="small">' . $loop->dew_temperature . '</td>
@@ -523,7 +499,11 @@ class Metar extends CI_Controller {
             }
 
             echo '</tbody>
-                </table>  ';
+                </table>
+
+
+                                                </div><!--/widget-body-->
+                                            </div>';
         } else {
 
             echo $date . ' no values ';
@@ -532,43 +512,18 @@ class Metar extends CI_Controller {
 
     public function daily() {
 
-        $sessdata = $this->session->userdata('actions');
-        if ($this->helper->allowed($sessdata, 'save')) {
-
-            echo $this->session->userdata('actions') . '<div class="alert alert-error">     <strong>
-                                               You do not have permission to execute this task	</strong>									
-						</div>';
-            redirect('metar/', 'refresh');
-        }
         $this->load->helper(array('form', 'url'));
         //{date:date,max:max,min:min,actual:actual,anemometer:anemometer,wind:wind,maxi:maxi,station:station}
 
         $date = $this->input->post('date');
-        // $date = date('Y-m-d');
         $station = $this->input->post('station');
-        // $station = "muk";
         $max = $this->input->post('max');
         $min = $this->input->post('min');
         $actual = $this->input->post('actual');
         $anemometer = $this->input->post('anemometer');
         $wind = $this->input->post('wind');
-        $maxi = "";
-        $rain = $this->input->post('rain');
-        $thunder = $this->input->post('thunder');
-        $fog = $this->input->post('fog');
-        $haze = $this->input->post('haze');
-        $storm = $this->input->post('storm');
-        $quake = $this->input->post('quake');
-        $height = $this->input->post('height');
-        $duration = $this->input->post('duration');
-        $sunshine = $this->input->post('sunshine');
-        $radiationtype = $this->input->post('type');
-        $radiation = $this->input->post('radiation');
-        $evaptype1 = $this->input->post('evaptype1');
-        $evap1 = $this->input->post('evap1');
-        $evaptype2 = $this->input->post('evaptype2');
-        $evap2 = $this->input->post('evap2');
-        $user = '';
+        $maxi = $this->input->post('maxi');
+        $user = 'test';
         $submitted = date('Y-m-d');
         $approved = 'false';
 
@@ -576,6 +531,7 @@ class Metar extends CI_Controller {
             echo '<div class="alert alert-error"><strong>Please select a station</strong></div>';
             return;
         }
+
         //echo $date;
         $get_result = $this->Md->check($date, 'date', 'daily');
         // var_dump($get_result);
@@ -583,46 +539,9 @@ class Metar extends CI_Controller {
             echo '<div class="alert alert-error"><strong> Data already submitted for ' . $date . '</strong></div>';
         } else {
 
-            $daily = array('station' => $station, 'date' => $date, 'max' => $max, 'min' => $min, 'actual' => $actual, 'anemometer' => $anemometer, 'wind' => $wind, 'maxi' => $maxi, 'user' => $this->session->userdata('username'), 'submitted' => $submitted, 'approved' => $approved, 'rain' => $rain, 'thunder' => $thunder, 'fog' => $fog, 'haze' => $haze, 'storm' => $storm, 'quake' => $quake, 'height' => $height, 'duration' => $duration, 'sunshine' => $sunshine, 'radiationtype' => $radiationtype, 'radiation' => $radiation, 'evaptype1' => $evaptype1, 'evap1' => $evap1, 'evaptype2' => $evaptype2, 'evap2' => $evap2);
+            $daily = array('station' => $station, 'date' => $date, 'max' => $max, 'min' => $min, 'actual' => $actual, 'anemometer' => $anemometer, 'wind' => $wind, 'maxi' => $maxi, 'user' => $user, 'submitted' => $submitted, 'approved' => $approved);
             $this->Md->save($daily, 'daily');
-            $log = array('user' => $this->session->userdata('username'), 'userid' => $this->session->userdata('id'), 'action' => 'saved daily weather information', 'details' => $this->session->userdata('stationname') . 'submit of weather information ', 'date' => date('Y-m-d H:i:s'), 'ip' => $this->input->ip_address(), 'url' => '');
-            $this->Md->save($log, 'logs');
-            echo '<br><div class="alert alert-info span12"><strong>Information  submitted</strong></div>';
-        }
-    }
-
-    public function rain() {
-
-        $this->load->helper(array('form', 'url'));
-        //date:date,rain:rain,time:time,duration:duration
-
-        $date = $this->input->post('date');
-        // $date = date('Y-m-d');
-        $rain = $this->input->post('rain');
-        $station = $this->input->post('station');
-        $time = $this->input->post('time');
-        $duration = $this->input->post('duration');
-
-        $user = $this->session->userdata('username');
-        $submitted = date('Y-m-d');
-
-        if ($station == "") {
-            echo '<div class="alert alert-error"><strong>Please select a station</strong></div>';
-            return;
-        }
-        //echo $date;
-        $get_result = $this->Md->check($time, 'rain', 'rain');
-        // var_dump($get_result);
-        if (!$get_result) {
-            echo '<div class="alert alert-error"><strong> Data already submitted for ' . $time . '</strong></div>';
-        } else {
-
-            $rain = array('station' => $station, 'date' => $date, 'rain' => $rain, 'time' => $time, 'duration' => $duration, 'user' => $user, 'submitted' => $submitted);
-            $this->Md->save($rain, 'rain');
-            $log = array('user' => $this->session->userdata('username'), 'userid' => $this->session->userdata('id'), 'action' => 'saved daily rainfall information', 'details' => $this->session->userdata('stationname') . 'submit of weather information ', 'date' => date('Y-m-d H:i:s'), 'ip' => $this->input->ip_address(), 'url' => '');
-            $this->Md->save($log, 'logs');
-
-            echo '<br><div class="alert alert-info"><strong>Rainfall information  submitted</strong></div>';
+            echo '<div class="alert alert-info"><strong>Information  submitted</strong></div>';
         }
     }
 

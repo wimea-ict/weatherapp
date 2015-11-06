@@ -260,119 +260,119 @@ class Dekadal extends CI_Controller {
                     //  var_dump($loop);
 
                     $dir2 = round($loop->wind15);
-                  echo  $dir1 = round($loop->wind9);
+                    $dir1 = round($loop->wind9);
 
                     $speed = round(($loop->speed9 * 0.514444), 2);
                     $speed2 = round(($loop->speed15 * 0.514444), 2);
 
                     if ($dir == "") {
-                        $dir = -1;
+                        $dir = "n/a";
                     } else {
                         $dir = $loop->wind9;
                     }
                     if ($dir2 == "") {
-                        $dir2 = -1;
+                        $dir2 = "n/a";
                     } else {
                         $dir2 = $loop->wind15;
                     }
 
-                    if (in_array($dir, range(1, 11.2))) {
+                    if (in_array($dir, range(0, 11))) {
                         $direction = $dir;
                     }
-                    if (in_array($dir, range(11.25, 33.75))) {
+                    if (in_array($dir, range(11, 34))) {
                         $direction = 'NNE';
                     }
-                    if (in_array($dir, range(33.76, 56.25))) {
+                    if (in_array($dir, range(34, 56))) {
                         $direction = 'NE';
                     }
-                    if (in_array($dir, range(56.26, 78.75))) {
+                    if (in_array($dir, range(56, 79))) {
                         $direction = 'ENE';
                     }
-                    if (in_array($dir, range(78.76, 101.25))) {
+                    if (in_array($dir, range(79, 101))) {
                         $direction = 'E';
                     }
-                    if (in_array($dir, range(101.26, 123.75))) {
+                    if (in_array($dir, range(101, 124))) {
                         $direction = 'ESE';
                     }
-                    if (in_array($dir, range(123.76, 146.25))) {
+                    if (in_array($dir, range(124, 146))) {
                         $direction = 'SE';
                     }
-                    if (in_array($dir, range(146.26, 168.75))) {
+                    if (in_array($dir, range(146, 169))) {
                         $direction = 'SSE';
                     }
-                    if (in_array($dir, range(168.76, 191.25), 0.1)) {
+                    if (in_array($dir, range(169, 191))) {
                         $direction = 'S';
                     }
-                    if (in_array($dir, range(191.26, 213.75))) {
+                    if (in_array($dir, range(191, 214))) {
                         $direction = 'SSW';
                     }
-                    if (in_array($dir, range(213.76, 236.25))) {
+                    if (in_array($dir, range(214, 236))) {
                         $direction = 'SW';
                     }
-                    if (in_array($dir, range(236.26, 258.75))) {
+                    if (in_array($dir, range(236, 259))) {
                         $direction = 'WSW';
                     }
-                    if (in_array($dir, range(258.76, 281.25))) {
+                    if (in_array($dir, range(259, 281))) {
                         $direction = 'W';
                     }
-                    if (in_array($dir, range(281.26, 303.75))) {
+                    if (in_array($dir, range(281, 304))) {
                         $direction = 'WNW';
                     }
-                    if (in_array($dir, range(303.76, 326.25))) {
+                    if (in_array($dir, range(304, 326))) {
                         $direction = 'NW';
                     }
-                    if (in_array($dir, range(326.26, 360))) {
+                    if (in_array($dir, range(326, 360))) {
                         $direction = 'NNW';
                     }
 
 
 
-                    if (in_array($dir2, range(0, 11.2))) {
+                    if (in_array($dir2, range(0, 11))) {
                         $direction2 = 'N';
                     }
-                    if (in_array($dir2, range(11.25, 33.75))) {
+                    if (in_array($dir2, range(11, 34))) {
                         $direction2 = 'NNE';
                     }
-                    if (in_array($dir2, range(33.75, 56.25))) {
+                    if (in_array($dir2, range(34, 56))) {
                         $direction2 = 'NE';
                     }
-                    if (in_array($dir2, range(56.25, 78.75))) {
+                    if (in_array($dir2, range(56, 79))) {
                         $direction2 = 'ENE';
                     }
-                    if (in_array($dir2, range(78.75, 101.25))) {
+                    if (in_array($dir2, range(79, 101))) {
                         $direction2 = 'E';
                     }
-                    if (in_array($dir2, range(101.25, 123.75))) {
+                    if (in_array($dir2, range(101, 124))) {
                         $direction2 = 'ESE';
                     }
-                    if (in_array($dir2, range(123.75, 146.25))) {
+                    if (in_array($dir2, range(124, 146))) {
                         $direction2 = 'SE';
                     }
-                    if (in_array($dir2, range(146.25, 168.75))) {
+                    if (in_array($dir2, range(146, 169))) {
                         $direction2 = 'SSE';
                     }
-                    if (in_array($dir2, range(168.75, 191.25))) {
+                    if (in_array($dir2, range(169, 191))) {
                         $direction2 = 'S';
                     }
-                    if (in_array($dir2, range(191.25, 213.75))) {
+                    if (in_array($dir2, range(191, 214))) {
                         $direction2 = 'SSW';
                     }
-                    if (in_array($dir2, range(213.75, 236.25))) {
+                    if (in_array($dir2, range(214, 236))) {
                         $direction2 = 'SW';
                     }
-                    if (in_array($dir2, range(236.25, 258.75))) {
+                    if (in_array($dir2, range(236, 259))) {
                         $direction2 = 'WSW';
                     }
-                    if (in_array($dir2, range(258.75, 281.25))) {
+                    if (in_array($dir2, range(259, 281))) {
                         $direction2 = 'W';
                     }
-                    if (in_array($dir2, range(281.25, 303.75))) {
+                    if (in_array($dir2, range(281, 304))) {
                         $direction2 = 'WNW';
                     }
-                    if (in_array($dir2, range(303.75, 326.25))) {
+                    if (in_array($dir2, range(304, 326))) {
                         $direction2 = 'NW';
                     }
-                    if (in_array($dir2, range(326.25, 348.75))) {
+                    if (in_array($dir2, range(326, 360))) {
                         $direction2 = 'NNW';
                     }
 
