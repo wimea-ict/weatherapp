@@ -45,8 +45,6 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id`, `name`, `email`, `contact`, `contact2`, `password`, `role`, `active`, `create`, `station`) VALUES
-(6, 'Douglas Were', 'weredouglas@gmail.com', '0782481746', '0704914596', '9Qexla+Wfl9ZFnknUKJ+eS7Ft8GX9QRtC7rTWvk1YKTCCP9QC+Q+YVNEo8BA6SXtw4ivRRLjQaokrt5UdA1rNw==', 'Manager', 'false', '2015-07-22', 'Makerere'),
-(7, 'John Salongo', 'info@aws.com', '0753388221', '0789237834', '3C466l1n01/h3NxGL/ERfpY08P0CZI/wZ3HDzoaIH8wE3MiGbqJh1Q01tKKZ6ViV+jbGnqQuCjsHd5iCjDX/aA==', 'Data', 'true', '2015-07-22', 'Makerere'),
 (8, 'Hellen', 'hellennakato@gmail.com', '', '', 'gDUAw1d1CLJpPDd2wdDWN0uEuM/bgn+q/M9fBLSHKs21LeBeqOH69sdc+6yoegJFFvSJGOR3TYMl1cZ3G9U2yw==', 'Data', 'false', '2015-10-23', 'Makerere'),
 (9, 'Manager', 'manager@aws.com', '0414237890', '0414237890', 'FBiBKJN7e2YV/cV7tiIb1TRAbQD6dI9ZYIQtT4688P+NNNQnHif8haaNMjn1MxSpVtr8QzFA1FSMdpam8gjUiA==', 'Data', 'false', '2015-10-23', 'Makerere'),
 (10, 'Collins Othira', 'collinsakena@gmail.com', '+256702848144', '', 'rHr5iQwA+E3+mc3oJHk07gaV16gLkULiduHo0YEK8IluJv0MU3z9bIgZeBprnhCn6RCtfDCOobGtHCE31wVHFg==', 'Data', 'true', '2015-10-23', 'Makerere'),
