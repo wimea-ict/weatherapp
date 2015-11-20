@@ -16,7 +16,6 @@
 
 <div class="scroll row-fluid span12 ">
         <h4>Metar Book (Observed every hour)Aviation Routine Weather Report</h4>
-
         <?php echo $this->session->flashdata('msg'); ?>
 <div class="scroll row-fluid">
     <?php  if ($role == 'Observer'||$role == 'Manager') {  ?>
@@ -35,11 +34,7 @@
                             if (is_array($stations) && count($stations)) {
                                 foreach ($stations as $loop) {
                                     ?> 
-                <option value="<?= $loop->name ?>" /><?= $loop->name ?>                      
- 
-                
-              
-
+                <option value="<?= $loop->name ?>" /><?= $loop->name ?>  
                             <?php }}
                             }
                             ?>
@@ -423,7 +418,6 @@
 <script type="text/javascript">
     $('#Loading').hide();
     $('#Loading_daily').hide();
-
     $('#station').change(function () {
         var station = $('#station').val();
         if (station != "") {
@@ -534,6 +528,7 @@
 
 
 </script>
+
 <script type="text/javascript">
     function ExportToExcel(datatable) {
         var htmltable = document.getElementById('metar');

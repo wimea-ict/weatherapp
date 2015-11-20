@@ -72,11 +72,18 @@ class Welcome extends CI_Controller {
     }
 
     public function logout() {
+         if ($this->session->userdata('username') != null) {
 
         $this->session->sess_destroy();
         $log = array('user' => $this->session->userdata('username'), 'userid' => $this->session->userdata('id'), 'action' => 'logout', 'details' => $this->session->userdata('stationname') . ' has logged out ', 'date' => date('Y-m-d H:i:s'), 'ip' => $this->input->ip_address(), 'url' => 'www.');
         $this->Md->save($log, 'logs');
         $this->load->view('login');
+         }
+         else{
+             
+              $this->load->view('login');
+             
+         }
     }
 
     public function login() {

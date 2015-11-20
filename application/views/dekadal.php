@@ -71,7 +71,7 @@
 
 
                                                                     </div>
-    <span id="Loading"  name ="Loading"><img src="<?= base_url(); ?>images/ajax-loader.gif" alt="Ajax Indicator" /></span><br>
+    <span id="Loading"  name ="Loading"><img src="<?= base_url(); ?>images/ajax-loader.gif" alt="Loading................" /></span><br>
   
                    <!--        <div class="scroll row-fluid">           
                     <table id="datatable" class="table table-striped table-bordered table-hover">
