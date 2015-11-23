@@ -113,11 +113,11 @@
                                                 </div>
 
                                                 <div>
-                                                    <a href="#" onclick="show_box('signup-box');
+<!--                                                    <a href="#" onclick="show_box('signup-box');
                                                                                                                 return false;" class="user-signup-link">
                                                     Register
                                                         <i class="icon-arrow-right"></i>
-                                                    </a>
+                                                    </a>-->
                                                 </div>
                                             </div>
                                         </div><!--/widget-body-->
@@ -133,7 +133,7 @@
 
                                                 <div class="space-6"></div>
                                                 <p>
-                                                    Enter your email and to receive instructions
+                                                    Enter your email to receive a new password!
                                                 </p>
 
                                                 <form />
