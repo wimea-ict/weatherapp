@@ -9,24 +9,27 @@ class Api extends REST_Controller {
 
         parent::__construct();
        
-       // $this->load->model('Md');
+        $this->load->model('Md');
         
     }
 
-    public function tasks_get() {
-          
-        if (!$this->get('id')) {
-         //  $tasks = $this->Md->show('daily'); // return all record
-             $tasks = $this->Md->get_all(); // return all record
-        } else {
-            $tasks = $this->Md->get_task($this->get('id')); // return a record based on id
-           // $tasks = $this->Md->get('id', $this->get('id'), 'daily');
-            }
-
-        if ($tasks) {
-            $this->response($tasks, 200); // return success code if record exist
-        } else {
-            $this->response([], 404); // return empty
+    public function tasks_get() {         
+       
+         if(!$this->get('station'))
+        {
+            $this->response(NULL, 400);
+        }
+        
+        $user = $this->Md->get('station', $this->get('station'), 'daily');
+      //  var_dump($user);
+        if($user)
+        {
+            $this->response($user, 200); // 200 being the HTTP response code
+        }
+ 
+        else
+        {
+            $this->response(NULL, 404);
         }
     }
      
