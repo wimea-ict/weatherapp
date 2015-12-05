@@ -35,20 +35,57 @@ class Api extends REST_Controller {
      
 
     public function tasks_post() {
-        if (!$this->post('actual')) {
-            $this->response(array('error' => 'Missing post data: title'), 400);
-        } else {
-            $data = array(
-                'actual' => $this->post('actual'),
-                 'min' => $this->post('min'),
-                 'max' => $this->post('max')
-            );
+        
+       if (!$this->post('actual')) {
+            echo 'F';           
+            
+       } else {
+       $date = $this->input->post('date');
+        // $date = date('Y-m-d');
+        $station = $this->input->post('station');
+        // $station = "muk";
+        $max = $this->input->post('max');
+        $min = $this->input->post('min');
+        $actual = $this->input->post('actual');
+        $anemometer = $this->input->post('anemometer');
+        $wind = $this->input->post('wind');
+        $maxi = "";
+        $rain = $this->input->post('rain');
+        $thunder = $this->input->post('thunder');
+        $fog = $this->input->post('fog');
+        $haze = $this->input->post('haze');
+        $storm = $this->input->post('storm');
+        $quake = $this->input->post('quake');
+        $height = $this->input->post('height');
+        $duration = $this->input->post('duration');
+        $sunshine = $this->input->post('sunshine');
+        $radiationtype = $this->input->post('type');
+        $radiation = $this->input->post('radiation');
+        $evaptype1 = $this->input->post('evaptype1');
+        $evap1 = $this->input->post('evap1');
+        $evaptype2 = $this->input->post('evaptype2');
+        $evap2 = $this->input->post('evap2');
+        $user = $this->input->post('user');
+        $submitted = date('Y-m-d');
+        $approved = 'false';
+
+        if ($station == "") {
+            echo 'F';
+            return;
         }
-       // $this->db->insert('task', $data);
-         $this->Md->save($data, 'daily');
-        if ($this->db->insert_id() > 0) {
-            $message = array('id' => $this->db->insert_id(), 'actual' => $this->post('actual'));
-            $this->response($message, 200);
+        //echo $date;
+        $get_result = $this->Md->check($date, 'date', 'daily');
+        // var_dump($get_result);
+        if (!$get_result) {
+            echo 'T' ;
+        } else {
+
+            $daily = array('station' => $station, 'date' => $date, 'max' => $max, 'min' => $min, 'actual' => $actual, 'anemometer' => $anemometer, 'wind' => $wind, 'maxi' => $maxi, 'user' => $user, 'submitted' => $submitted, 'approved' => $approved, 'rain' => $rain, 'thunder' => $thunder, 'fog' => $fog, 'haze' => $haze, 'storm' => $storm, 'quake' => $quake, 'height' => $height, 'duration' => $duration, 'sunshine' => $sunshine, 'radiationtype' => $radiationtype, 'radiation' => $radiation, 'evaptype1' => $evaptype1, 'evap1' => $evap1, 'evaptype2' => $evaptype2, 'evap2' => $evap2);
+            $this->Md->save($daily, 'daily');
+            $log = array('user' => $this->session->userdata('username'), 'userid' => $user, 'action' => 'saved daily weather information', 'details' => $station. 'submit of weather information from client ', 'date' => date('Y-m-d H:i:s'), 'ip' => "", 'url' => '');
+            $this->Md->save($log, 'logs');
+            echo 'T';
+        }
         }
     }
 

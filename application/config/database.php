@@ -64,9 +64,9 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'serviceug.cloudapp.net',
+	'hostname' => 'localhost',
 	'username' => 'root',
-	'password' => 'password',
+	'password' => '',
 	'database' => 'weather',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',

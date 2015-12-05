@@ -153,11 +153,7 @@ class Rainfall extends CI_Controller {
                                          ';
             $months = array(1 => "January", 2 => "February", 3 => "March", 4 => "April", 5 => "May", 6 => "June", 7 => "July", 8 => "August", 9 => "September", 10 => "October", 11 => "November", 12 => "December");
 
-            if (is_array($all) && count($all)) {
-
-
-
-
+        if (is_array($all) && count($all)) {
 
                 for ($do = 1; $do <= 31; $do++) {
 
@@ -173,7 +169,7 @@ class Rainfall extends CI_Controller {
                             $thisday = $loop->date ;
                        
                          if ($mh == 1){
-                            echo $r1 = $loop->rain ;
+                            $r1 = $loop->rain ;
                          }
                         if ($mh == 2){
                             $r2 = $loop->rain;
