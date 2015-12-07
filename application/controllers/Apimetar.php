@@ -38,22 +38,49 @@ class Apimetar extends REST_Controller {
     }
      
 
-    public function tasks_post() {
-        if (!$this->post('actual')) {
-            $this->response(array('error' => 'Missing post data: title'), 400);
-        } else {
-            $data = array(
-                'actual' => $this->post('actual'),
-                 'min' => $this->post('min'),
-                 'max' => $this->post('max')
-            );
+    public function metar_post() {
+        
+     if (!$this->post('station')) {
+            echo 'F';           
+            
+       } else {
+           
+        $type = $this->input->post('type');
+        $station = $this->input->post('code');
+        $datetime = $this->input->post('datetime');
+        $wind = $this->input->post('wind');
+        $visibility = $this->input->post('visibility');
+        $present = $this->input->post('present');
+        $cloud = $this->input->post('cloud');
+        $station_pressure = $this->input->post('stationhpa');
+        $sea_pressure = $this->input->post('seahpa');
+        $recent_weather = $this->input->post('recent');
+        $air_temperature = $this->input->post('temperature');
+        $humidity = $this->input->post('humidity');
+        $dew_temperature = $this->input->post('dew');
+        $wet_bulb = $this->input->post('wet');
+        $day = $this->input->post('datenow');
+        $wind_info = explode(' ', $wind);
+        $wind_direction = $wind_info[0];
+        $wind_speed = $wind_info[1];
+        $wind_unit = $wind_info[2];        
+         $user = $this->input->post('user');
+        
+        if ($station == "") {
+            echo 'F';
+            return;
         }
-       // $this->db->insert('task', $data);
-         $this->Md->save($data, 'daily');
-        if ($this->db->insert_id() > 0) {
-            $message = array('id' => $this->db->insert_id(), 'actual' => $this->post('actual'));
-            $this->response($message, 200);
+        //echo $date;      
+        $get_result = $this->Md->check($datetime, 'datetime', 'metar');
+        if (!$get_result) {
+                 echo 'T' ;
+        }        
+        else {
+            $metar = array('station' => $station, 'type' => $type, 'datetime' => $datetime, 'timezone' => 'GMT', 'wind_direction' => $wind_direction, 'wind_speed' => $wind_speed, 'unit' => $wind_unit, 'visibility' => $visibility, 'present_weather' => $present, 'cloud' => $cloud, 'air_temperature' => $air_temperature, 'humidity' => $humidity, 'dew_temperature' => $dew_temperature, 'wet_bulb' => $wet_bulb, 'station_pressure_hpa' => $station_pressure, 'sea_pressure_hpa' => $sea_pressure, 'recent_weather' => $recent_weather, 'submitted' => date('Y-m-d H:m:s'), 'user' => $user, 'day' => $day);
+            $this->Md->save($metar, 'metar');
+            echo 'T';
         }
+      }
     }
 
     public function tasks_put() {

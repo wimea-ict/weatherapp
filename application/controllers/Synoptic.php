@@ -147,6 +147,7 @@ class Synoptic extends CI_Controller {
         $wb = $this->input->post('wb');
         $rh = $this->input->post('rh');
         $vap = $this->input->post('vap');
+        $user = $this->session->userdata('username');
 
         $get_result = $this->Md->check_sql('SELECT * FROM synoptic where station ="'.$station.'" AND date ="'.$date.'" AND time = "'.$time.'"');
         if (!$get_result) {
@@ -161,7 +162,7 @@ class Synoptic extends CI_Controller {
 
         if ($station != "") {
 
-            $synoptic = array('station' => $station, 'date' => $date, 'time' => $time, 'ir' => $ir, 'ix' => $ix, 'h' => $h, 'www' => $www, 'vv' => $vv, 'n' => $n, 'dd' => $dd, 'ff' => $ff, 't' => $t, 'td' => $td, 'Po' => $Po, 'gisis' => $gisis, 'hhh' => $hhh, 'rrr' => $rrr, 'tr' => $tr, 'present' => $present, 'past' => $past, 'nh' => $nh, 'cl' => $cl, 'cm' => $cm, 'ch' => $ch, 'Tq' => $Tq, 'Ro' => $Ro, 'R1' => $R1, 'Tx' => $Tx, 'Tm' => $Tm, 'EE' => $EE, 'E' => $E, 'sss' => $sss, 'pchange' => $pchange, 'p24' => $p24, 'rr' => $rr, 'tr1' => $tr1, 'ns' => $ns, 'c' => $c, 'hs' => $hs, 'ns1' => $ns1, 'c1' => $c1, 'hs1' => $hs1, 'ns2' => $ns2, 'c2' => $c2, 'hs2' => $hs2, 'supplementary' => $supplementary, 'wb' => $wb, 'rh' => $rh, 'vap' => $vap, 'user' => 'test', 'submitted' => date('H:i:s'));
+            $synoptic = array('station' => $station, 'date' => $date, 'time' => $time, 'ir' => $ir, 'ix' => $ix, 'h' => $h, 'www' => $www, 'vv' => $vv, 'n' => $n, 'dd' => $dd, 'ff' => $ff, 't' => $t, 'td' => $td, 'Po' => $Po, 'gisis' => $gisis, 'hhh' => $hhh, 'rrr' => $rrr, 'tr' => $tr, 'present' => $present, 'past' => $past, 'nh' => $nh, 'cl' => $cl, 'cm' => $cm, 'ch' => $ch, 'Tq' => $Tq, 'Ro' => $Ro, 'R1' => $R1, 'Tx' => $Tx, 'Tm' => $Tm, 'EE' => $EE, 'E' => $E, 'sss' => $sss, 'pchange' => $pchange, 'p24' => $p24, 'rr' => $rr, 'tr1' => $tr1, 'ns' => $ns, 'c' => $c, 'hs' => $hs, 'ns1' => $ns1, 'c1' => $c1, 'hs1' => $hs1, 'ns2' => $ns2, 'c2' => $c2, 'hs2' => $hs2, 'supplementary' => $supplementary, 'wb' => $wb, 'rh' => $rh, 'vap' => $vap, 'user' => $user, 'submitted' => date('H:i:s'));
             $this->Md->save($synoptic, 'synoptic');
 
             $this->session->set_flashdata('msg', '<div class="alert alert-success">

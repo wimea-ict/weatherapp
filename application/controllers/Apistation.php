@@ -3,7 +3,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 require APPPATH . '/libraries/REST_Controller.php';
 
-class Api extends REST_Controller {
+class Apistation extends REST_Controller {
 
     function __construct() {
 
@@ -13,14 +13,14 @@ class Api extends REST_Controller {
         
     }
 
-    public function tasks_get() {         
+    public function station_get() {         
        
          if(!$this->get('station'))
         {
             $this->response(NULL, 400);
         }
         
-        $user = $this->Md->get('station', $this->get('station'), 'daily');
+        $user = $this->Md->get('name', $this->get('station'), 'station');
       //  var_dump($user);
         if($user)
         {
@@ -31,10 +31,9 @@ class Api extends REST_Controller {
         {
             $this->response(NULL, 404);
         }
-    }
-     
+    }     
 
-    public function tasks_post() {
+    public function station_post() {
         
        if (!$this->post('date')) {
             echo 'F';           
