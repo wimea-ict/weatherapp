@@ -47,33 +47,10 @@
                     <a href="#" class="brand">
                         <small>
                             <img src="<?= base_url() ?>images/logo.fw.png" height="100px" width="80px"/>
-                            Weather information management system
                         </small>
                     </a><!--/.brand-->
-
-                    <ul class="nav ace-nav pull-right">
-                        <li class="">
-                            <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                              
-                                <h4>  <?php echo $this -> session -> userdata('role'); ?> :  <?php echo $this -> session -> userdata('username'); ?>                        
-  </h4>
-                                <i class="icon-caret-down"></i>
-                            </a>
-
-                            <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-closer">
-                                <li>
-                                    <a href="<?php echo base_url() . "index.php/welcome/logout"; ?>">
-                                        <i class="icon-off"></i>
-                                        Logout
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul><!--/.ace-nav-->
-                </div><!--/.container-fluid-->
-            </div><!--/.navbar-inner-->
-        </div>
-          <?php  if ($role =='Observer') {  ?>
+                    <div class="menu-me">
+                              <?php  if ($role =='Observer') {  ?>
           <a  href="<?php echo base_url(). "index.php/welcome/start"; ?>" target="myframe"><button class="btn btn-small btn-info"> Home </button></a>
           
            <a  href="<?php echo base_url() . "index.php/metar/everyday"; ?>" target="myframe"><button class="btn btn-small btn-info">Weather </button></a>
@@ -191,7 +168,7 @@
                  
                     <div class="btn-group">
                         <button data-toggle="dropdown" class="btn btn-small btn-default dropdown-toggle">
-                            Stations
+                            Station
                             <i class="icon-angle-down icon-on-right"></i>
                         </button>
 
@@ -209,24 +186,61 @@
                              <li>
                                 <a target="myframe" href="<?php echo base_url() . "index.php/logs/"; ?>">Logs</a>
                             </li>
+                             <li>
+                                 <a target="myframe" href="<?php echo base_url() . "index.php/element/"; ?>">Elements </a>
+                            </li>
+                             <li>
+                                        </li>
+                                         <a target="myframe" href="<?php echo base_url() . "index.php/instrument"; ?>">  <i class="icon-cogs">Instrument </i></a>
+                                        
+                                         <li>
+                                             <a target="myframe" href="<?php echo base_url() . "index.php/archive"; ?>"><i class="icon-cogs">Archive </i>
+                        </a>
+                                        </li>
+                                        
+                                          <li>
+                                             <a  href="<?php echo base_url() . "file/Wimea.msi"; ?>">Desktop </i>
+                        </a>
+                                        </li>
+                                         <li>
+                                             <a  href="<?php echo base_url() . "file/Wimea.apk"; ?>">Mobile app </i>
+                        </a>
+                                        </li>
 
                         </ul>
                     </div><!--/btn-group-->
                     
                    
-
-                    <a target="myframe" href="<?php echo base_url() . "index.php/element/"; ?>">  <button class="btn btn-small btn-default">
-                            <i class="icon-cogs">Elements  </i>
-                        </button></a>
-                    <a target="myframe" href="<?php echo base_url() . "index.php/instrument"; ?>">  <button class="btn btn-small btn-default">
-                            <i class="icon-cogs">Instrument </i>
-                        </button></a>
-                    <a target="myframe" href="<?php echo base_url() . "index.php/archive"; ?>">  <button class="btn btn-small btn-default">
-                            <i class="icon-cogs">Archive </i>
-                        </button></a>
+                   
+                    
 
            
    <?php } ?>
+
+                    <ul class="nav ace-nav pull-right">
+                        <li class="">
+                            <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                              
+                                <h4>  <?php echo $this -> session -> userdata('role'); ?> :  <?php echo $this -> session -> userdata('username'); ?>                        
+  </h4>
+                                <i class="icon-caret-down"></i>
+                            </a>
+
+                            <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-closer">
+                                <li>
+                                    <a href="<?php echo base_url() . "index.php/welcome/logout"; ?>">
+                                        <i class="icon-off"></i>
+                                        Logout
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul><!--/.ace-nav-->
+                    </div>
+                </div><!--/.container-fluid-->
+            </div><!--/.navbar-inner-->
+        </div>
+
                
 							
 

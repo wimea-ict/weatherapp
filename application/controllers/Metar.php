@@ -212,6 +212,60 @@ class Metar extends CI_Controller {
         }
     }
 
+  
+    
+      public function saveOnline() {       
+
+        $this->load->helper(array('form', 'url'));
+        
+         $stations = $this->Md->get('name', $this->input->post('station'), 'station');
+         foreach ($stations as $loop) {                    
+                         $code = $loop->code;
+         }        
+        
+        $type = $this->input->post('type');      
+        $station = $code ;
+        $datetime = $this->input->post('datetime');
+        $wind = $this->input->post('wind');
+        $visibility = $this->input->post('visibility');
+        $present = $this->input->post('present');
+        $cloud = $this->input->post('cloud');
+        $station_pressure = $this->input->post('stationhpa');
+        $sea_pressure = $this->input->post('seahpa');
+        $recent_weather = $this->input->post('recent');
+        $air_temperature = $this->input->post('temperature');
+        $humidity = $this->input->post('humidity');
+        $dew_temperature = $this->input->post('dew');
+        $wet_bulb = $this->input->post('wet');
+        $day = $this->input->post('datenow');
+         $user = $this->input->post('user');
+
+        $wind_info = explode(' ', $wind);
+        $wind_direction = $wind_info[0];
+        $wind_speed = $wind_info[1];
+        $wind_unit = $wind_info[2];
+
+        $get_result = $this->Md->check($datetime, 'datetime', 'metar');
+        if (!$get_result) {
+            if ($type != '') {
+               echo' meta has already been submitted';
+                
+            }
+        }
+
+        if ($station != "") {
+            $metar = array('station' => $station, 'type' => $type, 'datetime' => $datetime, 'timezone' => 'GMT', 'wind_direction' => $wind_direction, 'wind_speed' => $wind_speed, 'unit' => $wind_unit, 'visibility' => $visibility, 'present_weather' => $present, 'cloud' => $cloud, 'air_temperature' => $air_temperature, 'humidity' => $humidity, 'dew_temperature' => $dew_temperature, 'wet_bulb' => $wet_bulb, 'station_pressure_hpa' => $station_pressure, 'sea_pressure_hpa' => $sea_pressure, 'recent_weather' => $recent_weather, 'submitted' => date('Y-m-d H:m:s'), 'user' => $user, 'day' => $day);
+            $this->Md->save($metar, 'metar');
+                     echo'saved';
+        } else {
+             echo 'no station defined ';
+        }
+    }
+
+  
+    
+    
+    
     public function edit() {
         $this->load->helper(array('form', 'url'));
         $id = $this->uri->segment(3);
@@ -583,6 +637,59 @@ class Metar extends CI_Controller {
             $this->Md->save($log, 'logs');
             echo '<br><div class="alert alert-info span12"><strong>Information  submitted</strong></div>';
         }
+    }
+    
+     public function dailyOnline() {
+
+       
+        $this->load->helper(array('form', 'url'));
+        //{date:date,max:max,min:min,actual:actual,anemometer:anemometer,wind:wind,maxi:maxi,station:station}
+
+        $date = $this->input->post('date');
+        // $date = date('Y-m-d');
+        $station = $this->input->post('station');
+        // $station = "muk";
+        $max = $this->input->post('max');
+        $min = $this->input->post('min');
+        $actual = $this->input->post('actual');
+        $anemometer = $this->input->post('anemometer');
+        $wind = $this->input->post('wind');
+        $maxi = "";
+        $rain = $this->input->post('rain');
+        $thunder = $this->input->post('thunder');
+        $fog = $this->input->post('fog');
+        $haze = $this->input->post('haze');
+        $storm = $this->input->post('storm');
+        $quake = $this->input->post('quake');
+        $height = $this->input->post('height');
+        $duration = $this->input->post('duration');
+        $sunshine = $this->input->post('sunshine');
+        $radiationtype = $this->input->post('type');
+        $radiation = $this->input->post('radiation');
+        $evaptype1 = $this->input->post('evaptype1');
+        $evap1 = $this->input->post('evap1');
+        $evaptype2 = $this->input->post('evaptype2');
+        $evap2 = $this->input->post('evap2');
+        $user = $this->input->post('user');
+        $submitted = date('Y-m-d');
+        $approved = 'false';
+
+        if ($station == "") {
+            echo 'Please select a station';
+            return;
+        }
+        //echo $date;
+        $get_result = $this->Md->check($date, 'date', 'daily');
+        // var_dump($get_result);
+        if (!$get_result) {
+            echo 'Data already submitted for ' . $date . '';
+        } else {
+
+            $daily = array('station' => $station, 'date' => $date, 'max' => $max, 'min' => $min, 'actual' => $actual, 'anemometer' => $anemometer, 'wind' => $wind, 'maxi' => $maxi, 'user' => $user, 'submitted' => $submitted, 'approved' => $approved, 'rain' => $rain, 'thunder' => $thunder, 'fog' => $fog, 'haze' => $haze, 'storm' => $storm, 'quake' => $quake, 'height' => $height, 'duration' => $duration, 'sunshine' => $sunshine, 'radiationtype' => $radiationtype, 'radiation' => $radiation, 'evaptype1' => $evaptype1, 'evap1' => $evap1, 'evaptype2' => $evaptype2, 'evap2' => $evap2);
+            $this->Md->save($daily, 'daily');
+            $log = array('user' => $user, 'userid' => "", 'action' => 'saved daily weather information', 'details' => $stationname . 'submit of weather information ', 'date' => date('Y-m-d H:i:s'), 'ip' => "", 'url' => '');
+            $this->Md->save($log, 'logs');
+             }
     }
 
     public function rain() {

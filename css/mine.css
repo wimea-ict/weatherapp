@@ -44,6 +44,11 @@ input.ace-checkbox-3{
    
     
 }
+h4 {
+    font-size: 18px;
+    font-weight: normal;
+    color: black;
+}
 table tr td.center
 {     
         width:1%;
@@ -166,6 +171,9 @@ input, textarea, .uneditable-input {
 .scroll {
   overflow:auto;
   padding-right: 1%;
+}
+.menu-me {
+  margin-top: 2%;
 }
 
 .CSSTableGenerator {

@@ -3,12 +3,23 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/wamp/www/weather/application/controllers/User.php</file>
+            <file>file:/C:/wamp/www/weather/application/views/view-start.php</file>
+            <file>file:/C:/wamp/www/weather/application/controllers/Welcome.php</file>
             <file>file:/C:/wamp/www/weather/application/controllers/Apicheck.php</file>
+            <file>file:/C:/wamp/www/weather/application/controllers/Apielement.php</file>
+            <file>file:/C:/wamp/www/weather/application/views/header.php</file>
+            <file>file:/C:/wamp/www/weather/application/views/gallery.html</file>
+            <file>file:/C:/wamp/www/weather/application/views/form.php</file>
+            <file>file:/C:/wamp/www/weather/css/mine.css</file>
+            <file>file:/C:/wamp/www/weather/application/controllers/User.php</file>
+            <file>file:/C:/wamp/www/weather/application/controllers/Metar.php</file>
+            <file>file:/C:/wamp/www/weather/application/controllers/Instrument.php</file>
+            <file>file:/C:/wamp/www/weather/application/controllers/Apiinstrument.php</file>
             <file>file:/C:/wamp/www/weather/application/controllers/Climatological.php</file>
-            <file>file:/C:/wamp/www/weather/application/controllers/Apimetar.php</file>
+            <file>file:/C:/wamp/www/weather/assets/css/ace.min.css</file>
+            <file>file:/C:/wamp/www/weather/application/views/home.php</file>
             <file>file:/C:/wamp/www/weather/application/controllers/Apistation.php</file>
-            <file>file:/C:/wamp/www/weather/application/controllers/Dekadal.php</file>
+            <file>file:/C:/wamp/www/weather/application/controllers/Apimetar.php</file>
             <file>file:/C:/wamp/www/weather/application/views/metar.php</file>
         </group>
     </open-files>

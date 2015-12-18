@@ -16,21 +16,21 @@ class User extends CI_Controller {
 
     public function index() {
         $query = $this->Md->show('user');
-      //  var_dump($query);
+//  var_dump($query);
         if ($query) {
-             $data['users'] = $query;
+            $data['users'] = $query;
         } else {
             $data['users'] = array();
         }
-        $query = $this->Md->show('role'); 
+        $query = $this->Md->show('role');
         if ($query) {
-             $data['roles'] = $query;
+            $data['roles'] = $query;
         } else {
             $data['roles'] = array();
         }
-         $query = $this->Md->show('station'); 
+        $query = $this->Md->show('station');
         if ($query) {
-             $data['stations'] = $query;
+            $data['stations'] = $query;
         } else {
             $data['stations'] = array();
         }
@@ -42,162 +42,230 @@ class User extends CI_Controller {
         $email = $this->input->post('email');
         $name = $this->input->post('name');
         $contact = $this->input->post('contact');
-        $password= $this->input->post('password');
+        $password = $this->input->post('password');
         $role = $this->input->post('role');
         $contact2 = $this->input->post('contact2');
         $station = $this->input->post('station');
         $page = $this->input->post('front');
-        
-        $password =$password;
-        $key =$email;
+
+        $password = $password;
+        $key = $email;
 
         $password = $this->encrypt->encode($password, $key);
-        /**$msg = 'My secret message';
-            $key = 'super-secret-key';
-            $encrypted_string = $this->encrypt->decode($msg, $key);**/
-       
-        $get_result = $this->Md->check($name,'name','user');
-        if(!$get_result){
-            $this->session->set_flashdata('msg', 'this name is already in use');
-              redirect('/User', 'refresh');
-        }
-         $get_result = $this->Md->check($email,'email','user');
-        if(!$get_result){
-            $this->session->set_flashdata('msg', 'this name is already in use');
-              redirect('/user', 'refresh');
-        }
-        if ($email!=""){
-        $user = array('email' => $email,'name' => $name,'station'=>$station, 'contact' => $contact,'contact2' => $contact2, 'password' => $password, 'role' => $role, 'active' => 'false', 'create' => date('Y-m-d'));
-        $this->Md->save($user, 'user');
-          $log = array('user' => $this->session -> userdata('username'),'userid'=>$this->session -> userdata('id'),'action' => 'save','details'=>  $name.' user information save ', 'date' => date('Y-m-d H:i:s'),'ip' => $this->input->ip_address(), 'url' =>'');
-           $this->Md->save($log, 'logs'); 
-          if ($page==""){
-            redirect('/user', 'refresh');
-            return;
-            }else{
-                redirect('/welcome', 'refresh');
-            return;
+        /*         * $msg = 'My secret message';
+          $key = 'super-secret-key';
+          $encrypted_string = $this->encrypt->decode($msg, $key);* */
 
-            }
+        $get_result = $this->Md->check($name, 'name', 'user');
+        if (!$get_result) {
+            $this->session->set_flashdata('msg', 'this name is already in use');
+            redirect('/User', 'refresh');
         }
-        else{
-              $this->session->set_flashdata('msg', 'Please input username  ');
-              redirect('/user', 'refresh');            
+        $get_result = $this->Md->check($email, 'email', 'user');
+        if (!$get_result) {
+            $this->session->set_flashdata('msg', 'this name is already in use');
+            redirect('/user', 'refresh');
+        }
+        if ($email != "") {
+            $user = array('email' => $email, 'name' => $name, 'station' => $station, 'contact' => $contact, 'contact2' => $contact2, 'password' => $password, 'role' => $role, 'active' => 'false', 'create' => date('Y-m-d'));
+            $this->Md->save($user, 'user');
+            $log = array('user' => $this->session->userdata('username'), 'userid' => $this->session->userdata('id'), 'action' => 'save', 'details' => $name . ' user information save ', 'date' => date('Y-m-d H:i:s'), 'ip' => $this->input->ip_address(), 'url' => '');
+            $this->Md->save($log, 'logs');
+            if ($page == "") {
+                redirect('/user', 'refresh');
+                return;
+            } else {
+                redirect('/welcome', 'refresh');
+                return;
+            }
+        } else {
+            $this->session->set_flashdata('msg', 'Please input username  ');
+            redirect('/user', 'refresh');
         }
     }
-    public  function edit(){
+
+    public function edit() {
         $this->load->helper(array('form', 'url'));
-         $id = $this->uri->segment(3);
-         $query = $this->Md->show('user');
- 
+        $id = $this->uri->segment(3);
+        $query = $this->Md->show('user');
+
         if ($query) {
-             $data['users'] = $query;
+            $data['users'] = $query;
         } else {
             $data['users'] = array();
         }
-        
-          $query = $this->Md->get('id',$id,'user');
-    
+
+        $query = $this->Md->get('id', $id, 'user');
+
         if ($query) {
-             $data['userID'] = $query;
+            $data['userID'] = $query;
         } else {
             $data['userID'] = array();
         }
-          $query = $this->Md->show('role'); 
+        $query = $this->Md->show('role');
         if ($query) {
-             $data['roles'] = $query;
+            $data['roles'] = $query;
         } else {
             $data['roles'] = array();
         }
-         $query = $this->Md->show('station'); 
+        $query = $this->Md->show('station');
         if ($query) {
-             $data['stations'] = $query;
+            $data['stations'] = $query;
         } else {
             $data['stations'] = array();
         }
 
         $this->load->view('user', $data);
-        
     }
-     public  function update(){
-        
+
+    public function update() {
+
         $this->load->helper(array('form', 'url'));
         $id = $this->input->post('userID');
         $email = $this->input->post('email');
         $name = $this->input->post('name');
         $contact = $this->input->post('contact');
-         $contact2 = $this->input->post('contact2');
-        $password= $this->input->post('password');
+        $contact2 = $this->input->post('contact2');
+        $password = $this->input->post('password');
         $role = $this->input->post('role');
         $contact2 = $this->input->post('contact2');
         $station = $this->input->post('station');
-        
-        if($password!=""){
-            $password =$password;
+
+        if ($password != "") {
+            $password = $password;
             $key = 'user';
 
             $password = $this->encrypt->encode($msg, $key);
-            $user = array( 'password' => $password,'create' => date('Y-m-d'));     
-            $this->Md->update($id,$user, 'user');
-             $log = array('user' => $this->session -> userdata('username'),'userid'=>$this->session -> userdata('id'),'upate' => 'save','details'=>  $name.' user password updated ', 'date' => date('Y-m-d H:i:s'),'ip' => $this->input->ip_address(), 'url' =>'');
-           $this->Md->save($log, 'logs');
+            $user = array('password' => $password, 'create' => date('Y-m-d'));
+            $this->Md->update($id, $user, 'user');
+            $log = array('user' => $this->session->userdata('username'), 'userid' => $this->session->userdata('id'), 'upate' => 'save', 'details' => $name . ' user password updated ', 'date' => date('Y-m-d H:i:s'), 'ip' => $this->input->ip_address(), 'url' => '');
+            $this->Md->save($log, 'logs');
+        }
+
+        $user = array('email' => $email, 'name' => $name, 'contact' => $contact, 'contact2' => $contact2, 'role' => $role, 'active' => 'true', 'station' => $station, 'create' => date('Y-m-d'));
+// update($id, $data,$table)
+        $this->Md->update($id, $user, 'user');
+
+        $log = array('user' => $this->session->userdata('username'), 'userid' => $this->session->userdata('id'), 'action' => 'update', 'details' => $name . ' user information updated', 'date' => date('Y-m-d H:i:s'), 'ip' => $this->input->ip_address(), 'url' => '');
+        $this->Md->save($log, 'logs');
+        $this->session->set_flashdata('msg', 'The ' . $name . ' has been updated');
+        redirect('/user', 'refresh');
+        return;
+    }
+
+    public function delete() {
+
+        $id = $this->uri->segment(3);
+
+        $query = $this->Md->delete($id, 'user');
+
+        $log = array('user' => $this->session->userdata('username'), 'userid' => $this->session->userdata('id'), 'action' => 'delete', 'details' => ' user information deleted', 'date' => date('Y-m-d H:i:s'), 'ip' => $this->input->ip_address(), 'url' => '');
+        $this->Md->save($log, 'logs');
+
+        if ($this->db->affected_rows() > 0) {
+            $msg = '<span style="color:red">Information Deleted Fields</span>';
+            $this->session->set_flashdata('msg', $msg);
+            redirect('/user', 'refresh');
+        } else {
+            $msg = '<span style="color:red">action failed</span>';
+            $this->session->set_flashdata('msg', $msg);
+            redirect('/user', 'refresh');
+        }
+    }
+
+    public function login() {
+
+
+        $this->load->helper(array('form', 'url'));
+        $email = $this->input->post('email');
+        //$email = "weredouglas@gmail.com";
+        $password_now = $this->input->post('password');
+        $key = $email;
+
+        $get_result = $this->Md->check($email, 'email', 'user');
+        if (!$get_result) {
+
+            $result = $this->Md->get('email', $email, 'user');
+            foreach ($result as $res) {
+                $key = $email;
+                $password = $this->encrypt->decode($res->password, $key);
+
+                if ($password_now == $password) {
+
+                    $query2 = $this->Md->query("select * from user WHERE email='".$email."'");
+                    $results = $query2;
+                    foreach ($results as $res) {
+                        
+                        $b["station"] = $res->station;
+                        $b["name"] = $res->name;
+                        $b["email"] = $res->email;
+                        $b["contact"] = $res->contact;
+                        $b["role"] = $res->role;
+                        $b["status"] = "true";
+                        $b["info"] = "";
+                    }
+                      echo json_encode($b);
+                } else {
+                     $b["info"] = "invalid password";
+                     $b["status"] = "false";
+                     echo json_encode($b);
+                }
+            }
+        } else {
+                     $b["info"] = "invalid email";
+                     $b["status"] = "false";
+                     echo json_encode($b);
             
         }
-         
-        $user = array('email' => $email,'name' => $name, 'contact' => $contact,'contact2' => $contact2,'role' => $role, 'active' => 'true','station'=>$station,'create' => date('Y-m-d'));
-      // update($id, $data,$table)
-        $this->Md->update($id,$user, 'user');
-        
-         $log = array('user' => $this->session -> userdata('username'),'userid'=>$this->session -> userdata('id'),'action' => 'update','details'=>  $name.' user information updated', 'date' => date('Y-m-d H:i:s'),'ip' => $this->input->ip_address(), 'url' =>'');
-           $this->Md->save($log, 'logs');
-           $this->session->set_flashdata('msg', 'The '.$name.' has been updated');        
-       redirect('/user', 'refresh');
-                   return;
-        
     }
-    public function delete(){
-        
-                    $id = $this->uri->segment(3);
-                 
-                    $query = $this->Md->delete($id,'user');
-                    
-                     $log = array('user' => $this->session -> userdata('username'),'userid'=>$this->session -> userdata('id'),'action' => 'delete','details'=>' user information deleted', 'date' => date('Y-m-d H:i:s'),'ip' => $this->input->ip_address(), 'url' =>'');
-                      $this->Md->save($log, 'logs');
-                 
-                    if ($this->db->affected_rows() > 0) {
-                        $msg='<span style="color:red">Information Deleted Fields</span>';
-                         $this->session->set_flashdata('msg', $msg); 
-                             redirect('/user', 'refresh');
-                    } else {
-                       $msg='<span style="color:red">action failed</span>';
-                        $this->session->set_flashdata('msg', $msg); 
-                             redirect('/user', 'refresh');
-                    }              
-        
-         }
 
-      public function check($user) {
+    public function all() {
+
+
+
+        $result = $this->Md->show('user');
+// var_dump($result);
+        $all = array();
+
+        foreach ($result as $res) {
+            $resv = new stdClass();
+            $resv->station = $res->station;
+            $resv->name = $res->name;
+            $resv->email = $res->email;
+            $resv->contact = $res->contact;
+            $resv->role = $res->role;
+            $resv->password = $this->encrypt->decode($res->password, $res->email);
+
+
+            array_push($all, $resv);
+        }
+        echo json_encode($all);
+    }
+
+    public function check($user) {
         $this->load->helper(array('form', 'url'));
-     
-        $user = ($user == "") ? $this->input->post('name') :$user;
-        //check($value,$field,$table)
-        $get_result = $this->Md->check($user,'name','user');
+
+        $user = ($user == "") ? $this->input->post('name') : $user;
+//check($value,$field,$table)
+        $get_result = $this->Md->check($user, 'name', 'user');
 
         if (!$get_result)
             echo '<span style="color:#f00"> name already in use. </span>';
         else
             echo '<span style="color:#0c0"> name not in use</span>';
     }
-     public function check_email() {
+
+    public function check_email() {
         $this->load->helper(array('form', 'url'));
-     
+
         $email = $this->input->post('email');
-        //check($value,$field,$table)
-        $get_result = $this->Md->check($email,'email','user');
+//check($value,$field,$table)
+        $get_result = $this->Md->check($email, 'email', 'user');
 
         if (!$get_result)
             echo '<span style="color:#f00">email already in use. </span>';
         else
             echo '<span style="color:#0c0">email not in use</span>';
     }
+
 }
