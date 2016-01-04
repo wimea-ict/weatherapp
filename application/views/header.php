@@ -111,6 +111,9 @@
                         </button>
 
                         <ul class="dropdown-menu">
+                            <li>
+                                <a target="myframe" href="<?php echo base_url() . "index.php/aws/"; ?>">AWS information </a>
+                            </li>
                              <li>
                                 <a target="myframe" href="<?php echo base_url() . "index.php/welcome/reports/"; ?>">Rainfall card</a>
                             </li>
@@ -125,7 +128,9 @@
                             </li>
                             
                               <li>
-                                <a target="myframe" href="<?php echo base_url() . "index.php/climatological/"; ?>">Climatological observations </a>
+                                <a target="myframe" href="<?php echo base_url() . "index.php/climatological/"; ?>">Climatological observations </a><li>
+                                <a target="myframe" href="<?php echo base_url() . "index.php/metar/report"; ?>">Metar information </a>
+                            </li>
                             </li>
                              <li>
                                 <a target="myframe" href="<?php echo base_url() . "index.php/metar/report"; ?>">Metar information </a>
