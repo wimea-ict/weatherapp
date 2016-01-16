@@ -49,10 +49,19 @@
                 <div class="container-fluid">
                     <a href="#" class="brand">
                         <small>
-                            <img src="<?= base_url() ?>images/logo.fw.png" height="100px" width="80px"/>
+                         
+                             <img src="<?= base_url() ?>images/logo.fw.png" height="80px" width="80px"/>
+                                              <img src="<?= base_url() ?>images/noradlogosort_.gif" height="100px" width="100px"/>
+                                <img src="<?= base_url() ?>images/mak-logo.png" height="100px" width="100px"/>
+                                 <img src="<?= base_url() ?>images/WIMEA LOGO.png" height="100px" width="100px"/>
+                                
                         </small>
                     </a><!--/.brand-->
-                    <div class="menu-me">
+               
+                </div><!--/.container-fluid-->
+            </div><!--/.navbar-inner-->
+        </div>
+             <div class="menu-me">
                               <?php  if ($role =='Observer') {  ?>
           <a  href="<?php echo base_url(). "index.php/welcome/start"; ?>" target="myframe"><button class="btn btn-small btn-info"> Home </button></a>
           
@@ -245,9 +254,6 @@
                         </li>
                     </ul><!--/.ace-nav-->
                     </div>
-                </div><!--/.container-fluid-->
-            </div><!--/.navbar-inner-->
-        </div>
 
                
 							

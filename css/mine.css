@@ -383,6 +383,7 @@ td
 {
 padding:5px;
 }
+
 .editbox
 {
 font-size:12px;
@@ -395,4 +396,27 @@ padding:2px;
 {
 background:url(edit.png) right no-repeat #80C8E5;
 cursor:pointer;
+}
+.login-container {
+    width: 450px;
+    margin: 0px auto;
+}
+.navbar .brand {
+    color: #FFF;
+    font-size: 24px;
+    text-shadow: none;
+    float: none;
+    margin-left: 20%;
+}
+.login-layout .widget-box {
+    visibility: hidden;
+    position: absolute;
+    overflow: hidden;
+    width: 100%;
+    border-bottom: 0px none;
+    box-shadow: none;
+    padding: 6px;
+    background-color: #C8D4E6;
+    transform: scale(0, 1) translate(-150px);
+    margin-left: 23px;
 }
