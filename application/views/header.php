@@ -14,7 +14,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
         <link rel="stylesheet" href="<?= base_url(); ?>assets/css/font-awesome.min.css" />
-         <link rel="stylesheet" href="<?= base_url(); ?>css/font-awesome.min.css" />
+        <link rel="stylesheet" href="<?= base_url(); ?>css/font-awesome.min.css" />
 
         <!--[if IE 7]>
           <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
@@ -41,225 +41,228 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
 
     <body>
-       <?php require_once(APPPATH . 'views/permission.php'); ?> 
-        
-        
+        <?php require_once(APPPATH . 'views/permission.php'); ?> 
+
+
         <div class="navbar">
             <div class="navbar-inner">
                 <div class="container-fluid">
                     <a href="#" class="brand">
                         <small>
-                         
-                             <img src="<?= base_url() ?>images/logo.fw.png" height="80px" width="80px"/>
-                                              <img src="<?= base_url() ?>images/noradlogosort_.gif" height="100px" width="100px"/>
-                                <img src="<?= base_url() ?>images/mak-logo.png" height="100px" width="100px"/>
-                                 <img src="<?= base_url() ?>images/WIMEA LOGO.png" height="100px" width="100px"/>
-                                
+
+
+                            <img src="<?= base_url() ?>images/noradlogosort_.gif" height="100px" width="100px"/>
+                            <img src="<?= base_url() ?>images/new-mak.png" height="100px" width="100px"/>
+                            <img src="<?= base_url() ?>images/WIMEA LOGO.png" height="100px" width="100px"/>
+
                         </small>
                     </a><!--/.brand-->
-               
+
                 </div><!--/.container-fluid-->
             </div><!--/.navbar-inner-->
         </div>
-             <div class="menu-me">
-                              <?php  if ($role =='Observer') {  ?>
-          <a  href="<?php echo base_url(). "index.php/welcome/start"; ?>" target="myframe"><button class="btn btn-small btn-info"> Home </button></a>
-          
-           <a  href="<?php echo base_url() . "index.php/metar/everyday"; ?>" target="myframe"><button class="btn btn-small btn-info">Weather </button></a>
-                         
-                      <a target="myframe" href="<?php echo base_url() . "index.php/metar/rainfall"; ?>"><button class="btn btn-small btn-info">Rainfall </button></a>
-                         
-            <a target="myframe" href="<?php echo base_url() . "index.php/metar"; ?>">  <button class="btn btn-small btn-info">
-                            Metar Book
-                        </button></a>
-                      
-                      
-                   
-                                <a target="myframe" href="<?php echo base_url() . "index.php/synoptic/"; ?>"><button class="btn btn-small btn-info">synoptic tabular form </button></a>
-                           
-                                <a target="myframe" href="<?php echo base_url() . "index.php/synoptic/tab"; ?>"><button class="btn btn-small btn-info">Synoptic view</button></a>
-                         
+        <div class="menu-me">
+            <?php if ($role == 'Observer') { ?>
+                <a  href="<?php echo base_url() . "index.php/welcome/start"; ?>" target="myframe"><button class="btn btn-small btn-info"> Home </button></a>
 
-        
-        
-          
-            
+                <a  href="<?php echo base_url() . "index.php/metar/everyday"; ?>" target="myframe"><button class="btn btn-small btn-info">Weather </button></a>
+
+                <a target="myframe" href="<?php echo base_url() . "index.php/metar/rainfall"; ?>"><button class="btn btn-small btn-info">Rainfall </button></a>
+
+                <a target="myframe" href="<?php echo base_url() . "index.php/metar"; ?>">  <button class="btn btn-small btn-info">
+                        Metar Book
+                    </button></a>
+
+
+
+                <a target="myframe" href="<?php echo base_url() . "index.php/synoptic/"; ?>"><button class="btn btn-small btn-info">synoptic tabular form </button></a>
+
+                <a target="myframe" href="<?php echo base_url() . "index.php/synoptic/tab"; ?>"><button class="btn btn-small btn-info">Synoptic view</button></a>
+
+
+
+
+
+
             <?php } ?>
-                      <?php  if ($role == 'Manager') {  ?>
-              <div class="btn-group">
-                        <button data-toggle="dropdown" class=" btn btn-small btn-default dropdown-toggle">
-                            Daily
-                            <i class="icon-angle-down icon-on-right"></i>
-                        </button>
+            <?php if ($role == 'Manager') { ?>
+                <div class="btn-group">
+                    <button data-toggle="dropdown" class=" btn btn-small btn-default dropdown-toggle">
+                        Daily
+                        <i class="icon-angle-down icon-on-right"></i>
+                    </button>
 
-                        <ul class="dropdown-menu">
-                            <li >
-                              <a  href="<?php echo base_url(). "index.php/welcome/start"; ?>" target="myframe"> Home</a>
-                            </li>
-                            <li>
-                                 <a  href="<?php echo base_url() . "index.php/metar/everyday"; ?>" target="myframe">Daily weather</a>
-                            </li>
-                             <li>
-                                <a target="myframe" href="<?php echo base_url() . "index.php/metar/rainfall"; ?>">Periodic Rainfall</a>
-                            </li>
-<!--                              <li>
-                                <a target="myframe" href="<?php echo base_url() . "index.php/angular/"; ?>">Angular</a>
-                            </li>-->
-
-                            <li>
-                                <a target="myframe" href="<?php echo base_url() . "index.php/metar/"; ?>">Metar</a>
-                            </li>                            
-
-                        </ul>
-              </div>
-           
-              <div class="btn-group">
-                        <button data-toggle="dropdown" class="btn btn-small btn-default dropdown-toggle">
-                            Reports
-                            <i class="icon-angle-down icon-on-right"></i>
-                        </button>
-
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a target="myframe" href="<?php echo base_url() . "index.php/aws/"; ?>">AWS information </a>
-                            </li>
-                             <li>
-                                <a target="myframe" href="<?php echo base_url() . "index.php/welcome/reports/"; ?>">Rainfall card</a>
-                            </li>
-                            <li>
-                                <a target="myframe" href="<?php echo base_url() . "index.php/dekadal/"; ?>">Dekadal</a>
-                            </li>
-                          <li>
-                                <a target="myframe" href="<?php echo base_url() . "index.php/rainfall/report"; ?>">Rainfall report(6a)</a>
-                            </li>
-                             <li>
-                                <a target="myframe" href="<?php echo base_url() . "index.php/monthly/"; ?>">Monthly summary</a>
-                            </li>
-                            
-                              <li>
-                                <a target="myframe" href="<?php echo base_url() . "index.php/climatological/"; ?>">Climatological observations </a><li>
-                                <a target="myframe" href="<?php echo base_url() . "index.php/metar/report"; ?>">Metar information </a>
-                            </li>
-                            </li>
-                             <li>
-                                <a target="myframe" href="<?php echo base_url() . "index.php/metar/report"; ?>">Metar information </a>
-                            </li>
-
-                        </ul>    
-              </div>
-
-                     <div class="btn-group">
-                        <button data-toggle="dropdown" class="btn btn-small btn-default dropdown-toggle">
-                           Synoptic Register
-                            <i class="icon-angle-down icon-on-right"></i>
-                        </button>
-
-                        <ul class="dropdown-menu">
-                             <li>
-                                <a target="myframe" href="<?php echo base_url() . "index.php/synoptic/"; ?>">Tabular</a>
-                            </li>
-                            <li>
-                                <a target="myframe" href="<?php echo base_url() . "index.php/synoptic/tab"; ?>">Tabbed</a>
-                            </li>
-
-
-                        </ul>
-                    </div><!--/btn-group-->
-                
-                
-                
-                
-
-                    <a target="myframe" href="<?php echo base_url() . "index.php/metar"; ?>">  <button class="btn btn-small btn-default">
-                            <i class="icon-group"> Metar Book</i>
-                        </button></a>
-
-                    <a target="myframe" href="<?php echo base_url() . "index.php/Welcome/schedule"; ?>">   <button class="btn btn-small btn-default">
-                            <i class="icon-cogs">Calendar And Schedules  </i>
-                        </button></a>
-
-<!--                    <a href="<?php echo base_url() . "index.php/Welcome/form"; ?>">  <button class="btn btn-small btn-default">
-                            <i class="icon-cogs">Forms(Register) </i>
-                        </button></a>-->
-
-                 
-                    <div class="btn-group">
-                        <button data-toggle="dropdown" class="btn btn-small btn-default dropdown-toggle">
-                            Station
-                            <i class="icon-angle-down icon-on-right"></i>
-                        </button>
-
-                        <ul class="dropdown-menu">
-                             <li>
-                                <a target="myframe" href="<?php echo base_url() . "index.php/station"; ?>">Stations</a>
-                            </li>
-                            <li>
-                                <a target="myframe" href="<?php echo base_url() . "index.php/user/"; ?>">User</a>
-                            </li>
-
-                            <li>
-                                <a target="myframe" href="<?php echo base_url() . "index.php/role/"; ?>">Roles</a>
-                            </li>
-                             <li>
-                                <a target="myframe" href="<?php echo base_url() . "index.php/logs/"; ?>">Logs</a>
-                            </li>
-                             <li>
-                                 <a target="myframe" href="<?php echo base_url() . "index.php/element/"; ?>">Elements </a>
-                            </li>
-                             <li>
-                                        </li>
-                                         <a target="myframe" href="<?php echo base_url() . "index.php/instrument"; ?>">  <i class="icon-cogs">Instrument </i></a>
-                                        
-                                         <li>
-                                             <a target="myframe" href="<?php echo base_url() . "index.php/archive"; ?>"><i class="icon-cogs">Archive </i>
-                        </a>
-                                        </li>
-                                        
-                                          <li>
-                                             <a  href="<?php echo base_url() . "file/Wimea.msi"; ?>">Desktop </i>
-                        </a>
-                                        </li>
-                                         <li>
-                                             <a  href="<?php echo base_url() . "file/Wimea.apk"; ?>">Mobile app </i>
-                        </a>
-                                        </li>
-
-                        </ul>
-                    </div><!--/btn-group-->
-                    
-                   
-                   
-                    
-
-           
-   <?php } ?>
-
-                    <ul class="nav ace-nav pull-right">
-                        <li class="">
-                            <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                              
-                                <h4>  <?php echo $this -> session -> userdata('role'); ?> :  <?php echo $this -> session -> userdata('username'); ?>                        
-  </h4>
-                                <i class="icon-caret-down"></i>
-                            </a>
-
-                            <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-closer">
-                                <li>
-                                    <a href="<?php echo base_url() . "index.php/welcome/logout"; ?>">
-                                        <i class="icon-off"></i>
-                                        Logout
-                                    </a>
-                                </li>
-                            </ul>
+                    <ul class="dropdown-menu">
+                        <li >
+                            <a  href="<?php echo base_url() . "index.php/welcome/start"; ?>" target="myframe"> Home</a>
                         </li>
-                    </ul><!--/.ace-nav-->
-                    </div>
+                        <li>
+                            <a  href="<?php echo base_url() . "index.php/metar/everyday"; ?>" target="myframe">Daily weather</a>
+                        </li>
+                        <li>
+                            <a target="myframe" href="<?php echo base_url() . "index.php/metar/rainfall"; ?>">Periodic Rainfall</a>
+                        </li>
+                        <!--                              <li>
+                                                        <a target="myframe" href="<?php echo base_url() . "index.php/angular/"; ?>">Angular</a>
+                                                    </li>-->
 
-               
-							
+                        <li>
+                            <a target="myframe" href="<?php echo base_url() . "index.php/metar/"; ?>">Metar</a>
+                        </li>                            
 
-			
+                    </ul>
+                </div>
 
-  
+                <div class="btn-group">
+                    <button data-toggle="dropdown" class="btn btn-small btn-default dropdown-toggle">
+                        Reports
+                        <i class="icon-angle-down icon-on-right"></i>
+                    </button>
+
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a target="myframe" href="<?php echo base_url() . "index.php/aws/"; ?>">AWS information </a>
+                        </li>
+                        <li>
+                            <a target="myframe" href="<?php echo base_url() . "index.php/welcome/reports/"; ?>">Rainfall card</a>
+                        </li>
+                        <li>
+                            <a target="myframe" href="<?php echo base_url() . "index.php/dekadal/"; ?>">Dekadal</a>
+                        </li>
+                        <li>
+                            <a target="myframe" href="<?php echo base_url() . "index.php/rainfall/report"; ?>">Rainfall report(6a)</a>
+                        </li>
+                        <li>
+                            <a target="myframe" href="<?php echo base_url() . "index.php/monthly/"; ?>">Monthly summary</a>
+                        </li>
+
+                        <li>
+                            <a target="myframe" href="<?php echo base_url() . "index.php/climatological/"; ?>">Climatological observations </a><li>
+                            <a target="myframe" href="<?php echo base_url() . "index.php/metar/report"; ?>">Metar information </a>
+                        </li>
+                        </li>
+                        <li>
+                            <a target="myframe" href="<?php echo base_url() . "index.php/metar/report"; ?>">Metar information </a>
+                        </li>
+
+                    </ul>    
+                </div>
+
+                <div class="btn-group">
+                    <button data-toggle="dropdown" class="btn btn-small btn-default dropdown-toggle">
+                        Synoptic Register
+                        <i class="icon-angle-down icon-on-right"></i>
+                    </button>
+
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a target="myframe" href="<?php echo base_url() . "index.php/synoptic/"; ?>">Tabular</a>
+                        </li>
+                        <li>
+                            <a target="myframe" href="<?php echo base_url() . "index.php/synoptic/tab"; ?>">Tabbed</a>
+                        </li>
+
+
+                    </ul>
+                </div><!--/btn-group-->
+
+
+
+
+
+                <a target="myframe" href="<?php echo base_url() . "index.php/metar"; ?>">  <button class="btn btn-small btn-default">
+                        <i class="icon-group"> Metar Book</i>
+                    </button></a>
+
+                <a target="myframe" href="<?php echo base_url() . "index.php/Welcome/schedule"; ?>">   <button class="btn btn-small btn-default">
+                        <i class="icon-cogs">Calendar And Schedules  </i>
+                    </button></a>
+
+        <!--                    <a href="<?php echo base_url() . "index.php/Welcome/form"; ?>">  <button class="btn btn-small btn-default">
+                                    <i class="icon-cogs">Forms(Register) </i>
+                                </button></a>-->
+
+
+                <div class="btn-group">
+                    <button data-toggle="dropdown" class="btn btn-small btn-default dropdown-toggle">
+                        Station
+                        <i class="icon-angle-down icon-on-right"></i>
+                    </button>
+
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a target="myframe" href="<?php echo base_url() . "index.php/station"; ?>">Stations</a>
+                        </li>
+                        <li>
+                            <a target="myframe" href="<?php echo base_url() . "index.php/user/"; ?>">User</a>
+                        </li>
+
+                        <li>
+                            <a target="myframe" href="<?php echo base_url() . "index.php/role/"; ?>">Roles</a>
+                        </li>
+                        <li>
+                            <a target="myframe" href="<?php echo base_url() . "index.php/logs/"; ?>">Logs</a>
+                        </li>
+                        <li>
+                            <a target="myframe" href="<?php echo base_url() . "index.php/element/"; ?>">Elements </a>
+                        </li>
+                        <li>
+                        </li>
+                        <li>
+                            <a target="myframe" href="<?php echo base_url() . "index.php/instrument"; ?>">  <i class="icon-cogs">Instrument </i></a>
+                        </li>
+                        <li>
+                            <a target="myframe" href="<?php echo base_url() . "index.php/archive"; ?>"><i class="icon-cogs">Archive</i>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a  href="<?php echo base_url() . "file/Wimea.msi"; ?>">Desktop </i>
+                            </a>
+                        </li>
+                        <li>
+                            <a  href="<?php echo base_url() . "file/Wimea.apk"; ?>">Mobile app </i>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div><!--/btn-group-->
+
+
+                <a target="myframe" href="<?php echo base_url() . "index.php/archive"; ?>">   <button class="btn btn-small btn-default">
+                        <i class="icon-cogs">Archive</i>
+                    </button></a>
+
+
+
+            <?php } ?>
+
+            <ul class="nav ace-nav pull-right">
+                <li class="">
+                    <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+
+                        <h4>  <?php echo $this->session->userdata('role'); ?> :  <?php echo $this->session->userdata('username'); ?>                        
+                        </h4>
+                        <i class="icon-caret-down"></i>
+                    </a>
+
+                    <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-closer">
+                        <li>
+                            <a href="<?php echo base_url() . "index.php/welcome/logout"; ?>">
+                                <i class="icon-off"></i>
+                                Logout
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul><!--/.ace-nav-->
+        </div>
+
+
+
+
+
+
+
 
 

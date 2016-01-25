@@ -55,11 +55,11 @@
                                 <div class="position-relative">
                                     <div id="login-box" class="login-box visible widget-box no-border">
                                         <div class="widget-body">
-                                             <img src="<?= base_url() ?>images/logo.fw.png" height="80px" width="80px"/>
-                                              <img src="<?= base_url() ?>images/noradlogosort_.gif" height="100px" width="100px"/>
-                                <img src="<?= base_url() ?>images/mak-logo.png" height="100px" width="100px"/>
-                                 <img src="<?= base_url() ?>images/WIMEA LOGO.png" height="100px" width="100px"/>
-                                
+                                               <img src="<?= base_url() ?>images/WIMEA LOGO.png" height="100px" width="100px"/>
+                                                  <img src="<?= base_url() ?>images/new-mak.png" height="100px" width="100px"/>
+                              
+                                 <img src="<?= base_url() ?>images/noradlogosort_.gif" height="100px" width="100px"/>
+                             
                                             <div class="widget-main">
                                                 <form id="user-form" name="user-form" enctype="multipart/form-data" class="form-horizontal"  action='<?= base_url(); ?>index.php/welcome/login' method="post">
 
@@ -96,8 +96,9 @@
                                                         <div class="space-4"></div>
                                                     </fieldset>
                                                 </form>
-
-
+<b>In partnership<b><br>
+ <img src="<?= base_url() ?>images/logo.fw.png" height="80px" width="80px"/>
+  <img src="<?= base_url() ?>images/bergen.gif" height="220px" width="220px"/>
 
 
                                             </div><!--/widget-main-->

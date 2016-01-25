@@ -141,8 +141,9 @@ td.rotate > div > span {
     border-radius: 4px;
 }
 iframe {
-    display:block;
+   
     width:100%;
+    height:800px;
 }
 .infobox {
    
