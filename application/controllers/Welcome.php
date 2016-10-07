@@ -31,24 +31,24 @@ class Welcome extends CI_Controller {
     }
 
     public function start() {
-        
-           $query = $this->Md->show('daily');
+
+        $query = $this->Md->show('daily');
         //  var_dump($query);
         if ($query) {
             $data['daily'] = $query;
         } else {
             $data['daily'] = array();
         }
-        
-         $query = $this->Md->query('select wind_direction,wind_speed,station_pressure_hpa,day from metar where Month(day)="'.date('m').'" AND YEAR(day)="'.  date('Y').'" AND station ="'.$this -> session -> userdata('code').'" ');
-       
+
+        $query = $this->Md->query('select wind_direction,wind_speed,station_pressure_hpa,day from metar where Month(day)="' . date('m') . '" AND YEAR(day)="' . date('Y') . '" AND station ="' . $this->session->userdata('code') . '" ');
+
         if ($query) {
             $data['dir'] = $query;
         } else {
             $data['dir'] = array();
         }
-      //  var_dump($query);
-       
+        //  var_dump($query);
+
         $query = $this->Md->show('metar');
         if ($query) {
             $data['metars'] = $query;
@@ -67,29 +67,26 @@ class Welcome extends CI_Controller {
         } else {
             $data['synoptics'] = array();
         }
-        
-        $this->load->view('view-start',$data);
+
+        $this->load->view('view-start', $data);
     }
 
     public function logout() {
-         if ($this->session->userdata('username') != null) {
+        if ($this->session->userdata('username') != null) {
 
-        $this->session->sess_destroy();
-        $log = array('user' => $this->session->userdata('username'), 'userid' => $this->session->userdata('id'), 'action' => 'logout', 'details' => $this->session->userdata('stationname') . ' has logged out ', 'date' => date('Y-m-d H:i:s'), 'ip' => $this->input->ip_address(), 'url' => 'www.');
-        $this->Md->save($log, 'logs');
-        $this->load->view('login');
-         }
-         else{
-             
-              $this->load->view('login');
-             
-         }
+            $this->session->sess_destroy();
+            $log = array('user' => $this->session->userdata('username'), 'userid' => $this->session->userdata('id'), 'action' => 'logout', 'details' => $this->session->userdata('stationname') . ' has logged out ', 'date' => date('Y-m-d H:i:s'), 'ip' => $this->input->ip_address(), 'url' => 'www.');
+            $this->Md->save($log, 'logs');
+            $this->load->view('login');
+        } else {
+
+            $this->load->view('login');
+        }
     }
 
     public function login() {
 
         if ($this->session->userdata('username') != null) {
-
             $this->load->view('home');
             return;
         }
@@ -97,11 +94,9 @@ class Welcome extends CI_Controller {
         $this->load->helper(array('form', 'url'));
         $email = $this->input->post('email');
         $password_now = $this->input->post('password');
-
-
         $key = $email;
-
-
+      //  $email = "weredouglas@gmail.com";
+      //  $password_now = "123456";
         $get_result = $this->Md->check($email, 'email', 'user');
         if (!$get_result) {
             //$this->session->set_flashdata('msg', 'Welcome'.$email);
@@ -110,9 +105,11 @@ class Welcome extends CI_Controller {
             // var_dump($result);
             foreach ($result as $res) {
                 $key = $email;
-                $password = $this->encrypt->decode($res->password, $key);
 
-                if ($password_now == $password) {
+                // $password = $this->encrypt->decode($res->password, $key);
+               $password = md5( $password_now);
+
+                if ($res->password == $password) {
 
                     $newdata = array(
                         'id' => $res->id,
@@ -147,12 +144,19 @@ class Welcome extends CI_Controller {
                     $this->Md->save($log, 'logs');
                     $this->load->view('home');
                 } else {
-                    $this->session->set_flashdata('msg', 'Invalid user');
-                    redirect('/', 'refresh');
+                    $this->session->set_flashdata('msg', '<div class="alert alert-error">                                                   
+                                                <strong>
+                                                INVALID USER</strong>									
+						</div>');
+                   redirect('/', 'refresh');
                 }
             }
         } else {
-            $this->session->set_flashdata('msg', 'Invalid user');
+          
+            $this->session->set_flashdata('msg', '<div class="alert alert-error">                                                   
+                                                <strong>
+                                                INVALID USER</strong>									
+						</div>');
             redirect('/', 'refresh');
         }
     }
@@ -332,23 +336,21 @@ class Welcome extends CI_Controller {
         if ($dailys) {
 
             echo ' <div class="rainfallcard" >';
-             //var_dump($dailys);
+            //var_dump($dailys);
             if (is_array($dailys) && count($dailys)) {
                 foreach ($dailys as $loop) {
-                    
+
                     $month = date('m', strtotime($loop->date));
                     $day = date('d', strtotime($loop->date));
-                  
-                    if ($months ==""){
-                        
-                        $current_month = date('m');  
+
+                    if ($months == "") {
+
+                        $current_month = date('m');
+                    } else {
+                        $current_month = $months;
                     }
-                    else {
-                         $current_month = $months;
-                        
-                    }
-                    
-                  
+
+
 
                     if ($loop->actual < 1) {
 

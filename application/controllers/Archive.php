@@ -43,6 +43,46 @@ class Archive extends CI_Controller {
         
        
         $this->load->view('archive', $data);
+      }
+      public function image() {  
+          
+          $data['file'] = $this->uri->segment(3);
+          
+           $this->load->view('view-image', $data);
+          
+      }
+    
+    
+     public function add_archive() {
+        
+        $query = $this->Md->show('archive');
+      //  var_dump($query);
+        if ($query) {
+             $data['files'] = $query;
+        } else {
+            $data['files'] = array();
+        }
+         $query = $this->Md->show('element');
+         if ($query) {
+             $data['elements'] = $query;
+        } else {
+            $data['elements'] = array();
+        }
+         $query = $this->Md->show('station'); 
+        if ($query) {
+             $data['stations'] = $query;
+        } else {
+            $data['stations'] = array();
+        }
+        $query = $this->Md->show('instrument'); 
+        if ($query) {
+             $data['instruments'] = $query;
+        } else {
+            $data['instruments'] = array();
+        }
+        
+       
+        $this->load->view('add-archive', $data);
     }
 
     public function save() {

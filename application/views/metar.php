@@ -17,7 +17,7 @@
 <div class="scroll row-fluid span12 ">
         <h4>Metar Book (Observed every hour)Aviation Routine Weather Report</h4>
         <?php echo $this->session->flashdata('msg'); ?>
-<div class="scroll row-fluid">
+<div class="col-md-12">
     <?php  if ($role == 'Observer'||$role == 'Manager') {  ?>
         <form id="edit-form" name="edit-form" enctype="multipart/form-data"  action='<?= base_url(); ?>index.php/metar/save'  method="post">            
 
@@ -293,7 +293,7 @@
 
             </tbody>
         </table>
- <?php  if ($role == 'Manager'||$role == 'Data') {  ?>
+
  <label>Day/Month/Year </label>
  
                                                                     <?php $months = array(1 => "January", 2 => "February", 3 => "March", 4 => "April", 5 => "May", 6 => "June", 7 => "July", 8 => "August", 9 => "September", 10 => "October", 11 => "November", 12 => "December"); ?>
@@ -323,7 +323,7 @@
 
                                                                     </div>
     <span id="Loading"  name ="Loading"><img src="<?= base_url(); ?>images/ajax-loader.gif" alt="Ajax Indicator" /></span><br>
-   <?php }?>
+ 
 </div>    
 </div>   
 </div> 
@@ -535,4 +535,44 @@
         var html = htmltable.outerHTML;
         window.open('data:application/vnd.ms-excel,' + encodeURIComponent(html));
     }
+</script>
+<script>
+
+
+    $('.btn-group[data-toggle=buttons]').each(function (i, e) {
+        var default_class = $(e).data('toggle-default-class') || 'btn-default';
+
+        $(e).find('label')
+                .click(function (event) {
+                    $(e).find('label')
+                            .each(function (i, e) {
+                                if (!(e == event.target)) {
+                                    $(e).removeClass($(e).data('toggle-class'))
+                                            .addClass(default_class);
+
+                                    $(e).find('input').removeAttr('checked');
+                                    console.log($(e).find("input").attr("id"));
+
+
+                                    $.post("<?php echo base_url() ?>index.php/management/activate_student", {
+                                        id: $(e).find("input").val(),
+                                        actives: $(e).find("input").attr("id")
+
+                                    }, function (response) {
+                                        // console.log(response);
+                                    });
+                                    // alert("active");
+
+                                } else {
+                                    $(e).removeClass(default_class)
+                                            .addClass($(e).data('toggle-class'));
+
+                                    $(e).find('input')
+                                            .attr('checked', 1);
+
+                                }
+                            });
+                });
+    });
+
 </script>

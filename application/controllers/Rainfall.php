@@ -109,7 +109,7 @@ class Rainfall extends CI_Controller {
                 $resv->rain = $v->actual;
                 $resv->actual2 = $v->maxi;
 
-               
+
                 $resv->thunder = $v->thunder;
                 $resv->fog = $v->fog;
                 $resv->haze = $v->haze;
@@ -153,7 +153,7 @@ class Rainfall extends CI_Controller {
                                          ';
             $months = array(1 => "January", 2 => "February", 3 => "March", 4 => "April", 5 => "May", 6 => "June", 7 => "July", 8 => "August", 9 => "September", 10 => "October", 11 => "November", 12 => "December");
 
-        if (is_array($all) && count($all)) {
+            if (is_array($all) && count($all)) {
 
                 for ($do = 1; $do <= 31; $do++) {
 
@@ -166,46 +166,45 @@ class Rainfall extends CI_Controller {
                         $mh = $split[1]; //month
 
                         if ($dy == $do) {
-                            $thisday = $loop->date ;
-                       
-                         if ($mh == 1){
-                            $r1 = $loop->rain ;
-                         }
-                        if ($mh == 2){
-                            $r2 = $loop->rain;
-                        }
-                        if ($mh == 3){
-                            $r3 = $loop->rain;  
-                        }
-                        if ($mh == 4){
-                            $r4 = $loop->rain;  
-                        }
-                        if ($mh == 5){
-                            $r5 = $loop->rain;  
-                        }
-                        if ($mh == 6){
-                            $r6 = $loop->rain;  
-                        }
-                        if ($mh == 7){
-                            $r7 = $loop->rain;  
-                        }
-                        if ($mh == 8){
-                            $r8 = $loop->rain;  
-                        }
-                        if ($mh == 9){
-                            $r9 = $loop->rain;  
-                        }
-                        if ($mh == 10){
-                            $r10 = $loop->rain;  
-                        }
-                        if ($mh == 11){
-                            $r11 = $loop->rain;  
-                        }
-                        if ($mh == 12){
-                            $r12 = $loop->rain;  
-                        }
-                        }
+                            $thisday = $loop->date;
 
+                            if ($mh == 1) {
+                                $r1 = $loop->rain;
+                            }
+                            if ($mh == 2) {
+                                $r2 = $loop->rain;
+                            }
+                            if ($mh == 3) {
+                                $r3 = $loop->rain;
+                            }
+                            if ($mh == 4) {
+                                $r4 = $loop->rain;
+                            }
+                            if ($mh == 5) {
+                                $r5 = $loop->rain;
+                            }
+                            if ($mh == 6) {
+                                $r6 = $loop->rain;
+                            }
+                            if ($mh == 7) {
+                                $r7 = $loop->rain;
+                            }
+                            if ($mh == 8) {
+                                $r8 = $loop->rain;
+                            }
+                            if ($mh == 9) {
+                                $r9 = $loop->rain;
+                            }
+                            if ($mh == 10) {
+                                $r10 = $loop->rain;
+                            }
+                            if ($mh == 11) {
+                                $r11 = $loop->rain;
+                            }
+                            if ($mh == 12) {
+                                $r12 = $loop->rain;
+                            }
+                        }
                     }
 
 
@@ -227,7 +226,18 @@ class Rainfall extends CI_Controller {
                                                         
                                                       
                                         </tr> ';
-                    $r1="";  $r2="";  $r3="";  $r4="";  $r5="";  $r6="";  $r7="";  $r8="";  $r9="";  $r10=""; $r11=""; $r12="";
+                    $r1 = "";
+                    $r2 = "";
+                    $r3 = "";
+                    $r4 = "";
+                    $r5 = "";
+                    $r6 = "";
+                    $r7 = "";
+                    $r8 = "";
+                    $r9 = "";
+                    $r10 = "";
+                    $r11 = "";
+                    $r12 = "";
                 }
 
 
@@ -273,6 +283,8 @@ class Rainfall extends CI_Controller {
 
                 $metar = array('station' => $station, 'type' => $type, 'datetime' => $datetime, 'timezone' => 'GMT', 'wind_direction' => $wind_direction, 'wind_speed' => $wind_speed, 'unit' => $wind_unit, 'visibility' => $visibility, 'present_weather' => $present, 'cloud' => $cloud, 'air_temperature' => $air_temperature, 'humidity' => $humidity, 'dew_temperature' => $dew_temperature, 'wet_bulb' => $wet_bulb, 'station_pressure_hpa' => $station_pressure, 'sea_pressure_hpa' => $sea_pressure, 'recent_weather' => $recent_weather, 'submitted' => date('Y-m-d H:m:s'), 'user' => 'test', 'day' => $day);
                 $this->Md->save($metar, 'metar');
+                $log = array('user' => $this->session->userdata('username'), 'userid' => $this->session->userdata('id'), 'action' => 'create', 'details' => $this->session->userdata('username') . ' created metar information', 'date' => date('Y-m-d H:i:s'), 'ip' => $this->input->ip_address(), 'url' => 'www.');
+                $this->Md->save($log, 'logs');
 
                 redirect('/metar', 'refresh');
                 return;
@@ -289,6 +301,8 @@ class Rainfall extends CI_Controller {
         if ($station != "") {
             $metar = array('station' => $station, 'type' => $type, 'datetime' => $datetime, 'timezone' => 'GMT', 'wind_direction' => $wind_direction, 'wind_speed' => $wind_speed, 'unit' => $wind_unit, 'visibility' => $visibility, 'present_weather' => $present, 'cloud' => $cloud, 'air_temperature' => $air_temperature, 'humidity' => $humidity, 'dew_temperature' => $dew_temperature, 'wet_bulb' => $wet_bulb, 'station_pressure_hpa' => $station_pressure, 'sea_pressure_hpa' => $sea_pressure, 'recent_weather' => $recent_weather, 'submitted' => date('Y-m-d H:m:s'), 'user' => 'test', 'day' => $day);
             $this->Md->save($metar, 'metar');
+              $log = array('user' => $this->session->userdata('username'), 'userid' => $this->session->userdata('id'), 'action' => 'create', 'details' => $this->session->userdata('username') . ' created metar information', 'date' => date('Y-m-d H:i:s'), 'ip' => $this->input->ip_address(), 'url' => 'www.');
+                $this->Md->save($log, 'logs');
 
             redirect('/metar', 'refresh');
             return;
@@ -370,6 +384,8 @@ class Rainfall extends CI_Controller {
         $id = $this->uri->segment(3);
 
         $query = $this->Md->delete($id, 'metar');
+          $log = array('user' => $this->session->userdata('username'), 'userid' => $this->session->userdata('id'), 'action' => 'delete', 'details' => $this->session->userdata('username') . ' deleted metar information', 'date' => date('Y-m-d H:i:s'), 'ip' => $this->input->ip_address(), 'url' => 'www.');
+                $this->Md->save($log, 'logs');
 
         if ($this->db->affected_rows() > 0) {
             $msg = '<span style="color:red">Information Deleted Fields</span>';
@@ -567,6 +583,8 @@ class Rainfall extends CI_Controller {
 
             $daily = array('station' => $station, 'date' => $date, 'max' => $max, 'min' => $min, 'actual' => $actual, 'anemometer' => $anemometer, 'wind' => $wind, 'maxi' => $maxi, 'user' => $user, 'submitted' => $submitted, 'approved' => $approved);
             $this->Md->save($daily, 'daily');
+              $log = array('user' => $this->session->userdata('username'), 'userid' => $this->session->userdata('id'), 'action' => 'create', 'details' => $this->session->userdata('username') . ' created metar information', 'date' => date('Y-m-d H:i:s'), 'ip' => $this->input->ip_address(), 'url' => 'www.');
+                $this->Md->save($log, 'logs');
             echo '<div class="alert alert-info"><strong>Information  submitted</strong></div>';
         }
     }

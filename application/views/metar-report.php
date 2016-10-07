@@ -1,104 +1,109 @@
- <div class=" container-fluid">
-      <div class="page-content">
-           <div class="row-fluid">
+<div class=" container-fluid">
+    <div class="page-content">
+        <div class="row-fluid">
 
-<link rel="stylesheet" href="<?= base_url(); ?>assets/css/ace.min.css" />     
-<link rel="stylesheet" href="<?= base_url(); ?>assets/css/ace-skins.min.css" />       
+            <link rel="stylesheet" href="<?= base_url(); ?>assets/css/ace.min.css" />     
+            <link rel="stylesheet" href="<?= base_url(); ?>assets/css/ace-skins.min.css" />       
 
-<link rel="stylesheet" href="<?= base_url(); ?>assets/css/chosen.css" />
-<link rel="stylesheet" href="<?= base_url(); ?>assets/css/datepicker.css" />
-<link rel="stylesheet" href="<?= base_url(); ?>assets/css/bootstrap-timepicker.css" />
-<link rel="stylesheet" href="<?= base_url(); ?>assets/css/daterangepicker.css" />
-<link rel="stylesheet" href="<?= base_url(); ?>assets/css/bootstrap.min.css" />
-<link href="<?= base_url(); ?>css/mine.css" rel="stylesheet" />
- <?php require_once(APPPATH . 'views/permission.php'); ?> 
-        
-
-<div class="scroll row-fluid span12 ">
-        <h4>Metar Book (Observed every hour)Aviation Routine Weather Report</h4>
-
-        <?php echo $this->session->flashdata('msg'); ?>
-<div class="scroll row-fluid">
-    <?php  if ($role == 'Observer'||$role == 'Manager') {  ?>
-        <form id="edit-form" name="edit-form" enctype="multipart/form-data"  action='<?= base_url(); ?>index.php/metar/save'  method="post">            
+            <link rel="stylesheet" href="<?= base_url(); ?>assets/css/chosen.css" />
+            <link rel="stylesheet" href="<?= base_url(); ?>assets/css/datepicker.css" />
+            <link rel="stylesheet" href="<?= base_url(); ?>assets/css/bootstrap-timepicker.css" />
+            <link rel="stylesheet" href="<?= base_url(); ?>assets/css/daterangepicker.css" />
+            <link rel="stylesheet" href="<?= base_url(); ?>assets/css/bootstrap.min.css" />
+            <link href="<?= base_url(); ?>css/mine.css" rel="stylesheet" />
+            <?php require_once(APPPATH . 'views/permission.php'); ?> 
 
 
-            <div class="span12">
-                <div class="span3">
-                         <label for="form-field-select-1">Station name</label>
-                        <select class="span12" id="station"  name="station">
-                            <option value="" />  
-                            <option value="<?= $this -> session -> userdata('stationname');?>" ><?= $this -> session -> userdata('stationname');?></option>
-                          
-                            <?php
-                            if (allowed ($see,'manage')) { 
-                            if (is_array($stations) && count($stations)) {
-                                foreach ($stations as $loop) {
-                                    ?> 
-                <option value="<?= $loop->name ?>" /><?= $loop->name ?>                      
- 
-                
-              
+            <div class="scroll row-fluid span12 ">
+                <h4>Metar Book (Observed every hour)Aviation Routine Weather Report</h4>
 
-                            <?php }}
-                            }
-                            ?>
-                
-                        </select>
-                </div>
-                <div class="span3">
-                    <label >Station No  </label >
-                    <input class="form-control"  id="number" readonly="" name="number" ></input>   
-                </div>
-                <div class="span3">
-                    <label > Select the date</label>
-                    <input class="form-control date-picker" id="datenow" value="<?php echo date('Y-m-d'); ?>"  name="datenow" type="text" data-date-format="yyyy-mm-dd" />
-                    <span class="add-on">
-                        <i class="icon-calendar"></i>
-                    </span>
-                </div>
-            </div>
+                <?php echo $this->session->flashdata('msg'); ?>
+                <div class="scroll row-fluid">
+                    <?php if ($role == 'Observer' || $role == 'Manager') { ?>
+                        <form id="edit-form" name="edit-form" enctype="multipart/form-data"  action='<?= base_url(); ?>index.php/metar/save'  method="post">            
 
-        </form> 
-    <?php }?>
-        <h4>Today's metar</h4>  
-     
- <?php  if ($role == 'Manager'||$role == 'Data') {  ?>
- <label>Day/Month/Year </label>
- 
-                                                                    <?php $months = array(1 => "January", 2 => "February", 3 => "March", 4 => "April", 5 => "May", 6 => "June", 7 => "July", 8 => "August", 9 => "September", 10 => "October", 11 => "November", 12 => "December"); ?>
 
-                                                                    <div class="span12">
-                                                                        <select class=" col-md-2 no"  name="day" id="day">
-                                                                            <option value=""></option>
-                                <?php for($d = 1; $d<=31; $d++ )
-                                    echo "<option value='$d'>$d</option>"?>
+                            <div class="span12">
+                                <div class="span3">
+                                    <label for="form-field-select-1">Station name</label>
+                                    <select class="span12" id="station"  name="station">
+                                        <option value="" />  
+                                        <option value="<?= $this->session->userdata('stationname'); ?>" ><?= $this->session->userdata('stationname'); ?></option>
+
+                                        <?php
+                                        if (allowed($see, 'manage')) {
+                                            if (is_array($stations) && count($stations)) {
+                                                foreach ($stations as $loop) {
+                                                    ?> 
+                                                    <option value="<?= $loop->name ?>" /><?= $loop->name ?>                      
+
+
+
+
+                                                <?php
+                                                }
+                                            }
+                                        }
+                                        ?>
+
+                                    </select>
+                                </div>
+                                <div class="span3">
+                                    <label >Station No  </label >
+                                    <input class="form-control"  id="number" readonly="" name="number" ></input>   
+                                </div>
+                                <div class="span3">
+                                    <label > Select the date</label>
+                                    <input class="form-control date-picker" id="datenow" value="<?php echo date('Y-m-d'); ?>"  name="datenow" type="text" data-date-format="yyyy-mm-dd" />
+                                    <span class="add-on">
+                                        <i class="icon-calendar"></i>
+                                    </span>
+                                </div>
+                            </div>
+
+                        </form> 
+                    <?php } ?>
+                    <h4>Today's metar</h4>  
+
+                    <?php if ($role == 'Manager' || $role == 'Data') { ?>
+                        <label>Day/Month/Year </label>
+
+    <?php $months = array(1 => "January", 2 => "February", 3 => "March", 4 => "April", 5 => "May", 6 => "June", 7 => "July", 8 => "August", 9 => "September", 10 => "October", 11 => "November", 12 => "December"); ?>
+
+                        <div class="span12">
+                            <select class=" col-md-2 no"  name="day" id="day">
+                                <option value=""></option>
+    <?php for ($d = 1; $d <= 31; $d++)
+        echo "<option value='$d'>$d</option>"
+        ?>
                             </select>
-                                                                        <select  name="month" id="month" >
-                                                                             <option value=""></option>
-                                                                            <?php for ($m = 1; $m <= 12; $m++)
-                                                                                echo "<option value='$m'>" . $months[$m] . "</option>"
-                                                                                ?>
-                                                                        </select>
-                                                                        <select name="year" id="year" >
-                                                                             <option value=""></option>
-                                                                            <?php for ($y = date('Y'); $y >= 1902; $y--)
-                                                                                echo "<option value='$y'>$y</option>"
-                                                                                ?>
-                                                                        </select>
-                                                                        <button type="button" class="btn btn-info btn-small" id="generate" >generate</button>
-                                                                        <input type="button" class="btn btn-info btn-small" onclick="ExportToExcel('datatable')" value="Export to Excel">
+                            <select  name="month" id="month" >
+                                <option value=""></option>
+    <?php
+    for ($m = 1; $m <= 12; $m++)
+        echo "<option value='$m'>" . $months[$m] . "</option>"
+        ?>
+                            </select>
+                            <select name="year" id="year" >
+                                <option value=""></option>
+    <?php
+    for ($y = date('Y'); $y >= 1902; $y--)
+        echo "<option value='$y'>$y</option>"
+        ?>
+                            </select>
+                            <button type="button" class="btn btn-info btn-small" id="generate" >generate</button>
+                            <input type="button" class="btn btn-info btn-small" onclick="ExportToExcel('datatable')" value="Export to Excel">
 
 
 
-                                                                    </div>
-    <span id="Loading"  name ="Loading"><img src="<?= base_url(); ?>images/ajax-loader.gif" alt="Ajax Indicator" /></span><br>
-   <?php }?>
-</div>    
-</div>   
+                        </div>
+                        <span id="Loading"  name ="Loading"><img src="<?= base_url(); ?>images/ajax-loader.gif" alt="Ajax Indicator" /></span><br>
+<?php } ?>
+                </div>    
+            </div>   
+        </div> 
+    </div> 
 </div> 
-          </div> 
-     </div> 
 
 
 
@@ -114,8 +119,7 @@
                 inp.setAttribute('readonly', 'true');
                 inp.removeAttribute('disabled');
                 inp.value = "This text field is readonly!";
-            }
-            else {
+            } else {
                 inp.setAttribute('disabled', 'disabled');
                 inp.removeAttribute('readonly');
                 inp.value = "This text field is disabled!";
@@ -146,7 +150,7 @@
         $('.input-mask-hpa').mask('999.9');
         $('.input-mask-height').mask('9999');
         $('.input-mask-eyescript').mask('~9.99 ~9.99 999');
-       
+
 
 
 
@@ -239,15 +243,15 @@
         $('#stationinch').val(inch);
 
     }); //end change
-     $("#generate").on ("click",function (e) {
-         
-            var station = $("#station").val();
-            var month = $("#month").val();
-            var year = $("#year").val();
-             var day = $("#day").val();
+    $("#generate").on("click", function (e) {
+
+        var station = $("#station").val();
+        var month = $("#month").val();
+        var year = $("#year").val();
+        var day = $("#day").val();
         $('#meta').hide();
         $('#Loading').show();
-        $.post("<?php echo base_url() ?>index.php/metar/get", {datenow: $("#datenow").val(),station:$("#code").val(),day:day,month:month,year:year}
+        $.post("<?php echo base_url() ?>index.php/metar/get", {datenow: $("#datenow").val(), station: $("#code").val(), day: day, month: month, year: year}
         , function (response) {
             //#emailInfo is a span which will show you message
             $('#Loading').hide();
@@ -269,7 +273,7 @@
         var actual = $('#actualrain').val();
         var anemometer = $('#anemometer').val();
         var wind = $('#windrun').val();
-      
+
         var station = $("#station").val();
         console.log(station);
         $('#Loading_daily').show();

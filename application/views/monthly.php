@@ -24,9 +24,9 @@
             <div class="span12">
                 <!--PAGE CONTENT BEGINS-->
 
-          <div class="form-group well alert-info">
+          <div class="form-group">
      
-                    <span class="span3 ">Station : <select id="station" name="station">
+                    Station : <select id="station" name="station">
                                                               <option value="<?=$user->station?>" /><?=$user->station?>
                                                             <?php
                                         if (is_array($stations) && count($stations)) {
@@ -36,16 +36,12 @@
                                                     
 
                                         <?php }}?>
-                                                </select></span>
+                                                </select>
 
 
-                    <span for="form-field-select-1">Station No:<input class="form-control"  id="number" readonly="" name="number" ></input>   
-                    </span>
-                    <span> Select the date:<input class="span3 date-picker" id="datenow" value="<?php echo date('Y-m-d');?>"  name="datenow" type="text" data-date-format="yyyy-mm-dd" />
-                        <span class="add-on">
-                            <i class="icon-calendar"></i>
-                        </span>
-                    </span>
+                   <input class="form-control"  id="number" readonly="" name="number" ></input>   
+                   
+                  
                 </div>
 
      
@@ -69,9 +65,10 @@
                                                                         </select>
                                                                         <button type="button" class="btn btn-info btn-small" id="generate" >generate</button>
                                                                         <input type="button" class="btn btn-info btn-small" onclick="ExportToExcel('datatable')" value="Export to Excel">
-
+   <input type="button" onclick="printDiv('printableArea')" value="print" />
+                                                                        <div id="printableArea">
      <span id="loading"  name ="loading"><img src="<?= base_url(); ?>images/ajax-loader.gif" alt="Ajax Indicator" /></span><br>
-  
+    </div>
 <!--                    <table id="sampletable"  class="table table-striped table-bordered table-hover">
                     
                     <tbody>
@@ -340,4 +337,15 @@
         var html = htmltable.outerHTML;
         window.open('data:application/vnd.ms-excel,' + encodeURIComponent(html));
     }
+     function printDiv(divName) {
+                                var printContents = document.getElementById(divName).innerHTML;
+                                var originalContents = document.body.innerHTML;
+
+                                document.body.innerHTML = printContents;
+
+                                window.print();
+
+                                document.body.innerHTML = originalContents;
+                            }
+
 </script>

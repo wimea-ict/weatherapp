@@ -1,93 +1,86 @@
- <div class=" container-fluid">
-      <div class="page-content">
-           <div class="row-fluid">
+<div class=" container-fluid">
+    <div class="page-content">
+        <div class="row-fluid">
 
-<link rel="stylesheet" href="<?= base_url(); ?>assets/css/ace.min.css" />     
-<link rel="stylesheet" href="<?= base_url(); ?>assets/css/ace-skins.min.css" />       
+            <link rel="stylesheet" href="<?= base_url(); ?>assets/css/ace.min.css" />     
+            <link rel="stylesheet" href="<?= base_url(); ?>assets/css/ace-skins.min.css" />       
 
-<link rel="stylesheet" href="<?= base_url(); ?>assets/css/chosen.css" />
-<link rel="stylesheet" href="<?= base_url(); ?>assets/css/datepicker.css" />
-<link rel="stylesheet" href="<?= base_url(); ?>assets/css/bootstrap-timepicker.css" />
-<link rel="stylesheet" href="<?= base_url(); ?>assets/css/daterangepicker.css" />
-<link rel="stylesheet" href="<?= base_url(); ?>assets/css/bootstrap.min.css" />
-<link href="<?= base_url(); ?>css/mine.css" rel="stylesheet" />
- <?php require_once(APPPATH . 'views/permission.php'); ?> 
-        
-
-<div class="scroll row-fluid span12 ">
-        <h4>Form No.6a(Rev.12/2012)</h4>
-
-        <?php echo $this->session->flashdata('msg'); ?>
-<div class="scroll row-fluid">
-    <?php  if ($role == 'Observer'||$role == 'Manager') {  ?>
-        <form id="edit-form" name="edit-form" enctype="multipart/form-data"  action='<?= base_url(); ?>index.php/metar/save'  method="post">            
+            <link rel="stylesheet" href="<?= base_url(); ?>assets/css/chosen.css" />
+            <link rel="stylesheet" href="<?= base_url(); ?>assets/css/datepicker.css" />
+            <link rel="stylesheet" href="<?= base_url(); ?>assets/css/bootstrap-timepicker.css" />
+            <link rel="stylesheet" href="<?= base_url(); ?>assets/css/daterangepicker.css" />
+            <link rel="stylesheet" href="<?= base_url(); ?>assets/css/bootstrap.min.css" />
+            <link href="<?= base_url(); ?>css/mine.css" rel="stylesheet" />
+            <?php require_once(APPPATH . 'views/permission.php'); ?> 
 
 
-            <div class="span12">
-                <div class="span3">
-                         <label for="form-field-select-1">Station name</label>
-                        <select class="span12" id="station"  name="station">
-                            <option value="" />  
-                            <option value="<?= $this -> session -> userdata('stationname');?>" ><?= $this -> session -> userdata('stationname');?></option>
-                          
-                            <?php
-                            if (allowed ($see,'manage')) { 
-                            if (is_array($stations) && count($stations)) {
-                                foreach ($stations as $loop) {
-                                    ?> 
-                <option value="<?= $loop->name ?>" /><?= $loop->name ?>                      
- 
-                
-              
+            <div class="scroll row-fluid span12 ">
+                <h4>Form No.6a(Rev.12/2012)</h4>
 
-                            <?php }}
-                            }
+                <?php echo $this->session->flashdata('msg'); ?>
+
+
+                <form id="edit-form" name="edit-form" enctype="multipart/form-data"  action='<?= base_url(); ?>index.php/metar/save'  method="post">            
+
+
+                    <div class="span12">
+                        <div class="span3">
+                            <label for="form-field-select-1">Station name</label>
+                            <select class="span12" id="station"  name="station">
+                                <option value="" />  
+                                <option value="<?= $this->session->userdata('stationname'); ?>" ><?= $this->session->userdata('stationname'); ?></option>
+
+                                <?php
+                                if (allowed($see, 'manage')) {
+                                    if (is_array($stations) && count($stations)) {
+                                        foreach ($stations as $loop) {
+                                            ?> 
+                                            <option value="<?= $loop->name ?>" /><?= $loop->name ?>                      
+
+
+
+
+                                            <?php
+                                        }
+                                    }
+                                }
+                                ?>
+
+                            </select>
+                        </div>
+                        <div class="span2">
+                            <label >Station No  </label >
+                            <input class="form-control"  id="number" readonly="" name="number" ></input>   
+                        </div>
+
+                    </div>
+
+                </form> 
+                <label>Year </label>
+
+
+                <div class="span12">
+
+                    <select name="year" id="year" >
+                        <option value=""></option>
+                        <?php
+                        for ($y = date('Y'); $y >= 1902; $y--)
+                            echo "<option value='$y'>$y</option>"
                             ?>
-                
-                        </select>
+                    </select>
+                    <button type="button" class="btn btn-info btn-small" id="generate" >generate</button>
+                    <input type="button" class="btn btn-info btn-small" onclick="ExportToExcel('datatable')" value="Export to Excel">
+                    <input type="button" onclick="printDiv('printableArea')" value="print" />
+
                 </div>
-                <div class="span3">
-                    <label >Station No  </label >
-                    <input class="form-control"  id="number" readonly="" name="number" ></input>   
+                <div id="printableArea">
+                    <span id="Loading"  name ="Loading"><img src="<?= base_url(); ?>images/ajax-loader.gif" alt="loading.............." /></span><br>
                 </div>
-                <div class="span3">
-                    <label > Select the date</label>
-                    <input class="form-control date-picker" id="datenow" value="<?php echo date('Y-m-d'); ?>"  name="datenow" type="text" data-date-format="yyyy-mm-dd" />
-                    <span class="add-on">
-                        <i class="icon-calendar"></i>
-                    </span>
-                </div>
-            </div>
+            </div>    
+        </div>   
 
-        </form> 
-    <?php }?>
-      
-     
- <?php  if ($role == 'Manager'||$role == 'Data') {  ?>
- <label>Year </label>
- 
-                                                                   
-                                                                    <div class="span12">
-                                                                        
-                                                                        <select name="year" id="year" >
-                                                                             <option value=""></option>
-                                                                            <?php for ($y = date('Y'); $y >= 1902; $y--)
-                                                                                echo "<option value='$y'>$y</option>"
-                                                                                ?>
-                                                                        </select>
-                                                                        <button type="button" class="btn btn-info btn-small" id="generate" >generate</button>
-                                                                        <input type="button" class="btn btn-info btn-small" onclick="ExportToExcel('datatable')" value="Export to Excel">
-
-
-
-                                                                    </div>
-    <span id="Loading"  name ="Loading"><img src="<?= base_url(); ?>images/ajax-loader.gif" alt="loading.............." /></span><br>
-   <?php }?>
-</div>    
-</div>   
+    </div> 
 </div> 
-          </div> 
-     </div> 
 
 
 
@@ -123,16 +116,25 @@
         }
     }); //end change
 
+    function printDiv(divName) {
+        var printContents = document.getElementById(divName).innerHTML;
+        var originalContents = document.body.innerHTML;
 
-  
-     $("#generate").on ("click",function (e) {
-         
-            var station = $("#station").val();           
-            var year = $("#year").val();
-            
+        document.body.innerHTML = printContents;
+
+        window.print();
+
+        document.body.innerHTML = originalContents;
+    }
+
+    $("#generate").on("click", function (e) {
+
+        var station = $("#station").val();
+        var year = $("#year").val();
+
         $('#meta').hide();
         $('#Loading').show();
-        $.post("<?php echo base_url() ?>index.php/rainfall/gets", {datenow: $("#datenow").val(),station:$("#station").val(),year:year}
+        $.post("<?php echo base_url() ?>index.php/rainfall/gets", {datenow: $("#datenow").val(), station: $("#station").val(), year: year}
         , function (response) {
             //#emailInfo is a span which will show you message
             $('#Loading').hide();
@@ -145,7 +147,7 @@
             $('#' + id).fadeIn();
         }
     });
-    
+
 </script>
 <script type="text/javascript">
     function ExportToExcel(datatable) {

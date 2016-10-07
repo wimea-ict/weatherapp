@@ -47,6 +47,8 @@ class Dekadal extends CI_Controller {
         $station = trim($this->input->post('station'));
         $monthed = trim($this->input->post('month'));
         $yeared = trim($this->input->post('year'));
+       $startdate = trim($this->input->post('startdate'));
+       $enddate = trim($this->input->post('enddate'));
 
         if ($station != " " && $monthed != " " && $yeared != " ") {
             unset($sql);
@@ -56,6 +58,14 @@ class Dekadal extends CI_Controller {
             }
             if ($yeared) {
                 $sql[] = " YEAR(date) = '$yeared' ";
+            }
+
+            if ($startdate) {
+                $sql[] = "DAY(date) > '$startdate' AND  DAY(date) < '$enddate' ";
+            } 
+            
+            if ($enddate) {
+                $sql[] = "DAY(date) > '$startdate' AND  DAY(date) < '$enddate' ";
             }
 
             $sql[] = "station = '$station'";
@@ -91,7 +101,7 @@ class Dekadal extends CI_Controller {
                         $resv->wet9 = $res->wet_bulb;
                         $resv->dew9 = $res->dew_temperature;
                         $resv->humid9 = $res->humidity;
-                        $resv->wind9 = number_format($res->wind_direction,0);
+                        $resv->wind9 = number_format($res->wind_direction, 0);
                         $resv->speed9 = $res->wind_speed;
                         $resv->visibility9 = $res->visibility;
                         $resv->hpa9 = $res->station_pressure_hpa;
@@ -102,7 +112,7 @@ class Dekadal extends CI_Controller {
                         $resv->wet15 = $res->wet_bulb;
                         $resv->dew15 = $res->dew_temperature;
                         $resv->humid15 = $res->humidity;
-                        $resv->wind15 = number_format($res->wind_direction,0);
+                        $resv->wind15 = number_format($res->wind_direction, 0);
                         $resv->speed15 = $res->wind_speed;
                         $resv->visibility15 = $res->visibility;
                         $resv->hpa15 = $res->station_pressure_hpa;
@@ -387,7 +397,7 @@ class Dekadal extends CI_Controller {
                             <td class="small" >' . $loop->humid9 . '</td>
                             <td class="small">' . $loop->wind9 . '<sup>o</sup></td>
                             <td class="small">' . $direction . '</td>
-                            <td class="small">' . $loop->speed9 .'</td>
+                            <td class="small">' . $loop->speed9 . '</td>
                             <td class="small">' . $speed . '</td>
                             <td class="small">' . $loop->rain . '</td>
                                 

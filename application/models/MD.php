@@ -6,6 +6,12 @@ class Md extends CI_Model {
         parent::__construct();
         	
     }
+      function query_cell($string, $cell) {
+      
+        return $this->db->query($string)->row()->$cell;
+    }
+
+ 
 
     function save($roles = NULL, $table) {
         $this->db->insert($table, $roles);

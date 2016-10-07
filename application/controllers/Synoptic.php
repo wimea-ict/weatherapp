@@ -12,7 +12,7 @@ class Synoptic extends CI_Controller {
         $this->load->library('session');
         $this->load->library('encrypt');
         date_default_timezone_set("Africa/Nairobi");
-          $this->load->library('helper');
+        $this->load->library('helper');
     }
 
     public function index() {
@@ -25,8 +25,8 @@ class Synoptic extends CI_Controller {
         }
         // get($field,$value,$table)
         //$query = $this->Md->get('day', date('Y-m-d'), 'metar');
-         // $query = $this->Md->get('day','2015-07-8','metar'); 
-       $query = $this->Md->query("SELECT * FROM metar LEFT JOIN synoptic ON metar.datetime = synoptic.time WHERE metar.day = '".date('Y-m-d')."'"); 
+        // $query = $this->Md->get('day','2015-07-8','metar'); 
+        $query = $this->Md->query("SELECT * FROM metar LEFT JOIN synoptic ON metar.datetime = synoptic.time WHERE metar.day = '" . date('Y-m-d') . "'");
         if ($query) {
             $data['metas'] = $query;
         } else {
@@ -35,7 +35,8 @@ class Synoptic extends CI_Controller {
 
         $this->load->view('form5', $data);
     }
-       public function tab() {
+
+    public function synop() {
 
         $query = $this->Md->show('station');
         if ($query) {
@@ -45,8 +46,86 @@ class Synoptic extends CI_Controller {
         }
         // get($field,$value,$table)
         //$query = $this->Md->get('day', date('Y-m-d'), 'metar');
-         // $query = $this->Md->get('day','2015-07-8','metar'); 
-       $query = $this->Md->query("SELECT * FROM metar LEFT JOIN synoptic ON metar.datetime = synoptic.time WHERE metar.day = '".date('Y-m-d')."'"); 
+        // $query = $this->Md->get('day','2015-07-8','metar'); 
+        
+
+        $gg = 00;
+
+        while ($gg <= 21) {
+          
+
+            $get_result = $this->Md->check_sql('SELECT * FROM synoptic where station ="' . $this->session->userdata('station') . '" AND date ="' . date('Y-m-d') . '" AND gg = "' . sprintf("%02d", $gg) . '"');
+            if ($get_result) {
+                $synoptic = array('approved' => 'F', 'station' => $this->session->userdata('station'), 'date' => date('Y-m-d'), 'gg' => sprintf("%02d", $gg) , 'ii' => '63', 'ir' => '', 'ix' => '', 'h' => '', 'www' => '', 'vv' => '', 'n' => '', 'dd' => '', 'ff' => '', 't' => '', 'td' => '', 'Po' => '', 'gisis' => '', 'hhh' => '', 'rrr' => '', 'tr' => '', 'present' => '', 'past' => '', 'nh' => '', 'cl' => '', 'cm' => '', 'ch' => '', 'Tq' => '', 'Ro' => '', 'R1' => '', 'Tx' => '', 'Tn' => '', 'EE' => '', 'E' => '', 'sss' => '', 'pchange' => '', 'p24' => '', 'rr' => '', 'tr1' => '', 'ns' => '', 'c' => '', 'hs' => '', 'ns1' => '', 'c1' => '', 'hs1' => '', 'ns2' => '', 'c2' => '', 'hs2' => '', 'supplementary' => '', 'wb' => $wb, 'rh' => '', 'vap' => '', 'user' => $this->session->userdata('username'), 'submitted' => date('H:i:s'));
+                $this->Md->save($synoptic, 'synoptic');
+            } 
+
+            $gg = $gg + 3;
+        }
+        $query = $this->Md->query('SELECT * FROM synoptic where station ="' . $this->session->userdata('station') . '" AND date ="' . date('Y-m-d') . '" ');
+        if ($query) {
+            $data['synop'] = $query;
+        } else {
+            $data['synop'] = array();
+        }
+
+
+        $this->load->view('synoptic-original', $data);
+    }
+
+    public function updater() {
+        $this->load->helper(array('form', 'url'));
+
+        if (!empty($_POST)) {
+
+            foreach ($_POST as $field_name => $val) {
+                //clean post values
+                $field_id = strip_tags(trim($field_name));
+                $val = strip_tags(trim(mysql_real_escape_string($val)));
+                //from the fieldname:user_id we need to get user_id
+                $split_data = explode(':', $field_id);
+                $user_id = $split_data[1];
+                $field_name = $split_data[0];
+                if (!empty($user_id) && !empty($field_name) && !empty($val)) {
+                    //update the values
+                    $student = array($field_name => $val);
+                    $this->Md->update($user_id, $student, 'synoptic');
+                    echo "Updated";
+                } else {
+                    echo "Invalid Requests";
+                }
+            }
+        } else {
+            echo "Invalid Requests";
+        }
+    }
+
+    public function api() {
+
+        $station = urldecode($this->uri->segment(3));
+
+        if ($station != "") {
+            $result = $this->Md->query("SELECT * FROM synoptic WHERE station='" . $station . "'");
+
+            if ($result) {
+                echo json_encode($result);
+                return;
+            }
+        }
+    }
+
+    public function tab() {
+
+        $query = $this->Md->show('station');
+        if ($query) {
+            $data['stations'] = $query;
+        } else {
+            $data['stations'] = array();
+        }
+        // get($field,$value,$table)
+        //$query = $this->Md->get('day', date('Y-m-d'), 'metar');
+        // $query = $this->Md->get('day','2015-07-8','metar'); 
+        $query = $this->Md->query("SELECT * FROM metar LEFT JOIN synoptic ON metar.datetime = synoptic.time WHERE metar.day = '" . date('Y-m-d') . "'");
         if ($query) {
             $data['metas'] = $query;
         } else {
@@ -54,6 +133,7 @@ class Synoptic extends CI_Controller {
         }
         $this->load->view('view-synoptic', $data);
     }
+
     public function vertical() {
 
         $query = $this->Md->show('station');
@@ -64,8 +144,8 @@ class Synoptic extends CI_Controller {
         }
         // get($field,$value,$table)
         //$query = $this->Md->get('day', date('Y-m-d'), 'metar');
-         // $query = $this->Md->get('day','2015-07-8','metar'); 
-       $query = $this->Md->query("SELECT * FROM metar LEFT JOIN synoptic ON metar.datetime = synoptic.time WHERE metar.day = '".date('Y-m-d')."'"); 
+        // $query = $this->Md->get('day','2015-07-8','metar'); 
+        $query = $this->Md->query("SELECT * FROM metar LEFT JOIN synoptic ON metar.datetime = synoptic.time WHERE metar.day = '" . date('Y-m-d') . "'");
         if ($query) {
             $data['metas'] = $query;
         } else {
@@ -74,6 +154,7 @@ class Synoptic extends CI_Controller {
 
         $this->load->view('vertical-form', $data);
     }
+
     public function full() {
 
         $query = $this->Md->show('station');
@@ -84,8 +165,8 @@ class Synoptic extends CI_Controller {
         }
         // get($field,$value,$table)
         //$query = $this->Md->get('day', date('Y-m-d'), 'metar');
-         // $query = $this->Md->get('day','2015-07-8','metar'); 
-       $query = $this->Md->query("SELECT * FROM metar LEFT JOIN synoptic ON metar.datetime = synoptic.time WHERE metar.day = '".date('Y-m-d')."'"); 
+        // $query = $this->Md->get('day','2015-07-8','metar'); 
+        $query = $this->Md->query("SELECT * FROM metar LEFT JOIN synoptic ON metar.datetime = synoptic.time WHERE metar.day = '" . date('Y-m-d') . "'");
         if ($query) {
             $data['metas'] = $query;
         } else {
@@ -149,7 +230,7 @@ class Synoptic extends CI_Controller {
         $vap = $this->input->post('vap');
         $user = $this->session->userdata('username');
 
-        $get_result = $this->Md->check_sql('SELECT * FROM synoptic where station ="'.$station.'" AND date ="'.$date.'" AND time = "'.$time.'"');
+        $get_result = $this->Md->check_sql('SELECT * FROM synoptic where station ="' . $station . '" AND date ="' . $date . '" AND time = "' . $time . '"');
         if (!$get_result) {
 
             $this->session->set_flashdata('msg', '<div class="alert alert-error">
@@ -162,7 +243,7 @@ class Synoptic extends CI_Controller {
 
         if ($station != "") {
 
-            $synoptic = array('station' => $station, 'date' => $date, 'time' => $time, 'ir' => $ir, 'ix' => $ix, 'h' => $h, 'www' => $www, 'vv' => $vv, 'n' => $n, 'dd' => $dd, 'ff' => $ff, 't' => $t, 'td' => $td, 'Po' => $Po, 'gisis' => $gisis, 'hhh' => $hhh, 'rrr' => $rrr, 'tr' => $tr, 'present' => $present, 'past' => $past, 'nh' => $nh, 'cl' => $cl, 'cm' => $cm, 'ch' => $ch, 'Tq' => $Tq, 'Ro' => $Ro, 'R1' => $R1, 'Tx' => $Tx, 'Tm' => $Tm, 'EE' => $EE, 'E' => $E, 'sss' => $sss, 'pchange' => $pchange, 'p24' => $p24, 'rr' => $rr, 'tr1' => $tr1, 'ns' => $ns, 'c' => $c, 'hs' => $hs, 'ns1' => $ns1, 'c1' => $c1, 'hs1' => $hs1, 'ns2' => $ns2, 'c2' => $c2, 'hs2' => $hs2, 'supplementary' => $supplementary, 'wb' => $wb, 'rh' => $rh, 'vap' => $vap, 'user' => $user, 'submitted' => date('H:i:s'));
+            $synoptic = array('approved' => 'F', 'station' => $station, 'date' => $date, 'time' => $time, 'ir' => $ir, 'ix' => $ix, 'h' => $h, 'www' => $www, 'vv' => $vv, 'n' => $n, 'dd' => $dd, 'ff' => $ff, 't' => $t, 'td' => $td, 'Po' => $Po, 'gisis' => $gisis, 'hhh' => $hhh, 'rrr' => $rrr, 'tr' => $tr, 'present' => $present, 'past' => $past, 'nh' => $nh, 'cl' => $cl, 'cm' => $cm, 'ch' => $ch, 'Tq' => $Tq, 'Ro' => $Ro, 'R1' => $R1, 'Tx' => $Tx, 'Tm' => $Tm, 'EE' => $EE, 'E' => $E, 'sss' => $sss, 'pchange' => $pchange, 'p24' => $p24, 'rr' => $rr, 'tr1' => $tr1, 'ns' => $ns, 'c' => $c, 'hs' => $hs, 'ns1' => $ns1, 'c1' => $c1, 'hs1' => $hs1, 'ns2' => $ns2, 'c2' => $c2, 'hs2' => $hs2, 'supplementary' => $supplementary, 'wb' => $wb, 'rh' => $rh, 'vap' => $vap, 'user' => $user, 'submitted' => date('H:i:s'));
             $this->Md->save($synoptic, 'synoptic');
 
             $this->session->set_flashdata('msg', '<div class="alert alert-success">

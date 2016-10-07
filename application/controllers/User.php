@@ -15,6 +15,7 @@ class User extends CI_Controller {
     }
 
     public function index() {
+
         $query = $this->Md->show('user');
 //  var_dump($query);
         if ($query) {
@@ -35,6 +36,87 @@ class User extends CI_Controller {
             $data['stations'] = array();
         }
         $this->load->view('user', $data);
+    }
+
+    public function api() {
+
+        $station = urldecode($this->uri->segment(3));
+
+        if ($station != "") {
+            $result = $this->Md->query("SELECT * FROM user WHERE station='" . $station . "'");
+            // $result = $this->Md->show('user');
+// var_dump($result);
+ echo json_encode($result);
+return;
+            $all = array();
+
+            foreach ($result as $res) {
+                $resv = new stdClass();
+                $resv->station = $res->station;
+                $resv->name = $res->name;
+                $resv->email = $res->email;
+                $resv->contact = $res->contact;
+                $resv->role = $res->role;
+                $resv->password = $this->encrypt->decode($res->password, $res->email);
+
+
+                array_push($all, $resv);
+            }
+           // echo json_encode($all);
+              $variations =  json_encode($all);
+echo $variations;
+
+
+            return;
+        }
+    }
+
+    public function add() {
+
+        $query = $this->Md->show('user');
+//  var_dump($query);
+        if ($query) {
+            $data['users'] = $query;
+        } else {
+            $data['users'] = array();
+        }
+        $query = $this->Md->show('role');
+        if ($query) {
+            $data['roles'] = $query;
+        } else {
+            $data['roles'] = array();
+        }
+        $query = $this->Md->show('station');
+        if ($query) {
+            $data['stations'] = $query;
+        } else {
+            $data['stations'] = array();
+        }
+        $this->load->view('add-user', $data);
+    }
+
+    public function view() {
+
+        $query = $this->Md->show('user');
+//  var_dump($query);
+        if ($query) {
+            $data['users'] = $query;
+        } else {
+            $data['users'] = array();
+        }
+        $query = $this->Md->show('role');
+        if ($query) {
+            $data['roles'] = $query;
+        } else {
+            $data['roles'] = array();
+        }
+        $query = $this->Md->show('station');
+        if ($query) {
+            $data['stations'] = $query;
+        } else {
+            $data['stations'] = array();
+        }
+        $this->load->view('view-user', $data);
     }
 
     public function save() {
@@ -67,9 +149,9 @@ class User extends CI_Controller {
             redirect('/user', 'refresh');
         }
         if ($email != "") {
-            $user = array('email' => $email, 'name' => $name, 'station' => $station, 'contact' => $contact, 'contact2' => $contact2, 'password' => $password, 'role' => $role, 'active' => 'false', 'create' => date('Y-m-d'));
+            $user = array('email' => $email, 'name' => $name, 'station' => $station, 'contact' => $contact, 'contact2' => $contact2, 'password' => md5($this->input->post('password')), 'role' => $role, 'active' => 'false', 'create' => date('Y-m-d'));
             $this->Md->save($user, 'user');
-            $log = array('user' => $this->session->userdata('username'), 'userid' => $this->session->userdata('id'), 'action' => 'save', 'details' => $name . ' user information save ', 'date' => date('Y-m-d H:i:s'), 'ip' => $this->input->ip_address(), 'url' => '');
+            $log = array('user' => $this->session->userdata('username'), 'userid' => $this->session->userdata('id'), 'action' => 'save', 'details' => $name . ' new user information saved '.$name, 'date' => date('Y-m-d H:i:s'), 'ip' => $this->input->ip_address(), 'url' => '');
             $this->Md->save($log, 'logs');
             if ($page == "") {
                 redirect('/user', 'refresh');
@@ -118,17 +200,81 @@ class User extends CI_Controller {
         $this->load->view('user', $data);
     }
 
+    public function generateRandomString($length = 6) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
+    }
+
+    public function reset() {
+        $password = $this->generateRandomString();
+        $password = "123456";
+        $userid = trim($this->input->post('id'));
+        // $userid = 'CB501C98-74B4-4480-BFBE-6447CF3BBB18';
+        //query_cell($string, $cell)
+        $email = $this->Md->query_cell("SELECT * FROM user where id= '" . $userid . "'", 'email');
+
+
+        if ($email == "") {
+            echo 'No email specified';
+            return;
+        }
+        $key = $email;
+        $password_new = md5($password) ;//$this->encrypt->encode($password, $key);
+        $newer = $password;
+
+        $user = array('password' => $password_new);
+        $this->Md->update($userid, $user, 'user');
+        echo 'New Password is reset please check mail( SPAM MAIL ESPECIALLY ) ' . $password;
+
+//        $reciever = $this->Md->query_cell("SELECT email FROM users WHERE id ='$userid' ", 'email');
+//        $message = $reciever . ' Your Password has been changed to  <b>' . $newer . '</b> for Caseprofessional login panel';
+//        $subject = 'CHANGED PASSWORD FOR YOUR ONLINE CASEPROFESSIONAL ACCOUNT ';
+//
+//        $mail = array('message' => $message, 'subject' => $subject, 'schedule' => date('d-m-Y'), 'reciever' => $email, 'created' => date('Y-m-d H:i:s'), 'org' => "", 'sent' => 'false', 'guid' => '');
+//        $this->Md->save($mail, 'emails');
+    }
+
+    public function remote() {
+
+        $this->load->helper(array('form', 'url'));
+        $email = $this->input->post('email');
+        $password_now = md5($this->input->post('password'));
+        $key = $email;
+        $get_result = $this->Md->check($email, 'email', 'user');
+        if (!$get_result) {
+
+            $result = $this->Md->get('email', $email, 'user');
+            // var_dump($result);
+            foreach ($result as $res) {
+                $key = $email;
+               // $password = md5($res->password);
+               
+                if ($password_now == $res->password && $res->role=="Administrator") {
+                    echo 'T';
+                } else {
+                    echo 'F';
+                }
+            }
+        } else {
+            echo 'F';
+        }
+    }
+
     public function update() {
 
         $this->load->helper(array('form', 'url'));
-        $id = $this->input->post('userID');
+        $id = $this->input->post('id');
         $email = $this->input->post('email');
         $name = $this->input->post('name');
         $contact = $this->input->post('contact');
         $contact2 = $this->input->post('contact2');
         $password = $this->input->post('password');
         $role = $this->input->post('role');
-        $contact2 = $this->input->post('contact2');
         $station = $this->input->post('station');
 
         if ($password != "") {
@@ -143,13 +289,13 @@ class User extends CI_Controller {
         }
 
         $user = array('email' => $email, 'name' => $name, 'contact' => $contact, 'contact2' => $contact2, 'role' => $role, 'active' => 'true', 'station' => $station, 'create' => date('Y-m-d'));
-// update($id, $data,$table)
+
         $this->Md->update($id, $user, 'user');
 
         $log = array('user' => $this->session->userdata('username'), 'userid' => $this->session->userdata('id'), 'action' => 'update', 'details' => $name . ' user information updated', 'date' => date('Y-m-d H:i:s'), 'ip' => $this->input->ip_address(), 'url' => '');
         $this->Md->save($log, 'logs');
         $this->session->set_flashdata('msg', 'The ' . $name . ' has been updated');
-        redirect('/user', 'refresh');
+        // redirect('/user', 'refresh');
         return;
     }
 
@@ -192,10 +338,10 @@ class User extends CI_Controller {
 
                 if ($password_now == $password) {
 
-                    $query2 = $this->Md->query("select * from user WHERE email='".$email."'");
+                    $query2 = $this->Md->query("select * from user WHERE email='" . $email . "'");
                     $results = $query2;
                     foreach ($results as $res) {
-                        
+
                         $b["station"] = $res->station;
                         $b["name"] = $res->name;
                         $b["email"] = $res->email;
@@ -204,18 +350,17 @@ class User extends CI_Controller {
                         $b["status"] = "true";
                         $b["info"] = "";
                     }
-                      echo json_encode($b);
+                    echo json_encode($b);
                 } else {
-                     $b["info"] = "invalid password";
-                     $b["status"] = "false";
-                     echo json_encode($b);
+                    $b["info"] = "invalid password";
+                    $b["status"] = "false";
+                    echo json_encode($b);
                 }
             }
         } else {
-                     $b["info"] = "invalid email";
-                     $b["status"] = "false";
-                     echo json_encode($b);
-            
+            $b["info"] = "invalid email";
+            $b["status"] = "false";
+            echo json_encode($b);
         }
     }
 
@@ -247,25 +392,33 @@ class User extends CI_Controller {
 
         $user = ($user == "") ? $this->input->post('name') : $user;
 //check($value,$field,$table)
-        $get_result = $this->Md->check($user, 'name', 'user');
+        if ($this->input->post('name') == "") {
+            echo '<span style="color:#f00">Please Input Name. </span>';
+        } else {
+            $get_result = $this->Md->check($user, 'name', 'user');
 
-        if (!$get_result)
-            echo '<span style="color:#f00"> name already in use. </span>';
-        else
-            echo '<span style="color:#0c0"> name not in use</span>';
+            if (!$get_result)
+                echo '<span style="color:#f00"> name already in use. </span>';
+            else
+                echo '<span style="color:#0c0"> name not in use</span>';
+        }
     }
 
     public function check_email() {
         $this->load->helper(array('form', 'url'));
 
         $email = $this->input->post('email');
+        if ($email == "") {
+            echo '<span style="color:#f00">Please Input E-mail Address. </span>';
+        } else {
 //check($value,$field,$table)
-        $get_result = $this->Md->check($email, 'email', 'user');
+            $get_result = $this->Md->check($email, 'email', 'user');
 
-        if (!$get_result)
-            echo '<span style="color:#f00">email already in use. </span>';
-        else
-            echo '<span style="color:#0c0">email not in use</span>';
+            if (!$get_result)
+                echo '<span style="color:#f00">email already in use. </span>';
+            else
+                echo '<span style="color:#0c0">email not in use</span>';
+        }
     }
 
 }

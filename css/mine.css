@@ -19,6 +19,61 @@ body {
     padding: 9px 5px;
    
 }
+input, textarea, .uneditable-input {
+    width: 100%;
+}
+.editbox
+{
+display:none
+}
+td
+{
+padding:5px;
+}
+.editbox
+{
+font-size:14px;
+width:270px;
+background-color:#ffffcc;
+border:solid 1px #000;
+padding:4px;
+}
+.edit_tr:hover
+{
+background:url(edit.png) right no-repeat #80C8E5;
+cursor:pointer;
+}
+.container {
+    padding-right: 15px;
+    padding-left: 0px;
+    margin-right: auto;
+    margin-left: auto;
+    width: 100% !important;
+}
+.scroll {
+  overflow:auto;
+  padding-right: 1%;
+}
+select {
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid #ccc;
+}
+
+.bootbox {
+    overflow: hidden;
+    display: block;
+    margin: 0px auto;
+}
+.modal {
+    background-color:#fff !important;
+}
+
+select {
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid #ccc;
+}
 .ace-nav > li {
   
     background: none repeat scroll 0% 0%;
@@ -107,12 +162,7 @@ th.rotate {
   white-space: nowrap;
 
 }
-td.rotate {
-  /* Something you can count on */
-  height: 200px;
-  white-space: nowrap;
-    //border: none;
-}
+
 
 td.rotate > div {
   transform: 
@@ -122,10 +172,7 @@ td.rotate > div {
     rotate(-90deg);
   width: 0px;
 }
-td.rotate > div > span {
-  //border-bottom: 1px solid #ccc;
-  padding: 5px 0px;
-}
+
 /* These aren't needed and will be weird if transforms don't work */
 .csstransforms & th.rotate {
   height: 100px;
@@ -156,10 +203,8 @@ iframe {
 .ace-nav > li {
     line-height: 100%;
 }
-.ace-nav > li a {
-   
-    max-height: 100%;
-   
+.ace-nav > li a {   
+    max-height: 100%;   
 }
 select {
     width: 125px;
@@ -171,7 +216,9 @@ input, textarea, .uneditable-input {
 }
 .scroll {
   overflow:auto;
+   overflow-x:scroll;
   padding-right: 1%;
+  scrollbar-base-color:#ffeaff;
 }
 .menu-me {
   margin-top: 2%;
@@ -421,3 +468,54 @@ cursor:pointer;
     transform: scale(0, 1) translate(-150px);
     margin-left: 23px;
 }
+.edit_td{
+  
+    font-size: 12px;    
+}
+
+
+.edit_td input {
+    width: 250px;
+    padding: 10px;
+    margin-bottom: 0px;
+}
+.profile {
+   margin-left: 0px;
+     float: right;
+}
+.editbox
+{
+display:none
+}
+td
+{
+padding:5px;
+}
+.editbox
+{
+font-size:12px;
+width:200px;
+background-color:#ffffcc;
+border:solid 1px #000;
+padding:4px;
+}
+.edit_tr:hover
+{
+background:url(edit.png) right no-repeat #80C8E5;
+cursor:pointer;
+}
+.form-control {    
+    display: block;   
+    height: 32px;
+    padding: 6px 12px;
+    font-size: 12px;
+    line-height: 1.42857;
+    color: #555;
+    background-color: #FFF;
+    background-image: none;
+    border: 1px solid #CCC;
+    border-radius: 4px;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+}
+
