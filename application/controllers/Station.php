@@ -220,5 +220,27 @@ class Station extends CI_Controller {
         //($where,$data,$table)
         echo json_encode($this->Md->get('name', $station, 'station'));
     }
+	
+	/*
+	 * This is specifically important for 
+	*/
+	function stationdetails(){
+		
+		 $this->load->view('station-status-details', $data);
+	}
+	
+	/*
+	  Added by Nsabagwa Mary, to check the list of stations 
+	*/
+	function getStatus(){
+		 $query = $this->Md->getStatus();
+        if ($query) {
+            $data['stations'] = $query;
+        } else {
+            $data['stations'] = array();
+        }		
+        $this->load->view('station-status', $data);
+		
+	}
 
 }

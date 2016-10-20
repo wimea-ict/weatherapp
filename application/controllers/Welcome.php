@@ -87,6 +87,7 @@ class Welcome extends CI_Controller {
     public function login() {
 
         if ($this->session->userdata('username') != null) {
+			//echo "hereer"; exit;
             $this->load->view('home');
             return;
         }
@@ -108,6 +109,7 @@ class Welcome extends CI_Controller {
 
                 // $password = $this->encrypt->decode($res->password, $key);
                $password = md5( $password_now);
+			  // echo $password; exit;
 
                 if ($res->password == $password) {
 
