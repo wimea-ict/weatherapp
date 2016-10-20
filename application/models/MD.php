@@ -44,6 +44,42 @@ class Md extends CI_Model {
         $result = $query->result();
         return $result;
     }
+	
+	/*
+	   To calculate time elapsed after a specific period
+	*/
+function time_difference ($t)
+{  $time = strtotime($t);
+
+    $time = time() - $time; // to get the time since that moment
+    $time = ($time<1)? 1 : $time;
+    $tokens = array (
+        31536000 => 'year',
+        2592000 => 'month',
+        604800 => 'week',
+        86400 => 'day',
+        3600 => 'hour',
+        60 => 'minute',
+        1 => 'second'
+    );
+
+    foreach ($tokens as $unit => $text) {
+        if ($time < $unit) continue;
+        $numberOfUnits = floor($time / $unit);
+        return $numberOfUnits.' '.$text.(($numberOfUnits>1)?'s':'');
+    }
+
+}
+	
+	/*
+	 * @ Mary Nsabagwa 
+	 * Checks last transmit date of the station to establish whether its on or off
+	*/
+	function getStatus(){
+	$query = $this->db->query("SELECT MAX(d.date) as date,s.number,s.type,s.name,s.latitude,s.longitude,dateDIFF(now(), concat(MAX(date),' ','00:00:00')) as diff FROM station s left outer join daily d on s.name=d.station GROUP BY s.name");
+	$result = $query->result();
+    return $result;
+	}
 
     function delete($id, $table) {
 
